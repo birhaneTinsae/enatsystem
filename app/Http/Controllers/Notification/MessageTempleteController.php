@@ -16,6 +16,8 @@ class MessageTempleteController extends Controller
     public function index()
     {
         //
+        $msg_templetes=MessageTemplete::all();
+        return view('notification.msg-templete.msg-templete',['msg_templetes'=>$msg_templetes]);
     }
 
     /**
@@ -26,6 +28,7 @@ class MessageTempleteController extends Controller
     public function create()
     {
         //
+        return view('notification.msg-templete.new');
     }
 
     /**
@@ -37,6 +40,13 @@ class MessageTempleteController extends Controller
     public function store(Request $request)
     {
         //
+        $msg_templete=new MessageTemplete;
+        $msg_templete->name=$request->msg_templete_name;
+        $msg_templete->templete=$request->msg_content;
+        if($msg_templete->save()){
+            $request->session()->flash('status','Message Templete with name'.$request->msg_templete_name.' successfully added');
+            return redirect('/msg-templete');
+        }
     }
 
     /**

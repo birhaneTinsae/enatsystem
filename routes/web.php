@@ -37,6 +37,10 @@ Route::resource('branch', 'Branch\BranchController');
 Route::get('hr/users','HRM\HumanResourceController@users');
 Route::resource('hr', 'HRM\HumanResourceController');
 /**
+ * 
+ */
+Route::resource('job','HRM\JobController');
+/**
  * Role maintenance related URLs.
  */
 Route::resource('role', 'Role\RoleController');

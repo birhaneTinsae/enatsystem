@@ -41,10 +41,10 @@
                         Delete</a>
                     @endcan
 
-                    @can('create-role')
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                   
+                    <a href="/branch/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
                         New</a>
-                    @endcan
+                   
                 
                 </div>
 
@@ -54,20 +54,28 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     <form method="POST" action="/branch">
-                        <div class="form-group">
-                            <label for="branch_code">Branch Code</label>
-                            <input type="text" class="form-control" id="branch_code" aria-describedby="emailHelp" placeholder="Branch code">
-                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                     {{csrf_field()}}
+                    <div class="row">
+                        <div class="col-md-6">
+                           
+                            <div class="form-group">
+                                <label for="branch_code">Branch Code</label>
+                                <input type="text" class="form-control" id="branch_code" name="branch_code"  placeholder="Branch code">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="branch_name">Branch Name</label>
-                            <input type="text" class="form-control" id="branch_name" aria-describedby="emailHelp" placeholder="Branch name">
-                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="branch_name">Branch Name</label>
+                                <input type="text" class="form-control" id="branch_name" name="branch_name"  placeholder="Branch name">
+                            </div>
                         </div>
+                    </div>
+                    
+                       
+                        
 
-                        <button type="submit" class="btn btn-primary">Register</button>
+                        <button type="submit" class="btn btn-success">Save</button>
                     </form>
                 </div>
                 <div class="panel-footer">

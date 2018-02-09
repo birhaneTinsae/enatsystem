@@ -49,48 +49,23 @@
                 </div>
 
                 <div class="panel-body">
-                    <!-- @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif -->
+                    
 
-                    <form action="/sms-password-notification/send" method="POST">
+                    <form action="/msg-templete" method="POST">
                     {{ csrf_field() }}
+                     
                         <div class="form-group">
-                            <label for="branch">Branch</label>
-                            <select id="branch" class="form-control" name="branch">
-                            @foreach($branches as $id=>$branch)
-                            <option value="{{$id}}">{{$branch}}</option>
-                            @endforeach
-                            </select>
+                            <label for="msg-templete-name">Message Templete Name</label>
+                            <input type="text" class="form-control" name="msg_templete_name" id="msg-templete-name">
                         </div>
                         <div class="form-group">
-                            <label for="employee">Employee</label>
-                            <select  id="employee" class="form-control" name="employee" >
-                                <option value=""></option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone-no">Phone Number</label>
-                            <input type="text" class="form-control" id="phone-no" name="phone_no" placeholder="0911******" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="msg-templete">Message Templete</label>
-                            <select name="msg-templete"  class="form-control" id="msg-templete" >
-                            <option value="">--Select Templete--</option>
-                            @foreach($msg_templetes as $id=>$msg_templete)
-                            <option value="{{$id}}">{{$msg_templete}}</option>
-                            @endforeach
-                        </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="msg">Message</label>
-                            <textarea class="form-control" id="msg" name="msg" rows="3"></textarea>
+                            <label for="msg-content">Message Content</label>
+                            <textarea type="text" class="form-control" name="msg_content" id="msg-content" rows="3">
+                            </textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-success btn-md">Send</button>
+
+                        <button type="submit" class="btn btn-success btn-md">Save</button>
                     </form>
                 </div>
                 <div class="panel-footer">

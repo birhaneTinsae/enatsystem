@@ -16,7 +16,8 @@ class BranchController extends Controller
      */
     public function index()
     {
-       return view('branch\branch');
+        $branches=Branch::all();
+       return view('branch\branch',['branches'=>$branches]);
     }
  
    
@@ -28,6 +29,7 @@ class BranchController extends Controller
     public function create()
     {
         //
+        return view('branch\new');
     }
 
     /**
@@ -38,17 +40,19 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        dd($request);
+     
         $branch=new Branch;
 
         $branch->branch_name = $request->branch_name;
         $branch->branch_code = $request->branch_code;
 
-        $branch->save();
+        if($branch->save()){
+            $request->session()->flash('status',"Branch ".$request->branch_name." successfully added.");
+            return redirect('/branch');
+        }
 
-        \Session::flash("success","Branch ".$request->branch_name." successfully added.");
-       return redirect('/branch');
+        
+       
     }
 
     /**

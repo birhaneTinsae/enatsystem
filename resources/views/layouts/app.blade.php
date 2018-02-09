@@ -153,7 +153,7 @@
         $('#branch').change(function () {
             var branch = $(this).val();          
             var result='';
-            
+            console.log(branch);
             $.getJSON("branch/"+branch+"/employees", function(data){
                   $.each(data,function(key,value){
                     result+='<option value="'+value.id+'">'+value.name+'</option>';

@@ -16,8 +16,7 @@ class CreateJobPositionsTable extends Migration
         Schema::create('job_positions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('operation_class');
-            //$table->integer('')
+            $table->enum('operation_class',['head office','branch','both']);            
             $table->timestamps();
         });
     }

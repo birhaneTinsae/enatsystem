@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\HRM;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\JobPosition;
-use App\Employee;
-use App\User;
-class HumanResourceController extends Controller
+
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,9 @@ class HumanResourceController extends Controller
      */
     public function index()
     {
-        $user=User::with('employee')->get();
-        return view('hr\hr',['employees'=> $user]);
+        //
+        $job_positions=JobPosition::all();
+        return view('hr\job\job',['job_positions'=>$job_positions]);
     }
 
     /**
@@ -28,8 +28,7 @@ class HumanResourceController extends Controller
     public function create()
     {
         //
-        $job_positions=JobPosition::orderBy('name')->pluck('name','id');
-        return view('hr\new',['job_positions'=>$job_positions]);
+        return view('hr\job\new');
     }
 
     /**
@@ -41,19 +40,13 @@ class HumanResourceController extends Controller
     public function store(Request $request)
     {
         //
-        $user=User::find($request->new_employee);
-
-        $new_employee=new Employee;
-        
-        $new_employee->user_id=$request->new_employee;
-        $new_employee->job_id=$request->job_position;
-        $new_employee->employed_date=$request->join_date;
-        $new_employee->branch_id=$user->branch_id;
-        if($new_employee->save()){
-            $request->session()->flash('status','Employee record successfully created');
-            return redirect('/hr');
+        $job_position=new JobPosition;
+        $job_position->name=$request->job_position_name;
+        $job_position->operation_class=$request->job_position_operation_class;
+        if($job_position->save()){
+            $request->session()->flash('status','Job Position Successfully added');
+            return redirect('job');
         }
-
     }
 
     /**
@@ -65,18 +58,6 @@ class HumanResourceController extends Controller
     public function show($id)
     {
         //
-        $employeeDTA=[];
-        $employee=Employee::where('user_id',$id)->firstOrFail();
-        
-        $job_position=JobPosition::find($employee->job_id);
-        $user=User::find($id);
-        $employeeDTA['employee_name']=$user->name;
-        $employeeDTA['phone_no']=$user->phone_no;
-        $employeeDTA['email']=$user->email;
-        $employeeDTA['job_position']=$job_position->name;
-        $employeeDTA['employed_date']=$employee->employed_date;
-
-        return json_encode( $employeeDTA);
     }
 
     /**
@@ -100,7 +81,6 @@ class HumanResourceController extends Controller
     public function update(Request $request, $id)
     {
         //
-        
     }
 
     /**
@@ -112,9 +92,5 @@ class HumanResourceController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function users(){
-        $users=User::all();
-        return json_encode($users);
     }
 }
