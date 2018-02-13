@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}- @yield('title')</title>
+    <title>{{ config('app.name', 'Enat Bank S.C.') }}- @yield('title')</title>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -41,7 +41,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Enat Bank S.c.') }}
                     </a>
                 </div>
 
@@ -53,8 +53,10 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+                             <li><a href="{{ route('phone-book') }}">Phone Book</a></li>
                         <!-- Authentication Links -->
                         @guest
+                            
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
@@ -246,6 +248,30 @@
                 $('#employees-list').append(option);
             });
           //  $('#new-employee').placeholder('--Employee List--');
+         });
+//phone book search query ajax call
+         $('#query').on('keyup',function(){
+           var query= $(this).val();
+           //to check if the search box is empty and display all the employees.
+            if(query==='')
+              query='all';
+
+           
+           var result='';
+           $.getJSON('/phone-book/'+query,function(data){
+            data.forEach(function(employee){
+              
+                result+='<tr><td>'
+                        +employee.count
+                        +'</td><td>'
+                        +employee.name
+                        +'</td><td>'                      
+                        +employee.branch
+                        +'</td><td>'
+                        +employee.phone_no+'</td></tr>';
+            });
+            $('#search-result tbody').html(result);
+           });
          });
     });
     </script>

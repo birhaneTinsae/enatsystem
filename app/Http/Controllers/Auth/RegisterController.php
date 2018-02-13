@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'role'=>'required',
             'phone_no'=>'required',
             'branch'=>'required',
+            'username'=>'required|max:20|min:6|unique:users'
         ]);
     }
 
@@ -73,6 +74,7 @@ class RegisterController extends Controller
             'phone_no' => $data['phone_no'],
             'branch_id' => $data['branch'],
             'password' => bcrypt($data['password']),
+            'username'=>$data['username'],
         ]);
 
         $user->roles()->attach($data['role']);

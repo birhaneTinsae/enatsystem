@@ -25,7 +25,13 @@ Route::get('home', 'HomeController@index')->name('home');
 /**
  * Admin area for managment purpose.
  */
+
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+/**
+ * Phone book 
+ */
+Route::get('phone-book','PhoneBookController@index')->name('phone-book');
+Route::get('phone-book/{query}','PhoneBookController@search');
 /**
  * Branch maintenance related URLs.
  */
