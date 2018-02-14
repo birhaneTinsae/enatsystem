@@ -8,6 +8,7 @@
                             <li class="list-group-item"><a href="branch" >Branch</a></li>
                             <li class="list-group-item"><a href="job" >JOB</a></li>
                             <li class="list-group-item"><a href="home" >Home</a></li>
+                            <li class="list-group-item"><a href="role" >Role</a></li>
                         </ul>
 @endsection
 
@@ -32,15 +33,15 @@
                     Update</a>
                     @endcan
 
-                    @can('delete-role')
+                    @can('delete')
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                         Delete</a>
                     @endcan
 
-                  
+                    @can('create', App\Employee::class)
                     <a href="hr/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
                         New</a>
-                   
+                    @endcan
                 
                 </div>
 
@@ -68,7 +69,9 @@
                                 <td>{{$employee->name}}</td>
                                 <td>{{$employee->email}}</td>
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="{{$employee->id}}"><i class="fa fa-info-circle"></i></a></td>
+                                @can('update',$employee)
                                 <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" data-id="{{$employee->id}}"><i class="fa fa-edit"></i></a></td>
+                                @endcan
                             </tr>
                             @endforeach
                         </tbody>

@@ -37,4 +37,14 @@ class User extends Authenticatable
     public function employee(){
         return $this->hasOne('App\Employee');
     }
+
+    public function hasAccess(array $permissions){
+        foreach($this->roles as $role){
+            if($role->hasAccess($permissions)){
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

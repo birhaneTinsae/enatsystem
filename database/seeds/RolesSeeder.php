@@ -20,23 +20,18 @@ class RolesSeeder extends Seeder
             'slug'=>'admin',
             'permissions'=>json_encode([
                 'create-user'=>true,
+                'create-employee'=>true,
+                'update-employee'=>true,
+                'delete-employee'=>true,
+                'view-employee'=>true,
+                
             ]),
 
         ]);
 
-        $branch=Branch::create([
-            'branch_code'=>'004',
-            'branch_name'=>'Head office'
-        ]);
-        $job=JobPosition::create([
-            'name'=>'Junior System admin',
-            'operation_class'=>'head office'
-        ]);
+        
+        
 
-        $employee=Employee::create([
-            'user_id'=>1,
-            'job_id'=>1
-           
-        ]);
+      
     }
 }

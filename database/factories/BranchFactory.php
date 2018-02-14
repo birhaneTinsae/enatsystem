@@ -13,14 +13,12 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Branch::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'username'=>$faker->userName,
-        'phone_no'=>$faker->phoneNumber,
-        'branch_id'=> $faker->numberBetween($min = 1, $max = 20) ,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'remember_token' => str_random(10),
+        'branch_code' => $faker->numerify('###'),
+        'branch_name' => $faker->company,
+      
+        // 'created_at' =>$faker->dateTime($max = 'now', $timezone = 'EAT'), // secret
+        // 'updated_at' =>$faker->dateTime($max = 'now', $timezone = 'EAT'),
     ];
 });

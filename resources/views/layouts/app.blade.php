@@ -273,6 +273,57 @@
             $('#search-result tbody').html(result);
            });
          });
+
+         //add new row to role defination screen
+         var row_counter=1;
+         $("#add-new-role-row").click(function(){
+
+            var row="<tr>\
+                                    <td>\
+                                        <select name=\"models[]\" id=\"\" class=\"form-control\">\
+                                            <option value=\"employee\">Employee</option>\
+                                            <option value=\"user\">User</option>\
+                                            <option value=\"branch\">Branch</option>\
+                                            <option value=\"job\">Job</option>\
+                                            <option value=\"role\">Role</option>\
+                                            <option value=\"sms\">SMS Notification</option>\
+                                            <option value=\"message\">Message Templete</option>\
+                                        </select>\
+                                    </td>\
+                                    <td>\
+                                        <div class=\"checkbox\">\
+                                            <label for=\"\">\
+                                            <input type=\"checkbox\" name=\"permissions["+row_counter+"][]\" value=\"create\">\
+                                            </label>\
+                                        </div>\
+                                    </td>\
+                                    <td>\
+                                        <div class=\"checkbox\">\
+                                            <label for=\"\">\
+                                            <input type=\"checkbox\" name=\"permissions["+row_counter+"][]\" value=\"view\">\
+                                            </label>\
+                                        </div>\
+                                    </td>\
+                                    <td>\
+                                        <div class=\"checkbox\" >\
+                                            <label for=\"\">\
+                                            <input type=\"checkbox\" name=\"permissions["+row_counter+"][]\" value=\"update\">\
+                                            </label>\
+                                        </div>\
+                                    </td>\
+                                    <td>\
+                                        <div class=\"checkbox\">\
+                                            <label for=\"\">\
+                                            <input type=\"checkbox\" name=\"permissions["+row_counter+"][]\" value=\"delete\">\
+                                            </label>\
+                                        </div>\
+                                    </td>\
+                                </tr>";
+                                row_counter++;
+       $('#new-role-table tbody').append(row);
+       console.log('clicked');
+
+         });
     });
     </script>
    

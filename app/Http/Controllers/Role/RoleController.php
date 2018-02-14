@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Role;
 
+use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class RoleController extends Controller
@@ -13,7 +14,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('role\role');
+        $counter=1;
+        $roles=Role::all();
+        return view('role.role',['roles'=>$roles,'counter'=>$counter]);
     }
 
     /**
@@ -24,6 +27,7 @@ class RoleController extends Controller
     public function create()
     {
         //
+        return view('role.new');
     }
 
     /**
@@ -35,6 +39,19 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //
+        $role_name=$request->role_name;
+        $role_permission=array();
+        $counter=1;
+        foreach($request->models as $model){
+            foreach($request->permissions as $permission){
+                foreach($permission as $per){
+                    $key=sprintf("%s-%s",$per,$model);
+                    $role_permission[sprintf('%s-%s',$per,$model)]=true;
+                }
+                break;
+            }
+        }
+        return json_encode($role_permission);
     }
 
     /**

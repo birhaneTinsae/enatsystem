@@ -37,8 +37,8 @@
                         Delete</a>
                     @endcan
 
-                    @can('create-role')
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    @can('create',App\Role::class)
+                    <a href="role/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
                         New</a>
                     @endcan
                 
@@ -51,7 +51,28 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Role Name</th>
+                                <th>Detail</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($roles as $role)
+                            <tr>
+                                <td>{{$counter++}}</td>
+                                <td>{{$role->name}}</td>
+                                <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#roleDetailModal" data-id="{{$role->id}}"><i class="fa fa-info-circle"></i></a></td>
+                                <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#roleUpdateModal" data-id="{{$role->id}}"><i class="fa fa-edit"></i></a></td>
+                               
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        
+                    </table>
                 </div>
                 <div class="panel-footer">
                 <div class="row">
