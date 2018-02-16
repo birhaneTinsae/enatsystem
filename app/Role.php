@@ -3,10 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+//use OwenIt\Auditing\Contracts\Auditable;
 
-class Role extends Model
+class Role extends Model //implements Auditable
 {
+    //use \OwenIt\Auditing\Auditable;
     
+    /**
+     * Attributes to include in the Audit.
+     *
+     * @var array
+     */
+    protected $auditInclude = [
+        'name',
+        'slug',
+    ];
+
     protected $fillable=['name','slug','permissions'];
 
     public function users(){

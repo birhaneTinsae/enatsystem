@@ -56,6 +56,10 @@
                             <label for="role-name">Role Name</label>
                             <input type="text" class="form-control" id="role-name" name="role_name">
                         </div>
+                        <div class="form-group">
+                            <label for="role-slug">Role Slug</label>
+                            <input type="text" class="form-control" id="role-slug" name="role_slug" readonly>
+                        </div>
                         <table class="table table-striped bordered " id="new-role-table">
                             <thead>
                                 <tr>
@@ -77,6 +81,10 @@
                                             <option value="role">Role</option>
                                             <option value="sms">SMS Notification</option>
                                             <option value="message">Message Templete</option>
+                                            <option value="hr">HR Access</option>
+                                            <option value="fam">FAM Access</option>
+                                            <option value="vms">VMS Access</option>
+                                            <option value="fcy">FCY Access</option>
                                         </select>
                                     </td>
                                     <td>

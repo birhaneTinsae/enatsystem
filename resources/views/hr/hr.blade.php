@@ -69,7 +69,7 @@
                                 <td>{{$employee->name}}</td>
                                 <td>{{$employee->email}}</td>
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="{{$employee->id}}"><i class="fa fa-info-circle"></i></a></td>
-                                @can('update',$employee)
+                                @can('update',App\Employee::class)
                                 <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" data-id="{{$employee->id}}"><i class="fa fa-edit"></i></a></td>
                                 @endcan
                             </tr>
@@ -77,6 +77,7 @@
                         </tbody>
 
                     </table>
+                    {{ $employees->links() }}
                 </div>
                 <div class="panel-footer">
                     <!-- <div class="row">
@@ -94,7 +95,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="employeeDetailModalLabel">New message</h5>
+        <h5 class="modal-title" id="employeeDetailModalLabel"><b>New message</b></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -137,7 +138,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="employeeUpdateModalLabel">New message</h5>
+        <h5 class="modal-title" id="employeeUpdateModalLabel"><b>New message</b></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

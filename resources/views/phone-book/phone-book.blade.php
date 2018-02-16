@@ -15,10 +15,10 @@
     <div class="row">
     <!--col-md-offset-1-->
         <div class="col-md-10 ">
-            <!-- <ol class="breadcrumb">
+            <ol class="breadcrumb">
                 <li><a href="home">Home</a></li>               
-                <li class="active">Notification</li>
-            </ol> -->
+                <li class="active">Phone Book</li>
+            </ol>
             <form action="">
                 <div class="form-group">
                 <div class="input-group">

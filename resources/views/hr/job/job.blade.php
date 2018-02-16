@@ -72,6 +72,7 @@
                         </tbody>
 
                     </table>
+                    {{$job_positions->links()}}
                 </div>
                 <div class="panel-footer">
                     <!-- <div class="row">

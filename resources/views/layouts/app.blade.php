@@ -58,7 +58,7 @@
                         @guest
                             
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <!-- <li><a href="{{ route('register') }}">Register</a></li> -->
                         @else
                             <li><a href="{{ route('register') }}">Branch <span class="label label-success">{{Auth::user()->branch->branch_code}}</span></a></li>
                             <!-- <li><a href="{{ route('register') }}">Role <span class="label label-primary">{{Auth::user()->branch->branch_code}}</span></a></li> -->
@@ -288,6 +288,10 @@
                                             <option value=\"role\">Role</option>\
                                             <option value=\"sms\">SMS Notification</option>\
                                             <option value=\"message\">Message Templete</option>\
+                                            <option value=\"hr\">HR Access</option>\
+                                            <option value=\"fam\">FAM Access</option>\
+                                            <option value=\"vms\">VMS Access</option>\
+                                            <option value=\"fcy\">FCY Access Access</option>\
                                         </select>\
                                     </td>\
                                     <td>\
@@ -323,6 +327,18 @@
        $('#new-role-table tbody').append(row);
        console.log('clicked');
 
+         });
+
+
+         //to do the actual slugfing
+         const slugify=(val)=>{
+             return val.toString().toLowerCase().trim()
+             .replace(/&/g,'-and-') //replace & with '-and-'
+             .replace(/[\s\W-]+/g,'-')  //replace other non wordy character with '-'
+         }
+         // to create slug for role name
+         $('#role-name').keyup(function(){
+                $('#role-slug').val(slugify($(this).val()));
          });
     });
     </script>

@@ -42,10 +42,10 @@ class EmployeePolicy
      * @param  \App\Employee  $employee
      * @return mixed
      */
-    public function update(User $user, Employee $employee)
+    public function update(User $user/*, Employee $employee*/)
     {
         //
-        dd($user->hasAccess(['update-employee']));
+        //dd($user->hasAccess(['update-employee']));
         return $user->hasAccess(['update-employee']);
     }
 

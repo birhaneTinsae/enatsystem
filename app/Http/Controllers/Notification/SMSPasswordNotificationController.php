@@ -25,6 +25,11 @@ class SMSPasswordNotificationController extends Controller
         $response=  $client->get("http://10.1.12.156:13013/cgi-bin/sendsms?username=enat&password=enat&text=".$request->msg."&to=".$request->phone_no."&charset=utf-8&coding=2");
        
         if($response->getStatusCode()==200 || (string) $response->getBody()=='0: Accepted for delivery'){
+            $notification=new SMSPasswordNotification;
+            $notification->message=$request->msg;
+            $notification->phone_no=$request->phone_no;
+            $notification->sender=Auth::user()->username;
+            $notification->save();
             $request->session()->flash('status', 'SMS successfully sent to '.$request->employee.' by Phone no '.$request->phone_no.'!');
             return redirect('/sms-password-notification');
         }

@@ -16,7 +16,7 @@ class HumanResourceController extends Controller
      */
     public function index()
     {
-        $user=User::with('employee')->get();
+        $user=User::with('employee')->paginate(10);
         return view('hr\hr',['employees'=> $user]);
     }
 

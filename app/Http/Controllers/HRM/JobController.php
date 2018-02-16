@@ -16,7 +16,7 @@ class JobController extends Controller
     public function index()
     {
         //
-        $job_positions=JobPosition::all();
+        $job_positions=JobPosition::paginate(10);
         return view('hr\job\job',['job_positions'=>$job_positions]);
     }
 
