@@ -56,6 +56,13 @@
                             <label for="role-name">Role Name</label>
                             <input type="text" class="form-control" id="role-name" name="role_name">
                         </div>
+<<<<<<< HEAD
+=======
+                        <div class="form-group">
+                            <label for="role-slug">Role Slug</label>
+                            <input type="text" class="form-control" id="role-slug" name="role_slug" readonly>
+                        </div>
+>>>>>>> f9eed50aca28a49caac929cebb6cf6bcd57256c5
                         <table class="table table-striped bordered " id="new-role-table">
                             <thead>
                                 <tr>
@@ -71,13 +78,23 @@
                                     <td>
                                         <select name="models[]" id="" class="form-control">
                                             <option value="employee">Employee</option>
+<<<<<<< HEAD
                                             <option value="acting_employee">Acting Employee</option>
+=======
+>>>>>>> f9eed50aca28a49caac929cebb6cf6bcd57256c5
                                             <option value="user">User</option>
                                             <option value="branch">Branch</option>
                                             <option value="job">Job</option>
                                             <option value="role">Role</option>
                                             <option value="sms">SMS Notification</option>
                                             <option value="message">Message Templete</option>
+<<<<<<< HEAD
+=======
+                                            <option value="hr">HR Access</option>
+                                            <option value="fam">FAM Access</option>
+                                            <option value="vms">VMS Access</option>
+                                            <option value="fcy">FCY Access</option>
+>>>>>>> f9eed50aca28a49caac929cebb6cf6bcd57256c5
                                         </select>
                                     </td>
                                     <td>

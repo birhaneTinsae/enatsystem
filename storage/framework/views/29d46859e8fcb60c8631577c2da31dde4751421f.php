@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('sidebar')
+<?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
                             <li class="list-group-item"><a href="#" >Request List</a></li>
@@ -8,21 +6,22 @@
                             <li class="list-group-item"><a href="#" >ISD</a></li>
                             <li class="list-group-item"><a href="actingemployee" >Home</a></li>
                         </ul>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">
     <!--col-md-offset-1-->
         <div class="col-md-10 ">
-                   @if (session('status'))
+                   <?php if(session('status')): ?>
                         <div class="alert alert-success">
-                            {{ session('status') }}
+                            <?php echo e(session('status')); ?>
+
                         </div>
-                    @endif
+                    <?php endif; ?>
             <ol class="breadcrumb">
                 <li><a href="actingemployee">Home</a></li>               
-                <li><a href="actingemployee">HRM</a></li>               
+                <li><a href="/hr">HRM</a></li>               
                 <li class="active">New Acting Employee</li>
             </ol>
             <div class="panel panel-default">
@@ -42,7 +41,8 @@
 
                     
                     <form method="POST" action="/actingemployee">
-                            {{ csrf_field() }}
+                            <?php echo e(csrf_field()); ?>
+
                             <div class="row">
                                 <div class="col-md-6">
                                    <div class="form-group">
@@ -64,9 +64,9 @@
                                     
                                     <select class="form-control" name="acting_job_id" id="acting_job_id" >
                                     <option>-----Select Job Position -----
-                                        @foreach($job_positions as $id=>$job_position)
-                                        <option value="{{$id}}">{{$job_position}}</option>
-                                        @endforeach
+                                        <?php $__currentLoopData = $job_positions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id=>$job_position): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($id); ?>"><?php echo e($job_position); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <select>
                              </div>
                                 </div>
@@ -76,12 +76,13 @@
                                     <label for="job_position">Acting Branch</label>
                                    
                                     <select class="form-control" name="acting_branch_id" id="acting_branch_id">
-                                     {{$branch=App\Branch::all()}}
+                                     <?php echo e($branch=App\Branch::all()); ?>
+
                                     <option>-----Select Branch -----
                                    </option>
-                                        @foreach($branch as $br)
-                                        <option value="{{$br->id}}">{{$br->branch_name}}</option>
-                                        @endforeach
+                                        <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $br): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($br->id); ?>"><?php echo e($br->branch_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <select>
                              </div>
                                 </div>
@@ -117,4 +118,6 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

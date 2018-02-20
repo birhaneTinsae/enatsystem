@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('sidebar')
+<?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
                             <li class="list-group-item"><a href="hr" >Employee List</a></li>
@@ -11,9 +9,9 @@
                             <li class="list-group-item"><a href="home" >Home</a></li>
                             <li class="list-group-item"><a href="role" >Role</a></li>
                         </ul>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">
     <!--col-md-offset-1-->
@@ -24,41 +22,43 @@
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Acting Employee Lists
-                    @can('close-role')                   
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('close-role')): ?>                   
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
                     Close</a>
-                    @endcan
+                    <?php endif; ?>
 
-                    @can('update-role')
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update-role')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     Update</a>
-                    @endcan
+                    <?php endif; ?>
 
-                    @can('delete')
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                         Delete</a>
-                    @endcan
+                    <?php endif; ?>
 
-                    @can('create', App\ActingEmployee::class)
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create', App\ActingEmployee::class)): ?>
                     <a href="actingemployee/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
                         New</a>
-                    @endcan
+                    <?php endif; ?>
                    
                 
                 </div>
 
                 <div class="panel-body">
-                    @if (session('status'))
+                    <?php if(session('status')): ?>
                         <div class="alert alert-success">
-                            {{ session('status') }}
+                            <?php echo e(session('status')); ?>
+
                              <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                         </div>
-                    @endif
-                    @if (session('delete_status'))
+                    <?php endif; ?>
+                    <?php if(session('delete_status')): ?>
                         <div class="alert alert-danger">
-                            {{ session('delete_status') }}
+                            <?php echo e(session('delete_status')); ?>
+
                         </div>
-                    @endif
+                    <?php endif; ?>
                     
 
                     <table class="table table-striped">
@@ -77,32 +77,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($employees as $employee)
+                            <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td>{{$employee->id}}</td>
-                                <td>{{$employee->employee_name}}</td>
-                                <td>{{$employee->job_position}}</td>
-                                <td>{{$employee->home_branch}}</td>
-                                <td>{{$employee->acting_job_position}}</td>
-                                <td>{{$employee->acting_branch_name}}</td>
-                                <td>{{$employee->start_date}}</td>
-                                <td>{{$employee->end_date}}</td>
-                                @if ($employee->status==="1")
+                                <td><?php echo e($employee->id); ?></td>
+                                <td><?php echo e($employee->employee_name); ?></td>
+                                <td><?php echo e($employee->job_position); ?></td>
+                                <td><?php echo e($employee->home_branch); ?></td>
+                                <td><?php echo e($employee->acting_job_position); ?></td>
+                                <td><?php echo e($employee->acting_branch_name); ?></td>
+                                <td><?php echo e($employee->start_date); ?></td>
+                                <td><?php echo e($employee->end_date); ?></td>
+                                <?php if($employee->status==="1"): ?>
 		                            <td><span class=".label-success">
 			                        <label class='label label-success'>Active</label>
 		                            </span></td>
-                                 @else
+                                 <?php else: ?>
                                     <td><span class=".label-success">
 			                        <label class='label label-danger'>Blocked</label>
 		                            </span></td>
-                                @endif
-                                @can('update',App\ActingEmployee::class)
+                                <?php endif; ?>
+                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',App\ActingEmployee::class)): ?>
                                 <td><a 
-                                class="btn-warning btn-sm" data-toggle="modal" data-target="#actingemployeeUpdateModal" data-id="{{$employee->id}}"><i class="fa fa-edit"></i></a></td>
-                                @endcan
+                                class="btn-warning btn-sm" data-toggle="modal" data-target="#actingemployeeUpdateModal" data-id="<?php echo e($employee->id); ?>"><i class="fa fa-edit"></i></a></td>
+                                <?php endif; ?>
                               
                             </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
 
                     </table>
@@ -134,9 +134,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="actingemployee/{{$employee->id}}"  method="post">         
-            {{method_field('patch')}}
-              {{csrf_field()}}
+        <form action="actingemployee/<?php echo e($employee->id); ?>"  method="post">         
+            <?php echo e(method_field('patch')); ?>
+
+              <?php echo e(csrf_field()); ?>
+
             <div class="form-group">
                 <label for="full_name">Fullname</label>
                 <input type="text" id="full_name" name="full_name"
@@ -147,24 +149,28 @@
             <div class="form-group">
                 <label for="acting_job_position">Acting_Position</label>
                 <select class="form-control" name="acting_job_position" id="acting_job_position" >
-                      {{$job_positions=App\JobPosition::all()}}
-                                    <option value="{{$employee->acting_job_position}}">{{$employee->acting_job_position}}
-                                        @foreach($job_positions as $job_position)
-                                        <option value="{{$job_position->id}}">{{$job_position->name}}</option>
-                                        @endforeach
+                      <?php echo e($job_positions=App\JobPosition::all()); ?>
+
+                                    <option value="<?php echo e($employee->acting_job_position); ?>"><?php echo e($employee->acting_job_position); ?>
+
+                                        <?php $__currentLoopData = $job_positions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $job_position): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($job_position->id); ?>"><?php echo e($job_position->name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <select>
                
             </div>
             <div class="form-group">
                 <label for="acting_branch_name">Acting_Branch</label>
                 <select class="form-control" name="acting_branch_name" id="acting_branch_name">
-                                     {{$branch=App\Branch::all()}}
-                                    <option value="{{$employee->acting_branch_name}}">
-                                    {{$employee->acting_branch_name}}
+                                     <?php echo e($branch=App\Branch::all()); ?>
+
+                                    <option value="<?php echo e($employee->acting_branch_name); ?>">
+                                    <?php echo e($employee->acting_branch_name); ?>
+
                                    </option>
-                                        @foreach($branch as $br)
-                                        <option value="{{$br->branch_name}}">{{$br->branch_name}}</option>
-                                        @endforeach
+                                        <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $br): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($br->branch_name); ?>"><?php echo e($br->branch_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <select>
                
             </div>
@@ -175,16 +181,16 @@
             <div class="form-group">
                 <label for="status">Status</label>
                 <select  class="form-control" name="status" id="status" >
-                                    <option value="{{$employee->status}}"> 
-                                   @if ($employee->status==="1")
+                                    <option value="<?php echo e($employee->status); ?>"> 
+                                   <?php if($employee->status==="1"): ?>
 		                            <td><span class=".label-success">
 			                        <label class='label label-success'>Active</label>
 		                            </span></td>
-                                 @else
+                                 <?php else: ?>
                                     <td><span class=".label-success">
 			                        <label class='label label-danger'>Blocked</label>
 		                            </span></td>
-                                @endif
+                                <?php endif; ?>
                                     </option>
                                     <option value="1">Active</option>
                                     <option value="0">Blocked</option>
@@ -209,4 +215,6 @@
 
 
 <!-- Update View Modal end -->
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

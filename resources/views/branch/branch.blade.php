@@ -66,6 +66,8 @@
                             <td>{{$branch->branch_name}}</td>
                             <td><a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#" data-id="{{$branch->id}}"><i class="fa fa-info-circle"></i></a></td>
                             <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#" data-id="{{$branch->id}}"><i class="fa fa-edit"></i></a></td>
+                            <td><a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#branchDetailModal" data-id="{{$branch->id}}"><i class="fa fa-info-circle"></i></a></td>
+                            <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#branchUpdateModal" data-id="{{$branch->id}}"><i class="fa fa-edit"></i></a></td>
                            
                         </tr>
                         @endforeach
@@ -83,4 +85,67 @@
         </div>
     </div>
 </div>
+<!-- Detail View Modal -->
+<div class="modal fade" id="branchDetailModal" tabindex="-1" role="dialog" aria-labelledby="branchDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="branchDetailModalLabel"><b>New message</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+            <div class="form-group">
+                <label for="branch_code">Branch Code</label>
+                <input type="text" id="branch_code" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label for="branch_name">Branch Name</label>
+                <input type="text" id="branch_name" class="form-control" readonly>
+            </div>            
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Detail View Modal end -->
+
+<!-- Update View Modal -->
+<div class="modal fade" id="branchUpdateModal" tabindex="-1" role="dialog" aria-labelledby="branchUpdateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="branchUpdateModalLabel"><b>New message</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/branch" >
+            {{ method_field('PUT') }}
+            <div class="form-group">
+                <label for="branch_code">Branch Code</label>
+                <input type="text" id="branch_code" class="form-control" >
+            </div>
+            <div class="form-group">
+                <label for="branch_name">Branch Name</label>
+                <input type="text" id="branch_name" class="form-control" >
+            </div>      
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Update View Modal end -->
 @endsection

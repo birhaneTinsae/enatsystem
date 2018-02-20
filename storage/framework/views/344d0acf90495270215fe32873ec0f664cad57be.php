@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="<?php echo e(app()->getLocale()); ?>">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title>{{ config('app.name', 'Enat Bank S.C.') }}- @yield('title')</title>
+    <title><?php echo e(config('app.name', 'Enat Bank S.C.')); ?>- <?php echo $__env->yieldContent('title'); ?></title>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
     <style>
     .sidebar{
         margin-left:10px;
@@ -40,8 +40,9 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Enat Bank S.c.') }}
+                    <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+                        <?php echo e(config('app.name', 'Enat Bank S.c.')); ?>
+
                     </a>
                 </div>
 
@@ -53,59 +54,62 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                             <li><a href="{{ route('phone-book') }}">Phone Book</a></li>
+                             <li><a href="<?php echo e(route('phone-book')); ?>">Phone Book</a></li>
                         <!-- Authentication Links -->
-                        @guest
+                        <?php if(auth()->guard()->guest()): ?>
                             
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                            <!-- <li><a href="{{ route('register') }}">Register</a></li> -->
-                        @else
-                            <li><a href="{{ route('register') }}">Branch <span class="label label-success">{{Auth::user()->branch->branch_code}}</span></a></li>
-                            <!-- <li><a href="{{ route('register') }}">Role <span class="label label-primary">{{Auth::user()->branch->branch_code}}</span></a></li> -->
+                            <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
+                            <li><a href="<?php echo e(route('register')); ?>">Register</a></li>
+                            <!-- <li><a href="<?php echo e(route('register')); ?>">Register</a></li> -->
+                        <?php else: ?>
+                            <li><a href="<?php echo e(route('register')); ?>">Branch <span class="label label-success"><?php echo e(Auth::user()->branch->branch_code); ?></span></a></li>
+                            <!-- <li><a href="<?php echo e(route('register')); ?>">Role <span class="label label-primary"><?php echo e(Auth::user()->branch->branch_code); ?></span></a></li> -->
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <a href="<?php echo e(route('logout')); ?>"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Reset password
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
+                                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                            <?php echo e(csrf_field()); ?>
+
                                         </form>
                                     </li>
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <a href="<?php echo e(route('logout')); ?>"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                      Settings
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
+                                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                            <?php echo e(csrf_field()); ?>
+
                                         </form>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <a href="<?php echo e(route('logout')); ?>"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
+                                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                            <?php echo e(csrf_field()); ?>
+
                                         </form>
                                     </li>
                                 </ul>
                             </li>
-                        @endguest
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
@@ -121,7 +125,7 @@
         <div class="row"> 
             <div class="col-md-2 sidebar">
             <!--Side bar functionality-->
-                    @yield('sidebar')
+                    <?php echo $__env->yieldContent('sidebar'); ?>
                    
     
                         
@@ -130,7 +134,7 @@
             </div>
             <div class="col-md-9">
             <!--Main Content functionality-->
-                    @yield('content')
+                    <?php echo $__env->yieldContent('content'); ?>
             </div>
         </div>
 
@@ -141,7 +145,7 @@
 
     <!-- Scripts -->
    
-    <script  src="{{ asset('js/app.js') }}"></script>
+    <script  src="<?php echo e(asset('js/app.js')); ?>"></script>
 
     <script >
     $(document).ready(function () {

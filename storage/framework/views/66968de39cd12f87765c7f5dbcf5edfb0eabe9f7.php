@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">
         <div class="col-md-2">
@@ -51,7 +49,7 @@
        
     </div>
     <div class="row">
-        @can('view-sms')
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view-sms')): ?>
         <div class="col-md-2">
             <div class="panel panel-default">
                 
@@ -62,8 +60,8 @@
                 </div>
             </div>
         </div>
-        @endcan
-        @can('view-vms')
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view-vms')): ?>
         <div class="col-md-2">
             <div class="panel panel-default">
                 
@@ -74,8 +72,8 @@
                 </div>
             </div>
         </div>
-        @endcan
-        @can('view-fcy')
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view-fcy')): ?>
         <div class="col-md-2">
             <div class="panel panel-default">
                 
@@ -86,8 +84,8 @@
                 </div>
             </div>
         </div>
-        @endcan
-        @can('view-fam')
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view-fam')): ?>
         <div class="col-md-2">
             <div class="panel panel-default">
                 
@@ -98,8 +96,8 @@
                 </div>
             </div>
         </div>
-        @endcan
-        @can('view-hr')
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view-hr')): ?>
         <div class="col-md-2">
             <div class="panel panel-default">
                 
@@ -110,7 +108,7 @@
                 </div>
             </div>
         </div>
-        @endcan
+        <?php endif; ?>
        
     </div>
     <!-- <div class="row">
@@ -163,4 +161,6 @@
     </div>
     </div> -->
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

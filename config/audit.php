@@ -119,6 +119,12 @@ return [
         ],
     ],
 
+    'resolver' => [
+        'user'       => OwenIt\Auditing\Contracts\UserResolver::class,
+        'ip_address' => OwenIt\Auditing\Resolvers\IpAddressResolver::class,
+        'user_agent' => OwenIt\Auditing\Resolvers\UserAgentResolver::class,
+        'url'        => OwenIt\Auditing\Resolvers\UrlResolver::class,
+    ],
     /*
     |--------------------------------------------------------------------------
     | Audit Console?

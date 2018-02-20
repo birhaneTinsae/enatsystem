@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('sidebar')
+<?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
                             <li class="list-group-item"><a href="hr" >Employee List</a></li>
@@ -12,9 +10,9 @@
                             <li class="list-group-item"><a href="home" >Home</a></li>
                             <li class="list-group-item"><a href="role" >Role</a></li>
                         </ul>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">
     <!--col-md-offset-1-->
@@ -25,34 +23,35 @@
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Human Resource
-                    @can('close-role')                   
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('close-role')): ?>                   
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
                     Close</a>
-                    @endcan
+                    <?php endif; ?>
 
-                    @can('update-role')
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update-role')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     Update</a>
-                    @endcan
+                    <?php endif; ?>
 
-                    @can('delete')
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                         Delete</a>
-                    @endcan
+                    <?php endif; ?>
 
-                    @can('create', App\Employee::class)
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create', App\Employee::class)): ?>
                     <a href="hr/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
                         New</a>
-                    @endcan
+                    <?php endif; ?>
                 
                 </div>
 
                 <div class="panel-body">
-                    @if (session('status'))
+                    <?php if(session('status')): ?>
                         <div class="alert alert-success">
-                            {{ session('status') }}
+                            <?php echo e(session('status')); ?>
+
                         </div>
-                    @endif
+                    <?php endif; ?>
 
                     <table class="table table-striped">
                         <thead>
@@ -65,21 +64,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($employees as $employee)
+                            <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td>{{$employee->id}}</td>
-                                <td>{{$employee->name}}</td>
-                                <td>{{$employee->email}}</td>
-                                <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="{{$employee->id}}"><i class="fa fa-info-circle"></i></a></td>
-                                @can('update',App\Employee::class)
-                                <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" data-id="{{$employee->id}}"><i class="fa fa-edit"></i></a></td>
-                                @endcan
+                                <td><?php echo e($employee->id); ?></td>
+                                <td><?php echo e($employee->name); ?></td>
+                                <td><?php echo e($employee->email); ?></td>
+                                <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="<?php echo e($employee->id); ?>"><i class="fa fa-info-circle"></i></a></td>
+                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',App\Employee::class)): ?>
+                                <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" data-id="<?php echo e($employee->id); ?>"><i class="fa fa-edit"></i></a></td>
+                                <?php endif; ?>
                             </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
 
                     </table>
-                    {{ $employees->links() }}
+                    <?php echo e($employees->links()); ?>
+
                 </div>
                 <div class="panel-footer">
                     <!-- <div class="row">
@@ -149,7 +149,8 @@
       </div>
       <div class="modal-body">
         <form action="/hr" >
-            {{ method_field('PUT') }}
+            <?php echo e(method_field('PUT')); ?>
+
             <div class="form-group">
                 <label for="full_name">Fullname</label>
                 <input type="text" id="full_name" class="form-control" >
@@ -181,4 +182,6 @@
   </div>
 </div>
 <!-- Update View Modal end -->
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

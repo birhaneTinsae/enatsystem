@@ -17,6 +17,7 @@ class HumanResourceController extends Controller
     public function index()
     {
         $user=User::with('employee')->get();
+        $user=User::with('employee')->paginate(10);
         return view('hr\hr',['employees'=> $user]);
     }
 
@@ -88,7 +89,6 @@ class HumanResourceController extends Controller
     public function edit($id)
     {
         //
-       
     }
 
     /**
@@ -101,8 +101,6 @@ class HumanResourceController extends Controller
     public function update(Request $request, $id)
     {
         //
-
-        dd($request->all());
         
     }
 

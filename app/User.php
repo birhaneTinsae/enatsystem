@@ -4,11 +4,14 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+// use OwenIt\Auditing\Contracts\Auditable;
+// use OwenIt\Auditing\Contracts\UserResolver;
 
-class User extends Authenticatable
+class User extends Authenticatable //implements Auditable,UserResolver
 {
     use Notifiable;
-
+    
+   // use \OwenIt\Auditing\Auditable;
     /**
      * The attributes that are mass assignable.
      *
@@ -47,4 +50,7 @@ class User extends Authenticatable
 
         return false;
     }
+    // public static function resolvedId(){
+    //     return Auth::check()?Auth::user()->getAuthIdentifier():null;
+    // }
 }

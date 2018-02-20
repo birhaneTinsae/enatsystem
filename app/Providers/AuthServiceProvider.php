@@ -23,6 +23,8 @@ class AuthServiceProvider extends ServiceProvider
         Employee::class=>EmployeePolicy::class,
         ActingEmployee::class=>ActingEmployeePolicy::class,
         Role::class=>RolePolicy::class,
+        Role::class=>RolePolicy::class,
+
     ];
 
     /**
@@ -35,5 +37,28 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //
+    
+        Gate::define('view-hr', function ($user) {
+            
+            return $user->hasAccess(['view-hr']);
+        });
+        Gate::define('view-fam', function ($user) {
+            
+            return $user->hasAccess(['view-fam']);
+        });
+        Gate::define('view-fcy', function ($user) {
+            
+            return $user->hasAccess(['view-fam']);
+        });
+        Gate::define('view-sms', function ($user) {
+            
+            return $user->hasAccess(['view-sms']);
+        });
+        Gate::define('view-vms', function ($user) {
+            
+            return $user->hasAccess(['view-vms']);
+        });
     }
+
+
 }
