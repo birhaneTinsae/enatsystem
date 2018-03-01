@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use App\Notifications\HRNotification;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,6 +25,8 @@ Route::get('phone-book/{query}','PhoneBookController@search');
 
 Route::middleware(['auth'])->group(function(){
 
+    Notification::route('mail', 'taylor@laravel.com')           
+    ->notify(new HRNotification(App\ActingEmployee::all()));
 
 /**
  * List applications that the user has role.

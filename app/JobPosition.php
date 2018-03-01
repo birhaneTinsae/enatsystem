@@ -13,4 +13,5 @@ class JobPosition extends Model //implements Auditable
     public function employees(){
         return $this->hasMany('App\Employee');
     }
+    
 }

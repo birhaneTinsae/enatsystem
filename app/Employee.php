@@ -12,7 +12,7 @@ class Employee extends Model //implements Auditable
 
     public function job_position()
     {
-        return $this->hasOne('App\JobPosition');
+        return $this->belongsTo('App\JobPosition');
     }
     public function user(){
         return $this->belongsTo('App\User');
