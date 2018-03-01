@@ -83,7 +83,7 @@ class UpdateTable extends Command
                    //$users=User::find(21);
                    $users=Group::find(2);
                    $when = Carbon::now()->addSeconds(20);
-                  Notification::send(  $users, new Actingemployees());
+                  Notification::send(  Group::all(), new Actingemployees());
                 // \ Notification::send($users,(new Actingemployees)->delay($when));
                      
    // 0911425080
