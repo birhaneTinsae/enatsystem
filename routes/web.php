@@ -1,5 +1,7 @@
 <?php
-
+use App\User;
+use App\Notifications\Actingemployees;
+use Carbon\Carbon ;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +14,11 @@
 */
 
 Route::get('/', function () {
+  
+
+                   
+                 
+    
     return view('welcome');
 });
 

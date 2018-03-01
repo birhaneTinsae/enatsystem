@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 // use OwenIt\Auditing\Contracts\Auditable;
 // use OwenIt\Auditing\Contracts\UserResolver;
@@ -30,6 +31,7 @@ class User extends Authenticatable //implements Auditable,UserResolver
         'password', 'remember_token',
     ];
 
+  
     public function roles(){
         return $this->belongsToMany(Role::class,'role_users');
     }
@@ -50,7 +52,6 @@ class User extends Authenticatable //implements Auditable,UserResolver
 
         return false;
     }
-    // public static function resolvedId(){
-    //     return Auth::check()?Auth::user()->getAuthIdentifier():null;
-    // }
+  
+
 }

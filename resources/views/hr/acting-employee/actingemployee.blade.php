@@ -93,12 +93,20 @@
 		                            </span></td>
                                  @else
                                     <td><span class=".label-success">
-			                        <label class='label label-danger'>Blocked</label>
+			                        <label class='label label-danger'>Terminated</label>
 		                            </span></td>
                                 @endif
                                 @can('update',App\ActingEmployee::class)
                                 <td><a 
-                                class="btn-warning btn-sm" data-toggle="modal" data-target="#actingemployeeUpdateModal" data-id="{{$employee->id}}"><i class="fa fa-edit"></i></a></td>
+                                class="btn-warning btn-sm" data-toggle="modal" data-target="#actingemployeeUpdateModal" 
+                                data-empid="{{$employee->id}}" 
+                                data-full_name="{{$employee->employee_name}}"
+                                data-acting_job_position="{{$employee->acting_job_position}}"
+                                data-acting_branch_name="{{$employee->acting_branch_name}}"
+                                data-start_date="{{$employee->start_date}}"
+                                data-end_date="{{$employee->end_date}}"
+                                data-status="{{$employee->status}}" >
+                                <i class="fa fa-edit"></i></a></td>
                                 @endcan
                               
                             </tr>
@@ -124,7 +132,10 @@
 
 <!-- Update View Modal -->
 
- <div class="modal fade" id="actingemployeeUpdateModal" tabindex="-1" role="dialog" aria-labelledby="employeeUpdateModalLabel" aria-hidden="true">
+ 
+
+
+<div class="modal fade" id="actingemployeeUpdateModal" tabindex="-1" role="dialog" aria-labelledby="employeeUpdateModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -134,8 +145,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="actingemployee/{{$employee->id}}"  method="post">         
-            {{method_field('patch')}}
+        <form action="/actingemployee/update "  method="post">         
+            {{method_field('put')}}
               {{csrf_field()}}
             <div class="form-group">
                 <label for="full_name">Fullname</label>
@@ -144,24 +155,22 @@
                 <datalist id="employees-list"> </datalist>
             </div>
             
-            <div class="form-group">
-                <label for="acting_job_position">Acting_Position</label>
-                <select class="form-control" name="acting_job_position" id="acting_job_position" >
-                      {{$job_positions=App\JobPosition::all()}}
-                                    <option value="{{$employee->acting_job_position}}">{{$employee->acting_job_position}}
-                                        @foreach($job_positions as $job_position)
-                                        <option value="{{$job_position->id}}">{{$job_position->name}}</option>
+        <div class="form-group">
+                <label for="acting_job_position">Acting_Job_Position</label>
+                <select class="form-control" name="acting_job_position" id="acting_job_position">
+                                      {{$job=App\JobPosition::all()}}
+                                    
+                                        @foreach($job as $jobs)
+                                        <option value="{{$jobs->name}}">{{$jobs->name}}</option>
                                         @endforeach
                                     <select>
                
-            </div>
+        </div>
             <div class="form-group">
                 <label for="acting_branch_name">Acting_Branch</label>
                 <select class="form-control" name="acting_branch_name" id="acting_branch_name">
                                      {{$branch=App\Branch::all()}}
-                                    <option value="{{$employee->acting_branch_name}}">
-                                    {{$employee->acting_branch_name}}
-                                   </option>
+                                   
                                         @foreach($branch as $br)
                                         <option value="{{$br->branch_name}}">{{$br->branch_name}}</option>
                                         @endforeach
@@ -173,21 +182,27 @@
                 <input type="date" id="start_date" name="start_date" class="form-control" >
             </div>
             <div class="form-group">
-                <label for="status">Status</label>
+                <label for="end_date">End_Date</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" >
+            </div>
+              <div class="form-group">
+             
+                <input type="hidden" id="empid" name="empid" value=""class="form-control"  >
+            </div>
+            <div class="form-group">
+                <label for="status">Status
+                   
+                </label>
                 <select  class="form-control" name="status" id="status" >
-                                    <option value="{{$employee->status}}"> 
-                                   @if ($employee->status==="1")
-		                            <td><span class=".label-success">
-			                        <label class='label label-success'>Active</label>
-		                            </span></td>
-                                 @else
-                                    <td><span class=".label-success">
-			                        <label class='label label-danger'>Blocked</label>
-		                            </span></td>
-                                @endif
-                                    </option>
+                                    
+                                
+                                    <option value="0">Terminated</option>
+                                 
                                     <option value="1">Active</option>
-                                    <option value="0">Blocked</option>
+                              
+                                   
+                                    
+                                    
                                    
                                     </select>
             </div>
@@ -205,8 +220,7 @@
 </div> 
 
 
-
-
-
 <!-- Update View Modal end -->
+
+
 @endsection

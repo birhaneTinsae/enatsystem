@@ -54,7 +54,7 @@
                                 
                         <div class="form-group">
                             <label for="start_date">Start Date</label>
-                            <input type="date" class="form-control" id="start_date" name="start_date"  >
+                            <input type="date" class="form-control col-xs-3" id="start_date" name="start_date"  >
                             
                         </div>
                                 </div>
@@ -90,7 +90,7 @@
                                     <label for="status">Status</label>
                                     <select  class="form-control" name="status" id="status" >
                                     <option value="1">Active</option>
-                                    <option value="0">Blocked</option>
+                                    <option value="0">Terminated</option>
                                    
                                     </select>
                                 </div>

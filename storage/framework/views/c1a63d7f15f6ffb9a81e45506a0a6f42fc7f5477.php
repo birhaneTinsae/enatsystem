@@ -1,14 +1,11 @@
 <?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="hr" >Employee List</a></li>
-                             <li class="list-group-item"><a href="actingemployee" >Acting Employee List</a></li>
-                            <li class="list-group-item"><a href="" >Employee List</a></li>
+                            <li class="list-group-item"><a href="#" >Job Positions List</a></li>
                             <li class="list-group-item"><a href="#" >Leave</a></li>
-                            <li class="list-group-item"><a href="branch" >Branch</a></li>
+                            <li class="list-group-item"><a href="#" >ISD</a></li>
                             <li class="list-group-item"><a href="job" >JOB</a></li>
                             <li class="list-group-item"><a href="home" >Home</a></li>
-                            <li class="list-group-item"><a href="role" >Role</a></li>
                         </ul>
 <?php $__env->stopSection(); ?>
 
@@ -19,10 +16,10 @@
         <div class="col-md-10 ">
             <ol class="breadcrumb">
                 <li><a href="home">Home</a></li>               
-                <li class="active">HR</li>
+                <li class="active">Job Position</li>
             </ol>
             <div class="panel panel-default">
-                <div class="panel-heading">Human Resource
+                <div class="panel-heading">Job Position List
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('close-role')): ?>                   
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
                     Close</a>
@@ -33,15 +30,15 @@
                     Update</a>
                     <?php endif; ?>
 
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete')): ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete-role')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                         Delete</a>
                     <?php endif; ?>
 
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create', App\Employee::class)): ?>
-                    <a href="hr/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                  
+                    <a href="job/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
                         New</a>
-                    <?php endif; ?>
+                   
                 
                 </div>
 
@@ -57,31 +54,28 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Fullname</th>
-                                <th>Email</th>
+                                <th>Job Position</th>                                
                                 <th>Detail</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php $__currentLoopData = $job_positions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $job_position): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td><?php echo e($employee->id); ?></td>
-                                <td><?php echo e($employee->name); ?></td>
-                                <td><?php echo e($employee->email); ?></td>
-                                <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="<?php echo e($employee->id); ?>"><i class="fa fa-info-circle"></i></a></td>
-                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',App\Employee::class)): ?>
-                                <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" 
-                                data-id="<?php echo e($employee->id); ?>"
-                                ><i class="fa fa-edit"></i></a></td>
-                                <?php endif; ?>
+                                <td><?php echo e($job_position->id); ?></td>
+                                <td><?php echo e($job_position->name); ?></td>                                
+                                <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="<?php echo e($job_position->id); ?>"><i class="fa fa-info-circle"></i></a></td>
+                                <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" data-id="<?php echo e($job_position->id); ?>"><i class="fa fa-edit"></i></a></td>
                             </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
 
                     </table>
-                    <?php echo e($employees->links()); ?>
+<<<<<<< HEAD
+=======
+                    <?php echo e($job_positions->links()); ?>
 
+>>>>>>> f9eed50aca28a49caac929cebb6cf6bcd57256c5
                 </div>
                 <div class="panel-footer">
                     <!-- <div class="row">
@@ -95,12 +89,11 @@
     </div>
 </div>
 <!-- Detail View Modal -->
-<div class="modal fade" id="employeeDetailModal" tabindex="-1" role="dialog" aria-labelledby="employeeDetailModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="employeeDetailModal" tabindex="-1" role="dialog" aria-labelledby="employeeDetailModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="employeeDetailModalLabel">New message</h5>
-        <h5 class="modal-title" id="employeeDetailModalLabel"><b>New message</b></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -135,16 +128,15 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- Detail View Modal end -->
 
 <!-- Update View Modal -->
-<div class="modal fade" id="employeeUpdateModal" tabindex="-1" role="dialog" aria-labelledby="employeeUpdateModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="employeeUpdateModal" tabindex="-1" role="dialog" aria-labelledby="employeeUpdateModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="employeeUpdateModalLabel">New message</h5>
-        <h5 class="modal-title" id="employeeUpdateModalLabel"><b>New message</b></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -182,7 +174,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- Update View Modal end -->
 <?php $__env->stopSection(); ?>
 

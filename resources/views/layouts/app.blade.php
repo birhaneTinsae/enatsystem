@@ -236,23 +236,32 @@
 
          $('#actingemployeeUpdateModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
-            var id = button.data('id') // Extract info from data-* attributes
+             // Extract info from data-* attributes
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    
-            var actemployee;
-            var modal = $(this)
-           $.getJSON('actingemployee/'+id,function(data){
+   // console.log(id);
+   var id = button.data('empid')
+  
+    var employee_name = button.data('full_name') 
+     var acting_job_position = button.data('acting_job_position') 
+      var acting_branch_name = button.data('acting_branch_name') 
+       var start_date = button.data('start_date') 
+        var end_date = button.data('end_date') 
+        var status = button.data('status') 
+        
+    console.log(acting_job_position);
+           
+            var modal = $(this)                       
             modal.find('.modal-title').text( "Edit Information");
-            modal.find('.modal-body input#full_name').val(data.employee_name);
-            modal.find('.modal-body input#acting_job_position').val(data.acting_job_position);
-            modal.find('.modal-body input#acting_branch_name').val(data.acting_branch_name);
-            modal.find('.modal-body input#start_date').val(data.start_date);
-            modal.find('.modal-body input#status').val(data.status);   
-            modal.find('.modal-body input#empid').val(data.id);         
+            modal.find('.modal-body #full_name').val(employee_name);
+            modal.find('.modal-body #acting_job_position').val(acting_job_position);
+            modal.find('.modal-body #acting_branch_name').val(acting_branch_name);
+            modal.find('.modal-body #start_date').val(start_date);
+             modal.find('.modal-body #end_date').val(end_date);
+            modal.find('.modal-body #status').val(status);   
+            modal.find('.modal-body #empid').val(id);         
             //modal.find('.modal-body form').attr('action','/actingemployee/'+id)
-            
-           })
+          
            
             
             

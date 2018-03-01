@@ -72,7 +72,9 @@
                                 <td>{{$employee->email}}</td>
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="{{$employee->id}}"><i class="fa fa-info-circle"></i></a></td>
                                 @can('update',App\Employee::class)
-                                <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" data-id="{{$employee->id}}"><i class="fa fa-edit"></i></a></td>
+                                <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" 
+                                data-id="{{$employee->id}}"
+                                ><i class="fa fa-edit"></i></a></td>
                                 @endcan
                             </tr>
                             @endforeach

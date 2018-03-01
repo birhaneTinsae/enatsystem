@@ -17,6 +17,8 @@ class ActingEmployeeController extends Controller
     public function index()
     {
         //
+      
+
          $acting=DB::table('acting_employees')->get();
    //dd($acting);
 
@@ -77,7 +79,8 @@ class ActingEmployeeController extends Controller
             Employee Selected is already in Acting Position');
             return redirect('/actingemployee');
           }
-
+           $currentdate = date('Y-m-d');
+ 
         $new_acting_employee->user_id=$request->new_employee;
         $new_acting_employee->employee_name=$employee_name;
         $new_acting_employee->job_position=$job_position;
@@ -85,9 +88,20 @@ class ActingEmployeeController extends Controller
         $new_acting_employee->acting_job_position=$acting_job_position;            
         $new_acting_employee->acting_branch_name=$acting_branch_name;
         $new_acting_employee->start_date=$request->start_date;
-        $new_acting_employee->end_date=$request->start_date;
+        $new_acting_employee->end_date=$currentdate;
         $new_acting_employee->status=$request->status;        
         $new_acting_employee->maker=Auth::User()->username;
+
+                 $sdate = $request->start_date;
+                 $edate = $currentdate;
+                 $ts1 = strtotime($sdate);
+                 $ts2 = strtotime($edate);
+                 $year1 = date('Y', $ts1);
+                 $year2 = date('Y', $ts2);
+                 $month1 = date('m', $ts1);
+                 $month2 = date('m', $ts2);
+                 $diff = (($year2 - $year1) * 12) + ($month2 - $month1);
+         $new_acting_employee->duration=$diff;                 
         if($new_acting_employee->save()){
             $request->session()->flash('status','Acting Employee record successfully created');
             return redirect('/actingemployee');
@@ -105,7 +119,7 @@ class ActingEmployeeController extends Controller
     {
         //
         $ActemployeeDTA=[];
-        $actemployee=ActingEmployee::where('id',$id)->firstOrFail();
+       //$actemployee=ActingEmployee::where('id',$id)->get();
         
        // $job_position=JobPosition::find($employee->job_id);
         $actemployee=ActingEmployee::find($id);
@@ -115,6 +129,7 @@ class ActingEmployeeController extends Controller
         $ActemployeeDTA['acting_job_position']=$actemployee->acting_job_position;
         $ActemployeeDTA['acting_branch_name']=$actemployee->acting_branch_name;
         $ActemployeeDTA['start_date']=$actemployee->start_date;
+        $ActemployeeDTA['end_date']=$actemployee->end_date;
         $ActemployeeDTA['status']=$actemployee->status;
         $ActemployeeDTA['emp_id']=$id;
 
@@ -132,8 +147,9 @@ class ActingEmployeeController extends Controller
     public function edit($id)
     {
         //
+
          $acting_emp = ActingEmployee::find($id);
- 
+       
         return view('hr\acting-employee\edit')->withActingEmployee($acting_emp);
     }
 
@@ -147,6 +163,9 @@ class ActingEmployeeController extends Controller
     public function update(Request $request, $id)
     {
         //
+         $id=$request->empid;
+     //  dd($request->all(),$id);
+     
 $user_id=DB::table('acting_employees')->where('id', '=',$id)->value('user_id');
        //dd($request->all());
          $branch_id = DB::table('employees')->where('user_id', '=',$user_id)->value('branch_id');
@@ -177,16 +196,29 @@ $user_id=DB::table('acting_employees')->where('id', '=',$id)->value('user_id');
           }
           $end_date = DB::table('acting_employees')->where('id', '=',$id)->value('end_date');
          $new_acting_employee=ActingEmployee::find($id);
+         $employee_name = DB::table('users')->where('id', '=',$user_id)->value('name');
         $new_acting_employee->user_id=$user_id;
-        $new_acting_employee->employee_name=$request->full_name;
+        $new_acting_employee->employee_name=$employee_name;
         $new_acting_employee->job_position=$job_position;
         $new_acting_employee->home_branch=$home_branch;
         $new_acting_employee->acting_job_position=$request->acting_job_position;            
         $new_acting_employee->acting_branch_name=$request->acting_branch_name;
         $new_acting_employee->start_date=$request->start_date;
-        $new_acting_employee->end_date=$end_date;
+        $new_acting_employee->end_date=$request->end_date;
         $new_acting_employee->status=$request->status;        
         $new_acting_employee->maker=Auth::User()->username;
+
+
+                 $sdate = $request->start_date;
+                 $edate = $end_date;
+                 $ts1 = strtotime($sdate);
+                 $ts2 = strtotime($edate);
+                 $year1 = date('Y', $ts1);
+                 $year2 = date('Y', $ts2);
+                 $month1 = date('m', $ts1);
+                 $month2 = date('m', $ts2);
+                 $diff = (($year2 - $year1) * 12) + ($month2 - $month1);
+         $new_acting_employee->duration=$diff;                 
         if($new_acting_employee->save()){
             $request->session()->flash('status',' record successfully Updated');
             return redirect('/actingemployee');

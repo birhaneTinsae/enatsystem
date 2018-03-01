@@ -93,12 +93,20 @@
 		                            </span></td>
                                  <?php else: ?>
                                     <td><span class=".label-success">
-			                        <label class='label label-danger'>Blocked</label>
+			                        <label class='label label-danger'>Terminated</label>
 		                            </span></td>
                                 <?php endif; ?>
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',App\ActingEmployee::class)): ?>
                                 <td><a 
-                                class="btn-warning btn-sm" data-toggle="modal" data-target="#actingemployeeUpdateModal" data-id="<?php echo e($employee->id); ?>"><i class="fa fa-edit"></i></a></td>
+                                class="btn-warning btn-sm" data-toggle="modal" data-target="#actingemployeeUpdateModal" 
+                                data-empid="<?php echo e($employee->id); ?>" 
+                                data-full_name="<?php echo e($employee->employee_name); ?>"
+                                data-acting_job_position="<?php echo e($employee->acting_job_position); ?>"
+                                data-acting_branch_name="<?php echo e($employee->acting_branch_name); ?>"
+                                data-start_date="<?php echo e($employee->start_date); ?>"
+                                data-end_date="<?php echo e($employee->end_date); ?>"
+                                data-status="<?php echo e($employee->status); ?>" >
+                                <i class="fa fa-edit"></i></a></td>
                                 <?php endif; ?>
                               
                             </tr>
@@ -124,7 +132,10 @@
 
 <!-- Update View Modal -->
 
- <div class="modal fade" id="actingemployeeUpdateModal" tabindex="-1" role="dialog" aria-labelledby="employeeUpdateModalLabel" aria-hidden="true">
+ 
+
+
+<div class="modal fade" id="actingemployeeUpdateModal" tabindex="-1" role="dialog" aria-labelledby="employeeUpdateModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -134,8 +145,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="actingemployee/<?php echo e($employee->id); ?>"  method="post">         
-            <?php echo e(method_field('patch')); ?>
+        <form action="/actingemployee/update "  method="post">         
+            <?php echo e(method_field('put')); ?>
 
               <?php echo e(csrf_field()); ?>
 
@@ -146,28 +157,24 @@
                 <datalist id="employees-list"> </datalist>
             </div>
             
-            <div class="form-group">
-                <label for="acting_job_position">Acting_Position</label>
-                <select class="form-control" name="acting_job_position" id="acting_job_position" >
-                      <?php echo e($job_positions=App\JobPosition::all()); ?>
+        <div class="form-group">
+                <label for="acting_job_position">Acting_Job_Position</label>
+                <select class="form-control" name="acting_job_position" id="acting_job_position">
+                                      <?php echo e($job=App\JobPosition::all()); ?>
 
-                                    <option value="<?php echo e($employee->acting_job_position); ?>"><?php echo e($employee->acting_job_position); ?>
-
-                                        <?php $__currentLoopData = $job_positions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $job_position): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($job_position->id); ?>"><?php echo e($job_position->name); ?></option>
+                                    
+                                        <?php $__currentLoopData = $job; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $jobs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($jobs->name); ?>"><?php echo e($jobs->name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <select>
                
-            </div>
+        </div>
             <div class="form-group">
                 <label for="acting_branch_name">Acting_Branch</label>
                 <select class="form-control" name="acting_branch_name" id="acting_branch_name">
                                      <?php echo e($branch=App\Branch::all()); ?>
 
-                                    <option value="<?php echo e($employee->acting_branch_name); ?>">
-                                    <?php echo e($employee->acting_branch_name); ?>
-
-                                   </option>
+                                   
                                         <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $br): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($br->branch_name); ?>"><?php echo e($br->branch_name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -179,21 +186,27 @@
                 <input type="date" id="start_date" name="start_date" class="form-control" >
             </div>
             <div class="form-group">
-                <label for="status">Status</label>
+                <label for="end_date">End_Date</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" >
+            </div>
+              <div class="form-group">
+             
+                <input type="hidden" id="empid" name="empid" value=""class="form-control"  >
+            </div>
+            <div class="form-group">
+                <label for="status">Status
+                   
+                </label>
                 <select  class="form-control" name="status" id="status" >
-                                    <option value="<?php echo e($employee->status); ?>"> 
-                                   <?php if($employee->status==="1"): ?>
-		                            <td><span class=".label-success">
-			                        <label class='label label-success'>Active</label>
-		                            </span></td>
-                                 <?php else: ?>
-                                    <td><span class=".label-success">
-			                        <label class='label label-danger'>Blocked</label>
-		                            </span></td>
-                                <?php endif; ?>
-                                    </option>
+                                    
+                                
+                                    <option value="0">Terminated</option>
+                                 
                                     <option value="1">Active</option>
-                                    <option value="0">Blocked</option>
+                              
+                                   
+                                    
+                                    
                                    
                                     </select>
             </div>
@@ -211,10 +224,9 @@
 </div> 
 
 
-
-
-
 <!-- Update View Modal end -->
+
+
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
