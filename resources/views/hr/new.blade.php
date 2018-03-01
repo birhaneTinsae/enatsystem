@@ -47,7 +47,8 @@
                                 <div class="col-md-6">
                                    <div class="form-group">
                                         <label for="employee">Employee</label>
-                                        <input type="text" class="form-control" list="employees-list" id="new-employee" name="new_employee" placeholder="Employee">
+                                        <input type="text" class="form-control" list="employees-list"
+                                         id="new-employee" name="new_employee" placeholder="Employee">
                             
                                     <datalist id="employees-list"> </datalist>
                                 </div>

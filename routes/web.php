@@ -2,6 +2,8 @@
 use App\User;
 use App\Notifications\Actingemployees;
 use Carbon\Carbon ;
+use App\ActingEmployee;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,12 +16,7 @@ use Carbon\Carbon ;
 */
 
 Route::get('/', function () {
-  
-
-                   
-                 
-    
-    return view('welcome');
+   return view('welcome');
 });
 
 Auth::routes();
@@ -66,7 +63,7 @@ Route::get('acting','HRM\ActingEmployeeController@index');
 
 
 
-Route::get('hr/acting','HRM\HumanResourceController@acting');
+Route::get('acting/employees','HRM\ActingEmployeeController@employees');
 Route::get('hr/users','HRM\HumanResourceController@users');
 Route::resource('hr', 'HRM\HumanResourceController')->middleware('can:view-hr');
 /**

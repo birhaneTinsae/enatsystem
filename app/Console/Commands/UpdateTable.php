@@ -67,30 +67,17 @@ class UpdateTable extends Command
             ->where('id', $res->id)
             ->update(['duration' =>$diff]);                  
             }
-
             $aemployee = DB::table('acting_employees')
+          ->whereNull('remark')
           ->where('duration','>=','5')
           ->where('status', '=','1')->get();
               $check1=count($aemployee);
-              if($check1>=1){
-                  //send Notification
+              if($check1>=1){                 
                  DB::table('jobs')->delete();
-                // $users=DB::table('users')
-                //         ->whereIn('id',[1,21])->get();
                       $users=DB::table('groups')
-                       ->where('email','Like','%enatbanksc.com%')->get();
-                       $usersd=User::all();
-                   //$users=User::find(21);
-                   $users=Group::find(2);
+                       ->where('email','Like','%enatbanksc.com%')->get();                                                       
                    $when = Carbon::now()->addSeconds(20);
-                  Notification::send(  Group::all(), new Actingemployees());
-                // \ Notification::send($users,(new Actingemployees)->delay($when));
-                     
-   // 0911425080
-                //User::find(21)->notify(new Actingemployees);
-                //  Mail::to(User::find(21))
-                // ->cc(User::find(1))                
-                // ->send(new NotifyHr());
+                  Notification::send(  Group::all(), new Actingemployees());                            
                   $this->info("Tabel Updated"); 
               }
           }

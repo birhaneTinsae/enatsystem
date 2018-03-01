@@ -292,17 +292,16 @@
           //  $('#new-employee').placeholder('--Employee List--');
          });
          
-          $.getJSON('/actingemployees',function(data){
-             
+   $.getJSON('/acting/employees',function(data){
                 // Loop over the JSON array.
-                data.forEach(function(actemployee) {
+                data.forEach(function(employee) {
                 // Create a new <option> element.
                 var option = document.createElement('option');
                 // Set the value using the item in the JSON array.
-                option.value = actemployee.id;
-                option.text=actemployee.name;
+                option.value = employee.id;
+                option.text=employee.name;
                 // Add the <option> element to the <datalist>.
-                $('#actemployee-list').append(option);
+                $('#actemployees-list').append(option);
             });
           //  $('#new-employee').placeholder('--Employee List--');
          });

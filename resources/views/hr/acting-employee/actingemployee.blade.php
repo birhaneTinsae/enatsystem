@@ -151,8 +151,8 @@
             <div class="form-group">
                 <label for="full_name">Fullname</label>
                 <input type="text" id="full_name" name="full_name"
-                list="employees-list" class="form-control" >
-                <datalist id="employees-list"> </datalist>
+                list="actemployees-list" class="form-control" >
+                <datalist id="actemployees-list"> </datalist>
             </div>
             
         <div class="form-group">

@@ -20,8 +20,8 @@
                         </div>
                     <?php endif; ?>
             <ol class="breadcrumb">
-                <li><a href="actingemployee">Home</a></li>               
-                <li><a href="actingemployee">HRM</a></li>               
+                <li><a href="acting">Home</a></li>               
+                <li><a href="acting">HRM</a></li>               
                 <li class="active">New Acting Employee</li>
             </ol>
             <div class="panel panel-default">
@@ -45,11 +45,12 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                   <div class="form-group">
+                                    <div class="form-group">
                                         <label for="employee">Employee</label>
-                                        <input type="text" class="form-control" list="employees-list" id="new-employee" name="new_employee" placeholder="Employee">
+                                        <input type="text" class="form-control" list="actemployees-list"
+                                         id="new-employee" name="new_employee" placeholder="Employee">
                             
-                                    <datalist id="employees-list"> </datalist>
+                                    <datalist id="actemployees-list"> </datalist>
                                 </div>
                                 
                         <div class="form-group">
