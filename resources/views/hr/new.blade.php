@@ -45,20 +45,29 @@
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6">
-                                   <div class="form-group">
+                                   <div class="form-group {{ $errors->has('user_id') ? ' has-error' : '' }}">
                                         <label for="employee">Employee</label>
-                                        <input type="text" class="form-control" list="employees-list" id="new-employee" name="new_employee" placeholder="Employee">
+                                        <input type="text" class="form-control" list="employees-list" id="new-employee" name="user_id" placeholder="Employee">
                             
                                     <datalist id="employees-list"> </datalist>
+                                    @if ($errors->has('user_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('user_id') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('join_date') ? ' has-error' : '' }}">
                             <label for="join_date">Join Date</label>
                             <input type="date" class="form-control" id="join_date" name="join_date"  >
-                            
+                                    @if ($errors->has('join_date'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('join_date') }}</strong>
+                                    </span>
+                                    @endif
                         </div>
                                 </div>
                                 <div class="col-md-6">
-                                  <div class="form-group">
+                                  <div class="form-group  {{ $errors->has('job_position') ? ' has-error' : '' }}">
                                     <label for="job_position">Job Position</label>
                                     
                                     <select class="form-control" name="job_position" id="job_position" >
@@ -66,6 +75,11 @@
                                         <option value="{{$id}}">{{$job_position}}</option>
                                         @endforeach
                                     <select>
+                                    @if ($errors->has('job_position'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('job_position') }}</strong>
+                                    </span>
+                                    @endif
                              </div>
                                 </div>
                             </div>

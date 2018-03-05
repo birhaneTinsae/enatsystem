@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -51,8 +51,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6|confirmed|alpha_dash',
             'role'=>'required',
             'phone_no'=>'required',
             'branch'=>'required',
@@ -83,7 +83,7 @@ class RegisterController extends Controller
     }
     public function showRegistrationForm(){
         $roles=Role::orderBy('name')->pluck('name','id');
-        $branches=Branch::orderBy('branch_code')->pluck('branch_name','id');
+        $branches=Branch::orderBy('code')->pluck('name','id');
         return view('auth.register',['roles'=>$roles,'branches'=>$branches]);
     }
 }

@@ -63,7 +63,7 @@
                         <tbody>
                         @foreach($roles as $role)
                             <tr>
-                                <td>{{$counter++}}</td>
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{$role->name}}</td>
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#roleDetailModal" data-id="{{$role->id}}"><i class="fa fa-info-circle"></i></a></td>
                                 <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#roleUpdateModal" data-id="{{$role->id}}"><i class="fa fa-edit"></i></a></td>
@@ -73,6 +73,7 @@
                         </tbody>
                         
                     </table>
+                    {{$roles->links()}}
                 </div>
                 <div class="panel-footer">
                 <div class="row">

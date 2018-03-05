@@ -69,7 +69,9 @@ Route::resource('fcy', 'FCY\FCYController')->middleware('can:view-fcy');
  * Notification management related URLs.
  */
 Route::post('/sms-password-notification/send','Notification\SMSPasswordNotificationController@send');
+Route::get('/password-generator','Notification\SMSPasswordNotificationController@generate_password');
 Route::get('/sms-password-notification', 'Notification\SMSPasswordNotificationController@index')->name('sms-notification')->middleware('can:view-sms');;
+Route::get('/sms-password-notification/create', 'Notification\SMSPasswordNotificationController@create')->middleware('can:create-sms');;
 /**
  * 
  */

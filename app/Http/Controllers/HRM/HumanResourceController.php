@@ -16,8 +16,9 @@ class HumanResourceController extends Controller
      */
     public function index()
     {
-        $user=User::with('employee')->paginate(10);
-        return view('hr\hr',['employees'=> $user]);
+       
+        $employees=Employee::paginate(10);
+        return view('hr.hr',['employees'=> $employees]);
     }
 
     /**
@@ -29,7 +30,7 @@ class HumanResourceController extends Controller
     {
         //
         $job_positions=JobPosition::orderBy('name')->pluck('name','id');
-        return view('hr\new',['job_positions'=>$job_positions]);
+        return view('hr.new',['job_positions'=>$job_positions]);
     }
 
     /**
@@ -41,14 +42,22 @@ class HumanResourceController extends Controller
     public function store(Request $request)
     {
         //
-        $user=User::find($request->new_employee);
+
+        $valid_data=$request->validate([
+            'user_id'=>'required|unique:employees',
+            'job_position'=>'required',
+            'join_date'=>'required|date',
+           // 'branch_id'=>'required',
+        ]);
+
+        //$user=User::find($request->user_id);
 
         $new_employee=new Employee;
         
-        $new_employee->user_id=$request->new_employee;
+        $new_employee->user_id=$request->user_id;
         $new_employee->job_id=$request->job_position;
         $new_employee->employed_date=$request->join_date;
-        $new_employee->branch_id=$user->branch_id;
+        //$new_employee->branch_id=$user->branch_id;
         if($new_employee->save()){
             $request->session()->flash('status','Employee record successfully created');
             return redirect('/hr');
@@ -65,18 +74,19 @@ class HumanResourceController extends Controller
     public function show($id)
     {
         //
-        $employeeDTA=[];
-        $employee=Employee::where('user_id',$id)->firstOrFail();
+        $employee_dto=[];
         
-        $job_position=JobPosition::find($employee->job_id);
-        $user=User::find($id);
-        $employeeDTA['employee_name']=$user->name;
-        $employeeDTA['phone_no']=$user->phone_no;
-        $employeeDTA['email']=$user->email;
-        $employeeDTA['job_position']=$job_position->name;
-        $employeeDTA['employed_date']=$employee->employed_date;
 
-        return json_encode( $employeeDTA);
+       $employee=Employee::find($id);
+
+
+        $employee_dto['employee_name']=$employee->user->name;
+        $employee_dto['phone_no']=$employee->user->phone_no;
+        $employee_dto['email']=$employee->user->email;
+        $employee_dto['job_position']=$employee->job_position->name;
+        $employee_dto['employed_date']=$employee->employed_date;
+
+        return json_encode( $employee_dto);
     }
 
     /**

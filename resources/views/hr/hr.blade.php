@@ -8,7 +8,9 @@
                             <li class="list-group-item"><a href="branch" >Branch</a></li>
                             <li class="list-group-item"><a href="job" >JOB</a></li>
                             <li class="list-group-item"><a href="home" >Home</a></li>
+                            @can('view',App\Role::class)
                             <li class="list-group-item"><a href="role" >Role</a></li>
+                            @endcan
                         </ul>
 @endsection
 
@@ -65,9 +67,9 @@
                         <tbody>
                             @foreach($employees as $employee)
                             <tr>
-                                <td>{{$employee->id}}</td>
-                                <td>{{$employee->name}}</td>
-                                <td>{{$employee->email}}</td>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$employee->user->name}}</td>
+                                <td>{{$employee->user->email}}</td>
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="{{$employee->id}}"><i class="fa fa-info-circle"></i></a></td>
                                 @can('update',App\Employee::class)
                                 <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" data-id="{{$employee->id}}"><i class="fa fa-edit"></i></a></td>

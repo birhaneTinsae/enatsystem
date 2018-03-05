@@ -63,7 +63,7 @@
                         <tbody>
                             @foreach($job_positions as $job_position)
                             <tr>
-                                <td>{{$job_position->id}}</td>
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{$job_position->name}}</td>                                
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="{{$job_position->id}}"><i class="fa fa-info-circle"></i></a></td>
                                 <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" data-id="{{$job_position->id}}"><i class="fa fa-edit"></i></a></td>

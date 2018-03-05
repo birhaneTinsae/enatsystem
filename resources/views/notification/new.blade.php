@@ -49,32 +49,53 @@
                 </div>
 
                 <div class="panel-body">
-                    <!-- @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif -->
+               
 
                     <form action="/sms-password-notification/send" method="POST">
                     {{ csrf_field() }}
-                        <div class="form-group">
-                            <label for="branch">Branch</label>
-                            <select id="branch" class="form-control" name="branch">
-                            @foreach($branches as $id=>$branch)
-                            <option value="{{$id}}">{{$branch}}</option>
-                            @endforeach
-                            </select>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="branch">Branch</label>
+                                <select id="branch" class="form-control" name="branch">
+                                @foreach($branches as $id=>$branch)
+                                <option value="{{$id}}">{{$branch}}</option>
+                                @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="employee">Employee</label>
-                            <select  id="employee" class="form-control" name="employee" >
-                                <option value=""></option>
-                            </select>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="employee">Employee</label>
+                                <select  id="employee" class="form-control" name="employee" >
+                                    <option value=""></option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="phone-no">Phone Number</label>
-                            <input type="text" class="form-control" id="phone-no" name="phone_no" placeholder="0911******" readonly>
-                        </div>
+                    </div>
+                        
+                     <div class="row">
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone-no">Phone Number</label>
+                                <input type="text" class="form-control" id="phone-no" name="phone_no" placeholder="0911******" readonly>
+                            </div>
+                         </div>
+                         <div class="col-md-6">
+                               <label for="notification-new-password">New Password</label>
+                            <div class="input-group">
+                                <!--  -->
+                                <input type="text" class="form-control" id="notification-new-password" name="password" placeholder="password" >
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="button" id="password_generate">
+                                    <i class="fa fa-cogs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+                       
+                       
                         <div class="form-group">
                             <label for="msg-templete">Message Templete</label>
                             <select name="msg-templete"  class="form-control" id="msg-templete" >
@@ -94,11 +115,11 @@
                     </form>
                 </div>
                 <div class="panel-footer">
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-4">Maker <span class="label label-default">Default Label</span></div>
                         <div class="col-md-4">Date Time <span class="label label-default">Default Label</span></div>
                         <div class="col-md-4">Record Status <span class="label label-default">Default Label</span></div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

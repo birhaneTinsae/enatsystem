@@ -14,9 +14,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $counter=1;
-        $roles=Role::all();
-        return view('role.role',['roles'=>$roles,'counter'=>$counter]);
+       
+        $roles=Role::paginate(10);
+        return view('role.role',['roles'=>$roles]);
     }
 
     /**
@@ -39,9 +39,10 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //
-        $request->role_name;
+       
         $role_permission=array();
         $counter=1;
+
         foreach($request->models as $model){
             foreach($request->permissions as $permission){
                 foreach($permission as $per){

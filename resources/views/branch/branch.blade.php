@@ -61,7 +61,7 @@
                         </tr>
                         @foreach($branches as $branch)
                         <tr>
-                            <td>{{$branch->id}}</td>
+                            <td>{{$loop->iteration}}</td>
                             <td>{{$branch->branch_code}}</td>
                             <td>{{$branch->branch_name}}</td>
                             <td><a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#branchDetailModal" data-id="{{$branch->id}}"><i class="fa fa-info-circle"></i></a></td>

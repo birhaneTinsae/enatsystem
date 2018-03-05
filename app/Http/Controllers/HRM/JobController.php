@@ -28,7 +28,7 @@ class JobController extends Controller
     public function create()
     {
         //
-        return view('hr\job\new');
+        return view('hr.job.new');
     }
 
     /**
@@ -40,6 +40,10 @@ class JobController extends Controller
     public function store(Request $request)
     {
         //
+        $valid_data=$request->validate([
+            'name'=>'required|unique:job_positions',
+            'operation_class'=>'required',
+        ]);
         $job_position=new JobPosition;
         $job_position->name=$request->job_position_name;
         $job_position->operation_class=$request->job_position_operation_class;
