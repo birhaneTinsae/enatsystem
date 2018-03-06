@@ -236,7 +236,7 @@
             modal.find('.modal-body form').attr('action','/hr/'+id)
             
            });
-           
+           modal.find('.modal-footer a').attr('href',`/hr/${id}/edit`)
             
             
             

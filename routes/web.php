@@ -25,8 +25,8 @@ Route::get('phone-book/{query}','PhoneBookController@search');
 
 Route::middleware(['auth'])->group(function(){
 
-    Notification::route('mail', 'taylor@laravel.com')           
-    ->notify(new HRNotification(App\ActingEmployee::all()));
+    // Notification::route('mail', 'taylor@laravel.com')           
+    // ->notify(new HRNotification(App\ActingEmployee::all()));
 
 /**
  * List applications that the user has role.

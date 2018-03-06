@@ -168,6 +168,7 @@
         </form>
       </div>
       <div class="modal-footer">
+        <a id="hr_fullscreen_link" href="">Edit in full screen</a>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
         

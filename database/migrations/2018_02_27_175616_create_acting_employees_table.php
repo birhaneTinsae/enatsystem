@@ -16,10 +16,12 @@ class CreateActingEmployeesTable extends Migration
         Schema::create('acting_employees', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('employee_id');
-            $table->unsignedInteger('job_id');
+            $table->unsignedInteger('from_job_position');
+            $table->unsignedInteger('to_job_position');
             $table->date('from_date');
             $table->foreign('employee_id')->references('id')->on('employees');
-            $table->foreign('job_id')->references('id')->on('job_positions');
+            $table->foreign('from_job_position')->references('id')->on('job_positions');
+            $table->foreign('to_job_position')->references('id')->on('job_positions');
             $table->timestamps();
             $table->softDeletes();
         });
