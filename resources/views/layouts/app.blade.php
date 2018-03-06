@@ -9,8 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Enat Bank S.C.') }}- @yield('title')</title>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
-  
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">  
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -49,7 +48,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Enat Bank S.c.') }}
                     </a>
                 </div>
@@ -364,8 +363,6 @@
 
     });
     </script>
-     <!--load everything-->
-     <script defer src="/static/fontawesome/fontawesome-all.js"></script>
-
+    
 </body>
 </html>

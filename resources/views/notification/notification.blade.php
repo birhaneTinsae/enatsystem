@@ -27,12 +27,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading">SMS Password Notification
                                   
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
                     Excel</a>
                    
 
                     
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fas fa-file-pdf"></i>
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
                     Pdf</a>
                    
 
@@ -42,7 +42,7 @@
                     @endcan
 
                     @can('create-sms')
-                    <a href="/sms-password-notification/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <a href="/sms-password-notification/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a>
                     @endcan
                 

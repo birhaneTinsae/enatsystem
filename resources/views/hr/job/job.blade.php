@@ -22,15 +22,11 @@
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Job Position List
-                    @can('close-role')                   
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
-                    Close</a>
-                    @endcan
+                   <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
+                    Excel</a>
 
-                    @can('update-role')
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Update</a>
-                    @endcan
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
+                    Pdf</a>
 
                     @can('delete-role')
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -38,7 +34,7 @@
                     @endcan
 
                   
-                    <a href="job/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <a href="job/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a>
                    
                 

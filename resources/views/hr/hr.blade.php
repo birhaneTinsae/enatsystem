@@ -25,15 +25,12 @@
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Human Resource
-                    @can('close-role')                   
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
-                    Close</a>
-                    @endcan
-
-                    @can('update-role')
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Update</a>
-                    @endcan
+                  
+                   <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
+                    Excel</a>
+                   
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
+                    Pdf</a>
 
                     @can('delete')
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -41,7 +38,7 @@
                     @endcan
 
                     @can('create', App\Employee::class)
-                    <a href="hr/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <a href="hr/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a>
                     @endcan
                 
