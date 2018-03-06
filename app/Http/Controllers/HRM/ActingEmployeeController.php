@@ -17,7 +17,7 @@ class ActingEmployeeController extends Controller
      */
     public function index()
     {
-    $acting=DB::table('acting_employees')->get();
+    $acting=ActingEmployee::paginate(10);
        return view('hr\acting-employee\actingemployee',['employees'=> $acting]);
          
     }

@@ -59,7 +59,7 @@ Route::resource('hr', 'HRM\HumanResourceController');
 
 Route::resource('actingemployee', 'HRM\ActingEmployeeController');
 //Route::get('hr/acting','HRM\ActingEmployeeController@acting');
-Route::get('acting','HRM\ActingEmployeeController@index');
+Route::get('actingemployee','HRM\ActingEmployeeController@index');
 
 
 

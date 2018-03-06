@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('sidebar')
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
@@ -114,13 +113,10 @@
                         </tbody>
 
                     </table>
+                    {{$employees->links()}}
                 </div>
                 <div class="panel-footer">
-                    <!-- <div class="row">
-                        <div class="col-md-4">Maker <span class="label label-default">Default Label</span></div>
-                        <div class="col-md-4">Date Time <span class="label label-default">Default Label</span></div>
-                        <div class="col-md-4">Record Status <span class="label label-default">Default Label</span></div>
-                    </div> -->
+                   
                 </div>
             </div>
         </div>

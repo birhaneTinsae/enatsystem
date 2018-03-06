@@ -4,8 +4,7 @@
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
                             <li class="list-group-item"><a href="hr" >Employee List</a></li>
-                             <li class="list-group-item"><a href="actingemployee" >Acting Employee List</a></li>
-                            <li class="list-group-item"><a href="" >Employee List</a></li>
+                             <li class="list-group-item"><a href="actingemployee" >Acting Employee List</a></li>                            
                             <li class="list-group-item"><a href="#" >Leave</a></li>
                             <li class="list-group-item"><a href="branch" >Branch</a></li>
                             <li class="list-group-item"><a href="job" >JOB</a></li>

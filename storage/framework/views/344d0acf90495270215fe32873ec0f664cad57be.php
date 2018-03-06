@@ -251,10 +251,7 @@
       var acting_branch_name = button.data('acting_branch_name') 
        var start_date = button.data('start_date') 
         var end_date = button.data('end_date') 
-        var status = button.data('status') 
-        
-    console.log(acting_job_position);
-           
+        var status = button.data('status')            
             var modal = $(this)                       
             modal.find('.modal-title').text( "Edit Information");
             modal.find('.modal-body #full_name').val(employee_name);
