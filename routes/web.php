@@ -51,6 +51,8 @@ Route::resource('branch', 'Branch\BranchController');
 Route::get('hr/acting','HRM\HumanResourceController@acting');
 Route::get('hr/users','HRM\HumanResourceController@users');
 Route::resource('hr', 'HRM\HumanResourceController')->middleware('can:view-hr');
+Route::resource('leave', 'HRM\LeaveManagmentController')->middleware('can:view-hr');
+
 /**
  * 
  */

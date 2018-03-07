@@ -22,10 +22,10 @@
             {{--  <div class="panel panel-default">
             <div class="panel panel-body">  --}}
                     <div class="jumbotron">
-                            <h1 class="display-4"><i class="fas fa-lock"></i> {{ $exception->getStatusCode() }}.</h1>
+                            <h1 class="display-4"><i class="fas fa-window-close"></i> {{ $exception->getStatusCode() }}.</h1>
                             <p class="lead"> {{ $exception->getMessage() }}</p>
                             <hr class="my-4">
-                            <p>This error is due to tring to access an authorized resource.Please make sure you have the previlages to access or contact the System administrator.</p>
+                            <p>The file your are tring to access can not be found.</p>
                             <p class="lead">
                               <a class="btn btn-primary btn-lg" href="/home" role="button">Learn more</a>
                             </p>

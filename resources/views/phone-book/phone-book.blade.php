@@ -22,7 +22,7 @@
             <form action="">
                 <div class="form-group">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="query" name="query" placeholder="Search Employee" aria-describedby="basic-addon2">
+                    <input type="search" class="form-control" id="query" name="query" placeholder="Search Employee" aria-describedby="basic-addon2">
                     <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
                 </div>
                 </div>

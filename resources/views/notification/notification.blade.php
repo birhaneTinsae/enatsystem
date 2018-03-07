@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="panel-body">
-                  
+                  @if($notifications->isNotEmpty())
                     <table class="table table-striped">
                         <thead>
                        
@@ -71,7 +71,14 @@
                         @endforeach
                         </tbody>
                     </table>
-                  
+                  @else
+                  <div class="jumbotron ">
+                    <div class="container">
+                      <h1 class="display-4">Notification Empty</h1>
+                      <p class="lead">No Notification yet.</p>
+                    </div>
+                  </div>
+                @endif
                 </div>
                 <div class="panel-footer">
                     <!-- <div class="row">

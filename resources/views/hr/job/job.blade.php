@@ -17,7 +17,8 @@
     <!--col-md-offset-1-->
         <div class="col-md-10 ">
             <ol class="breadcrumb">
-                <li><a href="home">Home</a></li>               
+                <li><a href="home">Home</a></li>  
+                <li><a href="hr">HR</a></li>              
                 <li class="active">Job Position</li>
             </ol>
             <div class="panel panel-default">

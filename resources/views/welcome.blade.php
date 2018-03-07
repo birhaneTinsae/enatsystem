@@ -62,6 +62,23 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .flex-center-bottom {
+                background-color: #739FD0;
+                color: #000000;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                align-content: center;
+                align-items: center;
+            }
+            .flex-item-bottom {
+                border: solid 2px #4675AA;
+                order: 1;
+                flex: 0 1 auto;
+                align-self: flex-end;
+            }
         </style>
     </head>
     <body>
@@ -91,6 +108,8 @@
                     <a href="https://github.com/laravel/laravel">GitHub</a> -->
                 </div>
             </div>
+           
         </div>
+        
     </body>
 </html>

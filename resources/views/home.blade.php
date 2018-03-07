@@ -10,7 +10,7 @@
                 <div class="panel-heading">Notification</div>
                 <div class="panel-body">
                 <p class="panel-text">For any tasks that need any form of information transmittion</p>
-                <a href="sms-password-notification" class="btn btn-primary btn-block">Notification</a>
+                <a href="sms-password-notification" class="btn btn-primary btn-block"><i class="far fa-bell"></i> Notification</a>
                 </div>
             </div>
         </div>
@@ -22,7 +22,8 @@
                 <div class="panel-heading">Vehicle Managment</div>
                 <div class="panel-body">
                 <p class="panel-text">With supporting text below as a natural lead-in to additional</p>
-                <a href="#" class="btn btn-primary btn-block">VMS</a>
+                <br>
+                <a href="#" class="btn btn-primary btn-block"><i class="fas fa-bus"></i> VMS</a>
                 </div>
             </div>
         </div>
@@ -34,7 +35,7 @@
                 <div class="panel-heading">Foreign Currency</div>
                 <div class="panel-body">
                 <p class="panel-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="fcy" class="btn btn-primary btn-block">FCY</a>
+                <a href="fcy" class="btn btn-primary btn-block"><i class="fas fa-dollar-sign"></i> FCY</a>
                 </div>
             </div>
         </div>
@@ -58,7 +59,7 @@
                 <div class="panel-heading">Human Resource</div>
                 <div class="panel-body">
                 <p class="panel-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="hr" class="btn btn-primary btn-block">HR</a>
+                <a href="hr" class="btn btn-primary btn-block"><i class="fas fa-female"></i> HR</a>
                 </div>
             </div>
         </div>
