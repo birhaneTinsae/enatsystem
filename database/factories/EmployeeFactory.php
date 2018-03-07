@@ -16,7 +16,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Employee::class, function (Faker $faker) {
     return [
         'user_id' => $faker->numberBetween($min = 1, $max = 20),
-        'branch_id' => $faker->numberBetween($min = 1, $max = 20),
+        // 'branch_id' => $faker->numberBetween($min = 1, $max = 20),
         'job_id' => $faker->numberBetween($min = 1, $max = 20), // secret
         'employed_date' =>$faker->dateTime($max = 'now', $timezone = 'Africa/Addis_Ababa'),
     ];

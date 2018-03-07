@@ -129,29 +129,30 @@
                                 <th>Starting Date</th>
                                 <th>End date</th>
                                   <th>Duration</th>
+                                  {{$employees}}
                             </tr>
                         
-                           @foreach($Aemployee as $aemp)
+                           @foreach($employees as $aemp)
 	
 	
 	<tr >
 		
 		<td><span>
-			{{$aemp->employee_name}}
+			{{$aemp->user->name}}
 
 		</span></td>
 		
 		<td><span>
-			{{$aemp->job_position}}
+			{{$aemp->job_position->name}}
 
 		</span></td>
     <td><span>
-        	{{$aemp->acting_job_position}}
+        	{{$aemp->acting_job_position_name}}
 			
 
 		</span></td>
         <td><span>
-		{{$aemp->home_branch}}
+		{{$aemp->branch->branch_name}}
 
 		</span></td>
         <td><span>

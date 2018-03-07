@@ -9,7 +9,9 @@
                             <li class="list-group-item"><a href="branch" >Branch</a></li>
                             <li class="list-group-item"><a href="job" >JOB</a></li>
                             <li class="list-group-item"><a href="home" >Home</a></li>
+                            @can('view',App\Role::class)
                             <li class="list-group-item"><a href="role" >Role</a></li>
+                            @endcan
                         </ul>
 @endsection
 
@@ -24,15 +26,12 @@
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Human Resource
-                    @can('close-role')                   
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
-                    Close</a>
-                    @endcan
-
-                    @can('update-role')
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Update</a>
-                    @endcan
+                  
+                   <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
+                    Excel</a>
+                   
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
+                    Pdf</a>
 
                     @can('delete')
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -40,7 +39,7 @@
                     @endcan
 
                     @can('create', App\Employee::class)
-                    <a href="hr/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <a href="hr/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a>
                     @endcan
                 
@@ -66,9 +65,9 @@
                         <tbody>
                             @foreach($employees as $employee)
                             <tr>
-                                <td>{{$employee->id}}</td>
-                                <td>{{$employee->name}}</td>
-                                <td>{{$employee->email}}</td>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$employee->user->name}}</td>
+                                <td>{{$employee->user->email}}</td>
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="{{$employee->id}}"><i class="fa fa-info-circle"></i></a></td>
                                 @can('update',App\Employee::class)
                                 <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" 

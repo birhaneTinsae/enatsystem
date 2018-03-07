@@ -15,8 +15,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Branch::class, function (Faker $faker) {
     return [
-        'branch_code' => $faker->numerify('###'),
-        'branch_name' => $faker->company,
+        'code' => $faker->numerify('###'),
+        'name' => $faker->company,
       
         // 'created_at' =>$faker->dateTime($max = 'now', $timezone = 'EAT'), // secret
         // 'updated_at' =>$faker->dateTime($max = 'now', $timezone = 'EAT'),

@@ -7,7 +7,9 @@
                             <li class="list-group-item"><a href="branch" >Branch</a></li>
                             <li class="list-group-item"><a href="job" >JOB</a></li>
                             <li class="list-group-item"><a href="home" >Home</a></li>
+                            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view',App\Role::class)): ?>
                             <li class="list-group-item"><a href="role" >Role</a></li>
+                            <?php endif; ?>
                         </ul>
 <?php $__env->stopSection(); ?>
 
@@ -22,15 +24,12 @@
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Human Resource
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('close-role')): ?>                   
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
-                    Close</a>
-                    <?php endif; ?>
-
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update-role')): ?>
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Update</a>
-                    <?php endif; ?>
+                  
+                   <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
+                    Excel</a>
+                   
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
+                    Pdf</a>
 
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -38,7 +37,7 @@
                     <?php endif; ?>
 
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create', App\Employee::class)): ?>
-                    <a href="hr/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <a href="hr/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a>
                     <?php endif; ?>
                 
@@ -65,9 +64,9 @@
                         <tbody>
                             <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td><?php echo e($employee->id); ?></td>
-                                <td><?php echo e($employee->name); ?></td>
-                                <td><?php echo e($employee->email); ?></td>
+                                <td><?php echo e($loop->iteration); ?></td>
+                                
+                                <td><?php echo e($employee->user->email); ?></td>
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="<?php echo e($employee->id); ?>"><i class="fa fa-info-circle"></i></a></td>
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',App\Employee::class)): ?>
                                 <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" 

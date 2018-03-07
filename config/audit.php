@@ -39,7 +39,7 @@ return [
         'primary_key' => 'id',
         'foreign_key' => 'user_id',
         'model'       => App\User::class,
-        'resolver'    => App\User::class,
+        'resolver'    => App\Resolvers\UserResolver::class,
     ],
 
     /*
@@ -120,10 +120,10 @@ return [
     ],
 
     'resolver' => [
-        'user'       => OwenIt\Auditing\Contracts\UserResolver::class,
-        'ip_address' => OwenIt\Auditing\Resolvers\IpAddressResolver::class,
-        'user_agent' => OwenIt\Auditing\Resolvers\UserAgentResolver::class,
-        'url'        => OwenIt\Auditing\Resolvers\UrlResolver::class,
+        'user' => App\Resolvers\UserResolver::class,
+        'ip_address' => App\Resolvers\IpAddressResolver::class,
+        'user_agent' => App\Resolvers\UserAgentResolver::class,
+        'url' => App\Resolvers\UrlResolver::class,
     ],
     /*
     |--------------------------------------------------------------------------

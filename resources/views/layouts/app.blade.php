@@ -9,7 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Enat Bank S.C.') }}- @yield('title')</title>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">  
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
@@ -22,6 +23,13 @@
     .panel-menu-item{
         margin-right:10px;
         color:#000;
+    }
+    input[type="password"]:invalid {
+    border-color: red;
+    }
+    input[type="password"],
+    input[type="password"]:valid {
+        border-color: #ccc;
     }
     </style>
 </head>
@@ -40,7 +48,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Enat Bank S.c.') }}
                     </a>
                 </div>
@@ -61,7 +69,7 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                             <!-- <li><a href="{{ route('register') }}">Register</a></li> -->
                         @else
-                            <li><a href="{{ route('register') }}">Branch <span class="label label-success">{{Auth::user()->branch->branch_code}}</span></a></li>
+                            <li><a href="{{ route('register') }}">Branch <span class="label label-success">{{Auth::user()->branch->code}}</span></a></li>
                             <!-- <li><a href="{{ route('register') }}">Role <span class="label label-primary">{{Auth::user()->branch->branch_code}}</span></a></li> -->
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -152,12 +160,15 @@
             }
         });
 
+        $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+            $(".alert").slideUp(500);
+        });
         //to dynamically populate employees while selecting branch.
         $('#branch').change(function () {
             var branch = $(this).val();          
             var result='';
             console.log(branch);
-            $.getJSON("branch/"+branch+"/employees", function(data){
+            $.getJSON("/branch/"+branch+"/employees", function(data){
                   $.each(data,function(key,value){
                     result+='<option value="'+value.id+'">'+value.name+'</option>';
                     temp[value.id]=value.phone_no;
@@ -177,7 +188,7 @@
             var msg='';
             var msg_templete=$(this).val();
             
-            $.getJSON('msg-templete/'+msg_templete,function(data){
+            $.getJSON('/msg-templete/'+msg_templete,function(data){
               msg=  data.templete;              
                 
                 $('#msg').text(msg);
@@ -243,18 +254,19 @@
    var id = button.data('empid')
   
     var employee_name = button.data('full_name') 
-     var acting_job_position = button.data('acting_job_position') 
+     var acting_job_position_name = button.data('acting_job_position_name') 
       var acting_branch_name = button.data('acting_branch_name') 
        var start_date = button.data('start_date') 
         var end_date = button.data('end_date') 
-        var status = button.data('status')            
+        var status = button.data('status')      
+        console.log(acting_branch_name);      
             var modal = $(this)                       
             modal.find('.modal-title').text( "Edit Information");
             modal.find('.modal-body #full_name').val(employee_name);
-            modal.find('.modal-body #acting_job_position').val(acting_job_position);
+            modal.find('.modal-body #acting_job_position_name').val(acting_job_position_name);
             modal.find('.modal-body #acting_branch_name').val(acting_branch_name);
             modal.find('.modal-body #start_date').val(start_date);
-             modal.find('.modal-body #end_date').val(end_date);
+            modal.find('.modal-body #end_date').val(end_date);
             modal.find('.modal-body #status').val(status);   
             modal.find('.modal-body #empid').val(id);         
             //modal.find('.modal-body form').attr('action','/actingemployee/'+id)
@@ -389,9 +401,18 @@
          $('#role-name').keyup(function(){
                 $('#role-slug').val(slugify($(this).val()));
          });
+
+         //password generator button click listener.
+         $('#password_generate').click(function(){
+             $.get('/password-generator',function(data,status){
+                 console.log(data);
+                 $('#notification-new-password').val(data);
+             });
+         });
+
+
     });
     </script>
-   
-
+    
 </body>
 </html>

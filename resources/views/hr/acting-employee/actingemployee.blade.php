@@ -79,10 +79,11 @@
                             @foreach($employees as $employee)
                             <tr>
                                 <td>{{$employee->id}}</td>
-                                <td>{{$employee->employee_name}}</td>
-                                <td>{{$employee->job_position}}</td>
-                                <td>{{$employee->home_branch}}</td>
-                                <td>{{$employee->acting_job_position}}</td>
+                                <td>{{$employee->user->name}}</td>
+                                <td>{{$employee->job_position->name}}</td>
+                                <td>{{$employee->branch->branch_name}}</td>
+                                
+                                <td>{{$employee->acting_job_position_name}}</td>
                                 <td>{{$employee->acting_branch_name}}</td>
                                 <td>{{$employee->start_date}}</td>
                                 <td>{{$employee->end_date}}</td>
@@ -99,8 +100,8 @@
                                 <td><a 
                                 class="btn-warning btn-sm" data-toggle="modal" data-target="#actingemployeeUpdateModal" 
                                 data-empid="{{$employee->id}}" 
-                                data-full_name="{{$employee->employee_name}}"
-                                data-acting_job_position="{{$employee->acting_job_position}}"
+                                data-full_name="{{$employee->user->name}}"
+                                data-acting_job_position_name="{{$employee->acting_job_position_name}}"
                                 data-acting_branch_name="{{$employee->acting_branch_name}}"
                                 data-start_date="{{$employee->start_date}}"
                                 data-end_date="{{$employee->end_date}}"
@@ -152,10 +153,9 @@
             </div>
             
         <div class="form-group">
-                <label for="acting_job_position">Acting_Job_Position</label>
-                <select class="form-control" name="acting_job_position" id="acting_job_position">
-                                      {{$job=App\JobPosition::all()}}
-                                    
+                <label for="acting_job_position_name">Acting_Job_Position</label>
+                <select class="form-control" name="acting_job_position_name" id="acting_job_position_name">
+                                      {{$job=App\JobPosition::all()}}                                    
                                         @foreach($job as $jobs)
                                         <option value="{{$jobs->name}}">{{$jobs->name}}</option>
                                         @endforeach

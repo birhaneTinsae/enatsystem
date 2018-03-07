@@ -9,7 +9,7 @@ class ActingEmployee extends Model
     //
     public function job_position()
     {
-        return $this->hasOne('App\JobPosition');
+        return $this->belongsTo('App\JobPosition');
     }
     public function user(){
         return $this->belongsTo('App\User');

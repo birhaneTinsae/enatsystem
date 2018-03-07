@@ -22,15 +22,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Role 
 
-                    @can('close-role')                   
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
-                    Close</a>
-                    @endcan
-
-                    @can('update-role')
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Update</a>
-                    @endcan
+                     <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
+                    Excel</a>
+                   
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
+                    Pdf</a>
 
                     @can('delete-role')
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -38,7 +34,7 @@
                     @endcan
 
                     @can('create',App\Role::class)
-                    <a href="role/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <a href="role/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a>
                     @endcan
                 
@@ -63,7 +59,7 @@
                         <tbody>
                         @foreach($roles as $role)
                             <tr>
-                                <td>{{$counter++}}</td>
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{$role->name}}</td>
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#roleDetailModal" data-id="{{$role->id}}"><i class="fa fa-info-circle"></i></a></td>
                                 <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#roleUpdateModal" data-id="{{$role->id}}"><i class="fa fa-edit"></i></a></td>
@@ -73,6 +69,7 @@
                         </tbody>
                         
                     </table>
+                    {{$roles->links()}}
                 </div>
                 <div class="panel-footer">
                 <div class="row">

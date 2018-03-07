@@ -41,8 +41,10 @@ class MessageTempleteController extends Controller
     {
         //
         $msg_templete=new MessageTemplete;
+        
         $msg_templete->name=$request->msg_templete_name;
         $msg_templete->templete=$request->msg_content;
+
         if($msg_templete->save()){
             $request->session()->flash('status','Message Templete with name'.$request->msg_templete_name.' successfully added');
             return redirect('/msg-templete');

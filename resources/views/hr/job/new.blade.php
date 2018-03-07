@@ -41,17 +41,27 @@
                          {{csrf_field()}}
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label for="job_position_name">Job Position Name</label>
-                                    <input type="text" class="form-control" name="job_position_name" id="job_position_name" placeholder="eg. Senior System Admin">
+                                    <input type="text" class="form-control" name="name" id="job_position_name" value="{{ old('name') }}" placeholder="eg. Senior System Admin">
+                                    @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group {{ $errors->has('operation_class') ? ' has-error' : '' }}">
                                     <label for="job_position_operation_class">Operation Location</label>
-                                    <select  class="form-control" name="job_position_operation_class" id="job_position_operation_class" >
+                                    <select  class="form-control" name="operation_class" id="job_position_operation_class" >
                                     <option value="Head office">Head office</option>
                                     <option value="Branch">Branch</option>
                                     <option value="Both">Both</option>
                                     </select>
+                                    @if ($errors->has('operation_class'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('operation_class') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-6"></div>

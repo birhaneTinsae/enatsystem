@@ -54,6 +54,10 @@ class AuthServiceProvider extends ServiceProvider
             
             return $user->hasAccess(['view-sms']);
         });
+        Gate::define('create-sms', function ($user) {
+            
+            return $user->hasAccess(['create-sms']);
+        });
         Gate::define('view-vms', function ($user) {
             
             return $user->hasAccess(['view-vms']);

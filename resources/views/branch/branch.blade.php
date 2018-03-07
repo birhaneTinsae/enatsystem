@@ -23,15 +23,11 @@
            
             <div class="panel panel-default">
                 <div class="panel-heading">Branch
-                @can('close-role')                   
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
-                    Close</a>
-                    @endcan
+                <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
+                    Excel</a>
 
-                    @can('update-role')
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Update</a>
-                    @endcan
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
+                    Pdf</a>
 
                     @can('delete-role')
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -39,7 +35,7 @@
                     @endcan
 
                     
-                    <a href="/branch/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <a href="/branch/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a>
                     
                 
@@ -61,11 +57,17 @@
                         </tr>
                         @foreach($branches as $branch)
                         <tr>
+<<<<<<< HEAD
                             <td>{{$branch->id}}</td>
                             <td>{{$branch->branch_code}}</td>
                             <td>{{$branch->branch_name}}</td>
                             <td><a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#" data-id="{{$branch->id}}"><i class="fa fa-info-circle"></i></a></td>
                             <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#" data-id="{{$branch->id}}"><i class="fa fa-edit"></i></a></td>
+=======
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$branch->code}}</td>
+                            <td>{{$branch->name}}</td>
+>>>>>>> 194b3dbb38f1fc2b8198dc582537bb634b9dcd5f
                             <td><a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#branchDetailModal" data-id="{{$branch->id}}"><i class="fa fa-info-circle"></i></a></td>
                             <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#branchUpdateModal" data-id="{{$branch->id}}"><i class="fa fa-edit"></i></a></td>
                            

@@ -27,7 +27,7 @@ class PhoneBookController extends Controller
         foreach($users as $user){
             $response[$counter]['count']=$counter;
             $response[$counter]['name']=$user->name;
-            $response[$counter]['branch']=$user->branch->branch_name;
+            $response[$counter]['branch']=$user->branch->name;
             $response[$counter]['phone_no']=$user->phone_no;
             $counter++;
         }

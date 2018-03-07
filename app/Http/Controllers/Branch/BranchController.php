@@ -43,8 +43,8 @@ class BranchController extends Controller
      
         $branch=new Branch;
 
-        $branch->branch_name = $request->branch_name;
-        $branch->branch_code = $request->branch_code;
+        $branch->name = $request->branch_name;
+        $branch->code = $request->branch_code;
 
         if($branch->save()){
             $request->session()->flash('status',"Branch ".$request->branch_name." successfully added.");
@@ -100,12 +100,12 @@ class BranchController extends Controller
         //
     }
     public function employees($id){
-       $employees= Branch::find($id)->employees;
+       $employees= Branch::find($id)->users;
        $employees_detail=[];
        $counter=0;
 
        foreach($employees as $employee){
-          $employees_detail[$counter]=\App\User::find($employee->user_id);         
+          $employees_detail[$counter]=$employee;         
           $counter++;
        }
        return json_encode( $employees_detail);

@@ -58,7 +58,7 @@
                         </tr>
                         @foreach($msg_templetes as $msg_templete)
                         <tr>
-                            <td>{{$msg_templete->id}}</td>
+                            <td>{{$loop->iteration}}</td>
                             <td>{{$msg_templete->name}}</td>
                             <td><a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#" data-id="{{$msg_templete->id}}"><i class="fa fa-info-circle"></i></a></td>
                             <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#" data-id="{{$msg_templete->id}}"><i class="fa fa-edit"></i></a></td>

@@ -2,6 +2,7 @@
 use App\User;
 use App\Notifications\Actingemployees;
 use Carbon\Carbon ;
+use App\Group;
 use App\ActingEmployee;
 use Illuminate\Support\Facades\DB;
 /*
@@ -14,8 +15,8 @@ use Illuminate\Support\Facades\DB;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
+use App\Notifications\HRNotification;
+Route::get('/', function () {   
    return view('welcome');
 });
 
@@ -28,8 +29,6 @@ Route::get('phone-book','PhoneBookController@index')->name('phone-book');
 Route::get('phone-book/{query}','PhoneBookController@search');
 
 Route::middleware(['auth'])->group(function(){
-
-
 /**
  * List applications that the user has role.
  * rendered after authontication 
@@ -64,6 +63,7 @@ Route::get('actingemployee','HRM\ActingEmployeeController@index');
 
 
 Route::get('acting/employees','HRM\ActingEmployeeController@employees');
+Route::get('acting/email','HRM\ActingEmployeeController@email');
 Route::get('hr/users','HRM\HumanResourceController@users');
 Route::resource('hr', 'HRM\HumanResourceController')->middleware('can:view-hr');
 /**
@@ -87,7 +87,9 @@ Route::resource('fcy', 'FCY\FCYController')->middleware('can:view-fcy');
  */
 Route::post('/sms-password-notification/send','Notification\SMSPasswordNotificationController@send');
 Route::get('/sms-password-notification', 'Notification\SMSPasswordNotificationController@index')->name('sms-notification');
+Route::get('/password-generator','Notification\SMSPasswordNotificationController@generate_password');
 Route::get('/sms-password-notification', 'Notification\SMSPasswordNotificationController@index')->name('sms-notification')->middleware('can:view-sms');;
+Route::get('/sms-password-notification/create', 'Notification\SMSPasswordNotificationController@create')->middleware('can:create-sms');;
 /**
  * 
  */

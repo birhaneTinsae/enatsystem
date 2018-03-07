@@ -68,19 +68,25 @@ class UpdateTable extends Command
             ->update(['duration' =>$diff]);                  
             }
             $aemployee = DB::table('acting_employees')
-          ->whereNull('remark')
-          ->where('duration','>=','5')
+          ->where('duration','>=',5)
           ->where('status', '=','1')->get();
               $check1=count($aemployee);
               if($check1>=1){                 
-                 DB::table('jobs')->delete();
-                      $users=DB::table('groups')
-                       ->where('email','Like','%enatbanksc.com%')->get();                                                       
+                 DB::table('jobs')->delete();                                                                         
                    $when = Carbon::now()->addSeconds(20);
-                  Notification::send(  Group::all(), new Actingemployees());                            
-                  $this->info("Tabel Updated"); 
+                  Notification::send(Group::find(2), new Actingemployees());                                             
+                  $this->info("Notification Sent"); 
               }
+              else{
+                 $this->info("Tabel Updated"); 
+                 $this->info("Notification Not Required");
+              }
+               
           }
+           else{
+                $this->info("No Record to be Updated Updated"); 
+              }
+         
          
     }
 }

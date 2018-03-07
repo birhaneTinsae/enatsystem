@@ -80,10 +80,11 @@
                             <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td><?php echo e($employee->id); ?></td>
-                                <td><?php echo e($employee->employee_name); ?></td>
-                                <td><?php echo e($employee->job_position); ?></td>
-                                <td><?php echo e($employee->home_branch); ?></td>
-                                <td><?php echo e($employee->acting_job_position); ?></td>
+                                <td><?php echo e($employee->user->name); ?></td>
+                                <td><?php echo e($employee->job_position->name); ?></td>
+                                <td><?php echo e($employee->branch->branch_name); ?></td>
+                                
+                                <td><?php echo e($employee->acting_job_position_name); ?></td>
                                 <td><?php echo e($employee->acting_branch_name); ?></td>
                                 <td><?php echo e($employee->start_date); ?></td>
                                 <td><?php echo e($employee->end_date); ?></td>
@@ -100,8 +101,8 @@
                                 <td><a 
                                 class="btn-warning btn-sm" data-toggle="modal" data-target="#actingemployeeUpdateModal" 
                                 data-empid="<?php echo e($employee->id); ?>" 
-                                data-full_name="<?php echo e($employee->employee_name); ?>"
-                                data-acting_job_position="<?php echo e($employee->acting_job_position); ?>"
+                                data-full_name="<?php echo e($employee->user->name); ?>"
+                                data-acting_job_position_name="<?php echo e($employee->acting_job_position_name); ?>"
                                 data-acting_branch_name="<?php echo e($employee->acting_branch_name); ?>"
                                 data-start_date="<?php echo e($employee->start_date); ?>"
                                 data-end_date="<?php echo e($employee->end_date); ?>"
@@ -156,11 +157,9 @@
             </div>
             
         <div class="form-group">
-                <label for="acting_job_position">Acting_Job_Position</label>
-                <select class="form-control" name="acting_job_position" id="acting_job_position">
-                                      <?php echo e($job=App\JobPosition::all()); ?>
-
-                                    
+                <label for="acting_job_position_name">Acting_Job_Position</label>
+                <select class="form-control" name="acting_job_position_name" id="acting_job_position_name">
+                                      <?php echo e($job=App\JobPosition::all()); ?>                                    
                                         <?php $__currentLoopData = $job; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $jobs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($jobs->name); ?>"><?php echo e($jobs->name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

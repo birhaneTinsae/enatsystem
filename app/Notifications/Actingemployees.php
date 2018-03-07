@@ -41,24 +41,9 @@ class Actingemployees extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
      $aemployee = DB::table('acting_employees')
-          ->whereNull('remark')
-          ->where('duration','>=','5')
-          ->where('status', '=','1')->get();
-          
-      $result = DB::table('acting_employees')
-          ->where('status', '=','1')
-          ->where('duration', '>=','5')
-          ->get();
-           $check=count($result);
-          if($check>=1){
-            foreach($result as $res){
-            DB::table('acting_employees')
-            ->where('id', $res->id)
-            ->update(['remark' =>"Notification sent"]);
-            }
-        }
-            
-  return (new MailMessage)->view('hr\acting-employee.email',['Aemployee'=>$aemployee]);
+          ->where('duration','>=',5)
+          ->where('status', '=','1')->get();        
+  return (new MailMessage)->view('hr\acting-employee.email',['employees'=>$aemployee]);
 
     }
 
