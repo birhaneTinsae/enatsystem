@@ -194,6 +194,17 @@ class ActingEmployeeController extends Controller
             ->get();
              return json_encode($emp);
     }
+    public function email(){
+         $emp= DB::table('acting_employees')            
+             ->join('branches', 'branches.id', '=', 'acting_employees.branch_id')    
+             ->join('users', 'users.id', '=', 'acting_employees.user_id')       
+              ->join('job_positions', 'job_positions.id', '=', 'acting_employees.job_position_id')  
+               ->where('duration','>=',5)
+                ->where('status', '=','1')         
+              ->select('acting_employees.*', 'users.name as full_name','branches.branch_name','job_positions.name as job_name')
+            ->get();
+              dd($emp);
+    }
 
 }
 

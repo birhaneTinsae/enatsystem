@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -128,22 +129,17 @@
                                 <th>Temporary Branch</th>
                                 <th>Starting Date</th>
                                 <th>End date</th>
-                                  <th>Duration</th>
-                                  {{$employees}}
-                            </tr>
-                        
-                           @foreach($employees as $aemp)
-	
-	
+                                  <th>Duration</th>                    
+                            </tr>                        
+      @foreach($employees as $aemp)		
 	<tr >
 		
 		<td><span>
-			{{$aemp->user->name}}
-
+        {{$aemp->full_name}}
 		</span></td>
 		
 		<td><span>
-			{{$aemp->job_position->name}}
+			   {{$aemp->job_name}}
 
 		</span></td>
     <td><span>
@@ -151,8 +147,9 @@
 			
 
 		</span></td>
+        {{$aemp->branch_name}}
         <td><span>
-		{{$aemp->branch->branch_name}}
+		
 
 		</span></td>
         <td><span>

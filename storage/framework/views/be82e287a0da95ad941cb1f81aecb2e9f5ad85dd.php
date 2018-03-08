@@ -128,24 +128,18 @@
                                 <th>Temporary Branch</th>
                                 <th>Starting Date</th>
                                 <th>End date</th>
-                                  <th>Duration</th>
-                                  <?php echo e($employees); ?>
-
-                            </tr>
-                        
-                           <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $aemp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-	
-	
+                                  <th>Duration</th>                    
+                            </tr>                        
+      <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $aemp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>		
 	<tr >
 		
 		<td><span>
-			<?php echo e($aemp->user->name); ?>
-
+        <?php echo e($aemp->full_name); ?>
 
 		</span></td>
 		
 		<td><span>
-			<?php echo e($aemp->job_position->name); ?>
+			   <?php echo e($aemp->job_name); ?>
 
 
 		</span></td>
@@ -155,9 +149,10 @@
 			
 
 		</span></td>
-        <td><span>
-		<?php echo e($aemp->branch->branch_name); ?>
+        <?php echo e($aemp->branch_name); ?>
 
+        <td><span>
+		
 
 		</span></td>
         <td><span>
@@ -292,3 +287,4 @@ For detail information click here
     </table>
 </body>
 </html>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
