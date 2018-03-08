@@ -57,7 +57,7 @@ Route::get('hr/users','HRM\HumanResourceController@users');
 Route::resource('hr', 'HRM\HumanResourceController');
 
 Route::resource('actingemployee', 'HRM\ActingEmployeeController');
-//Route::get('hr/acting','HRM\ActingEmployeeController@acting');
+Route::get('searchactingemployee/{queryemp}','HRM\ActingEmployeeController@search');
 Route::get('actingemployee','HRM\ActingEmployeeController@index');
 
 

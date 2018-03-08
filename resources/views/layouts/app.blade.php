@@ -320,8 +320,7 @@
            
            var result='';
            $.getJSON('/phone-book/'+query,function(data){
-            data.forEach(function(employee){
-              
+            data.forEach(function(employee){              
                 result+='<tr><td>'
                         +employee.count
                         +'</td><td>'
@@ -332,6 +331,40 @@
                         +employee.phone_no+'</td></tr>';
             });
             $('#search-result tbody').html(result);
+           });
+         });
+//Act Employee search query ajax call
+           $('#queryemp').on('keyup',function(){
+           var queryemp= $(this).val();
+           //to check if the search box is empty and display all the employees.
+            if(queryemp==='')
+              queryemp='all';           
+           var results='';
+           $.getJSON('/searchactingemployee/'+queryemp,function(data){
+            data.forEach(function(actemployee){              
+                results+='<tr><td>'
+                        +actemployee.count
+                        +'</td><td>'
+                        +actemployee.full_name
+                        +'</td><td>'                      
+                        +actemployee.job_position
+                        +'</td><td>'                      
+                        +actemployee.home_branch
+                        +'</td><td>'                      
+                        +actemployee.acting_job_position
+                        +'</td>'
+                        +'<td>'                      
+                        +actemployee.acting_branch_name
+                        +'</td><td>'                      
+                        +actemployee.from
+                        +'</td><td>'                      
+                        +actemployee.upto
+                        +'</td><td>'                      
+                        +actemployee.status                        
++'</td><td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#actingemployeeUpdateModal" data-empid='+actemployee.emp_id+' data-full_name='+actemployee.full_name+' data-acting_job_position_name='+actemployee.acting_job_position+' data-acting_branch_name='+actemployee.acting_branch_name+' data-start_date='+actemployee.from+' data-end_date='+actemployee.upto+' data-status='+actemployee.status+'> <i class="fa fa-edit"></i></a> ' +'</td></tr>';        
+            });
+            console.log(results);
+            $('#search-results tbody').html(results);
            });
          });
 

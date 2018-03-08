@@ -21,6 +21,14 @@
                 <li><a href="home">Home</a></li>               
                 <li class="active">HR</li>
             </ol>
+        <form action="">
+                <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="queryemp" name="queryemp" placeholder="Search Employee" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon"><i class="fa fa-search"></i></span>
+                </div>
+                </div>
+            </form>
             <div class="panel panel-default">
                 <div class="panel-heading">Acting Employee Lists
                     @can('close-role')                   
@@ -60,7 +68,7 @@
                     @endif
                     
 
-                    <table class="table table-striped">
+                    <table class="table table-striped"  id="search-results">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -81,10 +89,9 @@
                                 <td>{{$employee->id}}</td>
                                 <td>{{$employee->user->name}}</td>
                                 <td>{{$employee->job_position->name}}</td>
-                                <td>{{$employee->branch->branch_name}}</td>
-                                
+                                <td>{{$employee->branch->branch_name}}</td>                            
                                 <td>{{$employee->acting_job_position_name}}</td>
-                                <td>{{$employee->acting_branch_name}}</td>
+                                <td>{{$employee->acting_branch_name}}</td>                               
                                 <td>{{$employee->start_date}}</td>
                                 <td>{{$employee->end_date}}</td>
                                 @if ($employee->status==="1")
@@ -128,10 +135,6 @@
 <!-- Detail View Modal end -->
 
 <!-- Update View Modal -->
-
- 
-
-
 <div class="modal fade" id="actingemployeeUpdateModal" tabindex="-1" role="dialog" aria-labelledby="employeeUpdateModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -147,14 +150,14 @@
               {{csrf_field()}}
             <div class="form-group">
                 <label for="full_name">Fullname</label>
-                <input type="text" id="full_name" name="full_name"
+                <input type="text" required id="full_name" name="full_name"
                 list="actemployees-list" class="form-control" >
                 <datalist id="actemployees-list"> </datalist>
             </div>
             
         <div class="form-group">
                 <label for="acting_job_position_name">Acting_Job_Position</label>
-                <select class="form-control" name="acting_job_position_name" id="acting_job_position_name">
+                <select required class="form-control" name="acting_job_position_name" id="acting_job_position_name">
                                       {{$job=App\JobPosition::all()}}                                    
                                         @foreach($job as $jobs)
                                         <option value="{{$jobs->name}}">{{$jobs->name}}</option>
@@ -164,7 +167,7 @@
         </div>
             <div class="form-group">
                 <label for="acting_branch_name">Acting_Branch</label>
-                <select class="form-control" name="acting_branch_name" id="acting_branch_name">
+                <select class="form-control" name="acting_branch_name" id="acting_branch_name" required>
                                      {{$branch=App\Branch::all()}}
                                    
                                         @foreach($branch as $br)
@@ -179,42 +182,29 @@
             </div>
             <div class="form-group">
                 <label for="end_date">End_Date</label>
-                <input type="date" id="end_date" name="end_date" class="form-control" >
+                <input type="date" required id="end_date" name="end_date" class="form-control" >
             </div>
               <div class="form-group">
              
                 <input type="hidden" id="empid" name="empid" value=""class="form-control"  >
             </div>
             <div class="form-group">
-                <label for="status">Status
-                   
+                <label for="status">Status                   
                 </label>
-                <select  class="form-control" name="status" id="status" >
-                                    
-                                
-                                    <option value="0">Terminated</option>
-                                 
-                                    <option value="1">Active</option>
-                              
-                                   
-                                    
-                                    
-                                   
+                <select  class="form-control" name="status" id="status" required >                                                                    
+                                    <option value="0">Terminated</option>                                 
+                                    <option value="1">Active</option>                                                           
                                     </select>
             </div>
              <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success" >Update</button>
-        
+        <button type="submit" class="btn btn-success" >Update</button>        
       </div>
-
         </form>
-      </div>
-     
+      </div>     
     </div>
   </div>
 </div> 
-
 
 <!-- Update View Modal end -->
 

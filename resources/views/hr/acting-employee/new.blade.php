@@ -6,7 +6,7 @@
                             <li class="list-group-item"><a href="#" >Request List</a></li>
                             <li class="list-group-item"><a href="#" >Leave</a></li>
                             <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="actingemployee" >Home</a></li>
+                            <li class="list-group-item"><a href="" >Home</a></li>
                         </ul>
 @endsection
 
@@ -21,20 +21,13 @@
                         </div>
                     @endif
             <ol class="breadcrumb">
-                <li><a href="acting">Home</a></li>               
-                <li><a href="acting">HRM</a></li>               
+                <li><a href="/actingemployee">Home</a></li>               
+                <li><a href="/hr">HRM</a></li>               
                 <li class="active">New Acting Employee</li>
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Add new Acting employee
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
-                     Close</a>
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                     Update</a>
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
-                     Delete</a>
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                     New</a>
+                  
                 </div>
 
                 <div class="panel-body">

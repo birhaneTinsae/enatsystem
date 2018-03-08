@@ -20,6 +20,14 @@
                 <li><a href="home">Home</a></li>               
                 <li class="active">HR</li>
             </ol>
+        <form action="">
+                <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="queryemp" name="queryemp" placeholder="Search Employee" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon"><i class="fa fa-search"></i></span>
+                </div>
+                </div>
+            </form>
             <div class="panel panel-default">
                 <div class="panel-heading">Acting Employee Lists
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('close-role')): ?>                   
@@ -61,7 +69,7 @@
                     <?php endif; ?>
                     
 
-                    <table class="table table-striped">
+                    <table class="table table-striped"  id="search-results">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -82,10 +90,9 @@
                                 <td><?php echo e($employee->id); ?></td>
                                 <td><?php echo e($employee->user->name); ?></td>
                                 <td><?php echo e($employee->job_position->name); ?></td>
-                                <td><?php echo e($employee->branch->branch_name); ?></td>
-                                
+                                <td><?php echo e($employee->branch->branch_name); ?></td>                            
                                 <td><?php echo e($employee->acting_job_position_name); ?></td>
-                                <td><?php echo e($employee->acting_branch_name); ?></td>
+                                <td><?php echo e($employee->acting_branch_name); ?></td>                               
                                 <td><?php echo e($employee->start_date); ?></td>
                                 <td><?php echo e($employee->end_date); ?></td>
                                 <?php if($employee->status==="1"): ?>
@@ -130,10 +137,6 @@
 <!-- Detail View Modal end -->
 
 <!-- Update View Modal -->
-
- 
-
-
 <div class="modal fade" id="actingemployeeUpdateModal" tabindex="-1" role="dialog" aria-labelledby="employeeUpdateModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -151,14 +154,14 @@
 
             <div class="form-group">
                 <label for="full_name">Fullname</label>
-                <input type="text" id="full_name" name="full_name"
+                <input type="text" required id="full_name" name="full_name"
                 list="actemployees-list" class="form-control" >
                 <datalist id="actemployees-list"> </datalist>
             </div>
             
         <div class="form-group">
                 <label for="acting_job_position_name">Acting_Job_Position</label>
-                <select class="form-control" name="acting_job_position_name" id="acting_job_position_name">
+                <select required class="form-control" name="acting_job_position_name" id="acting_job_position_name">
                                       <?php echo e($job=App\JobPosition::all()); ?>                                    
                                         <?php $__currentLoopData = $job; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $jobs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($jobs->name); ?>"><?php echo e($jobs->name); ?></option>
@@ -168,7 +171,7 @@
         </div>
             <div class="form-group">
                 <label for="acting_branch_name">Acting_Branch</label>
-                <select class="form-control" name="acting_branch_name" id="acting_branch_name">
+                <select class="form-control" name="acting_branch_name" id="acting_branch_name" required>
                                      <?php echo e($branch=App\Branch::all()); ?>
 
                                    
@@ -184,42 +187,29 @@
             </div>
             <div class="form-group">
                 <label for="end_date">End_Date</label>
-                <input type="date" id="end_date" name="end_date" class="form-control" >
+                <input type="date" required id="end_date" name="end_date" class="form-control" >
             </div>
               <div class="form-group">
              
                 <input type="hidden" id="empid" name="empid" value=""class="form-control"  >
             </div>
             <div class="form-group">
-                <label for="status">Status
-                   
+                <label for="status">Status                   
                 </label>
-                <select  class="form-control" name="status" id="status" >
-                                    
-                                
-                                    <option value="0">Terminated</option>
-                                 
-                                    <option value="1">Active</option>
-                              
-                                   
-                                    
-                                    
-                                   
+                <select  class="form-control" name="status" id="status" required >                                                                    
+                                    <option value="0">Terminated</option>                                 
+                                    <option value="1">Active</option>                                                           
                                     </select>
             </div>
              <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success" >Update</button>
-        
+        <button type="submit" class="btn btn-success" >Update</button>        
       </div>
-
         </form>
-      </div>
-     
+      </div>     
     </div>
   </div>
 </div> 
-
 
 <!-- Update View Modal end -->
 
