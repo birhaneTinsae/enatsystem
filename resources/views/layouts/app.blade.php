@@ -361,7 +361,7 @@
                         +actemployee.upto
                         +'</td><td>'                      
                         +actemployee.status                        
-+'</td><td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#actingemployeeUpdateModal" data-empid='+actemployee.emp_id+' data-full_name='+actemployee.full_name+' data-acting_job_position_name='+actemployee.acting_job_position+' data-acting_branch_name='+actemployee.acting_branch_name+' data-start_date='+actemployee.from+' data-end_date='+actemployee.upto+' data-status='+actemployee.status+'> <i class="fa fa-edit"></i></a> ' +'</td></tr>';        
++'</td><td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#actingemployeeUpdateModal" data-empid='+actemployee.emp_id+' data-full_name='+actemployee.full_name+' data-acting_job_position_name='+actemployee.job_position+' data-acting_branch_name='+actemployee.home_branch+' data-start_date='+actemployee.from+' data-end_date='+actemployee.upto+' data-status='+actemployee.status+'> <i class="fa fa-edit"></i></a> ' +'</td></tr>';        
             });
             console.log(results);
             $('#search-results tbody').html(results);

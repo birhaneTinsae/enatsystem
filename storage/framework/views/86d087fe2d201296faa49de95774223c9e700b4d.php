@@ -20,11 +20,13 @@
                 <li><a href="home">Home</a></li>               
                 <li class="active">HR</li>
             </ol>
-        <form action="">
+        <form action="searchactingemployee" method="get">
                 <div class="form-group">
                 <div class="input-group">
                     <input type="text" class="form-control" id="queryemp" name="queryemp" placeholder="Search Employee" aria-describedby="basic-addon2">
-                    <span class="input-group-addon" id="basic-addon"><i class="fa fa-search"></i></span>
+                    <span class="input-group-addon" id="basic-addon">
+                    <button type="submit" class="fa fa-search">  </button>                  
+                    </span>
                 </div>
                 </div>
             </form>

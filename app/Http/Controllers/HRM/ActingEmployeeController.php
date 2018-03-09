@@ -206,53 +206,23 @@ class ActingEmployeeController extends Controller
             ->get();
             return json_encode($emp); 
     }
-    public function search($queryemp){
-
-        
-       
-        if($queryemp==='all'){
-            
-           $userss= DB::table('acting_employees')            
-             ->join('branches', 'branches.id', '=', 'acting_employees.branch_id')    
-             ->join('users', 'users.id', '=', 'acting_employees.user_id')       
-              ->join('job_positions', 'job_positions.id', '=', 'acting_employees.job_position_id')                                      
-              ->select('acting_employees.*', 'users.name as full_name','branches.branch_name','job_positions.name as job_name')
-            ->get();
-        }else{
-           $userss= DB::table('acting_employees')            
+    public function search(Request $request){
+         $name=$request->queryemp;
+$userss= DB::table('acting_employees')            
              ->join('branches', 'branches.id', '=', 'acting_employees.branch_id')    
              ->join('users', 'users.id', '=', 'acting_employees.user_id')       
             ->join('job_positions', 'job_positions.id', '=', 'acting_employees.job_position_id')  
-            ->where('users.name', 'like', '%'.$queryemp.'%')                     
+            ->where('users.name', 'like', '%'.$name.'%')                     
             ->select('acting_employees.*', 'users.name as full_name','branches.branch_name','job_positions.name as job_name')
             ->get();
-        }
-
-       
-     //  return json_encode($userss); 
-        
-        $response=array();
-        $counter=1;
-        foreach($userss as $users){
-            $response[$counter]['count']=$counter;
-            $response[$counter]['emp_id']=$users->id;
-            $response[$counter]['full_name']=$users->full_name;
-            $response[$counter]['job_position']=$users->job_name;
-            $response[$counter]['home_branch']=$users->branch_name;
-            $response[$counter]['acting_job_position']=$users->acting_job_position_name;
-            $response[$counter]['acting_branch_name']=$users->acting_branch_name;
-            $response[$counter]['from']=$users->start_date;
-            $response[$counter]['upto']=$users->end_date;
-            if($users->status==1){
-                  $response[$counter]['status']="Active";
-            }
-            else{
-                  $response[$counter]['status']="Terminated";
-            }
-          
-            $counter++;
-        }
-        return json_encode(array_values($response));
+ $data = [];
+ $count=0;
+foreach($userss as $user){
+    $data[$count]=$user->id;
+    $count++;
+}
+$acting=ActingEmployee::whereIn('id', $data)->paginate(2);
+    return view('hr\acting-employee\actingemployee',['employees'=> $acting]);
     }
 
 }
