@@ -63,7 +63,8 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$role->name}}</td>
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#roleDetailModal" data-id="{{$role->id}}"><i class="fa fa-info-circle"></i></a></td>
-                                <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#roleUpdateModal" data-id="{{$role->id}}"><i class="fa fa-edit"></i></a></td>
+                                {{--  <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#roleUpdateModal" data-id="{{$role->id}}"><i class="fa fa-edit"></i></a></td>  --}}
+                                <td><a class="btn-warning btn-sm" href="/role/{{$role->id}}/edit"><i class="fa fa-edit"></i></a></td>
                                
                             </tr>
                         @endforeach

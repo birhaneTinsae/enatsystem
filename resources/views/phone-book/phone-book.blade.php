@@ -70,9 +70,9 @@
                      <tbody>
                      @foreach($users as $user)
                          <tr>
-                             <td>{{$counter++}}</td>
+                             <td>{{$loop->iterations}}</td>
                              <td>{{$user->name}}</td>
-                             <td>{{$user->branch->branch_name}}</td>
+                             <td>{{$user->branch->name}}</td>
                              <td>{{$user->phone_no}}</td>
                          </tr>
                     @endforeach
