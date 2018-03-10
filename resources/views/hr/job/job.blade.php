@@ -3,11 +3,11 @@
 @section('sidebar')
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="#" >Job Positions List</a></li>
+                            {{--  <li class="list-group-item"><a href="#" >Job Positions List</a></li>
                             <li class="list-group-item"><a href="#" >Leave</a></li>
                             <li class="list-group-item"><a href="#" >ISD</a></li>
                             <li class="list-group-item"><a href="job" >JOB</a></li>
-                            <li class="list-group-item"><a href="home" >Home</a></li>
+                            <li class="list-group-item"><a href="home" >Home</a></li>  --}}
                         </ul>
 @endsection
 

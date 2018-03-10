@@ -3,10 +3,10 @@
 @section('sidebar')
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="#" >Role List</a></li>
+                            {{--  <li class="list-group-item"><a href="#" >Role List</a></li>
                             <li class="list-group-item"><a href="#" >ISD</a></li>
                             <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
+                            <li class="list-group-item"><a href="#" >ISD</a></li>  --}}
                         </ul>
 @endsection
 
@@ -17,6 +17,8 @@
         <div class="col-md-10 ">
             <ol class="breadcrumb">
                 <li><a href="home">Home</a></li>               
+                <li><a href="/hr">HRM</a></li>               
+                <li><a href="/role">Role</a></li>               
                 <li class="active">New Role</li>
             </ol>
             <div class="panel panel-default">
@@ -37,9 +39,9 @@
                         Delete</a>
                     @endcan
 
-                   
+{{--                     
                     <a href=""   class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                        Add</a>
+                        Add</a>  --}}
                    
                 
                 </div>

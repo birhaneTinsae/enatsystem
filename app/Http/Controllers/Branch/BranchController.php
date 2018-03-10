@@ -17,7 +17,7 @@ class BranchController extends Controller
     public function index()
     {
         $branches=Branch::all();
-       return view('branch\branch',['branches'=>$branches]);
+       return view('branch.branch',['branches'=>$branches]);
     }
  
    
@@ -29,7 +29,7 @@ class BranchController extends Controller
     public function create()
     {
         //
-        return view('branch\new');
+        return view('branch.new');
     }
 
     /**
