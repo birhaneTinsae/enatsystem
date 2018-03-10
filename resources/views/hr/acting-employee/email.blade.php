@@ -132,27 +132,20 @@
                                   <th>Duration</th>                    
                             </tr>                        
       @foreach($employees as $aemp)		
-	<tr >
-		
+	<tr>		
 		<td><span>
         {{$aemp->full_name}}
-		</span></td>
-		
+		</span></td>		
 		<td><span>
 			   {{$aemp->job_name}}
-
 		</span></td>
     <td><span>
         	{{$aemp->acting_job_position_name}}
-			
-
-		</span></td>
-        {{$aemp->branch_name}}
-        <td><span>
-		
-
 		</span></td>
         <td><span>
+        {{$aemp->branch_name}}    
+       </span> </td>
+          <td><span>
 			{{$aemp->acting_branch_name}}
 
 		</span></td>
@@ -166,9 +159,7 @@
 		</span></td>
         <td><span>
 			About {{$aemp->duration}} Month
-
-		</span></td>
-    
+		</span></td>    
     </tr>        
 @endforeach
 </table>

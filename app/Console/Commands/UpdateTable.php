@@ -74,7 +74,7 @@ class UpdateTable extends Command
               if($check1>=1){                 
                  DB::table('jobs')->delete();                                                                         
                    $when = Carbon::now()->addSeconds(20);
-                  Notification::send(Group::find(2), new Actingemployees());                                             
+                  Notification::send(Group::all(), new Actingemployees());                                             
                   $this->info("Notification Sent"); 
               }
               else{

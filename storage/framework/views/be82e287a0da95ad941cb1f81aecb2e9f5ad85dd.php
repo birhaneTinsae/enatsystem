@@ -132,31 +132,23 @@
                                   <th>Duration</th>                    
                             </tr>                        
       <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $aemp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>		
-	<tr >
-		
+	<tr>		
 		<td><span>
         <?php echo e($aemp->full_name); ?>
 
-		</span></td>
-		
+		</span></td>		
 		<td><span>
 			   <?php echo e($aemp->job_name); ?>
-
 
 		</span></td>
     <td><span>
         	<?php echo e($aemp->acting_job_position_name); ?>
 
-			
-
-		</span></td>
-        <?php echo e($aemp->branch_name); ?>
-
-        <td><span>
-		
-
 		</span></td>
         <td><span>
+        <?php echo e($aemp->branch_name); ?>    
+       </span> </td>
+          <td><span>
 			<?php echo e($aemp->acting_branch_name); ?>
 
 
@@ -173,9 +165,7 @@
 		</span></td>
         <td><span>
 			About <?php echo e($aemp->duration); ?> Month
-
-		</span></td>
-    
+		</span></td>    
     </tr>        
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </table>

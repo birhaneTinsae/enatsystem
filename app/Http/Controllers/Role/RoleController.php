@@ -38,17 +38,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         $nr=new Role;
         $role_name=$request->role_name;
-=======
+
         $request->role_name;
->>>>>>> f9eed50aca28a49caac929cebb6cf6bcd57256c5
-=======
-       
->>>>>>> 194b3dbb38f1fc2b8198dc582537bb634b9dcd5f
+
         $role_permission=array();
         $counter=1;
 
@@ -56,20 +51,12 @@ class RoleController extends Controller
             foreach($request->permissions as $permission){
                 foreach($permission as $per){
                     $key=sprintf("%s-%s",$per,$model);
-<<<<<<< HEAD
                     $role_permission[sprintf('%s-%s',$per,$model)]=true;
-=======
                     $role_permission[$key]=true;
->>>>>>> f9eed50aca28a49caac929cebb6cf6bcd57256c5
                 }
                 break;
             }
         }
-<<<<<<< HEAD
-        //$nr->name=$role_name;
-        //$nr->permissions=$role_permission;
-        //$nr->save();
-=======
        
         $role=new Role;
         $role->name=$request->role_name;
@@ -79,7 +66,6 @@ class RoleController extends Controller
             $request->session()->flash('status','Role ${$request->role_name} successfully added.');
             return redirect('/role');
         }
->>>>>>> f9eed50aca28a49caac929cebb6cf6bcd57256c5
         return json_encode($role_permission);
     }
 
