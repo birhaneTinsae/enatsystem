@@ -26,8 +26,8 @@
             <form action="">
                 <div class="form-group">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="query" name="query" placeholder="Search Employee" aria-describedby="basic-addon2">
-                    <span class="input-group-addon" id="basic-addon"><i class="fa fa-search"></i></span>
+                    <input type="search" class="form-control" id="query" name="query" placeholder="Search Employee" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
                 </div>
                 </div>
             </form>
@@ -74,9 +74,9 @@
                      <tbody>
                      @foreach($users as $user)
                          <tr>
-                             <td>{{$counter++}}</td>
+                             <td>{{$loop->iteration}}</td>
                              <td>{{$user->name}}</td>
-                             <td>{{$user->branch->branch_name}}</td>
+                             <td>{{$user->branch->name}}</td>
                              <td>{{$user->phone_no}}</td>
                          </tr>
                     @endforeach

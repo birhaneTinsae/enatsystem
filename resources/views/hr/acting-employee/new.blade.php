@@ -3,10 +3,10 @@
 @section('sidebar')
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="#" >Request List</a></li>
+                            <!-- <li class="list-group-item"><a href="#" >Request List</a></li>
                             <li class="list-group-item"><a href="#" >Leave</a></li>
                             <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="" >Home</a></li>
+                            <li class="list-group-item"><a href="" >Home</a></li> -->
                         </ul>
 @endsection
 
@@ -22,7 +22,7 @@
                     @endif
             <ol class="breadcrumb">
                 <li><a href="/actingemployee">Home</a></li>               
-                <li><a href="/hr">HRM</a></li>               
+                <li><a href="/actingemployee">Acting Employee</a></li>               
                 <li class="active">New Acting Employee</li>
             </ol>
             <div class="panel panel-default">

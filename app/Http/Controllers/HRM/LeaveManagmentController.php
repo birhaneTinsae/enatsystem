@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Branch;
+namespace App\Http\Controllers;
 
-use App\Branch;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class BranchController extends Controller
+class LeaveManagmentController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -16,11 +13,9 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $branches=Branch::all();
-       return view('branch.branch',['branches'=>$branches]);
+        //
     }
- 
-   
+
     /**
      * Show the form for creating a new resource.
      *
@@ -29,7 +24,6 @@ class BranchController extends Controller
     public function create()
     {
         //
-        return view('branch.new');
     }
 
     /**
@@ -40,19 +34,7 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-     
-        $branch=new Branch;
-
-        $branch->name = $request->branch_name;
-        $branch->code = $request->branch_code;
-
-        if($branch->save()){
-            $request->session()->flash('status',"Branch ".$request->branch_name." successfully added.");
-            return redirect('/branch');
-        }
-
-        
-       
+        //
     }
 
     /**
@@ -98,16 +80,5 @@ class BranchController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function employees($id){
-       $employees= Branch::find($id)->users;
-       $employees_detail=[];
-       $counter=0;
-
-       foreach($employees as $employee){
-          $employees_detail[$counter]=$employee;         
-          $counter++;
-       }
-       return json_encode( $employees_detail);
     }
 }

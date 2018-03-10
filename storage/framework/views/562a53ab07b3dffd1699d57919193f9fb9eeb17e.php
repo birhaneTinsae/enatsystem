@@ -62,18 +62,37 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .flex-center-bottom {
+                background-color: #739FD0;
+                color: #000000;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                align-content: center;
+                align-items: center;
+            }
+            .flex-item-bottom {
+                border: solid 2px #4675AA;
+                order: 1;
+                flex: 0 1 auto;
+                align-self: flex-end;
+            }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
             <?php if(Route::has('login')): ?>
                 <div class="top-right links">
-                    <a href="<?php echo e(route('phone-book')); ?>">Phone Book</a>
+                    <!-- <a href="<?php echo e(route('phone-book')); ?>">Phone Book</a> -->
                     <?php if(auth()->guard()->check()): ?>
                         <a href="<?php echo e(url('/home')); ?>">Home</a>
                     <?php else: ?>
                         <a href="<?php echo e(route('login')); ?>">Login</a>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create-user')): ?>
                         <a href="<?php echo e(route('register')); ?>">Register</a>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
@@ -91,6 +110,8 @@
                     <a href="https://github.com/laravel/laravel">GitHub</a> -->
                 </div>
             </div>
+           
         </div>
+        
     </body>
 </html>

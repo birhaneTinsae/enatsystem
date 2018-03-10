@@ -29,6 +29,10 @@ Route::get('phone-book','PhoneBookController@index')->name('phone-book');
 Route::get('phone-book/{query}','PhoneBookController@search');
 
 Route::middleware(['auth'])->group(function(){
+
+    // Notification::route('mail', 'taylor@laravel.com')           
+    // ->notify(new HRNotification(App\ActingEmployee::all()));
+
 /**
  * List applications that the user has role.
  * rendered after authontication 
@@ -66,6 +70,8 @@ Route::get('acting/employees','HRM\ActingEmployeeController@employees');
 Route::get('acting/email','HRM\ActingEmployeeController@email');
 Route::get('hr/users','HRM\HumanResourceController@users');
 Route::resource('hr', 'HRM\HumanResourceController')->middleware('can:view-hr');
+Route::resource('leave', 'HRM\LeaveManagmentController')->middleware('can:view-hr');
+
 /**
  * 
  */

@@ -49,18 +49,17 @@ class HumanResourceController extends Controller
         $valid_data=$request->validate([
             'user_id'=>'required|unique:employees',
             'job_position'=>'required',
-            'join_date'=>'required|date',
-           // 'branch_id'=>'required',
+            'join_date'=>'required|date',          
         ]);
 
-        //$user=User::find($request->user_id);
+        
 
         $new_employee=new Employee;
         
         $new_employee->user_id=$request->user_id;
         $new_employee->job_position_id=$request->job_position;
         $new_employee->employed_date=$request->join_date;
-        //$new_employee->branch_id=$user->branch_id;
+       
         if($new_employee->save()){
             $request->session()->flash('status','Employee record successfully created');
             return redirect('/hr');
@@ -101,6 +100,9 @@ class HumanResourceController extends Controller
     public function edit($id)
     {
         //
+        $job_positions=JobPosition::orderBy('name')->pluck('name','id');
+        $employee=Employee::findOrFail($id);
+        return view('hr.update',['employee'=>$employee,'job_positions'=>$job_positions]);
     }
 
     /**
@@ -114,6 +116,24 @@ class HumanResourceController extends Controller
     {
         //
         
+        $valid_data=$request->validate([
+            'job_position'=>'required',
+            'join_date'=>'required|date',          
+        ]);
+
+        
+
+        $update_employee=Employee::find($id);
+        
+       // $update_employee->user_id=$request->user_id;
+        $update_employee->job_position_id=$request->job_position;
+        $update_employee->employed_date=$request->join_date;
+       
+        if($update_employee->save()){
+            $request->session()->flash('status','Employee record successfully updated');
+            return redirect('/hr');
+        }
+
     }
 
     /**

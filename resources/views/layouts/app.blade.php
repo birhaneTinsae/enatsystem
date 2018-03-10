@@ -61,15 +61,18 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                             <li><a href="{{ route('phone-book') }}">Phone Book</a></li>
+                             <!-- <li><a href="{{ route('phone-book') }}">Phone Book</a></li> -->
                         <!-- Authentication Links -->
+                            
                         @guest
                             
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                            <!-- <li><a href="{{ route('register') }}">Register</a></li> -->
+                            
                         @else
-                            <li><a href="{{ route('register') }}">Branch <span class="label label-success">{{Auth::user()->branch->code}}</span></a></li>
+                            @can('create-user')
+                             <li><a href="{{ route('register') }}">Register</a></li> 
+                            @endcan
+                            <!-- <li><a href="#">Branch <span class="label label-success">{{Auth::user()->branch->code}}</span></a></li> -->
                             <!-- <li><a href="{{ route('register') }}">Role <span class="label label-primary">{{Auth::user()->branch->branch_code}}</span></a></li> -->
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -237,7 +240,7 @@
             modal.find('.modal-body form').attr('action','/hr/'+id)
             
            });
-           
+           modal.find('.modal-footer a').attr('href',`/hr/${id}/edit`)
             
             
             

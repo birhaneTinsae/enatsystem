@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "4aa09d6b07e5b54137735b76267a12f3",
+=======
+    "content-hash": "4003ff07131b7f071d93a50b372fdea2",
+>>>>>>> cd06e20aa66b55aa549da4ebe0ed8fcd41440914
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -623,6 +627,7 @@
         },
         {
             "name": "erusev/parsedown",
+<<<<<<< HEAD
             "version": "1.7.1",
             "source": {
                 "type": "git",
@@ -633,6 +638,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/erusev/parsedown/zipball/92e9c27ba0e74b8b028b111d1b6f956a15c01fc1",
                 "reference": "92e9c27ba0e74b8b028b111d1b6f956a15c01fc1",
+=======
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "6678d59be48c4be64eaca6ce70bea48a09488cc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/6678d59be48c4be64eaca6ce70bea48a09488cc2",
+                "reference": "6678d59be48c4be64eaca6ce70bea48a09488cc2",
+>>>>>>> cd06e20aa66b55aa549da4ebe0ed8fcd41440914
                 "shasum": ""
             },
             "require": {
@@ -665,7 +682,11 @@
                 "markdown",
                 "parser"
             ],
+<<<<<<< HEAD
             "time": "2018-03-08T01:11:30+00:00"
+=======
+            "time": "2018-02-28T11:41:37+00:00"
+>>>>>>> cd06e20aa66b55aa549da4ebe0ed8fcd41440914
         },
         {
             "name": "fideloper/proxy",
@@ -991,6 +1012,7 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
             "version": "v5.6.9",
             "source": {
                 "type": "git",
@@ -1001,6 +1023,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/98fdbb098cf52a74441fe949be121c18e3dbbe6a",
                 "reference": "98fdbb098cf52a74441fe949be121c18e3dbbe6a",
+=======
+            "version": "v5.6.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "ed0a327a31f2edc177bd1db38fd0c322478a1ddb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ed0a327a31f2edc177bd1db38fd0c322478a1ddb",
+                "reference": "ed0a327a31f2edc177bd1db38fd0c322478a1ddb",
+>>>>>>> cd06e20aa66b55aa549da4ebe0ed8fcd41440914
                 "shasum": ""
             },
             "require": {
@@ -1125,7 +1159,11 @@
                 "framework",
                 "laravel"
             ],
+<<<<<<< HEAD
             "time": "2018-03-07T14:04:49+00:00"
+=======
+            "time": "2018-03-06T14:22:56+00:00"
+>>>>>>> cd06e20aa66b55aa549da4ebe0ed8fcd41440914
         },
         {
             "name": "laravel/tinker",
@@ -3217,6 +3255,68 @@
             "time": "2017-10-19T19:58:43+00:00"
         },
         {
+            "name": "nunomaduro/collision",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nunomaduro/collision.git",
+                "reference": "4e310ef9384f53ee8dda8736afb3cbaf320753a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/4e310ef9384f53ee8dda8736afb3cbaf320753a0",
+                "reference": "4e310ef9384f53ee8dda8736afb3cbaf320753a0",
+                "shasum": ""
+            },
+            "require": {
+                "filp/whoops": "^2.1.4",
+                "jakub-onderka/php-console-highlighter": "0.3.*",
+                "php": "^7.1",
+                "symfony/console": "~2.8|~3.3|~4.0"
+            },
+            "require-dev": {
+                "laravel/framework": "5.6.*",
+                "phpunit/phpunit": "~7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NunoMaduro\\Collision\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                }
+            ],
+            "description": "Cli error handling for console/command-line PHP applications.",
+            "keywords": [
+                "artisan",
+                "cli",
+                "command-line",
+                "console",
+                "error",
+                "handling",
+                "laravel",
+                "laravel-zero",
+                "php",
+                "symfony"
+            ],
+            "time": "2018-02-18T12:29:27+00:00"
+        },
+        {
             "name": "phar-io/manifest",
             "version": "1.0.1",
             "source": {
@@ -4616,9 +4716,9 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.1.3"

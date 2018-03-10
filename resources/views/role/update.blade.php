@@ -3,10 +3,10 @@
 @section('sidebar')
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            {{--  <li class="list-group-item"><a href="#" >Role List</a></li>
+                            <li class="list-group-item"><a href="#" >Role List</a></li>
                             <li class="list-group-item"><a href="#" >ISD</a></li>
                             <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>  --}}
+                            <li class="list-group-item"><a href="#" >ISD</a></li>
                         </ul>
 @endsection
 
@@ -17,8 +17,6 @@
         <div class="col-md-10 ">
             <ol class="breadcrumb">
                 <li><a href="home">Home</a></li>               
-                <li><a href="/hr">HRM</a></li>               
-                <li><a href="/role">Role</a></li>               
                 <li class="active">New Role</li>
             </ol>
             <div class="panel panel-default">
@@ -39,9 +37,9 @@
                         Delete</a>
                     @endcan
 
-{{--                     
+                   
                     <a href=""   class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                        Add</a>  --}}
+                        Add</a>
                    
                 
                 </div>
@@ -56,11 +54,11 @@
                     {{csrf_field()}}
                         <div class="form-group">
                             <label for="role-name">Role Name</label>
-                            <input type="text" class="form-control" id="role-name" name="role_name">
+                        <input type="text" class="form-control" id="role-name" name="role_name" value="{{$role->name}}">
                         </div>
                         <div class="form-group">
                             <label for="role-slug">Role Slug</label>
-                            <input type="text" class="form-control" id="role-slug" name="role_slug" readonly>
+                            <input type="text" class="form-control" id="role-slug" name="role_slug" value="{{$role->slug}}" readonly>
                         </div>
                         <table class="table table-striped bordered " id="new-role-table">
                             <thead>
@@ -73,9 +71,16 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                    @foreach($models as $model)
                                 <tr>
+                                        
                                     <td>
+                                      
                                         <select name="models[]" id="" class="form-control">
+                                        <option value="{{$model}}">{{title_case($model)}}</option>
+                                        </select>
+                                        
+                                        {{--  <select name="models[]" id="" class="form-control">
                                             <option value="employee">Employee</option>
                                             <option value="user">User</option>
                                             <option value="branch">Branch</option>
@@ -87,12 +92,15 @@
                                             <option value="fam">FAM Access</option>
                                             <option value="vms">VMS Access</option>
                                             <option value="fcy">FCY Access</option>
-                                        </select>
+                                        </select>  --}}
                                     </td>
+                                   
                                     <td>
                                         <div class="checkbox">
                                             <label for="">
-                                            <input type="checkbox" name="permissions[0][]" value="create">
+                                            @if($permissions_array["create-".$model])
+                                            <input type="checkbox" name="permissions[0][]" value="create" checked>
+                                            @endif
                                             </label>
                                         </div>
                                     </td>
@@ -119,6 +127,7 @@
                                     </td>
                                    
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                        <div class="form-group">
@@ -128,11 +137,11 @@
                     <button class="btn btn-default pull-right" id="add-new-role-row">Add</button>
                 </div>
                 <div class="panel-footer">
-                <div class="row">
+                {{--  <div class="row">
                 <div class="col-md-4">Maker <span class="label label-default">Default Label</span></div>
                 <div class="col-md-4">Date Time <span class="label label-default">Default Label</span></div>
                 <div class="col-md-4">Record Status <span class="label label-default">Default Label</span></div>
-                </div>
+                </div>  --}}
                 </div>
             </div>
         </div>

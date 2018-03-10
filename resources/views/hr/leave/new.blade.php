@@ -3,10 +3,10 @@
 @section('sidebar')
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            {{--  <li class="list-group-item"><a href="#" >Request List</a></li>
+                            <li class="list-group-item"><a href="#" >Request List</a></li>
                             <li class="list-group-item"><a href="#" >Leave</a></li>
                             <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >Home</a></li>  --}}
+                            <li class="list-group-item"><a href="#" >Home</a></li>
                         </ul>
 @endsection
 
@@ -27,14 +27,14 @@
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Add new employee
-                    {{--  <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
                      Close</a>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                      Update</a>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                      Delete</a>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                     New</a>  --}}
+                     New</a>
                 </div>
 
                 <div class="panel-body">
@@ -47,7 +47,6 @@
                                 <div class="col-md-6">
                                    <div class="form-group {{ $errors->has('user_id') ? ' has-error' : '' }}">
                                         <label for="employee">Employee</label>
-                                        
                                         <input type="text" class="form-control" list="employees-list" id="new-employee" name="user_id" placeholder="Employee">
                             
                                     <datalist id="employees-list"> </datalist>

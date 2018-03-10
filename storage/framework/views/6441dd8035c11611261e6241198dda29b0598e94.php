@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('sidebar')
+<?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
                             <li class="list-group-item"><a href="#" >List</a></li>
@@ -8,9 +6,9 @@
                             <li class="list-group-item"><a href="#" >Email</a></li>
                             <li class="list-group-item"><a href="home" >Home</a></li>
                         </ul>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">
     <!--col-md-offset-1-->
@@ -19,63 +17,56 @@
                 <li><a href="home">Home</a></li>               
                 <li class="active">Notification</li>
             </ol>
-            @if(session('status'))
+            <?php if(session('status')): ?>
             <div class="alert alert-success" role="alert">
-                {{session('status')}}
+                <?php echo e(session('status')); ?>
+
             </div>
-            @endif
+            <?php endif; ?>
             <div class="panel panel-default">
                 <div class="panel-heading">SMS Password Notification
-               @can('close-role')                   
+               <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('close-role')): ?>                   
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
                     Close</a>
-                    @endcan
+                    <?php endif; ?>
 
-                    @can('update-role')
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update-role')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     Update</a>
-                    @endcan
+                    <?php endif; ?>
 
-                    @can('delete-role')
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete-role')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                         Delete</a>
-                    @endcan
+                    <?php endif; ?>
 
-                    
-                    <a href="/msg-templete/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create-role')): ?>
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
                         New</a>
-                    
+                    <?php endif; ?>
                 
                 </div>
 
                 <div class="panel-body">
-                 @if($msg_templetes->isNotEmpty())
-                    <table class="table table-striped">
-                        <tr>
-                            <th>#</th>
-                            <th>Msg Templete</th>
-                            <th>Detail</th>
-                            <th>Edit</th>
-                        </tr>
-                        @foreach($msg_templetes as $msg_templete)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$msg_templete->name}}</td>
-                            <td><a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#" data-id="{{$msg_templete->id}}"><i class="fa fa-info-circle"></i></a></td>
-                            <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#" data-id="{{$msg_templete->id}}"><i class="fa fa-edit"></i></a></td>
-                           
-                        </tr>
-                        @endforeach
-                    </table>
-                @else
-                  <div class="jumbotron ">
-                    <div class="container">
-                      <h1 class="display-4"> Message Templates Empty</h1>
-                      <p class="lead">No  Message Templates yet.</p>
-                    </div>
-                  </div>
-                @endif
-                   
+                    
+
+                    <form action="/msg-templete" method="POST">
+                    <?php echo e(csrf_field()); ?>
+
+                     
+                        <div class="form-group">
+                            <label for="msg-templete-name">Message Templete Name</label>
+                            <input type="text" class="form-control" name="msg_templete_name" id="msg-templete-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="msg-content">Message Content</label>
+                            <textarea type="text" class="form-control" name="msg_content" id="msg-content" rows="3">
+                            </textarea>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-success btn-md">Save</button>
+                    </form>
                 </div>
                 <div class="panel-footer">
                     <div class="row">
@@ -88,4 +79,6 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

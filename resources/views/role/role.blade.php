@@ -3,10 +3,10 @@
 @section('sidebar')
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="#" >Role List</a></li>
+                            {{--  <li class="list-group-item"><a href="#" >Role List</a></li>
                             <li class="list-group-item"><a href="#" >ISD</a></li>
                             <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
+                            <li class="list-group-item"><a href="#" >ISD</a></li>  --}}
                         </ul>
 @endsection
 
@@ -17,6 +17,7 @@
         <div class="col-md-10 ">
             <ol class="breadcrumb">
                 <li><a href="home">Home</a></li>               
+                <li><a href="/hr">HR</a></li>               
                 <li class="active">Role</li>
             </ol>
             <div class="panel panel-default">
@@ -62,7 +63,8 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$role->name}}</td>
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#roleDetailModal" data-id="{{$role->id}}"><i class="fa fa-info-circle"></i></a></td>
-                                <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#roleUpdateModal" data-id="{{$role->id}}"><i class="fa fa-edit"></i></a></td>
+                                {{--  <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#roleUpdateModal" data-id="{{$role->id}}"><i class="fa fa-edit"></i></a></td>  --}}
+                                <td><a class="btn-warning btn-sm" href="/role/{{$role->id}}/edit"><i class="fa fa-edit"></i></a></td>
                                
                             </tr>
                         @endforeach

@@ -62,6 +62,10 @@ class AuthServiceProvider extends ServiceProvider
             
             return $user->hasAccess(['view-vms']);
         });
+        Gate::define('create-user', function ($user) {
+            
+            return $user->hasAccess(['create-user']);
+        });
     }
 
 

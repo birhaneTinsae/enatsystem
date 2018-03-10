@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('sidebar')
+<?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
                             <li class="list-group-item"><a href="#" >List</a></li>
@@ -8,9 +6,9 @@
                             <li class="list-group-item"><a href="#" >Email</a></li>
                             <li class="list-group-item"><a href="home" >Home</a></li>
                         </ul>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">
     <!--col-md-offset-1-->
@@ -19,11 +17,12 @@
                 <li><a href="home">Home</a></li>               
                 <li class="active">Notification</li>
             </ol>
-            @if(session('status'))
+            <?php if(session('status')): ?>
             <div class="alert alert-success" role="alert">
-                {{session('status')}}
+                <?php echo e(session('status')); ?>
+
             </div>
-            @endif
+            <?php endif; ?>
             <div class="panel panel-default">
                 <div class="panel-heading">SMS Password Notification
                                   
@@ -36,20 +35,20 @@
                     Pdf</a>
                    
 
-                    @can('delete-role')
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete-role')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                         Delete</a>
-                    @endcan
+                    <?php endif; ?>
 
-                    @can('create-sms')
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create-sms')): ?>
                     <a href="/sms-password-notification/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a>
-                    @endcan
+                    <?php endif; ?>
                 
                 </div>
 
                 <div class="panel-body">
-                  @if($notifications->isNotEmpty())
+                  <?php if($notifications->isNotEmpty()): ?>
                     <table class="table table-striped">
                         <thead>
                        
@@ -61,24 +60,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($notifications as $notification)
+                        <?php $__currentLoopData = $notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{str_limit($notification->message,30)}}</td>
-                                <td>{{$notification->sender}}</td>
-                                <td>{{$notification->created_at->toDayDateTimeString()}}</td>
+                                <td><?php echo e($loop->iteration); ?></td>
+                                <td><?php echo e(str_limit($notification->message,30)); ?></td>
+                                <td><?php echo e($notification->sender); ?></td>
+                                <td><?php echo e($notification->created_at->toDayDateTimeString()); ?></td>
                             </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
-                  @else
+                  <?php else: ?>
                   <div class="jumbotron ">
                     <div class="container">
                       <h1 class="display-4">Notification Empty</h1>
                       <p class="lead">No Notification yet.</p>
                     </div>
                   </div>
-                @endif
+                <?php endif; ?>
                 </div>
                 <div class="panel-footer">
                     <!-- <div class="row">
@@ -91,4 +90,6 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

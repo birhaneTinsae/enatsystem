@@ -1,9 +1,9 @@
 <?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="hr" >Employee List</a></li>
-                             <li class="list-group-item"><a href="actingemployee" >Acting Employee List</a></li>                            
-                            <li class="list-group-item"><a href="#" >Leave</a></li>
+                            <li class="list-group-item"><a href="" >Employee List</a></li>
+                            <li class="list-group-item"><a href="actingemployee" >Acting Employee List</a></li>
+                            
                             <li class="list-group-item"><a href="branch" >Branch</a></li>
                             <li class="list-group-item"><a href="job" >JOB</a></li>
                             <li class="list-group-item"><a href="home" >Home</a></li>
@@ -50,7 +50,7 @@
 
                         </div>
                     <?php endif; ?>
-
+                    <?php if($employees->isNotEmpty()): ?>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -78,8 +78,17 @@
                         </tbody>
 
                     </table>
+
                     <?php echo e($employees->links()); ?>
 
+                    <?php else: ?>
+                    <div class="jumbotron ">
+                        <div class="container">
+                          <h1 class="display-4">Employee Empty</h1>
+                          <p class="lead">No Employee yet.</p>
+                        </div>
+                      </div>
+                    <?php endif; ?>
                 </div>
                 <div class="panel-footer">
                     <!-- <div class="row">
@@ -174,6 +183,7 @@
         </form>
       </div>
       <div class="modal-footer">
+        <a id="hr_fullscreen_link" href="">Edit in full screen</a>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
         

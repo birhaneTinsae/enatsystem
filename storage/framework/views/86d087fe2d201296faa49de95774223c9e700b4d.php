@@ -1,13 +1,13 @@
 <?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="hr" >Employee List</a></li>
+                            <!-- <li class="list-group-item"><a href="hr" >Employee List</a></li>
                              <li class="list-group-item"><a href="actingemployee" >Acting Employee List</a></li>
                             <li class="list-group-item"><a href="#" >Leave</a></li>
                             <li class="list-group-item"><a href="branch" >Branch</a></li>
                             <li class="list-group-item"><a href="job" >JOB</a></li>
                             <li class="list-group-item"><a href="home" >Home</a></li>
-                            <li class="list-group-item"><a href="role" >Role</a></li>
+                            <li class="list-group-item"><a href="role" >Role</a></li> -->
                         </ul>
 <?php $__env->stopSection(); ?>
 
@@ -17,8 +17,9 @@
     <!--col-md-offset-1-->
         <div class="col-md-10 ">
             <ol class="breadcrumb">
-                <li><a href="home">Home</a></li>               
-                <li class="active">HR</li>
+                <li><a href="home">Home</a></li>         
+                <li><a href="/hr">HR</a></li>                     
+                <li class="active">Acting Employee</li>
             </ol>
         <form action="searchactingemployee" method="get">
                 <div class="form-group">
@@ -68,9 +69,8 @@
                             <?php echo e(session('delete_status')); ?>
 
                         </div>
-                    <?php endif; ?>
-                    
-
+                    <?php endif; ?>                    
+     <?php if($employees->isNotEmpty()): ?>
                     <table class="table table-striped"  id="search-results">
                         <thead>
                             <tr>
@@ -124,6 +124,14 @@
                         </tbody>
 
                     </table>
+                  <?php else: ?>
+                  <div class="jumbotron ">
+                    <div class="container">
+                      <h1 class="display-4"> Acting Employees Empty</h1>
+                      <p class="lead">No Acting Employees yet.</p>
+                    </div>
+                  </div>
+                <?php endif; ?>
                     <?php echo e($employees->links()); ?>
 
                 </div>

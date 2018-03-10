@@ -24,8 +24,8 @@
             <form action="">
                 <div class="form-group">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="query" name="query" placeholder="Search Employee" aria-describedby="basic-addon2">
-                    <span class="input-group-addon" id="basic-addon"><i class="fa fa-search"></i></span>
+                    <input type="search" class="form-control" id="query" name="query" placeholder="Search Employee" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
                 </div>
                 </div>
             </form>
@@ -73,9 +73,9 @@
                      <tbody>
                      <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                          <tr>
-                             <td><?php echo e($counter++); ?></td>
+                             <td><?php echo e($loop->iteration); ?></td>
                              <td><?php echo e($user->name); ?></td>
-                             <td><?php echo e($user->branch->branch_name); ?></td>
+                             <td><?php echo e($user->branch->name); ?></td>
                              <td><?php echo e($user->phone_no); ?></td>
                          </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -21,13 +21,9 @@ class SMSPasswordNotificationController extends Controller
     }
 
     public function create(){
-        $branches=Branch::orderBy('name')->pluck('name','id');
+        $branches=Branch::orderBy('branch_name')->pluck('branch_name','id');
         $msg_templetes=MessageTemplete::all()->pluck('name','id');
-<<<<<<< HEAD
-        return view('notification\notification',['branches'=>$branches,'msg_templetes'=>$msg_templetes]);
-=======
         return view('notification.new',['branches'=>$branches,'msg_templetes'=>$msg_templetes]);
->>>>>>> 194b3dbb38f1fc2b8198dc582537bb634b9dcd5f
     }
     /**
      * Send the SMS given 'Phone Number' and 'Message Content'.

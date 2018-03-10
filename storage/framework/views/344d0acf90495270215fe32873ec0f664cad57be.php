@@ -62,15 +62,18 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                             <li><a href="<?php echo e(route('phone-book')); ?>">Phone Book</a></li>
+                             <!-- <li><a href="<?php echo e(route('phone-book')); ?>">Phone Book</a></li> -->
                         <!-- Authentication Links -->
+                            
                         <?php if(auth()->guard()->guest()): ?>
                             
                             <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
-                            <li><a href="<?php echo e(route('register')); ?>">Register</a></li>
-                            <!-- <li><a href="<?php echo e(route('register')); ?>">Register</a></li> -->
+                            
                         <?php else: ?>
-                            <li><a href="<?php echo e(route('register')); ?>">Branch <span class="label label-success"><?php echo e(Auth::user()->branch->code); ?></span></a></li>
+                            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create-user')): ?>
+                             <li><a href="<?php echo e(route('register')); ?>">Register</a></li> 
+                            <?php endif; ?>
+                            <!-- <li><a href="#">Branch <span class="label label-success"><?php echo e(Auth::user()->branch->code); ?></span></a></li> -->
                             <!-- <li><a href="<?php echo e(route('register')); ?>">Role <span class="label label-primary"><?php echo e(Auth::user()->branch->branch_code); ?></span></a></li> -->
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -241,7 +244,7 @@
             modal.find('.modal-body form').attr('action','/hr/'+id)
             
            });
-           
+           modal.find('.modal-footer a').attr('href',`/hr/${id}/edit`)
             
             
             
