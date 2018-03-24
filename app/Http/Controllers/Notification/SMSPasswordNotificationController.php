@@ -21,7 +21,7 @@ class SMSPasswordNotificationController extends Controller
     }
 
     public function create(){
-        $branches=Branch::orderBy('name')->pluck('name','id');
+        $branches=Branch::orderBy('branch_name')->pluck('branch_name','id');
         $msg_templetes=MessageTemplete::all()->pluck('name','id');
         return view('notification.new',['branches'=>$branches,'msg_templetes'=>$msg_templetes]);
     }
@@ -32,7 +32,7 @@ class SMSPasswordNotificationController extends Controller
 
 
         //to fetch employee name having employee id.
-        $emp_name=Employee::find($request->employee)->user->name;
+        $emp_name=User::find($request->employee)->name;//Employee::where('user_id',$request->employee)->first()->user->name;
 
         //formatted message containing employee full name,password and current date 
         $msg=sprintf($request->msg,$emp_name,$request->password,now()->toFormattedDateString());
@@ -41,8 +41,7 @@ class SMSPasswordNotificationController extends Controller
         $client = new Client();
 
 
-        //$response=  $client->get("http://10.1.12.156:13013/cgi-bin/sendsms?username=enat&password=enat&text=".$msg."&to=".$request->phone_no."&charset=utf-8&coding=2");
-        $response=  $client->get('http://10.1.12.156:13013/cgi-bin/sendsms',[
+            $response=  $client->get('http://10.1.12.156:13013/cgi-bin/sendsms',[
             'query' => ['username' => 'enat','password'=>'enat','text'=>$msg,'to'=>$request->phone_no,'charset'=>'utf-8','coding'=>'2']
             ]);
       

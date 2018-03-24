@@ -16,9 +16,8 @@
     <!--col-md-offset-1-->
         <div class="col-md-10 ">
             <ol class="breadcrumb">
-                <li><a href="/home">Home</a></li>               
-                <li><a href="/sms-password-notification">Notification</a></li>  
-                <li class="active">New Message Templete</li>
+                <li><a href="home">Home</a></li>               
+                <li class="active">Notification</li>
             </ol>
             @if(session('status'))
             <div class="alert alert-success" role="alert">
@@ -43,31 +42,39 @@
                     @endcan
 
                     
-                    <a href="/msg-templete/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
+                    <a href="/msg-templete/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
                         New</a>
                     
                 
                 </div>
 
                 <div class="panel-body">
-                    <table class="table table-striped">
-                        <tr>
-                            <th>#</th>
-                            <th>Msg Templete</th>
-                            <th>Detail</th>
-                            <th>Edit</th>
-                        </tr>
-                        @foreach($msg_templetes as $msg_templete)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$msg_templete->name}}</td>
-                            <td><a href="/msg-templete/{{$msg_templete->id}}/edit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#" data-id="{{$msg_templete->id}}"><i class="fa fa-info-circle"></i></a></td>
-                            <td><a href="/msg-templete/{{$msg_templete->id}}/edit" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#" data-id="{{$msg_templete->id}}"><i class="fa fa-edit"></i></a></td>
-                           
-                        </tr>
-                        @endforeach
-                    </table>
+                <form action="/msg-templete/{{$msg_templete->id}}" method="POST">
+                    {{ csrf_field() }}
+                     @method('PUT')
+                        <div class="form-group">
+                            <label for="msg-templete-name">Message Templete Name</label>
+                            <input type="text" class="form-control" name="msg_templete_name" id="msg-templete-name" value="{{$msg_templete->name}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="msg-content">Message Content</label>
+                            <textarea type="text" class="form-control" name="msg_content" id="msg-content" rows="3" >{{$msg_templete->templete}}
+                            
+                            </textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-md">Update</button>
+                        <a href="/msg-templete" class="btn btn-warning"> Cancel</a>
+                        <!-- <div class="row">
+                            <div class="col-md-6">
+                                  <button type="submit" class="btn btn-success btn-md">Update</button>
+                            </div>
+                            <div class="col-md-6">
+                                  <a href="/msg-templete" class="btn btn-warning"> Cancel</a>
+                            </div>
+                        </div> -->
 
+                       
+                    </form>
                    
                 </div>
                 <div class="panel-footer">
