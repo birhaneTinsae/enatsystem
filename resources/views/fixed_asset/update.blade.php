@@ -3,9 +3,9 @@
 @section('sidebar')
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="/fixed-asset" >PPE</a></li>
+                            <li class="list-group-item"><a href="#" >PPE</a></li>
                             <li class="list-group-item"><a href="#" >Asset Item</a></li>
-                            <li class="list-group-item"><a href="/asset" >Asset </a></li>
+                            <li class="list-group-item"><a href="#" >Asset </a></li>
                             <li class="list-group-item"><a href="#" >Additional Cost</a></li>
                             <li class="list-group-item"><a href="#" >Home</a></li>
                         </ul>
@@ -39,29 +39,31 @@
                 </div>
 
                 <div class="panel-body">
-                  <form action="/fixed-asset" method="POST">
+                  <form action="/fixed-asset/{{$ppe->id}}" method="POST">
                   {{csrf_field()}}
+                 @method('PUT')
                       <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">PPE Type</label>
-                                <input type="text" name="ppe_type" id="" class="form-control">
+                                <input type="text" name="ppe_type" id="" class="form-control" value="{{$ppe->p_p_e_type}}">
                             </div>
                             <div class="form-group">
                                 <label for="">Useful Life</label>
-                                <input type="number" name="useful_life" id="" class="form-control" required>
+                                <input type="number" name="useful_life" id="" class="form-control" required value="{{$ppe->useful_life}}">
                             </div>
                           </div>
                           <div class="col-md-6">
                                <div class="form-group">
                                     <label for="">Risdual Value</label>
-                                    <input type="number" name="residual_value" id="" class="form-control" required>
+                                    <input type="number" name="residual_value" id="" class="form-control" required value="{{$ppe->residual_value}}">
                                 </div>
                          
                           </div>
                          
                       </div>
-                      <input type="submit" value="Save" class="btn btn-success">
+                     
+                      <input type="submit" value="Update" class="btn btn-success">
                   </form>
                 </div>
                 <div class="panel-footer">

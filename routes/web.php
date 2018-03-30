@@ -81,7 +81,10 @@ Route::resource('msg-templete','Notification\MessageTempleteController');
 /**
  * Fixed asset managment related URls.
  */
-Route::get('fixed-asset', 'FAM\FixedAssetController@index')->name('fixed-asset')->middleware('can:view-fam');;
+Route::resource('fixed-asset', 'FAM\PPECategoryController')->middleware('can:view-fam');
+Route::resource('asset','FAM\AssetController');
+Route::resource('asset-category','FAM\AssetItemController');
+
 });
 /**
  * Please add new application URLs below.

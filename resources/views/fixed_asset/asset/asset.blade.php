@@ -17,41 +17,44 @@
     <!--col-md-offset-1-->
         <div class="col-md-10 ">
             <ol class="breadcrumb">
-                <li><a href="home">Home</a></li>               
-                <li class="active">FAM</li>
+                <li><a href="/home">Home</a></li>  
+                <li> <a href="/fixed-asset">FAM</a></li>
+                <li class="active">New Asset</li>
+                             
+                            
             </ol>
             <div class="panel panel-default">
-                <div class="panel-heading">Property Plant and Equipment Managment
+                <div class="panel-heading">Asset
                     <!-- <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
                          Close</a>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                          Update</a>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                          Delete</a> -->
-                    <a href="/fixed-asset/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
+                    <a href="/asset/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                          New</a>
                 </div>
 
                 <div class="panel-body">
-                @if($ppes->isNotEmpty())
+                @if($assets->isNotEmpty())
                     <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>PPE Type</th>
+                            <th>Asset Name</th>
                             <th>Useful Life</th>
                             <th>Residual Value</th>
                             <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($ppes as $ppe)
+                    @foreach($assets as $asset)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$ppe->p_p_e_type}}</td>
-                            <td>{{$ppe->useful_life}}</td>
-                            <td>{{$ppe->residual_value}}</td>
-                            <td><a href="/fixed-asset/{{$ppe->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
+                            <td>{{$asset->asset_name}}</td>
+                            <td>{{$asset->useful_life}}</td>
+                            <td>{{$asset->residual_value}}</td>
+                            <td><a href="/asset/{{$asset->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -59,8 +62,8 @@
                     @else
                   <div class="jumbotron ">
                     <div class="container">
-                      <h1 class="display-4">PPE Empty</h1>
-                      <p class="lead">No PPE yet.</p>
+                      <h1 class="display-4">ASSET Empty</h1>
+                      <p class="lead">No ASSET yet.</p>
                     </div>
                   </div>
                 @endif
