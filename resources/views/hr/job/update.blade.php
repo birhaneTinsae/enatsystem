@@ -19,7 +19,7 @@
                 <li><a href="home">Home</a></li>               
                 <li><a href="/hr">HRM</a></li>               
                 <li><a href="/job">Job</a></li>               
-                <li class="active">New Job Position</li>
+                <li class="active">Update Record</li>
             </ol>
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -27,7 +27,7 @@
                         </div>
                     @endif
             <div class="panel panel-default">
-                <div class="panel-heading">New Job Position
+                <div class="panel-heading">Update Record
                     {{--  <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
                         Close</a>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -39,22 +39,24 @@
                 </div>
 
                 <div class="panel-body">
-                <form action="/job" method="POST">    
+                   <form method="POST" action="/job/{{$job->id}}" >
+                            {{ csrf_field() }}
+                          @method('PUT')   
                          {{csrf_field()}}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label for="job_position_name">Job Position Name</label>
-                                    <input type="text" class="form-control" name="name" id="job_position_name" value="{{ old('name') }}" placeholder="eg. Senior System Admin">
+                                    <input type="text" class="form-control" name="name" id="job_position_name" value="{{ $job->name }}" placeholder="eg. Senior System Admin">
                                     @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                     @endif
                                 </div>
-                                      <div class="form-group {{ $errors->has('grade') ? ' has-error' : '' }}">
+                              <div class="form-group {{ $errors->has('grade') ? ' has-error' : '' }}">
                             <label for="grade">Grade</label>
-                            <input type="text" required class="form-control" id="grade" name="grade" placeholder="Job Grade" >
+                            <input type="text" required class="form-control" id="grade" name="grade" value="{{$job->grade}}" >
                                     @if ($errors->has('grade'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('grade') }}</strong>
@@ -62,11 +64,12 @@
                                     @endif
                         </div>
                             </div>
+                            
                             <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('operation_class') ? ' has-error' : '' }}">
                                     <label for="job_position_operation_class">Operation Location</label>
                                     <select  class="form-control" name="operation_class" id="job_position_operation_class" >
-                                    <option>------Select Operation Class------</option>
+                                    <option value="{{$job->operation_class}}">{{$job->operation_class}}</option>
                                     <option value="Head office">Head office</option>
                                     <option value="Branch">Branch</option>
                                     <option value="Both">Both</option>
@@ -81,9 +84,8 @@
                         </div>
                     
                        
-                        <div class="form-group">
-                            <input type="submit" value="Save" class="btn btn-success">
-                        </div>
+                        <a href="/job" class="btn btn-danger btn-sm">Cancel</a>
+                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
                     </form>
                 </div>
                 <div class="panel-footer">
@@ -97,5 +99,4 @@
         </div>
     </div>
 </div>
-
 @endsection

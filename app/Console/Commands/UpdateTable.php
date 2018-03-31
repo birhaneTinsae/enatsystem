@@ -47,6 +47,7 @@ class UpdateTable extends Command
         //
          $currentdate = date('Y-m-d');
           $result = DB::table('acting_employees')
+           ->where('remark', '=','1')
           ->where('status', '=','1')->get();
           $check=count($result);
           if($check>=1){
@@ -54,21 +55,18 @@ class UpdateTable extends Command
                 DB::table('acting_employees')
             ->where('id', $res->id)
             ->update(['end_date' =>$currentdate]);
-                 $sdate = $res->start_date;
-                 $edate = $res->end_date;
-                 $ts1 = strtotime($sdate);
-                 $ts2 = strtotime($edate);
-                 $year1 = date('Y', $ts1);
-                 $year2 = date('Y', $ts2);
-                 $month1 = date('m', $ts1);
-                 $month2 = date('m', $ts2);
-                 $diff = (($year2 - $year1) * 12) + ($month2 - $month1);
+                //  $sdate = $res->start_date;
+                //  $edate = $res->end_date;
+                 $sdate = Carbon::parse($res->start_date);
+                 $edate = Carbon::parse($res->end_date);               
+                 $diff = $edate->diffInMonths($sdate);
              DB::table('acting_employees')
             ->where('id', $res->id)
             ->update(['duration' =>$diff]);                  
             }
             $aemployee = DB::table('acting_employees')
           ->where('duration','>=',5)
+          ->where('remark', '=','1')
           ->where('status', '=','1')->get();
               $check1=count($aemployee);
               if($check1>=1){                 

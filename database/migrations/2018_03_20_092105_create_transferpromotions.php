@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActingEmployeesTable extends Migration
+class CreateTransferpromotions extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,17 @@ class CreateActingEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('acting_employees', function (Blueprint $table) {
+        Schema::create('transferpromotions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('employee_id');
             $table->unsignedInteger('from_job_position');
             $table->unsignedInteger('to_job_position');
-            $table->date('from_date');
+            $table->unsignedInteger('from_branch');  
+            $table->unsignedInteger('to_branch');            
+            $table->text('new_salary');
+            $table->date('date');
+            $table->text('reason');
+            $table->text('remark');
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->foreign('from_job_position')->references('id')->on('job_positions');
             $table->foreign('to_job_position')->references('id')->on('job_positions');
@@ -34,6 +39,6 @@ class CreateActingEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('acting_employees');
+        Schema::dropIfExists('transferpromotions');
     }
 }

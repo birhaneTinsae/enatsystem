@@ -69,7 +69,8 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters">
+                                <small id="passwordHelp" class="form-text text-muted">Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters</small>
 
                                 <?php if($errors->has('password')): ?>
                                     <span class="help-block">
@@ -83,7 +84,7 @@
                             <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
                             </div>
                         </div>
 
@@ -91,7 +92,7 @@
                             <label for="role" class="col-md-4 control-label">Roles</label>
 
                             <div class="col-md-6">
-                                <select id="role" type="text" class="form-control" name="role" value="<?php echo e(old('role')); ?>" required >
+                                <select id="role" type="text" class="form-control" name="role" value="<?php echo e(old('role')); ?>" multiple required >
                                 <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id=>$role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($id); ?>"><?php echo e($role); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

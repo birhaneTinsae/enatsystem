@@ -5,7 +5,11 @@ namespace App\Providers;
 use App\Employee;
 use App\ActingEmployee;
 use App\Role;
+use App\Transferpromotion;
+use App\Transferpromotionrequest;
 use App\Policies\EmployeePolicy;
+use App\Policies\Transferpromotionpolicy;
+use App\Policies\Transferpromotionrequestpolicy;
 use App\Policies\ActingEmployeePolicy;
 use App\Policies\RolePolicy;
 use Illuminate\Support\Facades\Gate;
@@ -22,6 +26,8 @@ class AuthServiceProvider extends ServiceProvider
         'App\Model' => 'App\Policies\ModelPolicy',
         Employee::class=>EmployeePolicy::class,
         ActingEmployee::class=>ActingEmployeePolicy::class,
+        Transferpromotion::class=>TransferPromotionPolicy::class,
+        Transferpromotionrequest::class=>TransferPromotionrequestPolicy::class,
         Role::class=>RolePolicy::class,
         Role::class=>RolePolicy::class,
 

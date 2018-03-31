@@ -83,7 +83,7 @@ class RegisterController extends Controller
     }
     public function showRegistrationForm(){
         $roles=Role::orderBy('name')->pluck('name','id');
-        $branches=Branch::orderBy('code')->pluck('name','id');
+        $branches=Branch::orderBy('branch_code')->pluck('branch_name','id');
         return view('auth.register',['roles'=>$roles,'branches'=>$branches]);
     }
 }

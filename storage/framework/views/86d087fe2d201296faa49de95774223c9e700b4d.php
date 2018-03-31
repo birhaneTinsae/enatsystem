@@ -73,23 +73,23 @@
      <?php if($employees->isNotEmpty()): ?>
                     <table class="table table-striped"  id="search-results">
                         <thead>
-                            <tr>
-                                <th>#</th>
+                            <tr>                                
                                 <th>Full name</th>
                                 <th>Job Position</th>
                                 <th>Branch</th>
                                 <th>Acting Position</th>                                
                                 <th>Acting For Branch</th>
                                 <th>From</th>
-                                <th>Up to</th>
-                                <th>Status</th>
+                                 <th>Up to</th>
+                                 <th>Duration</th>
+                                  <th>Remark</th> 
+                                 <th>Status</th>                                                                
                                  <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <tr>
-                                <td><?php echo e($employee->id); ?></td>
+                            <tr>                                
                                 <td><?php echo e($employee->user->name); ?></td>
                                 <td><?php echo e($employee->job_position->name); ?></td>
                                 <td><?php echo e($employee->branch->branch_name); ?></td>                            
@@ -97,6 +97,16 @@
                                 <td><?php echo e($employee->acting_branch_name); ?></td>                               
                                 <td><?php echo e($employee->start_date); ?></td>
                                 <td><?php echo e($employee->end_date); ?></td>
+                                <td><label class='label label-primary'>For about <?php echo e($employee->duration); ?> months</label></td>
+                                  <?php if($employee->remark==="1"): ?>
+		                            <td>
+			                        <label class='label label-primary'>Notification Required</label>
+		                            </td>
+                                 <?php else: ?>
+                                    <td>
+			                        <label class='label label-primary'>Notification not Required</label>
+		                            </td>
+                                <?php endif; ?>
                                 <?php if($employee->status==="1"): ?>
 		                            <td><span class=".label-success">
 			                        <label class='label label-success'>Active</label>
@@ -117,12 +127,10 @@
                                 data-end_date="<?php echo e($employee->end_date); ?>"
                                 data-status="<?php echo e($employee->status); ?>" >
                                 <i class="fa fa-edit"></i></a></td>
-                                <?php endif; ?>
-                              
+                                <?php endif; ?>                              
                             </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
-
                     </table>
                   <?php else: ?>
                   <div class="jumbotron ">
@@ -135,9 +143,13 @@
                     <?php echo e($employees->links()); ?>
 
                 </div>
-                <div class="panel-footer">
-                   
-                </div>
+                   <div class="panel-footer">
+                    <!-- <div class="row">
+                        <div class="col-md-4">Maker <span class="label label-default">Default Label</span></div>
+                        <div class="col-md-4">Date Time <span class="label label-default">Default Label</span></div>
+                        <div class="col-md-4">Record Status <span class="label label-default">Default Label</span></div>
+                    </div> -->
+                </div>               
             </div>
         </div>
     </div>
@@ -150,6 +162,7 @@
 <div class="modal fade" id="actingemployeeUpdateModal" tabindex="-1" role="dialog" aria-labelledby="employeeUpdateModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+    
       <div class="modal-header">
         <h5 class="modal-title" id="actingemployeeUpdateModalLabel">New message</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -176,8 +189,7 @@
                                         <?php $__currentLoopData = $job; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $jobs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($jobs->name); ?>"><?php echo e($jobs->name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    <select>
-               
+                                    <select>               
         </div>
             <div class="form-group">
                 <label for="acting_branch_name">Acting_Branch</label>
@@ -195,12 +207,23 @@
                 <label for="start_date">Start_Date</label>
                 <input type="date" id="start_date" name="start_date" class="form-control" >
             </div>
+              <label> Is End date known ?  </label>          
+            Yes
+        <input type="radio" onclick="javascript:yesnoCheck();" name="enddate" id="enddate" value="Yes"/>
+        </span>
+        <span>
+        No
+        <input type="radio" onclick="javascript:yesnoCheck();" name="enddate" id="enddate" value="No"/ >
+        </span>  
+          <div id="ifYes" style="display:none">If yes, Fill:
+            <label for="end_date">End Date</label>
+            <input type="date" class="form-control col-xs-3" id="end_date" name="end_date"  >
+        </div>      
             <div class="form-group">
                 <label for="end_date">End_Date</label>
                 <input type="date" required id="end_date" name="end_date" class="form-control" >
             </div>
-              <div class="form-group">
-             
+              <div class="form-group">             
                 <input type="hidden" id="empid" name="empid" value=""class="form-control"  >
             </div>
             <div class="form-group">

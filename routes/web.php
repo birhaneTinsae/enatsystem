@@ -63,11 +63,21 @@ Route::resource('hr', 'HRM\HumanResourceController');
 Route::resource('actingemployee', 'HRM\ActingEmployeeController');
 Route::get('searchactingemployee','HRM\ActingEmployeeController@search');
 Route::get('actingemployee','HRM\ActingEmployeeController@index');
-
-
-
 Route::get('acting/employees','HRM\ActingEmployeeController@employees');
 Route::get('acting/email','HRM\ActingEmployeeController@email');
+
+
+Route::resource('transferpromotion','HRM\TransferpromotionController');
+Route::get('transfer','HRM\TransferpromotionController@index');
+Route::get('searchtransferpromotion','HRM\TransferpromotionController@search');
+
+/**
+ * Transfer Promotion related URLs.
+ */
+Route::resource('transferpromotionrequest','HRM\TransferpromotionrequestController');
+Route::get('request','HRM\TransferpromotionrequestController@index');
+Route::get('searchtransferpromotionrequest','HRM\TransferpromotionrequestController@search');
+
 Route::get('hr/users','HRM\HumanResourceController@users');
 Route::resource('hr', 'HRM\HumanResourceController')->middleware('can:view-hr');
 Route::resource('leave', 'HRM\LeaveManagmentController')->middleware('can:view-hr');

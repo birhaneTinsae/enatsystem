@@ -1,25 +1,21 @@
-@extends('layouts.app')
-
-@section('sidebar')
+<?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            {{--  <li class="list-group-item"><a href="#" >Request List</a></li>
-                            <li class="list-group-item"><a href="#" >Leave</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >Home</a></li>  --}}
+                            
                         </ul>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">
     <!--col-md-offset-1-->
         <div class="col-md-10 ">
-                   @if (session('status'))
+                   <?php if(session('status')): ?>
                         <div class="alert alert-success">
-                            {{ session('status') }}
+                            <?php echo e(session('status')); ?>
+
                         </div>
-                    @endif
+                    <?php endif; ?>
             <ol class="breadcrumb">
                 <li><a href="home">Home</a></li>               
                 <li><a href="/hr">HRM</a></li>               
@@ -34,67 +30,70 @@
                    
 
                     
-                    <form method="POST" action="/hr/{{$employee->id}}" >
-                            {{ csrf_field() }}
-                          @method('PUT')
+                    <form method="POST" action="/hr/<?php echo e($employee->id); ?>" >
+                            <?php echo e(csrf_field()); ?>
+
+                          <?php echo method_field('PUT'); ?>
                             <div class="row">
                                 <div class="col-md-6">
-                                   <div class="form-group {{ $errors->has('user_id') ? ' has-error' : '' }}">
+                                   <div class="form-group <?php echo e($errors->has('user_id') ? ' has-error' : ''); ?>">
                                         <label for="employee">Employee</label>
-                                        <input disabled type="text" class="form-control" list="employees-list" value="{{$emp_name}}" id="new-employee" name="user_id" placeholder="Employee">
+                                        <input disabled type="text" class="form-control" list="employees-list" value="<?php echo e($emp_name); ?>" id="new-employee" name="user_id" placeholder="Employee">
                             
                                     <datalist id="employees-list"> </datalist>
-                                    @if ($errors->has('user_id'))
+                                    <?php if($errors->has('user_id')): ?>
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('user_id') }}</strong>
+                                        <strong><?php echo e($errors->first('user_id')); ?></strong>
                                     </span>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
-                        <div class="form-group {{ $errors->has('join_date') ? ' has-error' : '' }}">
+                        <div class="form-group <?php echo e($errors->has('join_date') ? ' has-error' : ''); ?>">
                             <label for="join_date">Join Date</label>
-                            <input type="date" class="form-control" id="join_date" name="join_date" value="{{$employee->employed_date}}" >
-                                    @if ($errors->has('join_date'))
+                            <input type="date" class="form-control" id="join_date" name="join_date" value="<?php echo e($employee->employed_date); ?>" >
+                                    <?php if($errors->has('join_date')): ?>
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('join_date') }}</strong>
+                                        <strong><?php echo e($errors->first('join_date')); ?></strong>
                                     </span>
-                                    @endif
+                                    <?php endif; ?>
                         </div>
                                 </div>
                                 <div class="col-md-6">
-                                  <div class="form-group  {{ $errors->has('job_position') ? ' has-error' : '' }}">
+                                  <div class="form-group  <?php echo e($errors->has('job_position') ? ' has-error' : ''); ?>">
                                     <label for="job_position">Job Position</label>
                                     
                                     <select class="form-control" name="job_position" id="job_position" >
-                                       {{$job_positions=App\Jobposition::all()}}
-                                    <option value="{{$employee->job_position_id}}">{{$job_name}}
-                                        @foreach($job_positions as $job_position)
-                                        <option value="{{$job_position->id}}">{{$job_position->name}}</option>
-                                        @endforeach
+                                       <?php echo e($job_positions=App\Jobposition::all()); ?>
+
+                                    <option value="<?php echo e($employee->job_position_id); ?>"><?php echo e($job_name); ?>
+
+                                        <?php $__currentLoopData = $job_positions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $job_position): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($job_position->id); ?>"><?php echo e($job_position->name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <select>
-                                    @if ($errors->has('job_position'))
+                                    <?php if($errors->has('job_position')): ?>
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('job_position') }}</strong>
+                                        <strong><?php echo e($errors->first('job_position')); ?></strong>
                                     </span>
-                                    @endif
+                                    <?php endif; ?>
                                     
                              </div>                                                          
-                               <div class="form-group {{ $errors->has('salary') ? ' has-error' : '' }}">
+                               <div class="form-group <?php echo e($errors->has('salary') ? ' has-error' : ''); ?>">
                             <label for="salary">Salary</label>
-                            <input type="text" required class="form-control" id="salary" name="salary" value="{{$employee->salary}}" placeholder="Salary" >
-                                    @if ($errors->has('salary'))
+                            <input type="text" required class="form-control" id="salary" name="salary" value="<?php echo e($employee->salary); ?>" placeholder="Salary" >
+                                    <?php if($errors->has('salary')): ?>
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('salary') }}</strong>
+                                        <strong><?php echo e($errors->first('salary')); ?></strong>
                                     </span>
-                                    @endif
+                                    <?php endif; ?>
                         </div>
-                                 <div class="form-group {{ $errors->has('enat_id') ? ' has-error' : '' }}">
+                                 <div class="form-group <?php echo e($errors->has('enat_id') ? ' has-error' : ''); ?>">
                             <label for="enat_id">Employee_Id</label>
-                            <input type="text" pattern="[E][B][-][\d]{2,}" required class="form-control"  id="enat_id" name="enat_id" value="{{$employee->enat_id}}" placeholder="eg. EB- id no" >
-                                    @if ($errors->has('enat_id'))
+                            <input type="text" pattern="[E][B][-][\d]{2,}" required class="form-control"  id="enat_id" name="enat_id" value="<?php echo e($employee->enat_id); ?>" placeholder="eg. EB- id no" >
+                                    <?php if($errors->has('enat_id')): ?>
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('enat_id') }}</strong>
+                                        <strong><?php echo e($errors->first('enat_id')); ?></strong>
                                     </span>
-                                    @endif
+                                    <?php endif; ?>
                         </div>
 
                         
@@ -150,4 +149,6 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

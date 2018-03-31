@@ -1,10 +1,7 @@
 <?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="#" >Request List</a></li>
-                            <li class="list-group-item"><a href="#" >Leave</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >Home</a></li>
+                            
                         </ul>
 <?php $__env->stopSection(); ?>
 
@@ -26,14 +23,7 @@
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Add new employee
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
-                     Close</a>
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                     Update</a>
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
-                     Delete</a>
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                     New</a>
+                    
                 </div>
 
                 <div class="panel-body">
@@ -44,6 +34,7 @@
                             <?php echo e(csrf_field()); ?>
 
                             <div class="row">
+                            
                                 <div class="col-md-6">
                                    <div class="form-group <?php echo e($errors->has('user_id') ? ' has-error' : ''); ?>">
                                         <label for="employee">Employee</label>
@@ -82,6 +73,24 @@
                                     </span>
                                     <?php endif; ?>
                              </div>
+                                     <div class="form-group <?php echo e($errors->has('salary') ? ' has-error' : ''); ?>">
+                            <label for="salary">Salary</label>
+                            <input type="text" required class="form-control" id="salary" name="salary"  placeholder="Salary" >
+                                    <?php if($errors->has('salary')): ?>
+                                    <span class="help-block">
+                                        <strong><?php echo e($errors->first('salary')); ?></strong>
+                                    </span>
+                                    <?php endif; ?>
+                        </div>
+                                 <div class="form-group <?php echo e($errors->has('enat_id') ? ' has-error' : ''); ?>">
+                            <label for="enat_id">Employee_Id</label>
+                            <input type="text" pattern="[E][B][-][\d]{2,}" required class="form-control" id="enat_id" name="enat_id" placeholder="eg. EB-id_no" >
+                                    <?php if($errors->has('enat_id')): ?>
+                                    <span class="help-block">
+                                        <strong><?php echo e($errors->first('enat_id')); ?></strong>
+                                    </span>
+                                    <?php endif; ?>
+                        </div>
                                 </div>
                             </div>
                        

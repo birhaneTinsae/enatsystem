@@ -216,6 +216,8 @@
             modal.find('.modal-body input#job_position').val(data.job_position)
             modal.find('.modal-body input#employed_date').val(data.employed_date)
             modal.find('.modal-body input#phone_no').val(data.phone_no)
+            modal.find('.modal-body input#salary').val(data.salary)
+            modal.find('.modal-body input#enat_id').val(data.enat_id)
             
            });
            
@@ -272,13 +274,10 @@
             modal.find('.modal-body #end_date').val(end_date);
             modal.find('.modal-body #status').val(status);   
             modal.find('.modal-body #empid').val(id);         
-            //modal.find('.modal-body form').attr('action','/actingemployee/'+id)
-          
-           
-            
-            
+            //modal.find('.modal-body form').attr('action','/actingemployee/'+id)                                             
             
         });
+        
         
         
         /** 

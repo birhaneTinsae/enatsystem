@@ -75,7 +75,7 @@
                          <tr>
                              <td><?php echo e($loop->iteration); ?></td>
                              <td><?php echo e($user->name); ?></td>
-                             <td><?php echo e($user->branch->name); ?></td>
+                             <td><?php echo e($user->branch->branch_name); ?></td>
                              <td><?php echo e($user->phone_no); ?></td>
                          </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

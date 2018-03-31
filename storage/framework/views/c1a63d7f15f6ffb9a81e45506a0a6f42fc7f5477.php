@@ -1,11 +1,7 @@
 <?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="#" >Job Positions List</a></li>
-                            <li class="list-group-item"><a href="#" >Leave</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="job" >JOB</a></li>
-                            <li class="list-group-item"><a href="home" >Home</a></li>
+                            
                         </ul>
 <?php $__env->stopSection(); ?>
 
@@ -15,20 +11,17 @@
     <!--col-md-offset-1-->
         <div class="col-md-10 ">
             <ol class="breadcrumb">
-                <li><a href="home">Home</a></li>               
+                <li><a href="home">Home</a></li>  
+                <li><a href="hr">HR</a></li>              
                 <li class="active">Job Position</li>
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Job Position List
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('close-role')): ?>                   
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
-                    Close</a>
-                    <?php endif; ?>
+                   <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
+                    Excel</a>
 
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update-role')): ?>
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Update</a>
-                    <?php endif; ?>
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
+                    Pdf</a>
 
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete-role')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -36,7 +29,7 @@
                     <?php endif; ?>
 
                   
-                    <a href="job/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <a href="job/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a>
                    
                 
@@ -54,28 +47,33 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Job Position</th>                                
-                                <th>Detail</th>
+                                <th>Job Position</th>    
+                                <th>Grade</th>                            
+                                <th>Operation Class</th>
+                                <!-- <th>Detail</th> -->
                                 <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $__currentLoopData = $job_positions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $job_position): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td><?php echo e($job_position->id); ?></td>
-                                <td><?php echo e($job_position->name); ?></td>                                
-                                <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="<?php echo e($job_position->id); ?>"><i class="fa fa-info-circle"></i></a></td>
-                                <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" data-id="<?php echo e($job_position->id); ?>"><i class="fa fa-edit"></i></a></td>
+                                <td><?php echo e($loop->iteration); ?></td>
+                                <td><?php echo e($job_position->name); ?></td> 
+                                <td><?php echo e($job_position->grade); ?></td> 
+                                <td><?php echo e($job_position->operation_class); ?></td>                                
+                                <!-- <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="<?php echo e($job_position->id); ?>"><i class="fa fa-info-circle"></i></a></td> -->
+                                  <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',App\ActingEmployee::class)): ?>
+                                <td>                                
+                                <a href="<?php echo e(route('job.edit', $job_position->id)); ?>" class="btn-warning btn-sm" >
+                                <i class="fa fa-edit"></i></a></td>
+                                <?php endif; ?>  
                             </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
 
                     </table>
-<<<<<<< HEAD
-=======
                     <?php echo e($job_positions->links()); ?>
 
->>>>>>> f9eed50aca28a49caac929cebb6cf6bcd57256c5
                 </div>
                 <div class="panel-footer">
                     <!-- <div class="row">

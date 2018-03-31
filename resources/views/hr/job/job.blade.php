@@ -52,8 +52,10 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Job Position</th>                                
-                                <th>Detail</th>
+                                <th>Job Position</th>    
+                                <th>Grade</th>                            
+                                <th>Operation Class</th>
+                                <!-- <th>Detail</th> -->
                                 <th>Edit</th>
                             </tr>
                         </thead>
@@ -61,18 +63,21 @@
                             @foreach($job_positions as $job_position)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$job_position->name}}</td>                                
-                                <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="{{$job_position->id}}"><i class="fa fa-info-circle"></i></a></td>
-                                <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" data-id="{{$job_position->id}}"><i class="fa fa-edit"></i></a></td>
+                                <td>{{$job_position->name}}</td> 
+                                <td>{{$job_position->grade}}</td> 
+                                <td>{{$job_position->operation_class}}</td>                                
+                                <!-- <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="{{$job_position->id}}"><i class="fa fa-info-circle"></i></a></td> -->
+                                  @can('update',App\ActingEmployee::class)
+                                <td>                                
+                                <a href="{{ route('job.edit', $job_position->id) }}" class="btn-warning btn-sm" >
+                                <i class="fa fa-edit"></i></a></td>
+                                @endcan  
                             </tr>
                             @endforeach
                         </tbody>
 
                     </table>
-<<<<<<< HEAD
-=======
                     {{$job_positions->links()}}
->>>>>>> f9eed50aca28a49caac929cebb6cf6bcd57256c5
                 </div>
                 <div class="panel-footer">
                     <!-- <div class="row">

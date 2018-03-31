@@ -5,6 +5,8 @@
                             <li class="list-group-item disabled">Menu</li>
                             <li class="list-group-item"><a href="" >Employee List</a></li>
                             <li class="list-group-item"><a href="actingemployee" >Acting Employee List</a></li>
+                            <li class="list-group-item"><a href="transferpromotionrequest" >Employee Transfer/Promotion Request</a></li>
+                            <li class="list-group-item"><a href="transfer" >Employee Transfer/Promotion </a></li>                        
                             {{--  <li class="list-group-item"><a href="#" >Leave</a></li>  --}}
                             <li class="list-group-item"><a href="branch" >Branch</a></li>
                             <li class="list-group-item"><a href="job" >JOB</a></li>
@@ -70,9 +72,9 @@
                                 <td>{{$employee->user->email}}</td>
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="{{$employee->id}}"><i class="fa fa-info-circle"></i></a></td>
                                 @can('update',App\Employee::class)
-                                <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" 
-                                data-id="{{$employee->id}}"
-                                ><i class="fa fa-edit"></i></a></td>
+                                <td>
+                               <a href="{{ route('hr.edit', $employee->id) }}" class="btn-warning btn-sm" >
+                                <i class="fa fa-edit"></i></a></td>
                                 @endcan
                             </tr>
                             @endforeach
@@ -133,6 +135,14 @@
             <div class="form-group">
                 <label for="job_position">Job Position</label>
                 <input type="text" id="job_position" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label for="salary">Salary</label>
+                <input type="text" id="salary" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label for="enat_id">Employee Id</label>
+                <input type="text" id="enat_id" class="form-control" readonly>
             </div>
         </form>
       </div>

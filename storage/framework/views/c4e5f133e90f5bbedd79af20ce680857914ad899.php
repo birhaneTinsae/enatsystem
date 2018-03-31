@@ -1,16 +1,11 @@
-@extends('layouts.app')
-
-@section('sidebar')
+<?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            {{--  <li class="list-group-item"><a href="#" >Job List</a></li>
-                            <li class="list-group-item"><a href="#" >Leave</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >Home</a></li>  --}}
+                            
                         </ul>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">
     <!--col-md-offset-1-->
@@ -21,49 +16,44 @@
                 <li><a href="/job">Job</a></li>               
                 <li class="active">New Job Position</li>
             </ol>
-                    @if (session('status'))
+                    <?php if(session('status')): ?>
                         <div class="alert alert-success">
-                            {{ session('status') }}
+                            <?php echo e(session('status')); ?>
+
                         </div>
-                    @endif
+                    <?php endif; ?>
             <div class="panel panel-default">
                 <div class="panel-heading">New Job Position
-                    {{--  <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
-                        Close</a>
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                       Update</a>
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
-                        Delete</a>
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                        New</a>  --}}
+                    
                 </div>
 
                 <div class="panel-body">
                 <form action="/job" method="POST">    
-                         {{csrf_field()}}
+                         <?php echo e(csrf_field()); ?>
+
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                <div class="form-group<?php echo e($errors->has('name') ? ' has-error' : ''); ?>">
                                     <label for="job_position_name">Job Position Name</label>
-                                    <input type="text" class="form-control" name="name" id="job_position_name" value="{{ old('name') }}" placeholder="eg. Senior System Admin">
-                                    @if ($errors->has('name'))
+                                    <input type="text" class="form-control" name="name" id="job_position_name" value="<?php echo e(old('name')); ?>" placeholder="eg. Senior System Admin">
+                                    <?php if($errors->has('name')): ?>
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong><?php echo e($errors->first('name')); ?></strong>
                                     </span>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
-                                      <div class="form-group {{ $errors->has('grade') ? ' has-error' : '' }}">
+                                      <div class="form-group <?php echo e($errors->has('grade') ? ' has-error' : ''); ?>">
                             <label for="grade">Grade</label>
                             <input type="text" required class="form-control" id="grade" name="grade" placeholder="Job Grade" >
-                                    @if ($errors->has('grade'))
+                                    <?php if($errors->has('grade')): ?>
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('grade') }}</strong>
+                                        <strong><?php echo e($errors->first('grade')); ?></strong>
                                     </span>
-                                    @endif
+                                    <?php endif; ?>
                         </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group {{ $errors->has('operation_class') ? ' has-error' : '' }}">
+                                <div class="form-group <?php echo e($errors->has('operation_class') ? ' has-error' : ''); ?>">
                                     <label for="job_position_operation_class">Operation Location</label>
                                     <select  class="form-control" name="operation_class" id="job_position_operation_class" >
                                     <option>------Select Operation Class------</option>
@@ -71,11 +61,11 @@
                                     <option value="Branch">Branch</option>
                                     <option value="Both">Both</option>
                                     </select>
-                                    @if ($errors->has('operation_class'))
+                                    <?php if($errors->has('operation_class')): ?>
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('operation_class') }}</strong>
+                                        <strong><?php echo e($errors->first('operation_class')); ?></strong>
                                     </span>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -87,15 +77,12 @@
                     </form>
                 </div>
                 <div class="panel-footer">
-                    {{--  <div class="row">
-                        <div class="col-md-4">Maker <span class="label label-default">Default Label</span></div>
-                        <div class="col-md-4">Date Time <span class="label label-default">Default Label</span></div>
-                        <div class="col-md-4">Record Status <span class="label label-default">Default Label</span></div>
-                    </div>  --}}
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
+<?php $__env->stopSection(); ?>
 
-@endsection
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

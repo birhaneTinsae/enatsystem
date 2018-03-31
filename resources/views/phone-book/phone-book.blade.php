@@ -76,7 +76,7 @@
                          <tr>
                              <td>{{$loop->iteration}}</td>
                              <td>{{$user->name}}</td>
-                             <td>{{$user->branch->name}}</td>
+                             <td>{{$user->branch->branch_name}}</td>
                              <td>{{$user->phone_no}}</td>
                          </tr>
                     @endforeach

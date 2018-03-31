@@ -165,7 +165,7 @@
 </table>
 <br><br>
 For detail information click here
-    <a  href="http://localhost:8000/actingemployee/" target="_blank">
+    <a  href="http://10.1.80.52:8000/actingemployee/" target="_blank">
                     More
                                                             </a>
 </div>

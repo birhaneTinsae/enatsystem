@@ -5,7 +5,7 @@ namespace App\Http\Controllers\HRM;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\JobPosition;
-
+use Auth;
 class JobController extends Controller
 {
     /**
@@ -48,6 +48,7 @@ class JobController extends Controller
         $job_position=new JobPosition;
         $job_position->name=$request->job_position_name;
         $job_position->operation_class=$request->job_position_operation_class;
+        $job_position->grade=$request->grade;
         if($job_position->save()){
             $request->session()->flash('status','Job Position Successfully added');
             return redirect('job');
@@ -73,7 +74,8 @@ class JobController extends Controller
      */
     public function edit($id)
     {
-        //
+       $edit=JobPosition::findOrFail($id);
+       return view('hr\job.update')->with('job',$edit);
     }
 
     /**
@@ -85,7 +87,15 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $update=JobPosition::find($id);
+         $update->name=$request->name;
+         $update->operation_class=$request->operation_class;
+         $update->grade=$request->grade;
+         $update->maker=Auth::user()->username;
+        if($update->save()){
+            $request->session()->flash('status','Record Successfully Updated');
+            return redirect('job');
+        }
     }
 
     /**

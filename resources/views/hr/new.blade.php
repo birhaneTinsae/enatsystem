@@ -44,6 +44,7 @@
                     <form method="POST" action="/hr">
                             {{ csrf_field() }}
                             <div class="row">
+                            
                                 <div class="col-md-6">
                                    <div class="form-group {{ $errors->has('user_id') ? ' has-error' : '' }}">
                                         <label for="employee">Employee</label>
@@ -82,6 +83,24 @@
                                     </span>
                                     @endif
                              </div>
+                                     <div class="form-group {{ $errors->has('salary') ? ' has-error' : '' }}">
+                            <label for="salary">Salary</label>
+                            <input type="text" required class="form-control" id="salary" name="salary"  placeholder="Salary" >
+                                    @if ($errors->has('salary'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('salary') }}</strong>
+                                    </span>
+                                    @endif
+                        </div>
+                                 <div class="form-group {{ $errors->has('enat_id') ? ' has-error' : '' }}">
+                            <label for="enat_id">Employee_Id</label>
+                            <input type="text" pattern="[E][B][-][\d]{2,}" required class="form-control" id="enat_id" name="enat_id" placeholder="eg. EB-id_no" >
+                                    @if ($errors->has('enat_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('enat_id') }}</strong>
+                                    </span>
+                                    @endif
+                        </div>
                                 </div>
                             </div>
                        
