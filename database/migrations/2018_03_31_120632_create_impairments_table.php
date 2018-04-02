@@ -15,6 +15,12 @@ class CreateImpairmentsTable extends Migration
     {
         Schema::create('impairments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('new_value');
+            $table->integer('current_value');
+            $table->date('effective_date');
+            $table->string('remarks')->nullable();
+            $table->unsignedInteger('asset_id');
+            $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade');
             $table->timestamps();
         });
     }

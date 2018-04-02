@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\FAM;
 
-use App\Impairment;
+use App\Transfer;
 use Illuminate\Http\Request;
-
-class ImpairmentController extends Controller
+use App\Http\Controllers\Controller;
+class TransferController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ImpairmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Impairment  $impairment
+     * @param  \App\Transfer  $transfer
      * @return \Illuminate\Http\Response
      */
-    public function show(Impairment $impairment)
+    public function show(Transfer $transfer)
     {
         //
     }
@@ -52,10 +52,10 @@ class ImpairmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Impairment  $impairment
+     * @param  \App\Transfer  $transfer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Impairment $impairment)
+    public function edit(Transfer $transfer)
     {
         //
     }
@@ -64,10 +64,10 @@ class ImpairmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Impairment  $impairment
+     * @param  \App\Transfer  $transfer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Impairment $impairment)
+    public function update(Request $request, Transfer $transfer)
     {
         //
     }
@@ -75,10 +75,10 @@ class ImpairmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Impairment  $impairment
+     * @param  \App\Transfer  $transfer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Impairment $impairment)
+    public function destroy(Transfer $transfer)
     {
         //
     }

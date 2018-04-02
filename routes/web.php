@@ -84,6 +84,8 @@ Route::resource('msg-templete','Notification\MessageTempleteController');
 Route::resource('fixed-asset', 'FAM\PPECategoryController')->middleware('can:view-fam');
 Route::resource('asset','FAM\AssetController');
 Route::resource('asset-category','FAM\AssetItemController');
+Route::get('additional-cost/{id}','FAM\AdditionalCostController@index');
+Route::get('impairment/{id}','FAM\ImpairmentController@index');
 
 });
 /**

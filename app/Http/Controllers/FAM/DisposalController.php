@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\FAM;
 
-use App\AdditionalCost;
+use App\Disposal;
 use Illuminate\Http\Request;
-
-class AdditionalCostController extends Controller
+use App\Http\Controllers\Controller;
+class DisposalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class AdditionalCostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\AdditionalCost  $additionalCost
+     * @param  \App\Disposal  $disposal
      * @return \Illuminate\Http\Response
      */
-    public function show(AdditionalCost $additionalCost)
+    public function show(Disposal $disposal)
     {
         //
     }
@@ -52,10 +52,10 @@ class AdditionalCostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\AdditionalCost  $additionalCost
+     * @param  \App\Disposal  $disposal
      * @return \Illuminate\Http\Response
      */
-    public function edit(AdditionalCost $additionalCost)
+    public function edit(Disposal $disposal)
     {
         //
     }
@@ -64,10 +64,10 @@ class AdditionalCostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\AdditionalCost  $additionalCost
+     * @param  \App\Disposal  $disposal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AdditionalCost $additionalCost)
+    public function update(Request $request, Disposal $disposal)
     {
         //
     }
@@ -75,10 +75,10 @@ class AdditionalCostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\AdditionalCost  $additionalCost
+     * @param  \App\Disposal  $disposal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AdditionalCost $additionalCost)
+    public function destroy(Disposal $disposal)
     {
         //
     }

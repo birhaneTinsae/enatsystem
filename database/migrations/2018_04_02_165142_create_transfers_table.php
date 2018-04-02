@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdditionalCostsTable extends Migration
+class CreateTransfersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreateAdditionalCostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('additional_costs', function (Blueprint $table) {
+        Schema::create('transfers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('added_cost');
             $table->date('effective_date');
+            $table->unsignedInteger('from_employee');
+            $table->unsignedInteger('to_employee');
             $table->unsignedInteger('asset_id');
+            $table->string('remarks')->nullable();
             $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade');
+            $table->foreign('from_employee')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('to_employee')->references('id')->on('employees')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ class CreateAdditionalCostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('additional_costs');
+        Schema::dropIfExists('transfers');
     }
 }

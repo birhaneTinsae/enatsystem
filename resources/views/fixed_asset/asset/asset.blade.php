@@ -44,6 +44,7 @@
                             <th>Asset Name</th>
                             <th>Useful Life</th>
                             <th>Residual Value</th>
+                            <th>Detail</th>
                             <th>Edit</th>
                         </tr>
                     </thead>
@@ -54,6 +55,7 @@
                             <td>{{$asset->asset_name}}</td>
                             <td>{{$asset->useful_life}}</td>
                             <td>{{$asset->residual_value}}</td>
+                            <td><a href="/asset/{{$asset->id}}" class="btn btn-warning btn-sm"><i class="fa fa-info-circle"></i></a></td>
                             <td><a href="/asset/{{$asset->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
                         </tr>
                     @endforeach

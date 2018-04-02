@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\FAM;
 
 use App\Asset;
+use App\AdditionalCost;
+use App\Impairment;
 use App\AssetItem;
 use App\Branch;
 use Illuminate\Http\Request;
@@ -17,7 +19,9 @@ class AssetController extends Controller
     public function index()
     {
         //
+
         $assets=Asset::all();
+        
         return view('fixed_asset.asset.asset',compact('assets'));
     }
 
@@ -73,9 +77,14 @@ class AssetController extends Controller
      * @param  \App\Asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function show(Asset $asset)
+    public function show($id)
     {
         //
+        $asset=Asset::findOrFail($id);
+        $additional_costs=AdditionalCost::where('asset_id',$asset->id)->get();
+        $impairments=Impairment::where('asset_id',$asset->id)->get();
+        // dd($additional_costs);
+        return view('fixed_asset.asset.show',['asset'=>$asset,'additional_costs'=>$additional_costs,'impairments'=>$impairments]);
     }
 
     /**
