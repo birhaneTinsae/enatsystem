@@ -16,8 +16,7 @@ class ImpairmentController extends Controller
     public function index($id)
     {
         //
-        $asset=Asset::findOrFail($id);
-        return view('fixed_asset.asset.impairment.new',['asset'=>$asset]);
+       
     }
 
     /**
@@ -25,9 +24,11 @@ class ImpairmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
+        $asset=Asset::findOrFail($id);
+        return view('fixed_asset.asset.impairment.new',['asset'=>$asset]);
     }
 
     /**
@@ -39,6 +40,21 @@ class ImpairmentController extends Controller
     public function store(Request $request)
     {
         //
+
+        $impairment=new Impairment;
+
+        $asset_id=Asset::where('asset_name',$request->asset_name)->pluck('id')->first();
+        $impairment->new_value=$request->new_value;
+        $impairment->current_value=$request->current_value;
+        $impairment->effective_date=$request->effective_date;
+        $impairment->remarks=$request->remarks;
+        $impairment->asset_id=$request->$asset_id;
+
+        if($impairment->save()){
+            $request->session()->flash('status',"New Cost for asset ".$request->asset_name." successfully added.");
+            return redirect('/impairment/'.$asset_id);
+        }
+
     }
 
     /**

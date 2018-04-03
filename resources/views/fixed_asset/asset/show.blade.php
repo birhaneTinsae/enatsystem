@@ -110,7 +110,7 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$additional_cost->added_cost}}</td>
-                                <td>{{$additional_cost->added_cost}}</td>
+                                <td>{{$additional_cost->remarks}}</td>
                                 <td>{{$additional_cost->effective_date}}</td>
                             </tr>
                         @endforeach

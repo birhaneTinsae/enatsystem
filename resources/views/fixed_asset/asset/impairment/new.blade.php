@@ -36,23 +36,33 @@
                 </div>
 
                 <div class="panel-body">
-                    <form action="/asset" method="POST">
+                    <form action="/impairment" method="POST">
                     {{csrf_field()}}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Asset</label>
-                                    <input type="text" name="" id="" class="form-control" value="{{$asset->asset_name}}" readonly>
+                                    <label for="asset_name">Asset</label>
+                                    <input type="text" name="asset_name" id="asset_name" class="form-control" value="{{$asset->asset_name}}" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Current Value</label>
-                                    <input type="text" name="" id="" class="form-control" value="{{$asset->gross_purchase_amount}}" readonly>
+                                    <label for="current_value">Current Value</label>
+                                    <input type="number" name="current_value" id="current_value" class="form-control" value="{{$asset->gross_purchase_amount}}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="remarks">Remarks</label>
+                                    <textarea name="remarks" id="remarks" cols="10" rows="5" class="form-control">
+                                    
+                                    </textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">New Value</label>
-                                    <input type="text" name="" id="" class="form-control">
+                                    <label for="new_value">New Value</label>
+                                    <input type="number" name="new_value" id="new_value" class="form-control">
+                                </div>  
+                                <div class="form-group">
+                                    <label for="effective_date">Effective Date</label>
+                                    <input type="date" name="effective_date" id="effective_date" class="form-control">
                                 </div>  
                                 <div class="form-group">
                                     <label for=""></label>

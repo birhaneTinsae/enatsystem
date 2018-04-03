@@ -17,6 +17,7 @@ class CreateAdditionalCostsTable extends Migration
             $table->increments('id');
             $table->integer('added_cost');
             $table->date('effective_date');
+            $table->string('remarks')->nullable();
             $table->unsignedInteger('asset_id');
             $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade');
             $table->timestamps();

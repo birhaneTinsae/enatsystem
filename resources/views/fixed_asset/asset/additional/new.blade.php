@@ -36,19 +36,28 @@
                 </div>
 
                 <div class="panel-body">
-                    <form action="/asset" method="POST">
+                    <form action="/additional-cost" method="POST">
                     {{csrf_field()}}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for=""></label>
-                                    <input type="text" name="" id="" class="form-control" value="{{$asset->asset_name}}" readonly>
+                                    <label for="asset_name">Asset Name</label>
+                                    <input type="text" name="asset_name" id="asset_name" class="form-control" value="{{$asset->asset_name}}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="remarks">Remarks</label>
+                                    <textarea name="remarks" id="remarks" cols="10" rows="5" class="form-control">
+                                    </textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Additional Value</label>
-                                    <input type="text" name="" id="" class="form-control">
+                                    <label for="additional_value">Additional Value</label>
+                                    <input type="number" name="additional_value" id="additional_value" class="form-control">
+                                </div>  
+                                <div class="form-group">
+                                    <label for="effective_date">Effective Date</label>
+                                    <input type="date" name="effective_date" id="effective_date" class="form-control">
                                 </div>  
                                 <div class="form-group">
                                     <input type="submit" value="Save" class="btn btn-success btn-block">

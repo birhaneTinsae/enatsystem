@@ -16,8 +16,7 @@ class AdditionalCostController extends Controller
     public function index($id)
     {
         //
-        $asset=Asset::findOrFail($id);
-        return view('fixed_asset.asset.additional.new',['asset'=>$asset]);
+       
     }
 
     /**
@@ -25,9 +24,11 @@ class AdditionalCostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
+        $asset=Asset::findOrFail($id);
+        return view('fixed_asset.asset.additional.new',['asset'=>$asset]);
     }
 
     /**
@@ -39,6 +40,20 @@ class AdditionalCostController extends Controller
     public function store(Request $request)
     {
         //
+        $additional_cost=new AdditionalCost;
+       
+        $asset_id=Asset::where('asset_name',$request->asset_name)->pluck('id')->first();
+     
+        $additional_cost->added_cost=$request->additional_value;
+        $additional_cost->effective_date=$request->effective_date;
+        $additional_cost->remarks=$request->remarks;
+        $additional_cost->asset_id=$asset_id;
+
+        if($additional_cost->save()){
+            $request->session()->flash('status',"Additional Cost for asset ".$request->asset_name." successfully added.");
+            return redirect('/asset/'.$asset_id);
+        }
+
     }
 
     /**
