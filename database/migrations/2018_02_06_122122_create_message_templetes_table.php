@@ -13,7 +13,7 @@ class CreateMessageTempletesTable extends Migration
      */
     public function up()
     {
-        Schema::create('message_templetes', function (Blueprint $table) {
+        Schema::connection('sqlsrv')->create('message_templetes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('templete');
@@ -28,6 +28,6 @@ class CreateMessageTempletesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('message_templetes');
+        Schema::connection('sqlsrv')->dropIfExists('message_templetes');
     }
 }

@@ -32,7 +32,7 @@ class RolePolicy
     public function create(User $user)
     {
         //
-        return $user->hasAccess(['create-role']);
+        return  $user->hasAccess(['create-role']);
     }
 
     /**

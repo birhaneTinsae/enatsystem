@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
   
-        Schema::create('users', function (Blueprint $table) {
+        Schema::connection('sqlsrv')->create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('phone_no');
@@ -41,6 +41,6 @@ class CreateUsersTable extends Migration
         // Schema::table('users', function (Blueprint $table) {
         //     $table->dropForeign('users_branch_id_foreign');
         // });
-        Schema::dropIfExists('users');
+        Schema::connection('sqlsrv')->dropIfExists('users');
     }
 }

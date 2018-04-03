@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActEmpNotifyGroups extends Migration
+class CreatePPECategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateActEmpNotifyGroups extends Migration
      */
     public function up()
     {
-        Schema::connection('sqlsrv')->create('groups', function (Blueprint $table) {
+        Schema::connection('sqlsrv2')->create('p_p_e_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('maker');
-            $table->string('email')->unique();
+            $table->string('p_p_e_type');
+            $table->integer('useful_life');
+            $table->integer('residual_value');
+            $table->string('depreciation_method')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateActEmpNotifyGroups extends Migration
      */
     public function down()
     {
-        Schema::connection('sqlsrv')->dropIfExists('groups');
+        Schema::connection('sqlsrv2')->dropIfExists('p_p_e_categories');
     }
 }

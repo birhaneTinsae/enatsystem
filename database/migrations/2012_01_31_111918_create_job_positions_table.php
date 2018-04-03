@@ -13,7 +13,7 @@ class CreateJobPositionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('job_positions', function (Blueprint $table) {
+        Schema::connection('sqlsrv')->create('job_positions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->enum('operation_class',['head office','branch','both']);            
@@ -28,6 +28,6 @@ class CreateJobPositionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_positions');
+        Schema::connection('sqlsrv')->dropIfExists('job_positions');
     }
 }

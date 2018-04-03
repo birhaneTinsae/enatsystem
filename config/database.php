@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlsrv'),
     //'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'sqlsrv'),
 
     /*
     |--------------------------------------------------------------------------
@@ -72,7 +72,6 @@ return [
             'driver' => 'sqlsrv',
             'host' => env('DB_HOST', 'localhost'),
             //'port' => env('DB_PORT', '1433'),
-            //'port' => env('DB_PORT', '1433'),
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
@@ -80,7 +79,17 @@ return [
             'pooling'  => false,
             'prefix' => '',
         ],
-
+            'sqlsrv2' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DB_HOST', 'localhost'),
+            //'port' => env('DB_PORT', '1433'),
+            'database' => env('DB_DATABASE_2', 'forge'),
+            'username' => env('DB_USERNAME_2', 'forge'),
+            'password' => env('DB_PASSWORD_2', ''),
+            'charset' => 'utf8',
+            'pooling'  => false,
+            'prefix' => '',
+        ],
     ],
 
     /*

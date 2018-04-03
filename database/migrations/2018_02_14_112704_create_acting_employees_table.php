@@ -13,7 +13,7 @@ class CreateActingEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('acting_employees', function (Blueprint $table) {
+        Schema::connection('sqlsrv')->create('acting_employees', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->text('employee_name');
@@ -41,6 +41,6 @@ class CreateActingEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('acting_employees');
+        Schema::connection('sqlsrv')->dropIfExists('acting_employees');
     }
 }

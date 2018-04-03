@@ -41,8 +41,8 @@
                         Delete</a>
                     @endcan
 
-                    @can('create-role')
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    @can('create-sms')
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a>
                     @endcan
                 

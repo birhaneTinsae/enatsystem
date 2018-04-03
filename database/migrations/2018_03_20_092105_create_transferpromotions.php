@@ -13,7 +13,7 @@ class CreateTransferpromotions extends Migration
      */
     public function up()
     {
-        Schema::create('transferpromotions', function (Blueprint $table) {
+        Schema::connection('sqlsrv')->create('transferpromotions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('employee_id');
             $table->unsignedInteger('from_job_position');
@@ -39,6 +39,6 @@ class CreateTransferpromotions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transferpromotions');
+        Schema::connection('sqlsrv')->dropIfExists('transferpromotions');
     }
 }

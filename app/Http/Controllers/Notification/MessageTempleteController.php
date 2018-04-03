@@ -73,6 +73,8 @@ class MessageTempleteController extends Controller
     public function edit($id)
     {
         //
+        $msg_templete=MessageTemplete::find($id);
+        return view('notification.msg-templete.update',['msg_templete'=>$msg_templete]);
     }
 
     /**
@@ -85,6 +87,13 @@ class MessageTempleteController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $new_msg_templete=MessageTemplete::find($id);
+        $new_msg_templete->name=$request->msg_templete_name;
+        $new_msg_templete->templete=$request->msg_content;
+        if($new_msg_templete->save()){
+            $request->session()->flash('status', 'Message Templete successfully updated !');
+            return redirect('/msg-templete');
+        }
     }
 
     /**
