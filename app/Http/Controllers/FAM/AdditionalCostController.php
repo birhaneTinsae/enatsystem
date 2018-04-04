@@ -73,9 +73,11 @@ class AdditionalCostController extends Controller
      * @param  \App\AdditionalCost  $additionalCost
      * @return \Illuminate\Http\Response
      */
-    public function edit(AdditionalCost $additionalCost)
+    public function edit($id)
     {
         //
+        $additional_cost=AdditionalCost::findOrFail($id);
+        return view('fixed_asset.asset.additional.update',['additional_cost'=>$additional_cost]);
     }
 
     /**
@@ -85,9 +87,18 @@ class AdditionalCostController extends Controller
      * @param  \App\AdditionalCost  $additionalCost
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AdditionalCost $additionalCost)
+    public function update(Request $request,  $id)
     {
         //
+        $additional_cost=AdditionalCost::findOrFail($id);
+
+        $additional_cost->added_cost=$request->additional_value;
+        $additional_cost->effective_date=$request->effective_date;
+        $additional_cost->remarks=$request->remarks;
+       if($additional_cost->save()){
+        $request->session()->flash('status',"Additional Cost for asset ".$request->asset_name." successfully updated.");
+        return redirect('/asset/'.$additional_cost->asset_id);
+       }
     }
 
     /**

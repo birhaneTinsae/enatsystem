@@ -26,11 +26,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Human Resource
                   
-                   <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
+                   <!-- <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
                     Excel</a>
                    
                     <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
-                    Pdf</a>
+                    Pdf</a> -->
 
                     @can('delete')
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>

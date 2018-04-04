@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Branch;
+use App\User;
 use App\Employee;
 use App\MessageTemplete;
 use App\SMSPasswordNotification;
@@ -21,7 +22,8 @@ class SMSPasswordNotificationController extends Controller
     }
 
     public function create(){
-        $branches=Branch::orderBy('name')->pluck('name','id');
+        $branches=Branch::orderBy('branch_name')->pluck('branch_name','id');
+        //$branches=Branch::orderBy('name')->pluck('name','id');
         $msg_templetes=MessageTemplete::all()->pluck('name','id');
         return view('notification.new',['branches'=>$branches,'msg_templetes'=>$msg_templetes]);
     }

@@ -52,6 +52,10 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$category->name}}</td>
+                            <td></td>
+                           
+                            <td></td>
+                            
                             
                             <td><a href="/asset-category/{{$category->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
                         </tr>

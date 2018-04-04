@@ -27,13 +27,13 @@
             <div class="panel panel-default">
                 <div class="panel-heading">SMS Password Notification
                                   
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
+                    <!-- <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
                     Excel</a>
                    
 
                     
                     <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
-                    Pdf</a>
+                    Pdf</a> -->
                    
 
                     @can('delete-role')

@@ -7,4 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AdditionalCost extends Model
 {
     //
+    public function asset(){
+        return $this->belongsTo('App\Asset');
+    }
 }

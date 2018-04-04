@@ -46,7 +46,8 @@ class HumanResourceController extends Controller
         $valid_data=$request->validate([
             'user_id'=>'required|unique:employees',
             'job_position'=>'required',
-            'join_date'=>'required|date',          
+            'join_date'=>'required|date',   
+            'salary'=>'required'       
         ]);
 
         
@@ -56,6 +57,7 @@ class HumanResourceController extends Controller
         $new_employee->user_id=$request->user_id;
         $new_employee->job_position_id=$request->job_position;
         $new_employee->employed_date=$request->join_date;
+        $new_employee->salary=$request->salary;
        
         if($new_employee->save()){
             $request->session()->flash('status','Employee record successfully created');

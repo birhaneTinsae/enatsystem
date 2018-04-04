@@ -21,7 +21,7 @@
                         </div>
                     @endif
             <ol class="breadcrumb">
-                <li><a href="home">Home</a></li>               
+                <li><a href="/home">Home</a></li>               
                 <li><a href="/hr">HRM</a></li>               
                 <li class="active">New Employee</li>
             </ol>
@@ -81,6 +81,10 @@
                                     </span>
                                     @endif
                              </div>
+                                <div class="form-group"> 
+                                        <label for="salary">Salary</label>
+                                        <input type="number" name="salary" id="salary" class="form-control" placeholder="Salary">
+                                </div>
                                 </div>
                             </div>
                        
@@ -122,11 +126,7 @@
                    
                 </div>
                 <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-md-4">Maker <span class="label label-default">Default Label</span></div>
-                        <div class="col-md-4">Date Time <span class="label label-default">Default Label</span></div>
-                        <div class="col-md-4">Record Status <span class="label label-default">Default Label</span></div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

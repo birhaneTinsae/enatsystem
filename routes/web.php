@@ -85,9 +85,13 @@ Route::resource('fixed-asset', 'FAM\PPECategoryController')->middleware('can:vie
 Route::resource('asset','FAM\AssetController');
 Route::resource('asset-category','FAM\AssetItemController');
 Route::get('additional-cost/{id}','FAM\AdditionalCostController@create');
+Route::get('additional-cost/{id}/edit','FAM\AdditionalCostController@edit');
+Route::put('additional-cost/{id}','FAM\AdditionalCostController@update');
 Route::post('additional-cost','FAM\AdditionalCostController@store');
 Route::get('impairment/{id}','FAM\ImpairmentController@create');
 Route::post('impairment','FAM\ImpairmentController@store');
+Route::get('impairment/{id}/edit','FAM\ImpairmentController@edit');
+Route::put('impairment/{id}','FAM\ImpairmentController@update');
 
 });
 /**

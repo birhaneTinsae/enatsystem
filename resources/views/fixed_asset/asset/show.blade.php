@@ -31,11 +31,17 @@
                          Update</a>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                          Delete</a> -->
-                    <a href="/fixed-asset/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
-                         New</a>
+                    <a href="/asset/{{$asset->id}}/edit" class="text-right pull-right panel-menu-item"><i class="far fa-edit"></i>
+                         Update</a>
                 </div>
 
                 <div class="panel-body">
+                @if (session('status'))
+                        <div class="alert alert-success">
+                        <i class="far fa-thumbs-up"></i> {{ session('status') }}
+                        </div>
+                    @endif
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -57,6 +63,11 @@
                             <div class="form-group">
                                 <label for="">Residual Value</label>
                                 <input type="text" name="" id="" class="form-control"  value="{{$asset->gross_purchase_amount}}" readonly>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="">Book Value</label>
+                                <input type="text" name="" id="" class="form-control"  value="{{$asset->book_value}}" readonly>
                             </div>
                            
                         </div>
@@ -103,6 +114,8 @@
                                 <th>Value</th>
                                 <th>Remarks</th>
                                 <th>Effective Date</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,6 +125,8 @@
                                 <td>{{$additional_cost->added_cost}}</td>
                                 <td>{{$additional_cost->remarks}}</td>
                                 <td>{{$additional_cost->effective_date}}</td>
+                                <td><a href="/additional-cost/{{$additional_cost->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
+                                <td><a href="" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></a></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -130,7 +145,10 @@
                                 <th>#</th>
                                 <th>Old Value</th>
                                 <th>New Value</th>
+                                <th>Remarks</th>
                                 <th>Effective Date</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -139,7 +157,11 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$impairment->current_value}}</td>
                                 <td>{{$impairment->new_value}}</td>
+                                <td>{{$impairment->remarks}}</td>
                                 <td>{{$impairment->effective_date}}</td>
+                                <td><a href="/impairment/{{$impairment->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
+                                <td><a href="" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></a></td>
+                                
                                 
                             </tr>
                             @endforeach
@@ -155,32 +177,20 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>#</th>
                                 <th>Depreciation Dates</th>
                                 <th>Depreciation Values</th>
                             </tr>
                         </thead>
                         <tbody>
+                        @for($i=1;$i<=$useful_life;$i++)
                             <tr>
-                                <td>1</td>
-                                <td>{{now()->addYear(1)->toDateString()}}</td>
+                                <td>{{$i}}</td>
+                                <td>{{now()->addYear($i)->toDateString()}}</td>
                                 <td>100</td>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>{{now()->addYear(2)->toDateString()}}</td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>{{now()->addYear(3)->toDateString()}}</td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>{{now()->addYear(4)->toDateString()}}</td>
-                                <td>100</td>
-                            </tr>
+                        @endfor
+                         
                         </tbody>
                     </table>
                 </div>

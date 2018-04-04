@@ -19,6 +19,7 @@ class CreateAssetsTable extends Migration
             $table->date('purchase_date')->default(now());
             $table->double('gross_purchase_amount',15,3);
             $table->string('remarks')->nullable();
+            $table->integer('book_value');
             $table->string('tag')->nullable();
             $table->unsignedInteger('asset_item_id');
             $table->unsignedInteger('branch_id');

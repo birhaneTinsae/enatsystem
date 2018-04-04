@@ -40,7 +40,7 @@ class ImpairmentController extends Controller
     public function store(Request $request)
     {
         //
-
+       
         $impairment=new Impairment;
 
         $asset_id=Asset::where('asset_name',$request->asset_name)->pluck('id')->first();
@@ -48,11 +48,11 @@ class ImpairmentController extends Controller
         $impairment->current_value=$request->current_value;
         $impairment->effective_date=$request->effective_date;
         $impairment->remarks=$request->remarks;
-        $impairment->asset_id=$request->$asset_id;
+        $impairment->asset_id=$asset_id;
 
         if($impairment->save()){
             $request->session()->flash('status',"New Cost for asset ".$request->asset_name." successfully added.");
-            return redirect('/impairment/'.$asset_id);
+            return redirect('/asset/'.$asset_id);
         }
 
     }
@@ -74,9 +74,11 @@ class ImpairmentController extends Controller
      * @param  \App\Impairment  $impairment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Impairment $impairment)
+    public function edit($id)
     {
         //
+        $impairment=Impairment::findOrFail($id);
+        return view('fixed_asset.asset.impairment.update',['impairment'=>$impairment]);
     }
 
     /**
@@ -86,9 +88,18 @@ class ImpairmentController extends Controller
      * @param  \App\Impairment  $impairment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Impairment $impairment)
+    public function update(Request $request, $id)
     {
         //
+        $impairment=Impairment::findOrFail($id);
+        $impairment->new_value=$request->new_value;
+        $impairment->remarks=$request->remarks;
+        $impairment->effective_date=$request->effective_date;
+
+        if($impairment->save()){
+            $request->session()->flash('status',"Impairment Cost for asset ".$request->asset_name." successfully updated.");
+            return redirect('/asset/'.$impairment->asset_id);
+        }
     }
 
     /**

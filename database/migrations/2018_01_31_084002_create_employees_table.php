@@ -18,6 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('job_position_id');
             $table->date('employed_date');  
+            $table->string('salary');
             $table->string('sub_city')->nullable() ;
             $table->string('kebele')->nullable() ;
             $table->string('woreda')->nullable() ;
