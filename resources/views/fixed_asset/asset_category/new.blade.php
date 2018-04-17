@@ -44,13 +44,14 @@
                                     <label for="">Item Category</label>
                                     <input type="text" name="name" id="" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="">Quantity</label>
                                     <input type="number" name="quantity" id="" class="form-control">
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label for="">PPE Category</label>
                                    <select name="ppe_type" id="" class="form-control">
+                                   <option>Select PPE Category </option>
                                    @foreach($ppes as $ppe)
                                        <option value="{{$ppe->id}}">{{$ppe->p_p_e_type}}</option>
                                     @endforeach

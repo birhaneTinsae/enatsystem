@@ -59,7 +59,7 @@ class ActingEmployeePolicy
      * @param  \App\Employee  $employee
      * @return mixed
      */
-    public function delete(User $user, ActingEmployee $employee)
+    public function delete(User $user)
     {
         //
         return $user->hasAccess(['delete-actingemployee']);

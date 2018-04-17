@@ -65,13 +65,24 @@
                                 <label for="">Tag</label>
                                 <input type="text" name="" id="" class="form-control"  value="{{$asset->tag}}" readonly>
                             </div>
-                            <div class="form-group">
+                             <div class="form-group">
                                 <label for="">Asset Category</label>
+                                <input type="text" name="" id="" class="form-control"  value="{{$asset_category->p_p_e_type}}" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Asset Sub Category</label>
                                 <input type="text" name="" id="" class="form-control"  value="{{$asset->asset_item->name}}" readonly>
+                            </div>
+                               <div class="form-group">
+                                <label for="">Custudian</label>
+                                <input type="text" name="" id="" class="form-control"  value="{{$custudian_name}}
+                                "  readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Cost Center</label>
-                                <input type="text" name="" id="" class="form-control"  value="{{$asset->branch->name}}"  readonly>
+                                <input type="text" name="" id="" class="form-control"  value="{{$branch->branch_name}}
+                                "  readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Remarks</label>
@@ -91,6 +102,9 @@
                             <div class="form-group">
                                 <a href="/additional-cost/{{$asset->id}}" class="btn btn-link"><kbd>Additional Cost</kbd></a>
                                 <a href="/impairment/{{$asset->id}}" class="btn btn-link"><kbd>Impairment</kbd></a>
+
+                                 <a href="/transfer/{{$asset->id}}" class="btn btn-link"><kbd>Transfer</kbd></a>
+                                  <a href="/disposal/{{$asset->id}}" class="btn btn-link"><kbd>Disposal</kbd></a>
                             </div>
                         </div>
                     </div>
@@ -151,6 +165,108 @@
                     </div>
                    
                     @endif
+                    <h4>Disposal</h4>
+                     @if($Disposal->isNotEmpty())
+                     <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>                                
+                                <th>Remark</th>
+                                <th>Effective Date</th>
+                                <th>Edit</th>
+                                 <th>Close</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($Disposal as $disposed)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$disposed->remarks}}</td>                                
+                                <td>{{$disposed->effective_date}}</td>
+                                 <td><a href="{{ route('dispose.edit', $disposed->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
+                                  <td>
+                                  	<form action="/dispose/{{ $disposed->id}}" method="POST">
+                                 {{ method_field ('DELETE')}}
+                        {{ csrf_field() }}		
+                                 <button class="btn-danger btn-sm">
+                                <i class="fa fa-trash"></i>
+                                </button>		                                                    			
+		                        </form>
+                                  </td> 
+                            </tr>
+                            @endforeach
+                            
+                        </tbody>
+                    </table>
+                      @else
+                    <div class="alert alert-warning">
+                        <strong>Not Disposed</strong> 
+                    </div>
+                    @endif
+                              <h4>Transfer</h4>
+                     @if($transfer->isNotEmpty())
+                     <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>     
+                                <th>From Employee</th>   
+                                <th>To Employee</th>                        
+                                <th>From Cost Center</th>
+                                <th>To Cost Center</th>
+                                <th>Remark</th>
+                                <th>Effective Date</th>
+                                <th>Edit</th>
+                                 <th>Close</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @php
+                            $j =0
+                         @endphp 
+                        @foreach($transfer as $transfers)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                               
+                                 @for ($i = $j; $i <=$j; $i++)                                                                        
+                                <td>{{$from_employee[$j]}}</td>                                                                                                                     
+                                @endfor 
+                                @for ($i = $j; $i <=$j; $i++)                                                                        
+                                <td>{{$to_employee[$j]}}</td>                                                                                                                     
+                                @endfor 
+                                  @for ($i = $j; $i <=$j; $i++)                                                                        
+                                <td>{{$FromBranch[$j]}}</td>                                                                                                                     
+                                @endfor 
+                                  @for ($i = $j; $i <=$j; $i++)                                                                        
+                                <td>{{$ToBranch[$j]}}</td>                                                                                                                     
+                                @endfor  
+                                <td>{{$transfers->remarks}}</td>                              
+                                <td>{{$transfers->effective_date}}</td>
+                                 <td><a href="{{ route('transfers.edit', $transfers->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
+                                  <td>
+                                  	<form action="/dispose/{{ $transfers->id}}" method="POST">
+                                 {{ method_field ('DELETE')}}
+                        {{ csrf_field() }}		
+                                 <button class="btn-danger btn-sm">
+                                <i class="fa fa-trash"></i>
+                                </button>		                                                    			
+		                        </form>
+                                  </td> 
+                            </tr>
+                            @php
+                            $j =$j+1
+                            
+                         @endphp     
+                            @endforeach
+                            
+                        </tbody>
+                    </table>
+                      @else
+                    <div class="alert alert-warning">
+                        <strong>Not Transfered</strong> 
+                    </div>
+                   
+                    @endif
+                
                     <h4>Depreciation Schedule</h4>
                     <table class="table table-striped table-bordered">
                         <thead>

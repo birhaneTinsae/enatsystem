@@ -7,6 +7,7 @@
                             <li class="list-group-item"><a href="/asset-category" >Asset Item</a></li>
                             <li class="list-group-item"><a href="/asset" >Asset </a></li>
                             <li class="list-group-item"><a href="#" >Additional Cost</a></li>
+                            <li class="list-group-item"><a href="/dispose" >Disposed Assets</a></li>
                             <li class="list-group-item"><a href="#" >Home</a></li>
                         </ul>
 @endsection
@@ -33,6 +34,17 @@
                 </div>
 
                 <div class="panel-body">
+                     @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                             <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                        </div>
+                    @endif
+                    @if (session('delete_status'))
+                        <div class="alert alert-danger">
+                            {{ session('delete_status') }}
+                        </div>
+                    @endif  
                 @if($ppes->isNotEmpty())
                     <table class="table table-striped">
                     <thead>

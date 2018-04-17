@@ -36,6 +36,17 @@
                 </div>
 
                 <div class="panel-body">
+                     @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                             <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                        </div>
+                    @endif
+                    @if (session('delete_status'))
+                        <div class="alert alert-danger">
+                            {{ session('delete_status') }}
+                        </div>
+                    @endif  
                 @if($asset_categories->isNotEmpty())
                     <table class="table table-striped">
                     <thead>
@@ -52,6 +63,8 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$category->name}}</td>
+                            <td>{{$category->overrided_useful_life}}</td>
+                            <td>{{$category->overrided_residual_value}}</td>
                             
                             <td><a href="/asset-category/{{$category->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
                         </tr>

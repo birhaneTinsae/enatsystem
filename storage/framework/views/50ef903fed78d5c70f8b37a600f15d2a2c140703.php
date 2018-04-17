@@ -24,6 +24,16 @@
                 <li><a href="home">Home</a></li>               
                 <li class="active">HR</li>
             </ol>
+               <form action="searchemployee" method="get">
+                <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="queryemp" name="queryemp" placeholder="Search Employee" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon">
+                    <button type="submit" class="fa fa-search">  </button>                  
+                    </span>
+                </div>
+                </div>
+            </form>
             <div class="panel panel-default">
                 <div class="panel-heading">Human Resource
                   
@@ -69,7 +79,10 @@
                                 <td><?php echo e($loop->iteration); ?></td>
                                 <td><?php echo e($employee->user->name); ?></td>
                                 <td><?php echo e($employee->user->email); ?></td>
-                                <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="<?php echo e($employee->id); ?>"><i class="fa fa-info-circle"></i></a></td>
+                                <td>
+                                <a href="/hr/detail/<?php echo e($employee->id); ?>" class="btn-success btn-sm">
+                                 <i class="fa fa-info-circle"></i> </a>                                 
+                                </td>
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',App\Employee::class)): ?>
                                 <td>
                                <a href="<?php echo e(route('hr.edit', $employee->id)); ?>" class="btn-warning btn-sm" >

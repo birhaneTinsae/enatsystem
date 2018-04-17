@@ -8,6 +8,6 @@ class FixedAssetController extends Controller
 {
     //
     public function index(){
-        return view('fixed_asset\fixed_asset');
+        //return view('fixed_asset\fixed_asset');
     }
 }

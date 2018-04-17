@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\FAM;
-
+use Illuminate\Support\Facades\DB;
 use App\Transfer;
+use App\Asset;
+use App\User;
+use App\Employee;
+use App\Branch;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class TransferController extends Controller
@@ -14,7 +18,7 @@ class TransferController extends Controller
      */
     public function index()
     {
-        //
+       
     }
 
     /**
@@ -22,9 +26,32 @@ class TransferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $asset=Asset::findOrFail($id);
+        $custudian=new Employee;
+        $custudian->setconnection('sqlsrv');
+        $custudian=Employee::all();
+        $branches=new Branch;
+        $branches->setconnection('sqlsrv');
+        $branches=Branch::all();
+        $count=0;
+        $custudian_name=array();
+        foreach($custudian as $cust){
+            $custudian_name[$count]=DB::table('users')->where('id', $cust->user_id)->value('name');
+            $count++;
+        }
+        $curr_custudian=Employee::find($asset->custudian);        
+        $curr_custudian_id=User::find($curr_custudian->user_id);       
+        $curr_custudian_name=$curr_custudian_id->name;
+
+        $curr_cost_center=Branch::find($asset->branch_id);        
+              
+        $curr_cost_center_name=$curr_cost_center->branch_name;
+         //dd($curr_custudian_name);
+        //dd($custudian_name);
+        return view('fixed_asset.asset.transfer.new',['branches'=>$branches,'asset'=>$asset,'curr_custudian_name'=>$curr_custudian_name,
+        'emp_name'=>$custudian_name,'Employee'=>$custudian,'Counter'=>$count,'current_cost_center'=>$curr_cost_center_name]);
     }
 
     /**
@@ -35,9 +62,28 @@ class TransferController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+     // dd($request->all());
+       $new_rec=new Transfer;
+       $new_rec->asset_id=$request->asset_id;
+       $new_rec->effective_date=$request->effective_date;
+        $new_rec->remarks=$request->remarks;
+         $new_rec->from_employee=$request->current_Custudian_id;
+         $new_rec->to_employee=$request->new_custudian;
+         $new_rec->from_cost_center=$request->current_cost_center_id;
+         $new_rec->to_cost_center=$request->new_cost_center;
 
+        if($new_rec->save()){
+            DB::connection('sqlsrv2')->table('assets')
+            ->where('id',$request->asset_id)
+            ->update(['custudian'=>$request->new_custudian]);
+
+             DB::connection('sqlsrv2')->table('assets')
+            ->where('id',$request->asset_id)
+            ->update(['branch_id'=>$request->new_cost_center]);
+            $request->session()->flash('status',"Asset ".$request->asset_name." Transfered to another Custudian.");
+            return redirect('/asset');
+    }
+    }
     /**
      * Display the specified resource.
      *

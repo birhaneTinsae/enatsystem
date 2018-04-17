@@ -57,6 +57,8 @@
                                     <label for="">Risdual Value</label>
                                     <input type="number" name="residual_value" id="" class="form-control" required>
                                 </div>
+
+                                
                          
                           </div>
                          

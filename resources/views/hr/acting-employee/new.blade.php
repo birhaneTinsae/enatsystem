@@ -98,12 +98,19 @@ function yesnoCheck() {
                                  <div class="form-group">
                                     <label for="status">Status</label>
                                     <select  class="form-control" name="status" id="status" >
+                                    <option>----Select Status----</option>
                                     <option value="1">Active</option>
                                     <option value="0">Terminated</option>
                                    
                                     </select>
                                 </div>
                                 </div>
+                                  
+                            <label for="remark">Remark</label>
+                         <div class="form-group">                           
+                            <textarea rows="4" cols="50" name="remark">Remark</textarea>                            
+                        </div> 
+                       </div>
                        
                             </div>                                                                  
                         <button type="submit" class="btn btn-primary">Register</button>

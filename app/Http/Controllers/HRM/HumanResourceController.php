@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\HRM;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\JobPosition;
@@ -80,13 +80,8 @@ class HumanResourceController extends Controller
      */
     public function show($id)
     {
-        //
-        $employee_dto=[];
-        
-
+        $employee_dto=[];    
        $employee=Employee::find($id);
-
-
         $employee_dto['employee_name']=$employee->user->name;
         $employee_dto['phone_no']=$employee->user->phone_no;
         $employee_dto['email']=$employee->user->email;
@@ -96,6 +91,22 @@ class HumanResourceController extends Controller
         $employee_dto['enat_id']=$employee->enat_id;
 
         return json_encode( $employee_dto);
+    }
+
+        public function detail($id)
+    {
+        $employee_dto=[];    
+       $employee=Employee::find($id);
+        // $employee_dto['employee_name']=$employee->user->name;
+        // $employee_dto['phone_no']=$employee->user->phone_no;
+        // $employee_dto['email']=$employee->user->email;
+        // $employee_dto['job_position']=$employee->job_position->name;
+        // $employee_dto['employed_date']=$employee->employed_date;
+        // $employee_dto['salary']=$employee->salary;
+        // $employee_dto['enat_id']=$employee->enat_id;
+ //return json_encode( $employee_dto);
+ //dd($employee);
+        return view('hr\detail')->with('employee',$employee);
     }
 
     /**
@@ -166,5 +177,27 @@ class HumanResourceController extends Controller
     public function users(){
         $users=User::all();
         return json_encode($users);
+    }
+       public function search(Request $request)
+    {
+         $name=$request->queryemp;          
+        $users =DB::table('users')->where('name','LIKE','%'.$name.'%')->get();          
+        $data = [];
+        $count=0;
+        foreach($users as $user){
+        $data[$count]=$user->id;
+        $count++;
+    }
+$emp_id=[];
+$count1=0;
+$Employee=DB::table('employees')->whereIn('user_id',$data)->get();
+foreach($Employee as $emp){
+    $emp_id[$count1]=$emp->id;
+    $count1++;
+}
+       
+
+        $employees=Employee::whereIn('id', $emp_id)->paginate(2);
+        return view('hr.hr',['employees'=> $employees]);
     }
 }

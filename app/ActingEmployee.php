@@ -18,4 +18,7 @@ class ActingEmployee extends Model implements Auditable
     public function branch(){
         return $this->belongsTo('App\Branch');
     }
+       public function employee(){
+        return $this->belongsTo('App\Employee');
+    }
 }

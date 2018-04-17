@@ -20,8 +20,8 @@ class TransferpromotionrequestController extends Controller
      */
     public function index()
     {
-          $results=Transferpromotionrequest::paginate(10);
-             $count=0;
+       $results=Transferpromotionrequest::paginate(10);
+       $count=0;
        $fjob_name=array();
        $tjob_name=array();
        $fbranch_name=array();

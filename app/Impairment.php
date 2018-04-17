@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Impairment extends Model
 {
-    //
+      protected $connection = 'sqlsrv2';
 }

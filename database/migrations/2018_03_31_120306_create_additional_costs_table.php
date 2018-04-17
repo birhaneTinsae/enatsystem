@@ -13,7 +13,7 @@ class CreateAdditionalCostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('additional_costs', function (Blueprint $table) {
+        Schema::connection('sqlsrv2')->create('additional_costs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('added_cost');
             $table->date('effective_date');
@@ -31,6 +31,6 @@ class CreateAdditionalCostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('additional_costs');
+        Schema::connection('sqlsrv2')->dropIfExists('additional_costs');
     }
 }

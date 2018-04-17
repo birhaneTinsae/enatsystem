@@ -47,7 +47,7 @@ class UpdateTable extends Command
         //
          $currentdate = date('Y-m-d');
           $result = DB::table('acting_employees')
-           ->where('remark', '=','1')
+           ->where('notification', '=','1')
           ->where('status', '=','1')->get();
           $check=count($result);
           if($check>=1){
@@ -66,7 +66,7 @@ class UpdateTable extends Command
             }
             $aemployee = DB::table('acting_employees')
           ->where('duration','>=',5)
-          ->where('remark', '=','1')
+          ->where('notification', '=','1')
           ->where('status', '=','1')->get();
               $check1=count($aemployee);
               if($check1>=1){                 

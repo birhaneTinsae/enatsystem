@@ -57,9 +57,10 @@ Route::resource('branch', 'Branch\BranchController');
 /**
  * Human resource management related URLs.
  */
+Route::resource('user','UserMaintainance');
 Route::get('hr/users','HRM\HumanResourceController@users');
 Route::resource('hr', 'HRM\HumanResourceController');
-
+Route::get('hr/detail/{id}','HRM\HumanResourceController@detail');
 Route::resource('actingemployee', 'HRM\ActingEmployeeController');
 Route::get('searchactingemployee','HRM\ActingEmployeeController@search');
 Route::get('actingemployee','HRM\ActingEmployeeController@index');
@@ -81,6 +82,7 @@ Route::get('searchtransferpromotionrequest','HRM\TransferpromotionrequestControl
 Route::get('hr/users','HRM\HumanResourceController@users');
 Route::resource('hr', 'HRM\HumanResourceController')->middleware('can:view-hr');
 Route::resource('leave', 'HRM\LeaveManagmentController')->middleware('can:view-hr');
+Route::get('searchemployee','HRM\HumanResourceController@search');
 
 /**
  * 
@@ -120,6 +122,12 @@ Route::get('additional-cost/{id}','FAM\AdditionalCostController@create');
 Route::post('additional-cost','FAM\AdditionalCostController@store');
 Route::get('impairment/{id}','FAM\ImpairmentController@create');
 Route::post('impairment','FAM\ImpairmentController@store');
+
+Route::resource('transfers','FAM\TransferController');
+Route::get('transfer/{id}','FAM\TransferController@create');
+Route::resource('dispose','FAM\DisposalController');
+Route::get('searchdisposedassets','FAM\DisposalController@search');
+Route::get('disposal/{id}','FAM\DisposalController@create');
 
 });
 /**

@@ -93,7 +93,7 @@
                 <div class="panel-heading">Fixed Asset</div>
                 <div class="panel-body">
                 <p class="panel-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary btn-block">Fixed Asset</a>
+                <a href="/fixed-asset" class="btn btn-primary btn-block">Fixed Asset</a>
                 </div>
             </div>
         </div>

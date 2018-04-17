@@ -43,16 +43,39 @@ class Actingemployees extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-      $aemployee= DB::table('acting_employees')            
-             ->join('branches', 'branches.id', '=', 'acting_employees.branch_id')    
+    //     $results = DB::table('acting_employees')
+    //             ->where('duration', '>=', 5)
+    //              ->where('status', '=', 1)
+    //               ->where('notification', '=',1)
+    //             ->get();
+    //   //  $results=ActingEmployee::paginate(10);
+    //    $count=0;
+    //    $Employee_name=array();
+    //    $fjob_name=array();
+    //    $tjob_name=array();
+    //    $fbranch_name=array();
+    //    $tbranch_name=array();
+    //   foreach($results as $result){
+    //      //$Employee_name[$count]= DB::table('users')->where('id',$result->employee_id)->value('name');
+    //     $fjob_name[$count]= DB::table('job_positions')->where('id', $result->job_position_id)->value('name');
+    //     $tjob_name[$count]= DB::table('job_positions')->where('id', $result->acting_job_position_id)->value('name');
+    //     $fbranch_name[$count]= DB::table('branches')->where('id', $result->branch_id)->value('branch_name');
+    //     $tbranch_name[$count]= DB::table('branches')->where('id', $result->acting_branch_id)->value('branch_name');
+    //     $count++;
+    //   }
+      $results= DB::table('acting_employees')            
+             ->join('branches', 'branches.id', '=', 'acting_employees.branch_id')  
+             ->join('branches as acting_branches', 'acting_branches.id', '=', 'acting_employees.acting_branch_id')  
              ->join('users', 'users.id', '=', 'acting_employees.user_id')       
               ->join('job_positions', 'job_positions.id', '=', 'acting_employees.job_position_id')  
+              ->join('job_positions as acting_job_positions', 'acting_job_positions.id', '=', 'acting_employees.acting_job_position_id')
                ->where('duration','>=',5)
-               ->where('remark', '=','1')
+               ->where('notification', '=','1')
                 ->where('status', '=','1')         
-              ->select('acting_employees.*', 'users.name as full_name','branches.branch_name','job_positions.name as job_name')
+              ->select('acting_employees.*', 'users.name as full_name','branches.branch_name','job_positions.name as job_name'
+              ,'acting_branches.branch_name as acting_branch_name','acting_job_positions.name as acting_job_name')
             ->get();
-  return (new MailMessage)->view('hr\acting-employee.email',['employees'=>$aemployee]);
+  return (new MailMessage)->view('hr\acting-employee.email',['employees'=>$results]);
 
     }
 

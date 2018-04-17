@@ -36,6 +36,17 @@
                 </div>
 
                 <div class="panel-body">
+                     @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                             <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                        </div>
+                    @endif
+                    @if (session('delete_status'))
+                        <div class="alert alert-danger">
+                            {{ session('delete_status') }}
+                        </div>
+                    @endif  
                 @if($assets->isNotEmpty())
                     <table class="table table-striped">
                     <thead>

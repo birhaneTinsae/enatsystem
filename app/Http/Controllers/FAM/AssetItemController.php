@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\FAM;
 
 use App\AssetItem;
+use App\PPECategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class AssetItemController extends Controller
@@ -14,7 +15,8 @@ class AssetItemController extends Controller
      */
     public function index()
     {
-        //
+        $asset_categories=new AssetItem;
+        $asset_categories->setConnection('sqlsrv2');
         $asset_categories=AssetItem::all();
         return view('fixed_asset.asset_category.asset_category',['asset_categories'=>$asset_categories]);
     }
@@ -27,7 +29,10 @@ class AssetItemController extends Controller
     public function create()
     {
         //
+         $ppes=new PPECategory;
+        $ppes->setConnection('sqlsrv2');
         $ppes=\App\PPECategory::all();
+        //dd($ppes);
         return view('fixed_asset.asset_category.new',['ppes'=>$ppes]);
     }
 
@@ -41,11 +46,12 @@ class AssetItemController extends Controller
     {
         //
         $asset_category=new AssetItem;
+        $asset_category->setConnection('sqlsrv2');
         $asset_category->p_p_e_category_id=$request->ppe_type;
         $asset_category->overrided_useful_life=$request->useful_life;
         $asset_category->overrided_residual_value=$request->residual_value;
         $asset_category->name=$request->name;
-        $asset_category->quantity=$request->quantity;
+        //$asset_category->quantity=$request->quantity;
         if($asset_category->save()){
             $request->session()->flash('status',"Asset Category ".$request->name." successfully added.");
             return redirect('/asset-category');

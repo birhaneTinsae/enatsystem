@@ -15,7 +15,10 @@ class PPECategoryController extends Controller
     public function index()
     {
         //
+        $ppes=new PPECategory;
+         $ppes->setConnection('sqlsrv2');
         $ppes=PPECategory::all();
+         
         return view('fixed_asset.fixed_asset',['ppes'=>$ppes]);
     }
 
@@ -40,6 +43,7 @@ class PPECategoryController extends Controller
     {
         //
         $ppe=new PPECategory;
+        $ppe->setConnection('sqlsrv2');
         $ppe->p_p_e_type=$request->ppe_type;
         $ppe->useful_life=$request->useful_life;
         $ppe->residual_value=$request->residual_value;

@@ -44,7 +44,7 @@
                         </div>
                     @endif
 
-                    <table class="table table-striped">
+                <table class="table table-striped">
                  <tr>
                 <th>Employee Name</th>
                 <td>{{$emp_name}}</td> 
