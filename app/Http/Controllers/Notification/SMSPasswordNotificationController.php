@@ -17,7 +17,7 @@ class SMSPasswordNotificationController extends Controller
 {
     //
     public function index(){
-        $notifications=SMSPasswordNotification::all();
+        $notifications=SMSPasswordNotification::paginate(10);
        return view('notification.notification',['notifications'=>$notifications]);
     }
 

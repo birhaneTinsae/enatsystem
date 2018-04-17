@@ -71,6 +71,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    {{$notifications->links()}}
                   @else
                   <div class="jumbotron ">
                     <div class="container">

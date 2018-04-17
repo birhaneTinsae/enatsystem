@@ -34,7 +34,7 @@
                         Delete</a>
                     @endcan
 
-                    @can('create',App\Role::class)
+                    @can('create',App\User::class)
                     <a href="role/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a>
                     @endcan
@@ -48,26 +48,27 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Role Name</th>
+                                <th>Full Name</th>
+                                <th>Username</th>
                                 <th>Detail</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($roles as $role)
+                        @foreach($users as $user)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$role->name}}</td>
-                                <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#roleDetailModal" data-id="{{$role->id}}"><i class="fa fa-info-circle"></i></a></td>
-                                {{--  <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#roleUpdateModal" data-id="{{$role->id}}"><i class="fa fa-edit"></i></a></td>  --}}
-                                <td><a class="btn-warning btn-sm" href="/role/{{$role->id}}/edit"><i class="fa fa-edit"></i></a></td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->username}}</td>
+                                <td><a href="http://" class="btn-primary btn-sm"><i class="fas fa-info-circle"></i></a></td>
+                                <td><a class="btn-warning btn-sm" href="/user/{{$user->id}}/edit"><i class="fa fa-edit"></i></a></td>
                                
                             </tr>
                         @endforeach
                         </tbody>
                         
                     </table>
-                    {{$roles->links()}}
+                    {{$users->links()}}
                 </div>
                 <div class="panel-footer">
                 <!-- <div class="row">
