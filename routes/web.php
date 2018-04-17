@@ -38,6 +38,8 @@ Route::get('home', 'HomeController@index')->name('home');
  */
 
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('password-reset','UserMaintainance@show_password_reset_form');
+Route::put('password-reset/{id}','UserMaintainance@reset_password');
 Route::resource('user','UserMaintainance');
 /**
  * Branch maintenance related URLs.

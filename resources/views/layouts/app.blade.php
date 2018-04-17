@@ -81,9 +81,12 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <!-- <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                            Reset password
+                                        </a> -->
+                                        <a href="/password-reset">
                                             Reset password
                                         </a>
 

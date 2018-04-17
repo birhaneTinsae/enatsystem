@@ -8,16 +8,16 @@
                 <div class="panel-heading">Reset Password</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
+                    <form class="form-horizontal" method="POST" action="/password-reset/{{Auth::id()}}">
                         {{ csrf_field() }}
+                        @method('PUT')
+                        {{--<input type="hidden" name="token" value="{{ $token }}">--}}
 
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                      {{--    <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                             <label for="username" class="col-md-4 control-label">Username</label>
 
                             <div class="col-md-6">
-                                <input id="username" type="username" class="form-control" name="username" value="{{ Auth::user() or old('username') }}" required autofocus>
+                                <input id="username" type="username" class="form-control" name="username" value="{{ Auth::user()->username or old('username') }}" required readonly autofocus>
 
                                 @if ($errors->has('username'))
                                     <span class="help-block">
@@ -25,7 +25,7 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div>--}}
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>

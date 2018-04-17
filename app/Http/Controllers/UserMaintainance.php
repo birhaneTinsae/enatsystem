@@ -100,4 +100,23 @@ class UserMaintainance extends Controller
     {
         //
     }
+    public function show_password_reset_form(){
+        return view('auth.passwords.reset');
+    }
+    public function reset_password(Request $request,$id){
+  
+        $validatedData = $request->validate([
+            'password' => 'required|string|min:6|confirmed|alpha_dash',
+            'password_confirmation' => 'required',
+        ]);
+
+
+        $user=User::findOrFail($id);
+        $user->password=Hash::make($request->password);
+        $user->first_login=false;
+        if($user->save()){
+            $request->session()->flash('status','Your password has been successfully reseted');
+        }
+        return redirect('/home');
+    }
 }

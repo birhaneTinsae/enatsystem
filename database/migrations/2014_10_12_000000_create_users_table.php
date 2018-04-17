@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('phone_no');
             $table->integer('branch_id')->unsigned();
             $table->string('username')->unique();
-          //  $table->unsignedInteger('employee_id');    
+          //  $table->unsignedInteger('employee_id'); 
+            $table->boolean('first_login')->default(1);   
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();

@@ -3,6 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
+        @if(session('status'))
+            <div class="alert alert-success" role="alert">
+                {{session('status')}}
+            </div>
+            @endif
         @can('view-sms')
         <div class="col-md-2">
             <div class="panel panel-default">
