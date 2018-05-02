@@ -24,6 +24,7 @@ class CreateSMSPasswordNotificationsTable extends Migration
             $table->text('message');
             $table->string('phone_no');
             $table->string('sender');
+            $table->date('sent_at')->useCurrent();
             $table->timestamps();
         });
     }

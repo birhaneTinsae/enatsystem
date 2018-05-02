@@ -1,27 +1,26 @@
-@extends('layouts.app')
-
+@extends('layouts.app') 
 @section('sidebar')
-                        <ul class="list-group">
-                            <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="/fixed-asset" >PPE</a></li>
-                            <li class="list-group-item"><a href="/asset-category" >Asset Item</a></li>
-                            <li class="list-group-item"><a href="/asset" >Asset </a></li>
-                            <li class="list-group-item"><a href="#" >Additional Cost</a></li>
-                            <li class="list-group-item"><a href="#" >Home</a></li>
-                        </ul>
+<ul class="list-group">
+    <li class="list-group-item disabled">Menu</li>
+    <li class="list-group-item"><a href="/fixed-asset">PPE</a></li>
+    <li class="list-group-item"><a href="/asset-category">Asset Item</a></li>
+    <li class="list-group-item"><a href="/asset">Asset </a></li>
+    <li class="list-group-item"><a href="#">Additional Cost</a></li>
+    <li class="list-group-item"><a href="#">Home</a></li>
+</ul>
 @endsection
-
+ 
 @section('content')
 <div class="container">
     <div class="row">
-    <!--col-md-offset-1-->
+        <!--col-md-offset-1-->
         <div class="col-md-10 ">
             <ol class="breadcrumb">
-                <li><a href="/home">Home</a></li>  
+                <li><a href="/home">Home</a></li>
                 <li> <a href="/fixed-asset">FAM</a></li>
                 <li class="active">New Asset</li>
-                             
-                            
+
+
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Asset
@@ -36,10 +35,10 @@
                 </div>
 
                 <div class="panel-body">
-                @if (session('status'))
-                        <div class="alert alert-success">
+                    @if (session('status'))
+                    <div class="alert alert-success">
                         <i class="far fa-thumbs-up"></i> {{ session('status') }}
-                        </div>
+                    </div>
                     @endif
 
                     <div class="row">
@@ -58,47 +57,45 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Useful Life</label>
-                                <input type="text" name="" id="" class="form-control"  value="{{$asset->gross_purchase_amount}}" readonly>
+                                <input type="text" name="" id="" class="form-control" value="{{$asset->gross_purchase_amount}}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Residual Value</label>
-                                <input type="text" name="" id="" class="form-control"  value="{{$asset->gross_purchase_amount}}" readonly>
+                                <input type="text" name="" id="" class="form-control" value="{{$asset->gross_purchase_amount}}" readonly>
                             </div>
-                           
+
                             <div class="form-group">
                                 <label for="">Book Value</label>
-                                <input type="text" name="" id="" class="form-control"  value="{{$asset->book_value}}" readonly>
+                                <input type="text" name="" id="" class="form-control" value="{{$asset->book_value}}" readonly>
                             </div>
-                           
+
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Tag</label>
-                                <input type="text" name="" id="" class="form-control"  value="{{$asset->tag}}" readonly>
+                                <input type="text" name="" id="" class="form-control" value="{{$asset->tag}}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Asset Category</label>
-                                <input type="text" name="" id="" class="form-control"  value="{{$asset->asset_item->name}}" readonly>
+                                <input type="text" name="" id="" class="form-control" value="{{$asset->asset_item->name}}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Cost Center</label>
-                                <input type="text" name="" id="" class="form-control"  value="{{$asset->branch->name}}"  readonly>
+                                <input type="text" name="" id="" class="form-control" value="{{$asset->branch->name}}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Remarks</label>
-                                <input type="text" name="" id="" class="form-control"  value="{{$asset->remarks}}" readonly>
+                                <input type="text" name="" id="" class="form-control" value="{{$asset->remarks}}" readonly>
                             </div>
 
                             <div class="form-group">
                                 <div class="checkbox">
-                                @if($asset->disposed)
-                                    <label><input type="checkbox" name="disposed" checked>Disposed</label>
-                                @else
-                                    <label><input type="checkbox" name="disposed">Disposed</label>
-                                @endif
+                                    @if($asset->disposed)
+                                    <label><input type="checkbox" name="disposed" checked>Disposed</label> @else
+                                    <label><input type="checkbox" name="disposed">Disposed</label> @endif
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <a href="/additional-cost/{{$asset->id}}" class="btn btn-link"><kbd>Additional Cost</kbd></a>
                                 <a href="/impairment/{{$asset->id}}" class="btn btn-link"><kbd>Impairment</kbd></a>
@@ -119,7 +116,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($additional_costs as $additional_cost)
+                            @foreach($additional_costs as $additional_cost)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$additional_cost->added_cost}}</td>
@@ -128,14 +125,14 @@
                                 <td><a href="/additional-cost/{{$additional_cost->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
                                 <td><a href="" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></a></td>
                             </tr>
-                        @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                     @else
                     <div class="alert alert-warning">
-                        <strong>No Additional Value</strong> 
+                        <strong>No Additional Value</strong>
                     </div>
-                   
+
                     @endif
                     <h4>Impairment</h4>
                     @if($impairments->isNotEmpty())
@@ -152,7 +149,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($impairments as $impairment)
+                            @foreach($impairments as $impairment)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$impairment->current_value}}</td>
@@ -161,17 +158,17 @@
                                 <td>{{$impairment->effective_date}}</td>
                                 <td><a href="/impairment/{{$impairment->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
                                 <td><a href="" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></a></td>
-                                
-                                
+
+
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                     @else
                     <div class="alert alert-warning">
-                        <strong> No Impairment Value</strong> 
+                        <strong> No Impairment Value</strong>
                     </div>
-                   
+
                     @endif
                     <h4>Depreciation Schedule</h4>
                     <table class="table table-striped table-bordered">
@@ -183,19 +180,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @for($i=1;$i<=$useful_life;$i++)
-                            <tr>
+                            @for($i=1;$i
+                            <=$useful_life;$i++) <tr>
                                 <td>{{$i}}</td>
                                 <td>{{now()->addYear($i)->toDateString()}}</td>
                                 <td>100</td>
-                            </tr>
-                        @endfor
-                         
+                                </tr>
+                                @endfor
+
                         </tbody>
                     </table>
                 </div>
                 <div class="panel-footer">
-            
+
                 </div>
             </div>
         </div>

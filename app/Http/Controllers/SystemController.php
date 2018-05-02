@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Branch;
+namespace App\Http\Controllers;
 
-use App\Branch;
+use App\System;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class BranchController extends Controller
+class SystemController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -16,11 +14,9 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $branches=Branch::all();
-       return view('branch.branch',['branches'=>$branches]);
+        //
     }
- 
-   
+
     /**
      * Show the form for creating a new resource.
      *
@@ -29,7 +25,6 @@ class BranchController extends Controller
     public function create()
     {
         //
-        return view('branch.new');
     }
 
     /**
@@ -40,28 +35,16 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-     
-        $branch=new Branch;
-
-        $branch->name = $request->branch_name;
-        $branch->code = $request->branch_code;
-
-        if($branch->save()){
-            $request->session()->flash('status',"Branch ".$request->branch_name." successfully added.");
-            return redirect('/branch');
-        }
-
-        
-       
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\System  $system
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(System $system)
     {
         //
     }
@@ -69,10 +52,10 @@ class BranchController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\System  $system
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(System $system)
     {
         //
     }
@@ -81,10 +64,10 @@ class BranchController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\System  $system
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, System $system)
     {
         //
     }
@@ -92,22 +75,11 @@ class BranchController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\System  $system
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(System $system)
     {
         //
-    }
-    public function employees($id){
-       $employees= Branch::find($id)->employees;
-    //    $employees_detail=[];
-    //    $counter=0;
-
-    //    foreach($employees as $employee){
-    //       $employees_detail[$counter]=$employee;         
-    //       $counter++;
-    //    }
-       return json_encode( $employees);
     }
 }

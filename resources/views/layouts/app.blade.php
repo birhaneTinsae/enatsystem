@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,30 +10,35 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Enat Bank S.C.') }}- @yield('title')</title>
-    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">  
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
-    .sidebar{
-        margin-left:10px;
-    }
-    .card{
-        background-color:#fff;
-    }
-    .panel-menu-item{
-        margin-right:10px;
-        color:#000;
-    }
-    input[type="password"]:invalid {
-    border-color: red;
-    }
-    input[type="password"],
-    input[type="password"]:valid {
-        border-color: #ccc;
-    }
+        .sidebar {
+            margin-left: 10px;
+        }
+
+        .card {
+            background-color: #fff;
+        }
+
+        .panel-menu-item {
+            margin-right: 10px;
+            color: #000;
+        }
+
+        input[type="password"]:invalid {
+            border-color: red;
+        }
+
+        input[type="password"],
+        input[type="password"]:valid {
+            border-color: #ccc;
+        }
     </style>
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
@@ -61,64 +67,63 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                             <li><a href="{{ route('phone-book') }}">Phone Book</a></li>
+                        <li><a href="{{ route('phone-book') }}">Phone Book</a></li>
                         <!-- Authentication Links -->
-                            
+
                         @guest
-                            
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            
-                        @else
-                            @can('create-user')
-                             <li><a href="{{ route('register') }}">Register</a></li> 
-                            @endcan
-                            <li><a href="#">Branch <span class="label label-success">{{Auth::user()->branch->code}}</span></a></li>
-                            <!-- <li><a href="{{ route('register') }}">Role <span class="label label-primary">{{Auth::user()->branch->branch_code}}</span></a></li> -->
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+
+                        <li><a href="{{ route('login') }}">Login</a></li>
+
+                        @else @can('create-user')
+                        <li><a href="{{ route('register') }}">Register</a></li>
+                        @endcan
+                        <li><a href="#">Branch <span class="label label-success">{{Auth::user()->employee->branch->code}}</span></a></li>
+                        {{--
+                        <li><a href="{{ route('register') }}">Role <span class="label label-primary">{{Auth::user()->branch->branch_code}}</span></a></li>
+                        --}}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    {{ Auth::user()->employee->name }} <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <!-- <a href="{{ route('logout') }}"
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <!-- <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Reset password
                                         </a> -->
-                                        <a href="/password-reset">
+                                    <a href="/password-reset">
                                             Reset password
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                                <li>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                      Settings
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
                         @endguest
                     </ul>
                 </div>
@@ -131,34 +136,34 @@
           <li class="breadcrumb-item active" aria-current="page">Library</li>
         </ol>
       </nav> -->
-    
-        <div class="row"> 
+
+        <div class="row">
             <div class="col-md-2 sidebar">
-            <!--Side bar functionality-->
-                    @yield('sidebar')
-                   
-    
-                        
-                  
-                   
+                <!--Side bar functionality-->
+                @yield('sidebar')
+
+
+
+
+
             </div>
             <div class="col-md-9">
-            <!--Main Content functionality-->
-                    @yield('content')
+                <!--Main Content functionality-->
+                @yield('content')
             </div>
         </div>
 
 
 
-       
+
     </div>
 
     <!-- Scripts -->
-   
-    <script  src="{{ asset('js/app.js') }}"></script>
 
-    <script >
-    $(document).ready(function () {
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
         var temp=[];
         $.ajaxSetup({
             headers: {
@@ -254,7 +259,7 @@
         to retriev employee list from user table
          */
 
-         $.getJSON('/hr/users',function(data){
+         $.getJSON('/hr/employees',function(data){
                 // Loop over the JSON array.
                 data.forEach(function(employee) {
                 // Create a new <option> element.
@@ -370,6 +375,7 @@
 
     });
     </script>
-    
+
 </body>
+
 </html>

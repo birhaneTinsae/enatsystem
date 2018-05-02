@@ -30,10 +30,19 @@ class RolesSeeder extends Seeder
                 "view-vms"=>true,
                 "view-fam"=>true,
                 "view-fcy"=>true,
+                "create-sms"=>true,
                 
             ]),
-
+           
         ]);
+        $isd=Role::create([ 
+        'name'=>'ISD',
+        'slug'=>'isd',
+        'permissions'=>json_encode([
+           
+            "create-sms"=>true,
+            
+        ]),]);
 
         
         

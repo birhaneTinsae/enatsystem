@@ -47,11 +47,15 @@ Route::resource('user','UserMaintainance');
 Route::get('branch/{id}/employees','Branch\BranchController@employees');
 Route::resource('branch', 'Branch\BranchController');
 /**
+ * Issue loging 
+ */
+Route::resource('issue','IssueController');
+/**
  * Human resource management related URLs.
  */
 
 Route::get('hr/acting','HRM\HumanResourceController@acting');
-Route::get('hr/users','HRM\HumanResourceController@users');
+Route::get('hr/employees','HRM\HumanResourceController@employees');
 Route::resource('hr', 'HRM\HumanResourceController')->middleware('can:view-hr');
 Route::resource('leave', 'HRM\LeaveManagmentController')->middleware('can:view-hr');
 
@@ -72,7 +76,10 @@ Route::resource('fcy', 'FCY\FCYController')->middleware('can:view-fcy');
 /**
  * Notification management related URLs.
  */
-Route::post('/sms-password-notification/send','Notification\SMSPasswordNotificationController@send');
+Route::post('/sms-password-notification/send','Notification\SMSPasswordNotificationController@send_password_reset_sms');
+Route::post('/sms-password-notification/send-one-time','Notification\SMSPasswordNotificationController@send_one_time_sms');
+Route::post('/sms-password-notification/filter','Notification\SMSPasswordNotificationController@filter');
+Route::get('/sms-password-notification/send-one-time','Notification\SMSPasswordNotificationController@one_time_sms');
 Route::get('/password-generator','Notification\SMSPasswordNotificationController@generate_password');
 Route::get('/sms-password-notification', 'Notification\SMSPasswordNotificationController@index')->name('sms-notification')->middleware('can:view-sms');;
 Route::get('/sms-password-notification/create', 'Notification\SMSPasswordNotificationController@create')->middleware('can:create-sms');;

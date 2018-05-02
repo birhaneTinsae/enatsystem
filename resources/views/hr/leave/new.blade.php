@@ -1,28 +1,27 @@
-@extends('layouts.app')
-
+@extends('layouts.app') 
 @section('sidebar')
-                        <ul class="list-group">
-                            <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="#" >Request List</a></li>
-                            <li class="list-group-item"><a href="#" >Leave</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >Home</a></li>
-                        </ul>
+<ul class="list-group">
+    <li class="list-group-item disabled">Menu</li>
+    <li class="list-group-item"><a href="#">Request List</a></li>
+    <li class="list-group-item"><a href="#">Leave</a></li>
+    <li class="list-group-item"><a href="#">ISD</a></li>
+    <li class="list-group-item"><a href="#">Home</a></li>
+</ul>
 @endsection
-
+ 
 @section('content')
 <div class="container">
     <div class="row">
-    <!--col-md-offset-1-->
+        <!--col-md-offset-1-->
         <div class="col-md-10 ">
-                   @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+            @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+            @endif
             <ol class="breadcrumb">
-                <li><a href="home">Home</a></li>               
-                <li><a href="/hr">HRM</a></li>               
+                <li><a href="home">Home</a></li>
+                <li><a href="/hr">HRM</a></li>
                 <li class="active">New Employee</li>
             </ol>
             <div class="panel panel-default">
@@ -38,39 +37,35 @@
                 </div>
 
                 <div class="panel-body">
-                   
 
-                    
+
+
                     <form method="POST" action="/hr">
-                            {{ csrf_field() }}
-                            <div class="row">
-                                <div class="col-md-6">
-                                   <div class="form-group {{ $errors->has('user_id') ? ' has-error' : '' }}">
-                                        <label for="employee">Employee</label>
-                                        <input type="text" class="form-control" list="employees-list" id="new-employee" name="user_id" placeholder="Employee">
-                            
-                                    <datalist id="employees-list"> </datalist>
-                                    @if ($errors->has('user_id'))
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group {{ $errors->has('user_id') ? ' has-error' : '' }}">
+                                    <label for="employee">Employee</label>
+                                    <input type="text" class="form-control" list="employees-list" id="new-employee" name="user_id" placeholder="Employee">
+
+                                    <datalist id="employees-list"> </datalist> @if ($errors->has('user_id'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('user_id') }}</strong>
-                                    </span>
-                                    @endif
+                                    </span> @endif
                                 </div>
-                        <div class="form-group {{ $errors->has('join_date') ? ' has-error' : '' }}">
-                            <label for="join_date">Join Date</label>
-                            <input type="date" class="form-control" id="join_date" name="join_date"  >
-                                    @if ($errors->has('join_date'))
+                                <div class="form-group {{ $errors->has('join_date') ? ' has-error' : '' }}">
+                                    <label for="join_date">Join Date</label>
+                                    <input type="date" class="form-control" id="join_date" name="join_date"> @if ($errors->has('join_date'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('join_date') }}</strong>
-                                    </span>
-                                    @endif
-                        </div>
+                                    </span> @endif
                                 </div>
-                                <div class="col-md-6">
-                                  <div class="form-group  {{ $errors->has('job_position') ? ' has-error' : '' }}">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group  {{ $errors->has('job_position') ? ' has-error' : '' }}">
                                     <label for="job_position">Job Position</label>
-                                    
-                                    <select class="form-control" name="job_position" id="job_position" >
+
+                                    <select class="form-control" name="job_position" id="job_position">
                                         @foreach($job_positions as $id=>$job_position)
                                         <option value="{{$id}}">{{$job_position}}</option>
                                         @endforeach

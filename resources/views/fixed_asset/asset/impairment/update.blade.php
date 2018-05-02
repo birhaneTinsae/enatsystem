@@ -1,27 +1,26 @@
-@extends('layouts.app')
-
+@extends('layouts.app') 
 @section('sidebar')
-                        <ul class="list-group">
-                            <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="/fixed-asset" >PPE</a></li>
-                            <li class="list-group-item"><a href="/asset-category" >Asset Item</a></li>
-                            <li class="list-group-item"><a href="/asset" >Asset </a></li>
-                            <li class="list-group-item"><a href="#" >Additional Cost</a></li>
-                            <li class="list-group-item"><a href="#" >Home</a></li>
-                        </ul>
+<ul class="list-group">
+    <li class="list-group-item disabled">Menu</li>
+    <li class="list-group-item"><a href="/fixed-asset">PPE</a></li>
+    <li class="list-group-item"><a href="/asset-category">Asset Item</a></li>
+    <li class="list-group-item"><a href="/asset">Asset </a></li>
+    <li class="list-group-item"><a href="#">Additional Cost</a></li>
+    <li class="list-group-item"><a href="#">Home</a></li>
+</ul>
 @endsection
-
+ 
 @section('content')
 <div class="container">
     <div class="row">
-    <!--col-md-offset-1-->
+        <!--col-md-offset-1-->
         <div class="col-md-10 ">
             <ol class="breadcrumb">
-                <li><a href="/home">Home</a></li>  
+                <li><a href="/home">Home</a></li>
                 <li> <a href="/fixed-asset">FAM</a></li>
                 <li class="active">New Asset</li>
-                             
-                            
+
+
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Asset
@@ -37,8 +36,7 @@
 
                 <div class="panel-body">
                     <form action="/impairment/{{$impairment->id}}" method="POST">
-                    {{csrf_field()}}
-                    @method('PUT')
+                        {{csrf_field()}} @method('PUT')
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -47,7 +45,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="current_value">Current Value</label>
-                                    <input type="number" name="current_value" id="current_value" class="form-control" value="{{$impairment->current_value}}" readonly>
+                                    <input type="number" name="current_value" id="current_value" class="form-control" value="{{$impairment->current_value}}"
+                                        readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="remarks">Remarks</label>
@@ -60,11 +59,11 @@
                                 <div class="form-group">
                                     <label for="new_value">New Value</label>
                                     <input type="number" name="new_value" id="new_value" value="{{$impairment->new_value}}" class="form-control">
-                                </div>  
+                                </div>
                                 <div class="form-group">
                                     <label for="effective_date">Effective Date</label>
                                     <input type="date" name="effective_date" id="effective_date" value="{{$impairment->effective_date}}" class="form-control">
-                                </div>  
+                                </div>
                                 <div class="form-group">
                                     <label for=""></label>
                                     <input type="submit" value="Update" class="btn btn-success btn-block">
@@ -75,7 +74,7 @@
 
                 </div>
                 <div class="panel-footer">
-            
+
                 </div>
             </div>
         </div>

@@ -1,58 +1,55 @@
-@extends('layouts.app')
-
+@extends('layouts.app') 
 @section('sidebar')
-                        <ul class="list-group">
-                            <li class="list-group-item disabled">Menu</li>
-                            {{--  <li class="list-group-item"><a href="#" >Job Positions List</a></li>
-                            <li class="list-group-item"><a href="#" >Leave</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="job" >JOB</a></li>
-                            <li class="list-group-item"><a href="home" >Home</a></li>  --}}
-                        </ul>
+<ul class="list-group">
+    <li class="list-group-item disabled">Menu</li>
+    {{--
+    <li class="list-group-item"><a href="#">Job Positions List</a></li>
+    <li class="list-group-item"><a href="#">Leave</a></li>
+    <li class="list-group-item"><a href="#">ISD</a></li>
+    <li class="list-group-item"><a href="job">JOB</a></li>
+    <li class="list-group-item"><a href="home">Home</a></li> --}}
+</ul>
 @endsection
-
+ 
 @section('content')
 <div class="container">
     <div class="row">
-    <!--col-md-offset-1-->
+        <!--col-md-offset-1-->
         <div class="col-md-10 ">
             <ol class="breadcrumb">
-                <li><a href="home">Home</a></li>  
-                <li><a href="hr">HR</a></li>              
+                <li><a href="home">Home</a></li>
+                <li><a href="hr">HR</a></li>
                 <li class="active">Job Position</li>
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Job Position List
-                   <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
                     Excel</a>
 
                     <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
-                    Pdf</a>
-
-                    @can('delete-role')
+                    Pdf</a> @can('delete-role')
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
-                        Delete</a>
-                    @endcan
+                        Delete</a> @endcan
 
-                  
+
                     <a href="job/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a>
-                   
-                
+
+
                 </div>
 
                 <div class="panel-body">
                     @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
                     @endif
 
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Job Position</th>                                
+                                <th>Job Position</th>
                                 <th>Detail</th>
                                 <th>Edit</th>
                             </tr>
@@ -61,7 +58,7 @@
                             @foreach($job_positions as $job_position)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$job_position->name}}</td>                                
+                                <td>{{$job_position->name}}</td>
                                 <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="{{$job_position->id}}"><i class="fa fa-info-circle"></i></a></td>
                                 <td><a class="btn-warning btn-sm" data-toggle="modal" data-target="#employeeUpdateModal" data-id="{{$job_position->id}}"><i class="fa fa-edit"></i></a></td>
                             </tr>

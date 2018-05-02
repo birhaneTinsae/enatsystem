@@ -1,28 +1,28 @@
-@extends('layouts.app')
-
+@extends('layouts.app') 
 @section('sidebar')
-                        <ul class="list-group">
-                            <li class="list-group-item disabled">Menu</li>
-                            {{--  <li class="list-group-item"><a href="#" >Request List</a></li>
-                            <li class="list-group-item"><a href="#" >Leave</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >Home</a></li>  --}}
-                        </ul>
+<ul class="list-group">
+    <li class="list-group-item disabled">Menu</li>
+    {{--
+    <li class="list-group-item"><a href="#">Request List</a></li>
+    <li class="list-group-item"><a href="#">Leave</a></li>
+    <li class="list-group-item"><a href="#">ISD</a></li>
+    <li class="list-group-item"><a href="#">Home</a></li> --}}
+</ul>
 @endsection
-
+ 
 @section('content')
 <div class="container">
     <div class="row">
-    <!--col-md-offset-1-->
+        <!--col-md-offset-1-->
         <div class="col-md-10 ">
-                   @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+            @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+            @endif
             <ol class="breadcrumb">
-                <li><a href="home">Home</a></li>               
-                <li><a href="/hr">HRM</a></li>               
+                <li><a href="/home">Home</a></li>
+                <li><a href="/hr">HRM</a></li>
                 <li class="active">New Employee</li>
             </ol>
             <div class="panel panel-default">
@@ -33,45 +33,54 @@
                      Update</a>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                      Delete</a>
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                      New</a>
                 </div>
 
                 <div class="panel-body">
-                   
 
-                    
-                    <form method="POST" action="/hr/{{$employee->id}}" >
-                            {{ csrf_field() }}
-                          @method('PUT')
-                            <div class="row">
-                                <div class="col-md-6">
-                                   <div class="form-group {{ $errors->has('user_id') ? ' has-error' : '' }}">
-                                        <label for="employee">Employee</label>
-                                        <input type="text" class="form-control" list="employees-list" value="{{$employee->user->id}}" id="new-employee" name="user_id" placeholder="Employee">
-                            
-                                    <datalist id="employees-list"> </datalist>
-                                    @if ($errors->has('user_id'))
+
+
+                    <form method="POST" action="/hr/{{$employee->id}}">
+                        {{ csrf_field() }} @method('PUT')
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group {{ $errors->has('new_employee') ? ' has-error' : '' }}">
+                                    <label for="new_employee">Employee</label>
+                                    <input type="text" class="form-control" value="{{$employee->name}}" id="new_employee" name="new_employee" placeholder="Employee">
+
+                                    <datalist id="employees-list"> </datalist> @if ($errors->has('new_employee'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('user_id') }}</strong>
-                                    </span>
-                                    @endif
+                                        <strong>{{ $errors->first('new_employee') }}</strong>
+                                    </span> @endif
                                 </div>
-                        <div class="form-group {{ $errors->has('join_date') ? ' has-error' : '' }}">
-                            <label for="join_date">Join Date</label>
-                            <input type="date" class="form-control" id="join_date" name="join_date" value="{{$employee->employed_date}}" >
-                                    @if ($errors->has('join_date'))
+                                <div class="form-group {{ $errors->has('join_date') ? ' has-error' : '' }}">
+                                    <label for="join_date">Join Date</label>
+                                    <input type="date" class="form-control" id="join_date" name="join_date" value="{{$employee->employed_date}}">                                    @if ($errors->has('join_date'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('join_date') }}</strong>
-                                    </span>
-                                    @endif
-                        </div>
+                                    </span> @endif
                                 </div>
-                                <div class="col-md-6">
-                                  <div class="form-group  {{ $errors->has('job_position') ? ' has-error' : '' }}">
+                                <div class="form-group {{ $errors->has('salary') ? ' has-error' : '' }}">
+                                    <label for="salary">Salary</label>
+                                    <input type="number" class="form-control" id="salary" name="salary" placeholder="Salary" value="{{$employee->salary}}">                                    @if ($errors->has('salary'))
+                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('salary') }}</strong>
+                                                </span> @endif
+                                </div>
+                                <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+                                    <label for="email">E-mail</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" value="{{$employee->email}}">                                    @if ($errors->has('email'))
+                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                </span> @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group  {{ $errors->has('job_position') ? ' has-error' : '' }}">
                                     <label for="job_position">Job Position</label>
-                                    
-                                    <select class="form-control" name="job_position" id="job_position" >
+
+                                    <select class="form-control" name="job_position" id="job_position">
                                         @foreach($job_positions as $id=>$job_position)
                                         <option value="{{$id}}">{{$job_position}}</option>
                                         @endforeach
@@ -82,6 +91,48 @@
                                     </span>
                                     @endif
                              </div>
+                             <div class="form-group  {{ $errors->has('branch') ? ' has-error' : '' }}">
+                                    <label for="branch">Branch</label>
+                                    
+                                    <select class="form-control" name="branch" id="branch" >
+                                        <option value="{{$employee->branch_id}}">{{$employee->branch->name}}</option>
+                                        @foreach($branches as $id=>$branch)
+                                        <option value="{{$id}}">{{$branch}}</option>
+                                        @endforeach
+                                    <select>
+                                    @if ($errors->has('branch'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('branch') }}</strong>
+                                    </span>
+                                    @endif
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="">Sex</label>
+                                    <div class="radio">
+                                    @if($employee->sex=='F')
+                                        <label><input type="radio" name="sex" value="F" checked>Female</label>
+                                    @else
+                                        <label><input type="radio" name="sex" value="F" >Female</label>
+                                    @endif
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="radio">
+                                    @if($employee->sex=='M')
+                                        <label><input type="radio" name="sex" value="M" checked>Male</label>
+                                    @else   
+                                        <label><input type="radio" name="sex" value="M" >Male</label>
+                                    @endif
+                                    </div>
+                                  </div>
+                                  <div class="form-group"> 
+                                        <label for="phone_no">Phone No</label>
+                                        <input type="tel" name="phone_no" id="phone_no" class="form-control" placeholder="Phone No" value="{{$employee->phone_no}}">
+                                </div>
+                                <div class="form-group"> 
+                                        <label for="enat_id">Enat Id</label>
+                                        <input type="tel" name="enat_id" id="enat_id" class="form-control" placeholder="Enat Id" value="{{$employee->enat_id}}">
+                                </div>
                                 </div>
                             </div>
                        

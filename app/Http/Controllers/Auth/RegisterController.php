@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/login';
+    protected $redirectTo = '/register';
 
     /**
      * Create a new controller instance.
@@ -50,12 +50,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'employee'=>'required',
             'password' => 'required|string|min:6|confirmed|alpha_dash',
             'role'=>'required',
-            'phone_no'=>'required',
-            'branch'=>'required',
             'username'=>'required|max:20|min:6|unique:users'
         ]);
     }
@@ -69,11 +66,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user= User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone_no' => $data['phone_no'],
-            'branch_id' => $data['branch'],
+            'employee_id'=>$data['employee'],
+            // 'name' => $data['name'],
             'password' => bcrypt($data['password']),
+            'first_login'=>false,
             'username'=>$data['username'],
         ]);
 
@@ -83,7 +79,7 @@ class RegisterController extends Controller
     }
     public function showRegistrationForm(){
         $roles=Role::orderBy('name')->pluck('name','id');
-        $branches=Branch::orderBy('branch_code')->pluck('branch_name','id');
-        return view('auth.register',['roles'=>$roles,'branches'=>$branches]);
+       // $branches=Branch::orderBy('code')->pluck('name','id');
+        return view('auth.register',['roles'=>$roles/*,'branches'=>$branches*/]);
     }
 }

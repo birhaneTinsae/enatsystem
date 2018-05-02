@@ -1,27 +1,26 @@
-@extends('layouts.app')
-
+@extends('layouts.app') 
 @section('sidebar')
-                        <ul class="list-group">
-                            <li class="list-group-item disabled">Menu</li>
-                            <li class="list-group-item"><a href="/fixed-asset" >PPE</a></li>
-                            <li class="list-group-item"><a href="/asset-category" >Asset Item</a></li>
-                            <li class="list-group-item"><a href="/asset" >Asset </a></li>
-                            <li class="list-group-item"><a href="#" >Additional Cost</a></li>
-                            <li class="list-group-item"><a href="#" >Home</a></li>
-                        </ul>
+<ul class="list-group">
+    <li class="list-group-item disabled">Menu</li>
+    <li class="list-group-item"><a href="/fixed-asset">PPE</a></li>
+    <li class="list-group-item"><a href="/asset-category">Asset Item</a></li>
+    <li class="list-group-item"><a href="/asset">Asset </a></li>
+    <li class="list-group-item"><a href="#">Additional Cost</a></li>
+    <li class="list-group-item"><a href="#">Home</a></li>
+</ul>
 @endsection
-
+ 
 @section('content')
 <div class="container">
     <div class="row">
-    <!--col-md-offset-1-->
+        <!--col-md-offset-1-->
         <div class="col-md-10 ">
             <ol class="breadcrumb">
-                <li><a href="/home">Home</a></li>  
+                <li><a href="/home">Home</a></li>
                 <li> <a href="/fixed-asset">FAM</a></li>
                 <li class="active">New Asset</li>
-                             
-                            
+
+
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Asset
@@ -37,13 +36,13 @@
 
                 <div class="panel-body">
                     <form action="/additional-cost/{{$additional_cost->id}}" method="POST">
-                    {{csrf_field()}}
-                    @method('PUT')
+                        {{csrf_field()}} @method('PUT')
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="asset_name">Asset Name</label>
-                                    <input type="text" name="asset_name" id="asset_name" class="form-control" value="{{$additional_cost->asset->asset_name}}" readonly>
+                                    <input type="text" name="asset_name" id="asset_name" class="form-control" value="{{$additional_cost->asset->asset_name}}"
+                                        readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="remarks">Remarks</label>
@@ -55,11 +54,11 @@
                                 <div class="form-group">
                                     <label for="additional_value">Additional Value</label>
                                     <input type="number" name="additional_value" id="additional_value" value="{{$additional_cost->added_cost}}" class="form-control">
-                                </div>  
+                                </div>
                                 <div class="form-group">
                                     <label for="effective_date">Effective Date</label>
                                     <input type="date" name="effective_date" id="effective_date" class="form-control" value="{{$additional_cost->effective_date}}">
-                                </div>  
+                                </div>
                                 <div class="form-group">
                                     <input type="submit" value="Update" class="btn btn-success btn-block">
                                 </div>
@@ -69,7 +68,7 @@
 
                 </div>
                 <div class="panel-footer">
-            
+
                 </div>
             </div>
         </div>

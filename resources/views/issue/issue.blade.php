@@ -35,7 +35,7 @@
                     @can('delete')
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                         Delete</a> @endcan @can('create', App\Employee::class)
-                    <a href="hr/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
+                    <a href="issue/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
                         New</a> @endcan
 
                 </div>
@@ -45,24 +45,24 @@
                     <div class="alert alert-success">
                         {{ session('status') }}
                     </div>
-                    @endif @if($employees->isNotEmpty())
+                    @endif @if($issues->isNotEmpty())
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Fullname</th>
-                                <th>Email</th>
-                                <th>Detail</th>
+                                <th>Employee</th>
+                                <th>Request Type</th>
+                                <th>Created on</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($employees as $employee)
+                            @foreach($issues as $issue)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$employee->name}}</td>
-                                <td>{{$employee->email}}</td>
-                                <td><a class="btn-success btn-sm" href="/hr/{{$employee->id}}"><i class="fa fa-info-circle"></i></a></td>
+                                <td>{{$issue->employee->name}}</td>
+                                <td>{{$issue->created_at}}</td>
+                                <td><a class="btn-success btn-sm" href="/issue/{{$issue->id}}"><i class="fa fa-info-circle"></i></a></td>
                                 @can('update',App\Employee::class)
                                 <td><a class="btn-warning btn-sm" href="/hr/{{$employee->id}}/edit"><i class="fa fa-edit"></i></a></td>
                                 @endcan
@@ -72,11 +72,11 @@
 
                     </table>
 
-                    {{ $employees->links() }} @else
+                    {{ $issues->links() }} @else
                     <div class="jumbotron ">
                         <div class="container">
-                            <h1 class="display-4">Employee Empty</h1>
-                            <p class="lead">No Employee yet.</p>
+                            <h1 class="display-4">Issue Empty</h1>
+                            <p class="lead">No Issue yet.</p>
                         </div>
                     </div>
                     @endif

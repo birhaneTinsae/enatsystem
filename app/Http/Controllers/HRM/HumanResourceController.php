@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\JobPosition;
 use App\Employee;
 use App\User;
+use App\Branch;
 class HumanResourceController extends Controller
 {
     /**
@@ -30,7 +31,8 @@ class HumanResourceController extends Controller
     {
         //
         $job_positions=JobPosition::orderBy('name')->pluck('name','id');
-        return view('hr.new',['job_positions'=>$job_positions]);
+        $branches=Branch::orderBy('name')->pluck('name','id');
+        return view('hr.new',['job_positions'=>$job_positions,'branches'=>$branches]);
     }
 
     /**
@@ -42,10 +44,13 @@ class HumanResourceController extends Controller
     public function store(Request $request)
     {
         //
-
+        
         $valid_data=$request->validate([
-            'user_id'=>'required|unique:employees',
+            'new_employee'=>'required',
             'job_position'=>'required',
+            'sex'=>'required',
+            'phone_no'=>'required',
+            'enat_id'=>'required',
             'join_date'=>'required|date',   
             'salary'=>'required'       
         ]);
@@ -54,10 +59,15 @@ class HumanResourceController extends Controller
 
         $new_employee=new Employee;
         
-        $new_employee->user_id=$request->user_id;
+        $new_employee->name=$request->new_employee;
         $new_employee->job_position_id=$request->job_position;
         $new_employee->employed_date=$request->join_date;
+        $new_employee->email=$request->email;
         $new_employee->salary=$request->salary;
+        $new_employee->phone_no=$request->phone_no;
+        $new_employee->enat_id=$request->enat_id;
+        $new_employee->sex=$request->sex;
+        $new_employee->branch_id=$request->branch;
        
         if($new_employee->save()){
             $request->session()->flash('status','Employee record successfully created');
@@ -75,19 +85,19 @@ class HumanResourceController extends Controller
     public function show($id)
     {
         //
-        $employee_dto=[];
+      //  $employee_dto=[];
         
 
        $employee=Employee::find($id);
 
 
-        $employee_dto['employee_name']=$employee->user->name;
-        $employee_dto['phone_no']=$employee->user->phone_no;
-        $employee_dto['email']=$employee->user->email;
-        $employee_dto['job_position']=$employee->job_position->name;
-        $employee_dto['employed_date']=$employee->employed_date;
+        // $employee_dto['employee_name']=$employee->name;
+        // $employee_dto['phone_no']=$employee->phone_no;
+        // $employee_dto['email']=$employee->usemail;
+        // $employee_dto['job_position']=$employee->job_position->name;
+        // $employee_dto['employed_date']=$employee->employed_date;
 
-        return json_encode( $employee_dto);
+         return view('hr.detail',['employee'=>$employee]); //json_encode( $employee);
     }
 
     /**
@@ -101,7 +111,8 @@ class HumanResourceController extends Controller
         //
         $job_positions=JobPosition::orderBy('name')->pluck('name','id');
         $employee=Employee::findOrFail($id);
-        return view('hr.update',['employee'=>$employee,'job_positions'=>$job_positions]);
+        $branches=Branch::orderBy('name')->pluck('name','id');
+        return view('hr.update',['employee'=>$employee,'job_positions'=>$job_positions,'branches'=>$branches]);
     }
 
     /**
@@ -116,17 +127,28 @@ class HumanResourceController extends Controller
         //
         
         $valid_data=$request->validate([
+            'new_employee'=>'required',
             'job_position'=>'required',
-            'join_date'=>'required|date',          
+            'sex'=>'required',
+            'phone_no'=>'required',
+            'enat_id'=>'required',
+            'join_date'=>'required|date',   
+            'salary'=>'required'       
         ]);
 
         
 
         $update_employee=Employee::find($id);
         
-       // $update_employee->user_id=$request->user_id;
+        $update_employee->name=$request->new_employee;
         $update_employee->job_position_id=$request->job_position;
         $update_employee->employed_date=$request->join_date;
+        $update_employee->email=$request->email;
+        $update_employee->salary=$request->salary;
+        $update_employee->phone_no=$request->phone_no;
+        $update_employee->enat_id=$request->enat_id;
+        $update_employee->sex=$request->sex;
+        $update_employee->branch_id=$request->branch;
        
         if($update_employee->save()){
             $request->session()->flash('status','Employee record successfully updated');
@@ -145,8 +167,8 @@ class HumanResourceController extends Controller
     {
         //
     }
-    public function users(){
-        $users=User::all();
+    public function employees(){
+        $users=Employee::all();
         return json_encode($users);
     }
 }

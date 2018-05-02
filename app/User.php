@@ -18,7 +18,7 @@ class User extends Authenticatable //implements Auditable,UserResolver
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','phone_no','branch_id','username'
+        'employee_id','password','username','first_login'
     ];
 
     /**
@@ -38,7 +38,7 @@ class User extends Authenticatable //implements Auditable,UserResolver
         return $this->belongsTo('App\Branch');
     }
     public function employee(){
-        return $this->hasOne('App\Employee');
+        return $this->belongsTo('App\Employee');
     }
 
     public function hasAccess(array $permissions){

@@ -12,11 +12,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(\BranchTableSeeder::class);
+        $this->call(\JobTableSeeder::class);
+        $this->call(\EmployeeTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(\RolesSeeder::class);
-        $this->call(\JobTableSeeder::class);
+       
                 
-        $this->call(\EmployeeTableSeeder::class);
+       
         $this->call(\MessageTempleteSeeder::class);
+        $this->call(\SystemTableSeeder::class);
     }
 }

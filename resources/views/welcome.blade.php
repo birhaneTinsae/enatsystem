@@ -1,117 +1,117 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name', 'Enat Bank S.c.') }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <title>{{ config('app.name', 'Enat Bank S.c.') }}</title>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-            .full-height {
-                height: 100vh;
-            }
+    <!-- Styles -->
+    <style>
+        html,
+        body {
+            background-color: #fff;
+            color: #636b6f;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 100;
+            height: 100vh;
+            margin: 0;
+        }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+        .full-height {
+            height: 100vh;
+        }
 
-            .position-ref {
-                position: relative;
-            }
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        .position-ref {
+            position: relative;
+        }
 
-            .content {
-                text-align: center;
-            }
+        .top-right {
+            position: absolute;
+            right: 10px;
+            top: 18px;
+        }
 
-            .title {
-                font-size: 84px;
-            }
+        .content {
+            text-align: center;
+        }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+        .title {
+            font-size: 84px;
+        }
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
+        .links>a {
+            color: #636b6f;
+            padding: 0 25px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
 
-            .flex-center-bottom {
-                background-color: #739FD0;
-                color: #000000;
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: flex-end;
-                align-content: center;
-                align-items: center;
-            }
-            .flex-item-bottom {
-                border: solid 2px #4675AA;
-                order: 1;
-                flex: 0 1 auto;
-                align-self: flex-end;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    <a href="{{route('phone-book')}}">Phone Book</a>
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        @can('create-user')
-                        <a href="{{ route('register') }}">Register</a>
-                        @endcan
-                    @endauth
-                </div>
-            @endif
+        .m-b-md {
+            margin-bottom: 30px;
+        }
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Enat Bank S.C.
-                </div>
+        .flex-center-bottom {
+            background-color: #739FD0;
+            color: #000000;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            align-content: center;
+            align-items: center;
+        }
 
-                <div class="links">
-                    <a href="#">Documentation</a>
-                    <a href="#">FAQ</a>
-                    <a href="#">Help</a>
-                    <!-- <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a> -->
-                </div>
-            </div>
-           
+        .flex-item-bottom {
+            border: solid 2px #4675AA;
+            order: 1;
+            flex: 0 1 auto;
+            align-self: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-center position-ref full-height">
+        @if (Route::has('login'))
+        <div class="top-right links">
+            <a href="{{route('phone-book')}}">Phone Book</a> @auth
+            <a href="{{ url('/home') }}">Home</a> @else
+            <a href="{{ route('login') }}">Login</a> @can('create-user')
+            <a href="{{ route('register') }}">Register</a> @endcan @endauth
         </div>
-        
-    </body>
+        @endif
+
+        <div class="content">
+            <div class="title m-b-md">
+                Enat Bank S.C.
+            </div>
+
+            <div class="links">
+                <a href="#">Documentation</a>
+                <a href="#">FAQ</a>
+                <a href="#">Help</a>
+                <!-- <a href="https://forge.laravel.com">Forge</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a> -->
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
 </html>
