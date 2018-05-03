@@ -21,6 +21,16 @@
                 <li><a href="hr">HR</a></li>              
                 <li class="active">Job Position</li>
             </ol>
+             <form action="searchjobs" method="get">
+                <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="queryjob" name="queryjob" placeholder="Search Job Position" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon">
+                    <button type="submit" class="fa fa-search">  </button>                  
+                    </span>
+                </div>
+                </div>
+            </form>
             <div class="panel panel-default">
                 <div class="panel-heading">Job Position List
                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
@@ -54,8 +64,9 @@
                                 <th>#</th>
                                 <th>Job Position</th>    
                                 <th>Grade</th>                            
-                                <th>Operation Class</th>
-                                <!-- <th>Detail</th> -->
+                                <th>Base Salary</th>
+                                <th>Maximum Salary</th>
+                                <th>Detail</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
@@ -65,9 +76,12 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$job_position->name}}</td> 
                                 <td>{{$job_position->grade}}</td> 
-                                <td>{{$job_position->operation_class}}</td>                                
-                                <!-- <td><a class="btn-success btn-sm" data-toggle="modal" data-target="#employeeDetailModal" data-id="{{$job_position->id}}"><i class="fa fa-info-circle"></i></a></td> -->
-                                  @can('update',App\ActingEmployee::class)
+                                <td>{{$job_position->step1}}</td>                                
+                                <td>{{$job_position->step10}}</td>                                
+                                <td><a href="{{ route('job.show', $job_position->id) }}" class="btn-success btn-sm">
+                                 <i class="fa fa-info-circle"></i> </a>
+                                </td>
+                                  @can('update',App\ActingEmployee::class)                                  
                                 <td>                                
                                 <a href="{{ route('job.edit', $job_position->id) }}" class="btn-warning btn-sm" >
                                 <i class="fa fa-edit"></i></a></td>
@@ -90,91 +104,5 @@
         </div>
     </div>
 </div>
-<!-- Detail View Modal -->
-<!-- <div class="modal fade" id="employeeDetailModal" tabindex="-1" role="dialog" aria-labelledby="employeeDetailModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="employeeDetailModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="">
-            <div class="form-group">
-                <label for="full_name">Fullname</label>
-                <input type="text" id="full_name" class="form-control" readonly>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" class="form-control" readonly>
-            </div>
-            <div class="form-group">
-                <label for="phone_no">Phone No</label>
-                <input type="tel" id="phone_no" class="form-control" readonly>
-            </div>
-            <div class="form-group">
-                <label for="employed_date">Hired Date</label>
-                <input type="date" id="employed_date" class="form-control" readonly>
-            </div>
-            <div class="form-group">
-                <label for="job_position">Job Position</label>
-                <input type="text" id="job_position" class="form-control" readonly>
-            </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- Detail View Modal end -->
 
-<!-- Update View Modal -->
-<!-- <div class="modal fade" id="employeeUpdateModal" tabindex="-1" role="dialog" aria-labelledby="employeeUpdateModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="employeeUpdateModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="/hr" >
-            {{ method_field('PUT') }}
-            <div class="form-group">
-                <label for="full_name">Fullname</label>
-                <input type="text" id="full_name" class="form-control" >
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" class="form-control" >
-            </div>
-            <div class="form-group">
-                <label for="phone_no">Phone No</label>
-                <input type="tel" id="phone_no" class="form-control" >
-            </div>
-            <div class="form-group">
-                <label for="employed_date">Hired Date</label>
-                <input type="date" id="employed_date" class="form-control" >
-            </div>
-            <div class="form-group">
-                <label for="job_position">Job Position</label>
-                <input type="text" id="job_position" class="form-control" >
-            </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
-        
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- Update View Modal end -->
 @endsection

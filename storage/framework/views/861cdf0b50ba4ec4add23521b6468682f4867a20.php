@@ -42,18 +42,18 @@
                                 <div class="form-group">
                                     <label for="asset_name">Asset</label>
                                     <input type="text" name="asset_name" id="asset_name" class="form-control" value="<?php echo e($asset->asset_name); ?>" readonly>
-                                     <input type="hidden" name="asset_id" id="asset_id" class="form-control" value="<?php echo e($asset->id); ?>" readonly>
+                                     <input type="hidden" name="asset_id" id="asset_id" class="form-control" value="<?php echo e($transfer->asset_id); ?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="current_Custudian">Current Custudian</label>
-                                    <input type="text" name="current_Custudian" id="current_Custudian" class="form-control" value="<?php echo e($curr_custudian_name); ?>" readonly>
-                                    <input type="hidden" name="current_Custudian_id" id="current_Custudian" class="form-control" value="<?php echo e($asset->custudian); ?>" readonly>
+                                    <input type="text" name="current_Custudian" id="current_Custudian" class="form-control" value="<?php echo e($curr_custudian->full_name); ?>" readonly>
+                                    <input type="hidden" name="current_Custudian_id" id="current_Custudian" class="form-control" value="<?php echo e($transfer->from_employee); ?>" readonly>
                                 </div>
 
                                  <div class="form-group">
                                     <label for="current_Custudian">Current Cost_Center</label>
-                                    <input type="text" name="current_cost_center_name" id="current_cost_center_name" class="form-control" value="<?php echo e($current_cost_center); ?>" readonly>
-                                    <input type="hidden" name="current_cost_center_id" id="current_cost_center_id" class="form-control" value="<?php echo e($asset->branch_id); ?>" readonly>
+                                    <input type="text" name="current_cost_center_name" id="current_cost_center_name" class="form-control" value="<?php echo e($curr_cost_center->branch_name); ?>" readonly>
+                                    <input type="hidden" name="current_cost_center_id" id="current_cost_center_id" class="form-control" value="<?php echo e($transfer->from_cost_center); ?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="remarks">Remarks</label>
@@ -66,35 +66,25 @@
                                   <div class="form-group">
                                     <label for="">New Custudian</label>
                                     <select type="select" name="new_custudian" id="" class="form-control" >
-                                     <option >----- Select the New Custudian here -----
-                                     </option>
+                                     <option value="<?php echo e($transfer->to_employee); ?>" ><?php echo e($new_custudian->full_name); ?>
+
+                                     </option>   
+                                                                     
                                       <?php echo e($employees=App\Employee::all()); ?>  
                                         <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($employee->id); ?>"><?php echo e($employee->full_name); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                      <!-- <?php
-                                           $j =0
-                                         ?> 
-                                    <?php $__currentLoopData = $Employee; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $emp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                                        
-                                        <option value="<?php echo e($emp->id); ?>">
-                                         <?php for($i=$j; $i <=$j; $i++): ?> 
-                                            <?php echo e($emp_name[$i]); ?>
-
-                                            <?php endfor; ?>                                       
-                                        </option>   
-                                         <?php
-                                     $j =$j+1
-                                     ?>                                                                       
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                   
-                                    -->
+                                     
+                                    
                                     </select>
                                 </div> 
                                  <div class="form-group">
                                     <label for="">New Cost Center</label>
                                     <select type="select" name="new_cost_center" id="" class="form-control" >
-                                    <option value="">----- Select Cost Center here -----
+                                    <option value=""><?php echo e($new_cost_center->branch_name); ?>
+
                                      </option>
+                                     <?php echo e($branches=App\Branch::all()); ?>  
                                     <?php $__currentLoopData = $branches; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $branch): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($branch->id); ?>"><?php echo e($branch->branch_name); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -106,7 +96,8 @@
                                 </div>  
                                 <div class="form-group">
                                     <label for=""></label>
-                                    <input type="submit" value="Save" class="btn btn-success btn-block">
+                                    <a href="/asset" class="btn btn-danger btn-sm">Cancel</a>
+                                    <input type="submit" value="Update" class="btn btn-success btn-sm">
                                 </div>
                             </div>
                         </div>

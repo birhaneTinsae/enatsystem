@@ -69,7 +69,11 @@
                                     <select type="select" name="new_custudian" id="" class="form-control" >
                                      <option >----- Select the New Custudian here -----
                                      </option>
-                                      @php
+                                      {{$employees=App\Employee::all()}}  
+                                        @foreach($employees as $employee)
+                                        <option value="{{$employee->id}}">{{$employee->full_name}}</option>
+                                    @endforeach
+                                      <!-- @php
                                            $j =0
                                          @endphp 
                                     @foreach($Employee as $emp)                                        
@@ -83,7 +87,7 @@
                                      @endphp                                                                       
                                     @endforeach
                                    
-                                   
+                                    -->
                                     </select>
                                 </div> 
                                  <div class="form-group">

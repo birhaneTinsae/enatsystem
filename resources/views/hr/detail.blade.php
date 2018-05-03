@@ -47,10 +47,10 @@
                 <table class="table table-striped">
                  <tr>
                 <th>Employee Name</th>
-                <td>{{$employee->user->name}}</td> 
+                <td>{{$employee->full_name}}</td> 
                 </tr>
                 <th>Employee Id</th>
-                <td>{{$employee->enat_id}}</td> 
+                <td>{{$employee->id}}</td> 
                 </tr>
                 <tr>
                 <th>Job Position</th>
@@ -59,17 +59,17 @@
 
                 <tr>
                 <th>Email</th>
-                <td>{{$employee->user->email}}</td>
+                <td>{{$employee->email}}</td>
                 </tr>
 
                 <tr>
                 <th>Phone number</th>
-               <td>{{$employee->user->phone_no}}</td>
+               <td>{{$employee->phone_no}}</td>
                 </tr>
 
                 <tr>
                 <th>Branch</th>
-                <td>{{$employee->user->branch->branch_name}}</td>
+                <td>{{$employee->branch->branch_name}}</td>
                 </tr>
                 <tr>
                 <th> Date of Employment</th>
@@ -81,6 +81,51 @@
                  <td>{{$employee->salary}}</td>
                 </tr>
                 
+                  <tr>
+                <th>Birth Date</th>
+                 <td>{{$employee->salary}}</td>
+                </tr>
+
+                    <tr>
+                <th>Employee Name</th>
+                <td>{{$employee->full_name}}</td> 
+                </tr>
+                <th>Employee Id</th>
+                <td>{{$employee->id}}</td> 
+                </tr>
+                <tr>
+                <th>Job Position</th>
+                <td>{{$employee->job_position->name}}</td> 
+                </tr>
+
+                <tr>
+                <th>Email</th>
+                <td>{{$employee->email}}</td>
+                </tr>
+
+                <tr>
+                <th>Phone number</th>
+               <td>{{$employee->phone_no}}</td>
+                </tr>
+
+                <tr>
+                <th>Branch</th>
+                <td>{{$employee->branch->branch_name}}</td>
+                </tr>
+                <tr>
+                <th> Date of Employment</th>
+                 <td>{{$employee->employed_date}}</td>
+                </tr>
+
+                 <tr>
+                <th>Salary</th>
+                 <td>{{$employee->salary}}</td>
+                </tr>
+                
+                  <tr>
+                <th>Salary</th>
+                 <td>{{$employee->salary}}</td>
+                </tr>
 
                         </table>
                 </div>

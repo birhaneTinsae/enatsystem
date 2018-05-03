@@ -43,78 +43,140 @@ function yesnoCheck() {
                             <?php echo e(csrf_field()); ?>
 
                             <div class="row">
-                                <div class="col-md-6">
+                             <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="employee">Employee</label>
-                                        <input type="text" class="form-control" list="actemployees-list"
-                                         id="new-employee" name="new_employee" placeholder="Employee">
-                            
-                                    <datalist id="actemployees-list"> </datalist>
-                                </div>                                
+                                    <label for="employee"> Employee name</label>
+                                   
+                                    <select class="form-control" name="employee" id="employee">
+                                     <?php echo e($employee=App\Employee::all()); ?>
+
+                                    <option value="">-----Select Employee -----
+                                   </option>
+                                        <?php $__currentLoopData = $employee; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $emp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($emp->id); ?>"><?php echo e($emp->full_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <select>
+                                     <?php if($errors->has('employee')): ?>
+                                    <span class="help-block">
+                                        <strong  class="text-danger"><?php echo e($errors->first('employee')); ?></strong>
+                                    </span>
+                                    <?php endif; ?>
+                             </div>    
+
+                                                <div class="form-group">
+                                    <label for="employee"> Replaced by</label>
+                                   
+                                    <select class="form-control" name="replaced_by" id="replaced_by">
+                                     <?php echo e($employee=App\Employee::all()); ?>
+
+                                    <option value="">-----Select Employee -----
+                                   </option>
+                                        <?php $__currentLoopData = $employee; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $emp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($emp->id); ?>"><?php echo e($emp->full_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <select>
+                                           <?php if($errors->has('replaced_by')): ?>
+                                    <span class="help-block">
+                                        <strong  class="text-danger"><?php echo e($errors->first('replaced_by')); ?></strong>
+                                    </span>
+                                    <?php endif; ?>
+                             </div>    
+                             <div class="form-group">
+                                    <label for="acting_branch_id">Acting Branch</label>
+                                   
+                                    <select class="form-control" name="acting_branch_id" id="acting_branch_id">
+                                     <?php echo e($branch=App\Branch::all()); ?>
+
+                                    <option value="">-----Select Branch -----
+                                   </option>
+                                        <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $br): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($br->id); ?>"><?php echo e($br->branch_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <select>
+                                      <?php if($errors->has('acting_branch_id')): ?>
+                                    <span class="help-block">
+                                        <strong  class="text-danger"><?php echo e($errors->first('acting_branch_id')); ?></strong>
+                                    </span>
+                                    <?php endif; ?>
+                             </div>                             
                         <div class="form-group">
                             <label for="start_date">Start Date</label>
-                            <input type="date" class="form-control col-xs-3" id="start_date" name="start_date"  >                            
-                        </div>                     
+                            <input type="date" class="form-control col-xs-3" id="start_date" name="start_date" required  >                            
+                        </div> 
+         <div class="form-group">                    
            <label> Is End date known ?  </label>          
             Yes
         <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck"/>
         </span>
         <span>
         No
-        <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck"/>
+        <input type="radio" onclick="javascript:yesnoCheck();" checked name="yesno" id="noCheck"/>
         </span>
-        <div id="ifYes" style="display:none">If yes, Fill:
-            <label for="end_date">End Date</label>
-            <input type="date" class="form-control col-xs-3" id="end_date" name="end_date"  >
         </div>
-                                </div>
+        <div class="form-group" id="ifYes" style="display:none">If yes, Fill:
+            <label for="end_date">End Date</label>
+            <input type="date" class="form-control col-xs-3" id="end_date" name="end_date" >
+        </div>
+         </div>
+
+         
                                 <div class="col-md-6">
+                                                     <div class="form-group">
+                                    <label for="in_place_of_employee"> In Place of Employee</label>
+                                   
+                                    <select class="form-control" name="in_place_of_employee" id="in_place_of_employee">
+                                     <?php echo e($employee=App\Employee::all()); ?>
+
+                                    <option value="">-----Select Employee -----
+                                   </option>
+                                        <?php $__currentLoopData = $employee; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $emp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($emp->id); ?>"><?php echo e($emp->full_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <select>
+                                           <?php if($errors->has('in_place_of_employee')): ?>
+                                    <span class="help-block">
+                                        <strong  class="text-danger"><?php echo e($errors->first('in_place_of_employee')); ?></strong>
+                                    </span>
+                                    <?php endif; ?>
+                             </div>    
                                   <div class="form-group">
                                     <label for="job_position">Acting Position</label>
                                     
                                     <select class="form-control" name="acting_job_id" id="acting_job_id" >
-                                    <option>-----Select Job Position -----
+                                    <option value="">-----Select Job Position -----</option>
                                         <?php $__currentLoopData = $job_positions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id=>$job_position): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($id); ?>"><?php echo e($job_position); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <select>
-                             </div>
-                                </div>
-                                
-                                       <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label for="job_position">Acting Branch</label>
-                                   
-                                    <select class="form-control" name="acting_branch_id" id="acting_branch_id">
-                                     <?php echo e($branch=App\Branch::all()); ?>
-
-                                    <option>-----Select Branch -----
-                                   </option>
-                                        <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $br): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($br->id); ?>"><?php echo e($br->branch_name); ?></option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    <select>
-                             </div>
-                                </div>
-                                <div class="col-md-6">
+                                     <?php if($errors->has('acting_job_id')): ?>
+                                    <span class="help-block">
+                                        <strong  class="text-danger"><?php echo e($errors->first('acting_job_id')); ?></strong>
+                                    </span>
+                                    <?php endif; ?>
+                             </div>                                                                                                
+                                                       
                                  <div class="form-group">
                                     <label for="status">Status</label>
                                     <select  class="form-control" name="status" id="status" >
-                                    <option>----Select Status----</option>
+                                    <option value="">----Select Status----</option>
                                     <option value="1">Active</option>
-                                    <option value="0">Terminated</option>
-                                   
+                                    <option value="0">Terminated</option>                                   
                                     </select>
+                                     <?php if($errors->has('status')): ?>
+                                    <span class="help-block">
+                                        <strong  class="text-danger"><?php echo e($errors->first('status')); ?></strong>
+                                    </span>
+                                    <?php endif; ?>
                                 </div>
-                                </div>
-                                  
-                            <label for="remark">Remark</label>
+                                       <label for="remark">Remark</label>
                          <div class="form-group">                           
                             <textarea rows="4" cols="50" name="remark">Remark</textarea>                            
                         </div> 
+                                </div>
+                                  
+                     
                        </div>
-                       
-                            </div>                                                                  
+                                                                                                                  
                         <button type="submit" class="btn btn-primary">Register</button>
                     </form>
 

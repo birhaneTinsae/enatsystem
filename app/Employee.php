@@ -9,7 +9,7 @@ class Employee extends Model implements Auditable
 {
     //
     use \OwenIt\Auditing\Auditable;
-
+//public $incrementing = false;
     public function job_position()
     {
         return $this->belongsTo('App\JobPosition');

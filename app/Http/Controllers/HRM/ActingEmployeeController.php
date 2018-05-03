@@ -19,9 +19,7 @@ class ActingEmployeeController extends Controller
      */
     public function index()
     {
-    //$acting=ActingEmployee::paginate(10);
-       //return view('hr\acting-employee\actingemployee',['employees'=> $acting]);
-        $results=ActingEmployee::paginate(10);
+       $results=ActingEmployee::paginate(10);    
        $count=0;
        $fjob_name=array();
        $tjob_name=array();
@@ -60,20 +58,26 @@ class ActingEmployeeController extends Controller
      */
     public function store(Request $request)
     {
+//dd($request->all());
+         $valid_data=$request->validate([                     
+            'employee'=>'required',
+            'acting_job_id'=>'required',
+            'acting_branch_id'=>'required',
+            'start_date'=>'required',             
+            'status'=>'required',                      
+        ]);  
+        //dd($request->all());
         $new_acting_employee=new ActingEmployee;
-        $emp=Employee::find($request->new_employee);
-//dd($diff_in_days);
-   //  dd($request->all());
-        $user=User::find($emp->user_id);
+        $emp=Employee::find($request->employee);      
         $branch=Branch::find($request->acting_branch_id);
-        $job=JobPosition::find($request->acting_job_id);
-        $act_br_name=$branch->branch_name;
-        $new_acting_employee->user_id=$emp->user_id;
+        $job=JobPosition::find($request->acting_job_id);      
         $new_acting_employee->employee_id=$emp->id;
         $new_acting_employee->job_position_id=$emp->job_position_id;
-        $new_acting_employee->branch_id=$user->branch_id;
+        $new_acting_employee->branch_id=$emp->branch_id;
         $new_acting_employee->acting_job_position_id=$request->acting_job_id;
         $new_acting_employee->acting_branch_id=$request->acting_branch_id;
+        $new_acting_employee->in_place_of=$request->in_place_of_employee;
+        $new_acting_employee->replaced_by=$request->replaced_by;
         $new_acting_employee->remark=$request->remark;             
          $result = DB::table('acting_employees')
           ->where('employee_id', '=',$emp->id)
@@ -84,26 +88,24 @@ class ActingEmployeeController extends Controller
             Employee Selected is already in Acting Position');
             return redirect('/actingemployee');
           }
-        $currentdate = date('Y-m-d');
+         $currentdate = date('Y-m-d');
          $new_acting_employee->start_date=$request->start_date;        
          $new_acting_employee->status=$request->status;        
-         $new_acting_employee->maker=Auth::User()->username;
-         $sdate = $request->start_date;
+         $new_acting_employee->maker=Auth::User()->username;        
         if(empty($request['end_date'])){
             $new_acting_employee->end_date=$currentdate;
             $new_acting_employee->notification="1";
             $end_date = Carbon::parse($currentdate);
-             $start_date = Carbon::parse($request->start_date);
-               $diff_in_months = $end_date->diffInMonths($start_date);
-                $new_acting_employee->duration=$diff_in_months;                 
+            $start_date = Carbon::parse($request->start_date);
+            $diff_in_months = $end_date->diffInMonths($start_date);
+            $new_acting_employee->duration=$diff_in_months;                 
          }
          else{
-        $start_date = Carbon::parse($request->start_date);
+         $start_date = Carbon::parse($request->start_date);
          $end_date = Carbon::parse($request->end_date);
          $diff_in_months = $end_date->diffInMonths($start_date);
          $new_acting_employee->end_date=$request->end_date;
-         $new_acting_employee->notification="0";
-         $edate = $currentdate;        
+         $new_acting_employee->notification="0";                
          $new_acting_employee->duration=$diff_in_months;            
          }
               
@@ -124,8 +126,8 @@ class ActingEmployeeController extends Controller
     {
         $show=ActingEmployee::find($id);      
         $emp=Employee::find($show->employee_id);
-        $emp_name=$emp->user->name;
-        $emp_id=$emp->enat_id;
+        $emp_name=$emp->full_name;
+        $emp_id=$emp->id;
         $from_job=JobPosition::find($show->job_position_id);
         $from_jobname=$from_job->name;
         $to_job=JobPosition::find($show->acting_job_position_id);
@@ -140,10 +142,9 @@ class ActingEmployeeController extends Controller
         else{
              $status="Terminated";
         }
-       //dd($to_branch);
          return view('hr\acting-employee\detail'
-         ,['result'=>$show,'emp_name'=>$emp_name,'from_job'=>$from_jobname,'to_job'=>$to_jobname
-         ,'from_branch'=>$from_branchname,'to_branch'=>$to_branchname,'emp_id'=>$emp_id,'status'=>$status])->with('Transferpromotion',$show);  
+         ,['result'=>$show,'emp_name'=>$emp_name,'emp_id'=>$emp_id,'from_job'=>$from_jobname,'to_job'=>$to_jobname
+         ,'from_branch'=>$from_branchname,'to_branch'=>$to_branchname,'status'=>$status])->with('Transferpromotion',$show);  
     }
 
     /**
@@ -156,20 +157,38 @@ class ActingEmployeeController extends Controller
     {
        $edit=ActingEmployee::find($id);
        $emp=Employee::find($edit->employee_id);
-       $emp_name=$emp->user->name;
+       $emp_name=$emp->full_name;       
+       $replaced_by=Employee::find($edit->replaced_by);
+       //
+       if($replaced_by===NULL){
+         $replaced_by_name="";
+       }
+       else{         
+        $replaced_by_name=$replaced_by->full_name;
+       }
+      
+       $inplace_of=Employee::find($edit->in_place_of);
+        if($inplace_of===NULL){
+         $inplace_of_name="";
+       }
+       else{
+        $inplace_of_name=$inplace_of->full_name;
+       }
+      
        $emp_enat_id=$emp->enat_id;
        $from_job=JobPosition::find($edit->job_position_id);
-        $from_jobname=$from_job->name;
-        $to_job=JobPosition::find($edit->acting_job_position_id);
-        $to_jobname=$to_job->name;
-        $from_branch=Branch::find($edit->branch_id);
-        $from_branchname=$from_branch->branch_name;
-        $to_branch=Branch::find($edit->acting_branch_id);
-        $to_branchname=$to_branch->branch_name;
-       //dd($to_branch);
+       $from_jobname=$from_job->name;
+       $to_job=JobPosition::find($edit->acting_job_position_id);
+       $to_jobname=$to_job->name;
+       $from_branch=Branch::find($edit->branch_id);
+       $from_branchname=$from_branch->branch_name;
+       $to_branch=Branch::find($edit->acting_branch_id);
+       $to_branchname=$to_branch->branch_name;   
+       $job_positions=JobPosition::orderBy('name')->pluck('name','id');     
          return view('hr\acting-employee\edit'
          ,['ActingEmployee'=>$edit,'emp_name'=>$emp_name,'from_job'=>$from_jobname,'to_job'=>$to_jobname
-         ,'from_branch'=>$from_branchname,'to_branch'=>$to_branchname,'enat_id'=>$emp_enat_id]);  
+         ,'from_branch'=>$from_branchname,'to_branch'=>$to_branchname,'enat_id'=>$emp_enat_id
+         ,'job_positions'=>$job_positions,'replaced_by'=>$replaced_by_name,'inplace_of'=>$inplace_of_name]);  
     }
 
     /**
@@ -181,64 +200,43 @@ class ActingEmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-    //$id=$request->empid; 
-//dd($request->all());
-    $currentdate = date('Y-m-d');
-        $acting_employee=ActingEmployee::find($id);
-       // dd($id);
-        $emp=Employee::find($request->new_employee);
-        $user=User::find($emp->user_id);
-        //dd($request->all());
+        $currentdate = date('Y-m-d');
+        $acting_employee=ActingEmployee::find($id);       
+        $emp=Employee::find($request->employee);                
         $result = DB::table('acting_employees')
           ->where('employee_id', '=',$request->new_employee)
           ->where('status', '=','1')->get();
-          $check=count($result);
-        
-            if($request->yesno==='No'){
-             //$currentdate = date('Y-m-d');
-             $acting_employee->end_date=$currentdate;
-             
-            $acting_employee->notification="1";
-            $end_date = Carbon::parse($currentdate);
-             $start_date = Carbon::parse($request->start_date);
-               $diff_in_months = $end_date->diffInMonths($start_date);
-                $acting_employee->duration=$diff_in_months;                 
+          $check=count($result);        
+            if($request->yesno==='No'){             
+              $acting_employee->end_date=$currentdate;             
+              $acting_employee->notification="1";
+              $end_date = Carbon::parse($currentdate);
+              $start_date = Carbon::parse($request->start_date);
+              $diff_in_months = $end_date->diffInMonths($start_date);
+              $acting_employee->duration=$diff_in_months;                 
          }
-         else{
-
-            //dd($request->end_date);
-           
-        $start_date = Carbon::parse($request->start_date);
+         else{                
+         $start_date = Carbon::parse($request->start_date);
          $end_date = Carbon::parse($request->end_date);         
          $diff_in_months = $end_date->diffInMonths($start_date);
-         $acting_employee->end_date=$request->end_date;
-         //$acting_employee->start_date=$request->start_date;
-         $acting_employee->notification="0";
-         $edate = $currentdate;        
+         $acting_employee->end_date=$request->end_date;         
+         $acting_employee->notification="0";                 
          $acting_employee->duration=$diff_in_months;            
-         }
-
-        //$acting_employee->user_id=$emp->user_id;
-        $acting_employee->employee_id=$request->new_employee;
+         }        
+        $acting_employee->employee_id=$request->employee;
         $acting_employee->job_position_id=$emp->job_position_id;
-        $acting_employee->branch_id=$user->branch_id;       
+        $acting_employee->branch_id=$emp->branch_id;       
         $acting_employee->acting_job_position_id=$request->acting_job_id;            
         $acting_employee->acting_branch_id=$request->acting_branch_id;
-        $acting_employee->start_date=$request->start_date;
-        // $acting_employee->end_date=$request->end_date;
+        $acting_employee->start_date=$request->start_date; 
+        $acting_employee->in_place_of=$request->in_place_of_employee;
+        $acting_employee->replaced_by=$request->replaced_by;      
         $acting_employee->status=$request->status;        
-        $acting_employee->maker=Auth::User()->username;
-        $sdate = $request->start_date;
-        $edate = $request->end_date;
-        // $start_date = Carbon::parse($request->start_date);
-        // $end_date = Carbon::parse($request->end_date);
-        // $diff_in_months = $end_date->diffInMonths($start_date);
-        // $acting_employee->duration= $diff_in_months;                 
+        $acting_employee->maker=Auth::User()->username;                             
         if($acting_employee->save()){
             $request->session()->flash('status',' record successfully Updated');
             return redirect('/actingemployee'); 
-    }
-        
+    }        
     }
 
     /**
@@ -273,40 +271,29 @@ class ActingEmployeeController extends Controller
             
             return json_encode($emp); 
     }
-    public function search(Request $request){
- $name=$request->queryemp;
-          
-          $users =DB::table('users')->where('name','LIKE','%'.$name.'%')->get();
-          // dd($user);
-        $data = [];
+    
+  public function search(Request $request){
+        $name=$request->queryemp;          
+        $employees =DB::table('employees')->where('full_name','LIKE','%'.$name.'%')->get();         
+        $emp_id = [];
         $count=0;
-        foreach($users as $user){
-        $data[$count]=$user->id;
+        foreach($employees as $employee){
+        $emp_id[$count]=$employee->id;
         $count++;
     }
-$emp_id=[];
-$count1=0;
-$Employee=DB::table('employees')->whereIn('user_id',$data)->get();
-foreach($Employee as $emp){
-    $emp_id[$count1]=$emp->id;
-    $count1++;
-}
-
-$results=ActingEmployee::whereIn('employee_id', $emp_id)->paginate(2);
- $count2=0;
+        $results=ActingEmployee::whereIn('employee_id', $emp_id)->paginate(2);
+        $count2=0;
        $fjob_name=array();
        $tjob_name=array();
        $fbranch_name=array();
        $tbranch_name=array();
       foreach($results as $result){
-        $fjob_name[$count2]= DB::table('job_positions')->where('id', $result->job_position_id)->value('name');
+    $fjob_name[$count2]= DB::table('job_positions')->where('id', $result->job_position_id)->value('name');
     $tjob_name[$count2]= DB::table('job_positions')->where('id', $result->acting_job_position_id)->value('name');
     $fbranch_name[$count2]= DB::table('branches')->where('id', $result->branch_id)->value('branch_name');
     $tbranch_name[$count2]= DB::table('branches')->where('id', $result->acting_branch_id)->value('branch_name');
-   $count2++;
-      }
-      //dd($fjob_name);
-       
+    $count2++;
+      }      
         return view('hr\acting-employee\actingemployee',['Result'=> $results,
        'FromJob'=>$fjob_name,'ToJob'=>$tjob_name,'FromBranch'=>$fbranch_name,'ToBranch'=>$tbranch_name]);
     }

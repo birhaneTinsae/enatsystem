@@ -31,7 +31,7 @@
             <ol class="breadcrumb">
                 <li><a href="home">Home</a></li>         
                 <li><a href="/hr">HR</a></li>                     
-                <li class="active">TransferPromotion Request</li>
+                <li class="active">Transfer Position change Request</li>
             </ol>
         <form action="searchtransferpromotionrequest" method="get">
                 <div class="form-group">
@@ -44,7 +44,7 @@
                 </div>
             </form>
             <div class="panel panel-default">
-                <div class="panel-heading">Employees Transfer/Promotion Request Records
+                <div class="panel-heading">Employees Transfer/ Request Records
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('close-role')): ?>                   
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
                     Close</a>
@@ -104,7 +104,7 @@
                          ?>  
                             <?php $__currentLoopData = $Result; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                                    
                             <tr>                                
-                                <td><?php echo e($employee->Employee->User->name); ?></td>                                                                                    
+                                <td><?php echo e($employee->Employee->full_name); ?></td>                                                                                    
                                  <?php for($i = $j; $i <=$j; $i++): ?>                                                                        
                                 <td><?php echo e($FromJob[$j]); ?></td>                                                                                                                     
                                 <?php endfor; ?>                                                                                                                                                 

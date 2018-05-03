@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "4aa09d6b07e5b54137735b76267a12f3",
-=======
     "content-hash": "4003ff07131b7f071d93a50b372fdea2",
->>>>>>> cd06e20aa66b55aa549da4ebe0ed8fcd41440914
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -627,8 +623,6 @@
         },
         {
             "name": "erusev/parsedown",
-<<<<<<< HEAD
-<<<<<<< HEAD
             "version": "1.7.1",
             "source": {
                 "type": "git",
@@ -639,26 +633,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/erusev/parsedown/zipball/92e9c27ba0e74b8b028b111d1b6f956a15c01fc1",
                 "reference": "92e9c27ba0e74b8b028b111d1b6f956a15c01fc1",
-=======
-            "version": "1.7.0",
-=======
-            "version": "1.7.1",
->>>>>>> b2911ec603eb1b035e8cfee6354d59557fc7fe02
-            "source": {
-                "type": "git",
-                "url": "https://github.com/erusev/parsedown.git",
-                "reference": "92e9c27ba0e74b8b028b111d1b6f956a15c01fc1"
-            },
-            "dist": {
-                "type": "zip",
-<<<<<<< HEAD
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/6678d59be48c4be64eaca6ce70bea48a09488cc2",
-                "reference": "6678d59be48c4be64eaca6ce70bea48a09488cc2",
->>>>>>> cd06e20aa66b55aa549da4ebe0ed8fcd41440914
-=======
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/92e9c27ba0e74b8b028b111d1b6f956a15c01fc1",
-                "reference": "92e9c27ba0e74b8b028b111d1b6f956a15c01fc1",
->>>>>>> b2911ec603eb1b035e8cfee6354d59557fc7fe02
                 "shasum": ""
             },
             "require": {
@@ -691,15 +665,7 @@
                 "markdown",
                 "parser"
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
             "time": "2018-03-08T01:11:30+00:00"
-=======
-            "time": "2018-02-28T11:41:37+00:00"
->>>>>>> cd06e20aa66b55aa549da4ebe0ed8fcd41440914
-=======
-            "time": "2018-03-08T01:11:30+00:00"
->>>>>>> b2911ec603eb1b035e8cfee6354d59557fc7fe02
         },
         {
             "name": "fideloper/proxy",
@@ -1025,23 +991,7 @@
         },
         {
             "name": "laravel/framework",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "version": "v5.6.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "98fdbb098cf52a74441fe949be121c18e3dbbe6a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/98fdbb098cf52a74441fe949be121c18e3dbbe6a",
-                "reference": "98fdbb098cf52a74441fe949be121c18e3dbbe6a",
-=======
-            "version": "v5.6.8",
-=======
             "version": "v5.6.14",
->>>>>>> b2911ec603eb1b035e8cfee6354d59557fc7fe02
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
@@ -1049,14 +999,8 @@
             },
             "dist": {
                 "type": "zip",
-<<<<<<< HEAD
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ed0a327a31f2edc177bd1db38fd0c322478a1ddb",
-                "reference": "ed0a327a31f2edc177bd1db38fd0c322478a1ddb",
->>>>>>> cd06e20aa66b55aa549da4ebe0ed8fcd41440914
-=======
                 "url": "https://api.github.com/repos/laravel/framework/zipball/fba33e59fd43661933e9cecb84dfb0a64c5323ce",
                 "reference": "fba33e59fd43661933e9cecb84dfb0a64c5323ce",
->>>>>>> b2911ec603eb1b035e8cfee6354d59557fc7fe02
                 "shasum": ""
             },
             "require": {
@@ -1181,15 +1125,7 @@
                 "framework",
                 "laravel"
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2018-03-07T14:04:49+00:00"
-=======
-            "time": "2018-03-06T14:22:56+00:00"
->>>>>>> cd06e20aa66b55aa549da4ebe0ed8fcd41440914
-=======
             "time": "2018-03-28T14:17:03+00:00"
->>>>>>> b2911ec603eb1b035e8cfee6354d59557fc7fe02
         },
         {
             "name": "laravel/tinker",

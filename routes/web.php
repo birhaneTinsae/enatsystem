@@ -54,6 +54,7 @@ Route::get('phone-book/{query}','PhoneBookController@search');
  */
 Route::get('branch/{id}/employees','Branch\BranchController@employees');
 Route::resource('branch', 'Branch\BranchController');
+Route::get('searchbranch','Branch\BranchController@search');
 /**
  * Human resource management related URLs.
  */
@@ -84,10 +85,12 @@ Route::resource('hr', 'HRM\HumanResourceController')->middleware('can:view-hr');
 Route::resource('leave', 'HRM\LeaveManagmentController')->middleware('can:view-hr');
 Route::get('searchemployee','HRM\HumanResourceController@search');
 
+
 /**
  * 
  */
 Route::resource('job','HRM\JobController');
+Route::get('searchjobs','HRM\JobController@search');
 /**
  * Role maintenance related URLs.
  */

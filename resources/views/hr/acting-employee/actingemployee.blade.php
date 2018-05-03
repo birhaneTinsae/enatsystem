@@ -93,7 +93,7 @@
                          @endphp  
                             @foreach($Result as  $employee)                                    
                             <tr>                                
-                                <td>{{$employee->Employee->User->name}}</td>                                                                                    
+                                <td>{{$employee->Employee->full_name}}</td>                                                                                    
                                  @for ($i = $j; $i <=$j; $i++)                                                                        
                                 <td>{{$FromJob[$j]}}</td>                                                                                                                     
                                 @endfor                                                                                                                                                 

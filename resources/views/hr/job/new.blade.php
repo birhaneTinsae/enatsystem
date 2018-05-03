@@ -52,31 +52,134 @@
                                     </span>
                                     @endif
                                 </div>
-                                      <div class="form-group {{ $errors->has('grade') ? ' has-error' : '' }}">
-                            <label for="grade">Grade</label>
-                            <input type="text" required class="form-control" id="grade" name="grade" placeholder="Job Grade" >
+                              <div class="form-group">
+                            <label for="base">Base </label>
+                            <input type="text" class="form-control" 
+                            pattern="\d*" id="base" name="base" required value="{{ old('base') }}"  >  
+                            @if ($errors->has('base'))
+                                    <span class="help-block">
+                                        <strong  class="text-danger">{{ $errors->first('base') }}</strong>
+                                    </span>
+                                    @endif                               
+                        </div>   
+
+                           <div class="form-group">
+                            <label for="base">Step1 </label>
+                            <input type="text" class="form-control" 
+                            pattern="\d*" id="step1" name="step1" required value="{{ old('step1') }}"  >  
+                            @if ($errors->has('step1'))
+                                    <span class="help-block">
+                                        <strong  class="text-danger">{{ $errors->first('step1') }}</strong>
+                                    </span>
+                                    @endif                               
+                        </div>                       
+
+                           <div class="form-group">
+                            <label for="Phone no">Step3 </label>
+                            <input type="text" class="form-control" 
+                            pattern="\d*" id="step3" name="step3" required value="{{ old('step3') }}"  >  
+                            @if ($errors->has('step3'))
+                                    <span class="help-block">
+                                        <strong  class="text-danger">{{ $errors->first('step3') }}</strong>
+                                    </span>
+                                    @endif                               
+                        </div>
+
+                           <div class="form-group">
+                            <label for="Phone no">Step5 </label>
+                            <input type="text" class="form-control" 
+                            pattern="\d*" id="step5" name="step5" required value="{{ old('step5') }}"  >  
+                            @if ($errors->has('step5'))
+                                    <span class="help-block">
+                                        <strong  class="text-danger">{{ $errors->first('step5') }}</strong>
+                                    </span>
+                                    @endif                               
+                        </div>
+
+                           <div class="form-group">
+                            <label for="Phone no">Step7 </label>
+                            <input type="text" class="form-control" 
+                            pattern="\d*" id="step7" name="step7" required value="{{ old('step7') }}"  >  
+                            @if ($errors->has('step7'))
+                                    <span class="help-block">
+                                        <strong  class="text-danger">{{ $errors->first('step7') }}</strong>
+                                    </span>
+                                    @endif                               
+                        </div>
+
+                            <div class="form-group">
+                            <label for="Phone no">Step9 </label>
+                            <input type="text" class="form-control" 
+                            pattern="\d*" id="step9" name="step9" required value="{{ old('step9') }}"  >  
+                            @if ($errors->has('step9'))
+                                    <span class="help-block">
+                                        <strong  class="text-danger">{{ $errors->first('step9') }}</strong>
+                                    </span>
+                                    @endif                               
+                        </div>
+                            </div>
+                            <div class="col-md-6">
+                                       <div class="form-group {{ $errors->has('grade') ? ' has-error' : '' }}">
+                                     <label for="grade">Grade</label>
+                                     <input type="text" required class="form-control" id="grade" name="grade" placeholder="Job Grade" >
                                     @if ($errors->has('grade'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('grade') }}</strong>
                                     </span>
                                     @endif
                         </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group {{ $errors->has('operation_class') ? ' has-error' : '' }}">
-                                    <label for="job_position_operation_class">Operation Location</label>
-                                    <select  class="form-control" name="operation_class" id="job_position_operation_class" >
-                                    <option>------Select Operation Class------</option>
-                                    <option value="Head office">Head office</option>
-                                    <option value="Branch">Branch</option>
-                                    <option value="Both">Both</option>
-                                    </select>
-                                    @if ($errors->has('operation_class'))
+
+                            <div class="form-group">
+                            <label for="Phone no">Step2 </label>
+                            <input type="text" class="form-control" 
+                            pattern="\d*" id="step2" name="step2" required value="{{ old('step2') }}"  >  
+                            @if ($errors->has('step2'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('operation_class') }}</strong>
+                                        <strong  class="text-danger">{{ $errors->first('step2') }}</strong>
                                     </span>
-                                    @endif
-                                </div>
+                                    @endif                               
+                        </div>
+
+                            <div class="form-group">
+                            <label for="Phone no">Step4 </label>
+                            <input type="text" class="form-control" 
+                            pattern="\d*" id="step4" name="step4" required value="{{ old('step4') }}"  >  
+                            @if ($errors->has('step4'))
+                                    <span class="help-block">
+                                        <strong  class="text-danger">{{ $errors->first('step4') }}</strong>
+                                    </span>
+                                    @endif                               
+                        </div>
+                            <div class="form-group">
+                            <label for="Phone no">Step6 </label>
+                            <input type="text" class="form-control" 
+                            pattern="\d*" id="step6" name="step6" required value="{{ old('step6') }}"  >  
+                            @if ($errors->has('step6'))
+                                    <span class="help-block">
+                                        <strong  class="text-danger">{{ $errors->first('step6') }}</strong>
+                                    </span>
+                                    @endif                               
+                        </div>
+                            <div class="form-group">
+                            <label for="Phone no">Step8 </label>
+                            <input type="text" class="form-control" 
+                            pattern="\d*" id="step8" name="step8" required value="{{ old('step8') }}"  >  
+                            @if ($errors->has('step8'))
+                                    <span class="help-block">
+                                        <strong  class="text-danger">{{ $errors->first('step8') }}</strong>
+                                    </span>
+                                    @endif                               
+                        </div>
+                            <div class="form-group">
+                            <label for="Phone no">Step10 </label>
+                            <input type="text" class="form-control" 
+                            pattern="\d*" id="step10" name="step10" required value="{{ old('step10') }}"  >  
+                            @if ($errors->has('step10'))
+                                    <span class="help-block">
+                                        <strong  class="text-danger">{{ $errors->first('step10') }}</strong>
+                                    </span>
+                                    @endif                               
+                        </div>
                             </div>
                         </div>
                     

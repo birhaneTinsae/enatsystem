@@ -26,24 +26,36 @@
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="employee">Employee</label>
-                                        <input type="text" class="form-control" list="actemployees-list"
-                                         id="new-employee" name="new_employee" placeholder="Employee">                            
-                                    <datalist id="actemployees-list"> </datalist>
-                                </div>                                                                                                         
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label for="job_position">Requested Position</label>                                    
-                                    <select class="form-control" name="job_id" id="job_id" >
-                                    {{$job_positions=App\Jobposition::all()}}
-                                    <option>-----Select Job Position -----
-                                        @foreach($job_positions as $job_position)
-                                        <option value="{{$job_position->id}}">{{$job_position->name}}</option>
+                                     <div class="form-group">
+                                    <label for="employee"> Employee name</label>
+                                   
+                                    <select class="form-control" name="employee" id="employee">
+                                     {{$employee=App\Employee::all()}}
+                                    <option value="">-----Select Employee -----
+                                   </option>
+                                        @foreach($employee as $emp)
+                                        <option value="{{$emp->id}}">{{$emp->full_name}}</option>
                                         @endforeach
                                     <select>
-                             </div>
+                             </div>                                                                                                         
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group  {{ $errors->has('job_position') ? ' has-error' : '' }}">
+                                    <label for="job_position">Job Position</label>
+                                    
+                                    <select class="form-control" name="job_position_id" id="job_position_id" >
+                                         <option value="">-----Select Job Position  -----
+                                   </option>
+                                        @foreach($job_positions as $id=>$job_position)
+                                        <option value="{{$id}}"  @if (old('job_position_id') == "$id") {{ 'selected' }} @endif>{{$job_position}}</option>
+                                        @endforeach
+                                    <select>
+                                    @if ($errors->has('job_position_id'))
+                                    <span class="help-block">
+                                        <strong  class="text-danger">{{ $errors->first('job_position_id') }}</strong>
+                                    </span>
+                                    @endif
+                             </div> 
                                 </div>
                                 
                                  <div class="col-md-6">
@@ -62,12 +74,12 @@
                                 </div>
                                 <div class="col-md-6">
                                  <div class="form-group">
-                                    <label for="reason">Reason</label>
-                                    <select  class="form-control" name="reason" id="reason" >
-                                    <option>-----Verify Reason -----
+                                    <label for="reason">Remark</label>
+                                    <select  class="form-control" name="remark" id="remark" >
+                                    <option>
                                    </option>
-                                    <option value="Transfer">Transfer</option>
-                                    <option value="Promotion">Promotion</option>
+                                    <option value="Lateral">Lateral</option>
+                                    <option value="Place Change">Place Change</option>
                                    
                                     </select>
                                 </div>
@@ -78,10 +90,11 @@
                             <input type="date" class="form-control col-xs-3" id="start_date" name="start_date"  >                            
                         </div> 
                         </div>
+                      
                     <div class="col-md-6">
-                    <label for="remark">Remark</label>
+                    <label for="reason">Reason</label>
                          <div class="form-group">                           
-                            <textarea rows="4" cols="50" name="remark">Remark</textarea>                            
+                            <textarea rows="4" cols="50" name="reason">Reason</textarea>                            
                         </div> 
                        </div>
                             </div>                                                                  

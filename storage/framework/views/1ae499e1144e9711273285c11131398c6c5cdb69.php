@@ -27,25 +27,37 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="employee">Employee</label>
-                                        <input type="text" class="form-control" list="actemployees-list"
-                                         id="new-employee" name="new_employee" placeholder="Employee">                            
-                                    <datalist id="actemployees-list"> </datalist>
-                                </div>                                                                                                         
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label for="job_position">Requested Position</label>                                    
-                                    <select class="form-control" name="job_id" id="job_id" >
-                                    <?php echo e($job_positions=App\Jobposition::all()); ?>
+                                     <div class="form-group">
+                                    <label for="employee"> Employee name</label>
+                                   
+                                    <select class="form-control" name="employee" id="employee">
+                                     <?php echo e($employee=App\Employee::all()); ?>
 
-                                    <option>-----Select Job Position -----
-                                        <?php $__currentLoopData = $job_positions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $job_position): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($job_position->id); ?>"><?php echo e($job_position->name); ?></option>
+                                    <option value="">-----Select Employee -----
+                                   </option>
+                                        <?php $__currentLoopData = $employee; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $emp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($emp->id); ?>"><?php echo e($emp->full_name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <select>
-                             </div>
+                             </div>                                                                                                         
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group  <?php echo e($errors->has('job_position') ? ' has-error' : ''); ?>">
+                                    <label for="job_position">Job Position</label>
+                                    
+                                    <select class="form-control" name="job_position_id" id="job_position_id" >
+                                         <option value="">-----Select Job Position  -----
+                                   </option>
+                                        <?php $__currentLoopData = $job_positions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id=>$job_position): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($id); ?>"  <?php if(old('job_position_id') == "$id"): ?> <?php echo e('selected'); ?> <?php endif; ?>><?php echo e($job_position); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <select>
+                                    <?php if($errors->has('job_position_id')): ?>
+                                    <span class="help-block">
+                                        <strong  class="text-danger"><?php echo e($errors->first('job_position_id')); ?></strong>
+                                    </span>
+                                    <?php endif; ?>
+                             </div> 
                                 </div>
                                 
                                  <div class="col-md-6">
@@ -65,12 +77,12 @@
                                 </div>
                                 <div class="col-md-6">
                                  <div class="form-group">
-                                    <label for="reason">Reason</label>
-                                    <select  class="form-control" name="reason" id="reason" >
-                                    <option>-----Verify Reason -----
+                                    <label for="reason">Remark</label>
+                                    <select  class="form-control" name="remark" id="remark" >
+                                    <option>
                                    </option>
-                                    <option value="Transfer">Transfer</option>
-                                    <option value="Promotion">Promotion</option>
+                                    <option value="Lateral">Lateral</option>
+                                    <option value="Place Change">Place Change</option>
                                    
                                     </select>
                                 </div>
@@ -81,10 +93,11 @@
                             <input type="date" class="form-control col-xs-3" id="start_date" name="start_date"  >                            
                         </div> 
                         </div>
+                      
                     <div class="col-md-6">
-                    <label for="remark">Remark</label>
+                    <label for="reason">Reason</label>
                          <div class="form-group">                           
-                            <textarea rows="4" cols="50" name="remark">Remark</textarea>                            
+                            <textarea rows="4" cols="50" name="reason">Reason</textarea>                            
                         </div> 
                        </div>
                             </div>                                                                  

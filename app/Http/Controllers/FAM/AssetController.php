@@ -94,11 +94,11 @@ class AssetController extends Controller
         $asset->serial_no=$request->serial_no;
         $asset->book_value=$request->gross_purchase_amount;
 
-        if(!isset($request->disposed)){
-            $asset->disposed=false;
-        }else{
-            $asset->disposed=true;
-        }
+        // if(!isset($request->disposed)){
+        //     $asset->disposed=false;
+        // }else{
+        //     $asset->disposed=true;
+        // }
        
         if($asset->save()){
             $request->session()->flash('status',"Asset ".$request->asset_name." successfully added.");
@@ -126,8 +126,8 @@ class AssetController extends Controller
         $branch->setconnection('sqlsrv');
         $branch=Branch::find($asset->branch_id);
         $custudian=Employee::find($asset->custudian);
-        $custudian_id=User::find($custudian->user_id);
-        $custudian_name=$custudian_id->name;
+
+        $custudian_name=$custudian->full_name;
         $disposal=new Disposal;
         $disposal->setconnection('sqlsrv2');
         $disposal=Disposal::where('asset_id',$asset->id)->get();
@@ -142,22 +142,22 @@ class AssetController extends Controller
        $to_user_id=array();
        $count2=0;
      foreach($transfer as $result){
-     $from_user_id[$count]=Employee::where('id',$result->from_employee)->value('user_id');           
-    $to_user_id[$count]= Employee::where('id',$result->to_employee)->value('user_id'); 
+     $femp_name[$count]=Employee::where('id',$result->from_employee)->value('full_name');           
+    $temp_name[$count]= Employee::where('id',$result->to_employee)->value('full_name'); 
     $fbranch_name[$count]= DB::table('branches')->where('id', $result->from_cost_center)->value('branch_name');
     $tbranch_name[$count]= DB::table('branches')->where('id', $result->to_cost_center)->value('branch_name');
    $count++;
       }
       //dd($from_user_id);  
-    foreach($from_user_id as $res){      
-   $femp_name[$count2]= DB::table('users')->where('id',$res)->value('name');     
-   $count2++;
-      }
-       $count3=0;       
-        foreach($to_user_id as $res2){      
-   $temp_name[$count3]= DB::table('users')->where('id',$res2)->value('name');     
-   $count3++;
-      }
+//     foreach($from_user_id as $res){      
+//    $femp_name[$count2]= DB::table('users')->where('id',$res)->value('name');     
+//    $count2++;
+//       }
+//        $count3=0;       
+//         foreach($to_user_id as $res2){      
+//    $temp_name[$count3]= DB::table('users')->where('id',$res2)->value('name');     
+//    $count3++;
+//       }
       
   
         $asset_category=PPECategory::find($asset->p_p_e_categorie_id);

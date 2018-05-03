@@ -93,7 +93,7 @@
                          ?>  
                             <?php $__currentLoopData = $Result; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                                    
                             <tr>                                
-                                <td><?php echo e($employee->Employee->User->name); ?></td>                                                                                    
+                                <td><?php echo e($employee->Employee->full_name); ?></td>                                                                                    
                                  <?php for($i = $j; $i <=$j; $i++): ?>                                                                        
                                 <td><?php echo e($FromJob[$j]); ?></td>                                                                                                                     
                                 <?php endfor; ?>                                                                                                                                                 

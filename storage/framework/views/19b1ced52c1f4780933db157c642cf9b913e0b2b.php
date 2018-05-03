@@ -108,7 +108,11 @@
                                      <select type="select" name="custudian" id="" class="form-control" >
                                      <option value="">----- Select Custudian here -----
                                      </option>
-                                      <?php
+                                      <?php echo e($employees=App\Employee::all()); ?>  
+                                        <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($employee->id); ?>"><?php echo e($employee->full_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                      <!-- <?php
                                            $j =0
                                          ?> 
                                     <?php $__currentLoopData = $Employee; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $emp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                                        
@@ -121,7 +125,7 @@
                                          <?php
                                      $j =$j+1
                                      ?>                                                                       
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                                                    
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                                                     -->
                                     </select>
                                 </div>
                                 </div>
@@ -143,9 +147,9 @@
                                     <label for="">Remarks</label>
                                     <textarea name="remarks" id="" cols="20" rows="5" class="form-control"></textarea>
                                 </div>
-                                <div class="checkbox">
+                                <!-- <div class="checkbox">
                                     <label><input type="checkbox" name="disposed">Disposed</label>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <input type="submit" value="Save" class="btn btn-success btn-block">
                                 </div>

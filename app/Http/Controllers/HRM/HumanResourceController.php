@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\JobPosition;
 use App\Employee;
+use App\Branch;
 use App\User;
+use Auth;
 class HumanResourceController extends Controller
 {
     /**
@@ -21,6 +23,8 @@ class HumanResourceController extends Controller
         // return view('hr\hr',['employees'=> $user]);
        
         $employees=Employee::paginate(10);
+
+       // dd($employees);
         return view('hr.hr',['employees'=> $employees]);
     }
 
@@ -44,27 +48,56 @@ class HumanResourceController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
-        $valid_data=$request->validate([
-            'user_id'=>'required|unique:employees',
+        //dd($request->all());
+    //   $tin_no_length=strlen ($request->tin_no);
+    //   $loop_length=10-$tin_no_length;      
+    //   $tin_no=$request->tin_no;
+    //   for($i=0;$i<$loop_length;$i++){
+    //     $tin_no="0".$tin_no;
+    //   }
+        $valid_data=$request->validate([                     
             'enat_id'=>'required|unique:employees',
-            'job_position'=>'required',
-            'join_date'=>'required|date',          
-        ]);    
-        //  if ($valid_data->fails()) {
-        //     return redirect('post/create')
-        //                 ->withErrors($valid_data)
-        //                 ->withInput();
-        // }
-       
+            'Phone_no'=>'required|unique:employees',
+            
+            'email'=>'nullable|unique:employees',             
+            'govt_pension_no'=>'nullable|min:10|unique:employees',
+            'private_pension_no'=>'nullable|min:10|unique:employees',
+            'tin_no'=>'nullable|min:10|unique:employees',  
+            'job_position_id'=>'required',
+            'job_position_step'=>'required',
+            'branch_id'=>'required',
+            'marital_status'=>'required',
+            'gender'=>'required',
+            'category'=>'required',
+            'operation_location'=>'required',
+            'employement_date'=>'required|date',          
+        ]);  
+ //dd($request->all());
         $new_employee=new Employee;
-        $new_employee->user_id=$request->user_id;
-        $new_employee->job_position_id=$request->job_position;
-        $new_employee->employed_date=$request->join_date;
-        $new_employee->enat_id=$request->enat_id;
-        $new_employee->salary=$request->salary;
        
+        $new_employee->enat_id=$request->enat_id;
+        $new_employee->full_name=$request->full_name;
+        $new_employee->gender=$request->gender;
+        $new_employee->birth_date=$request->birth_date;
+        $new_employee->job_position_id=$request->job_position_id;
+        $new_employee->branch_id=$request->branch_id;
+        $new_employee->Job_Position_Step=$request->job_position_step;
+        $new_employee->employement_date=$request->employement_date;
+        $new_employee->phone_no=$request->Phone_no;
+        $new_employee->email=$request->email;
+        $new_employee->city=$request->city;
+        $new_employee->woreda=$request->woreda;
+        $new_employee->category=$request->category;
+        $new_employee->house_no=$request->houseno;
+
+        $new_employee->operation_location=$request->operation_location;
+        $new_employee->private_pension_no=$request->private_pension_no;
+        $new_employee->govt_pension_no=$request->gov_pension_no;
+        $new_employee->marital_status=$request->marital_status;
+        $new_employee->tin_no=$request->tin_no;
+             
+        $new_employee->maker=Auth::User()->username;
+      //  dd($new_employee->save());
         if($new_employee->save()){
             $request->session()->flash('status','Employee record successfully created');
             return redirect('/hr');
@@ -80,32 +113,13 @@ class HumanResourceController extends Controller
      */
     public function show($id)
     {
-        $employee_dto=[];    
-       $employee=Employee::find($id);
-        $employee_dto['employee_name']=$employee->user->name;
-        $employee_dto['phone_no']=$employee->user->phone_no;
-        $employee_dto['email']=$employee->user->email;
-        $employee_dto['job_position']=$employee->job_position->name;
-        $employee_dto['employed_date']=$employee->employed_date;
-        $employee_dto['salary']=$employee->salary;
-        $employee_dto['enat_id']=$employee->enat_id;
-
-        return json_encode( $employee_dto);
+    
     }
 
-        public function detail($id)
+    public function detail($id)
     {
         $employee_dto=[];    
        $employee=Employee::find($id);
-        // $employee_dto['employee_name']=$employee->user->name;
-        // $employee_dto['phone_no']=$employee->user->phone_no;
-        // $employee_dto['email']=$employee->user->email;
-        // $employee_dto['job_position']=$employee->job_position->name;
-        // $employee_dto['employed_date']=$employee->employed_date;
-        // $employee_dto['salary']=$employee->salary;
-        // $employee_dto['enat_id']=$employee->enat_id;
- //return json_encode( $employee_dto);
- //dd($employee);
         return view('hr\detail')->with('employee',$employee);
     }
 
@@ -117,14 +131,16 @@ class HumanResourceController extends Controller
      */
     public function edit($id)
     {
-        $job_positions=JobPosition::orderBy('name')->pluck('name','id');       
-        $employee=Employee::findOrFail($id);
-        $emp_name=$employee->user->name;
+         $job_positions=JobPosition::orderBy('name')->pluck('name','id');       
+         $employee=Employee::findOrFail($id);        
          $job_id=$employee->job_position_id;
          $job=JobPosition::find($job_id);
          $job_name=$job->name;
-         //dd($job_name);
-        return view('hr.update',['emp_name'=>$emp_name,'job_name'=>$job_name])->with('employee',$employee);
+         $branch_id=$employee->branch_id;
+         $branch=Branch::find($branch_id);
+         $branch_name=$branch->branch_name;       
+        return view('hr.update',['job_name'=>$job_name,'branch_name'=>$branch_name,
+        'job_positions'=>$job_positions])->with('employee',$employee);
     }
 
     /**
@@ -135,28 +151,50 @@ class HumanResourceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-        //dd($request->all());
-   // $enat_id="EB-".$request->enat_id;
-        $valid_data=$request->validate([
-            // 'user_id'=>'required|unique:employees',
-            'enat_id'=>'required|unique:employees',
-            'job_position'=>'required',
-            'join_date'=>'required|date',          
-        ]); 
+     {
+ $update_employee=Employee::find($id);  
+        $valid_data=$request->validate([                     
+            'enat_id'=>'required|unique:employees,enat_id,'.$id,
+            'Phone_no'=>'required|unique:employees,phone_no,'.$id,            
+            'email'=>'nullable|unique:employees,email,'.$id,             
+            'govt_pension_no'=>'nullable|min:10|unique:employees,govt_pension_no,'.$id,
+            'private_pension_no'=>'nullable|min:10|unique:employees,private_pension_no,'.$id,
+            'tin_no'=>'nullable|min:10|unique:employees,tin_no,'.$id,  
+            'job_position_id'=>'required',
+            'job_position_step'=>'required',
+            'branch_id'=>'required',
+            'marital_status'=>'required',
+            'gender'=>'required',
+            'category'=>'required',
+            'operation_location'=>'required',
+            'employement_date'=>'required|date',          
+        ]);  
 
-         // $valid_data1=$enat_id->validate($enat_id=>'required|unique:employees');
+       // dd($request->all());
+                    
+        $update_employee->enat_id=$request->enat_id;
+        $update_employee->full_name=$request->full_name;
+        $update_employee->gender=$request->gender;
+        $update_employee->birth_date=$request->birth_date;
+        $update_employee->job_position_id=$request->job_position_id;
+        $update_employee->branch_id=$request->branch_id;
+        $update_employee->Job_Position_Step=$request->job_position_step;
+        $update_employee->employement_date=$request->employement_date;
+        $update_employee->phone_no=$request->Phone_no;
+        $update_employee->email=$request->email;
+        $update_employee->city=$request->city;
+        $update_employee->woreda=$request->woreda;
+        $update_employee->category=$request->category;
+        $update_employee->house_no=$request->houseno;
 
-        $update_employee=Employee::find($id);
-        
-       // $update_employee->user_id=$request->user_id;
-        $update_employee->job_position_id=$request->job_position;
-        $update_employee->employed_date=$request->join_date;
-        $update_employee->salary=$request->salary;
-        $update_employee->enat_id= $request->enat_id;
-        if($update_employee->save()){
-        }
+        $update_employee->operation_location=$request->operation_location;
+        $update_employee->private_pension_no=$request->private_pension_no;
+        $update_employee->govt_pension_no=$request->gov_pension_no;
+        $update_employee->marital_status=$request->marital_status;
+        $update_employee->tin_no=$request->tin_no;
+               
+        $update_employee->maker=Auth::User()->username;
+      
         if($update_employee->save()){
             $request->session()->flash('status','Employee record successfully updated');
             return redirect('/hr');
@@ -181,23 +219,8 @@ class HumanResourceController extends Controller
        public function search(Request $request)
     {
          $name=$request->queryemp;          
-        $users =DB::table('users')->where('name','LIKE','%'.$name.'%')->get();          
-        $data = [];
-        $count=0;
-        foreach($users as $user){
-        $data[$count]=$user->id;
-        $count++;
-    }
-$emp_id=[];
-$count1=0;
-$Employee=DB::table('employees')->whereIn('user_id',$data)->get();
-foreach($Employee as $emp){
-    $emp_id[$count1]=$emp->id;
-    $count1++;
-}
-       
-
-        $employees=Employee::whereIn('id', $emp_id)->paginate(2);
+        $employees =DB::table('employees')->where('full_name','LIKE','%'.$name.'%')->paginate(2);          
         return view('hr.hr',['employees'=> $employees]);
+       
     }
 }

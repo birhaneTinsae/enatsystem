@@ -19,11 +19,10 @@
             <ol class="breadcrumb">
                 <li><a href="/home">Home</a></li>  
                 <li> <a href="/fixed-asset">FAM</a></li>
-                <li class="active">Asset Category</li>
-                             
-                            
+                <li class="active">Asset Category</li>                        
             </ol>
             <div class="panel panel-default">
+   
                 <div class="panel-heading">Asset Category
                     <!-- <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
                          Close</a>

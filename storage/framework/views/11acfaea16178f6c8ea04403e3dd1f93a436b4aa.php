@@ -31,7 +31,7 @@
                     <img class="profile_Image" src="http://localhost:8000/download.jpg">                        
                           </div> 
               <h4 class="text-center  text-success font-weight-bold">
-               <?php echo e($Transferpromotion->reason); ?> request History of Employee <?php echo e($emp_name); ?> on date <?php echo e($Transferpromotion->date); ?>
+               <?php echo e($Transferpromotion->remark); ?> request History of Employee <?php echo e($emp_name); ?> on date <?php echo e($Transferpromotion->date); ?>
 
                </h4>
                 </div>

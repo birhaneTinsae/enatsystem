@@ -109,7 +109,11 @@
                                      <select type="select" name="custudian" id="" class="form-control" >
                                      <option value="">----- Select Custudian here -----
                                      </option>
-                                      @php
+                                      {{$employees=App\Employee::all()}}  
+                                        @foreach($employees as $employee)
+                                        <option value="{{$employee->id}}">{{$employee->full_name}}</option>
+                                    @endforeach
+                                      <!-- @php
                                            $j =0
                                          @endphp 
                                     @foreach($Employee as $emp)                                        
@@ -121,7 +125,7 @@
                                          @php
                                      $j =$j+1
                                      @endphp                                                                       
-                                    @endforeach                                                    
+                                    @endforeach                                                     -->
                                     </select>
                                 </div>
                                 </div>
@@ -143,9 +147,9 @@
                                     <label for="">Remarks</label>
                                     <textarea name="remarks" id="" cols="20" rows="5" class="form-control"></textarea>
                                 </div>
-                                <div class="checkbox">
+                                <!-- <div class="checkbox">
                                     <label><input type="checkbox" name="disposed">Disposed</label>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <input type="submit" value="Save" class="btn btn-success btn-block">
                                 </div>

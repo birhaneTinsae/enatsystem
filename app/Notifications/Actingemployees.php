@@ -66,13 +66,13 @@ class Actingemployees extends Notification implements ShouldQueue
       $results= DB::table('acting_employees')            
              ->join('branches', 'branches.id', '=', 'acting_employees.branch_id')  
              ->join('branches as acting_branches', 'acting_branches.id', '=', 'acting_employees.acting_branch_id')  
-             ->join('users', 'users.id', '=', 'acting_employees.user_id')       
+             ->join('employees', 'employees.id', '=', 'acting_employees.employee_id')       
               ->join('job_positions', 'job_positions.id', '=', 'acting_employees.job_position_id')  
               ->join('job_positions as acting_job_positions', 'acting_job_positions.id', '=', 'acting_employees.acting_job_position_id')
                ->where('duration','>=',5)
                ->where('notification', '=','1')
                 ->where('status', '=','1')         
-              ->select('acting_employees.*', 'users.name as full_name','branches.branch_name','job_positions.name as job_name'
+              ->select('acting_employees.*', 'employees.full_name as full_name','branches.branch_name','job_positions.name as job_name'
               ,'acting_branches.branch_name as acting_branch_name','acting_job_positions.name as acting_job_name')
             ->get();
   return (new MailMessage)->view('hr\acting-employee.email',['employees'=>$results]);

@@ -52,11 +52,9 @@ class UpdateTable extends Command
           $check=count($result);
           if($check>=1){
             foreach($result as $res){
-                DB::table('acting_employees')
+            DB::table('acting_employees')
             ->where('id', $res->id)
-            ->update(['end_date' =>$currentdate]);
-                //  $sdate = $res->start_date;
-                //  $edate = $res->end_date;
+            ->update(['end_date' =>$currentdate]);                
                  $sdate = Carbon::parse($res->start_date);
                  $edate = Carbon::parse($res->end_date);               
                  $diff = $edate->diffInMonths($sdate);

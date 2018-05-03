@@ -27,7 +27,7 @@ class TransferpromotionrequestController extends Controller
        $fbranch_name=array();
        $tbranch_name=array();
       foreach($results as $result){
-        $fjob_name[$count]= DB::table('job_positions')->where('id', $result->from_job_position)->value('name');
+     $fjob_name[$count]= DB::table('job_positions')->where('id', $result->from_job_position)->value('name');
     $tjob_name[$count]= DB::table('job_positions')->where('id', $result->to_job_position)->value('name');
     $fbranch_name[$count]= DB::table('branches')->where('id', $result->from_branch)->value('branch_name');
     $tbranch_name[$count]= DB::table('branches')->where('id', $result->to_branch)->value('branch_name');
@@ -45,7 +45,9 @@ class TransferpromotionrequestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { return view('hr\Transferpromotionrequest\new');
+    { 
+       $job_positions=JobPosition::orderBy('name')->pluck('name','id');
+      return view('hr\Transferpromotionrequest\new',['job_positions'=>$job_positions]);
     }
 
     /**
@@ -55,25 +57,19 @@ class TransferpromotionrequestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-       // dd($request->all());
-        $employee=Employee::find($request->new_employee);
-        //dd($employee);
+    {            
+        $employee=Employee::find($request->employee);       
         $newrecord=new Transferpromotionrequest;
-        $newrecord->employee_id=$request->new_employee;
-        $newrecord->from_job_position=$employee->job_position_id;
-        //$newrecord->enat_id=$employee->enat_id;
-        $newrecord->to_job_position=$request->job_id;
-        $newrecord->from_branch=$employee->user->branch_id;
+        $newrecord->employee_id=$request->employee;
+        $newrecord->from_job_position=$employee->job_position_id;        
+        $newrecord->to_job_position=$request->job_position_id;
+        $newrecord->from_branch=$employee->branch_id;
         $newrecord->to_branch=$request->branch_id;
-        $newrecord->salary=$employee->salary;
-       // $newrecord->new_salary=$request->newsalary;
+        $newrecord->salary=$employee->salary;       
         $newrecord->date=$request->start_date;
         $newrecord->reason=$request->reason;
         $newrecord->remark=$request->remark;
-        $newrecord->maker=Auth::user()->username;
-//dd($employee->id);
-        //Update Employee and User Table       
+        $newrecord->maker=Auth::user()->username;    
             if($newrecord->save()){
             $request->session()->flash('status','New record successfully added');
             return redirect('/transferpromotionrequest');
@@ -90,8 +86,8 @@ class TransferpromotionrequestController extends Controller
     {
         $show=Transferpromotionrequest::find($id);      
         $emp=Employee::find($show->employee_id);
-        $emp_name=$emp->user->name;
-        $emp_id=$emp->enat_id;
+        $emp_name=$emp->full_name;
+        $emp_id=$emp->id;
         $from_job=JobPosition::find($show->from_job_position);
         $from_jobname=$from_job->name;
         $to_job=JobPosition::find($show->to_job_position);
@@ -100,10 +96,11 @@ class TransferpromotionrequestController extends Controller
         $from_branchname=$from_branch->branch_name;
         $to_branch=Branch::find($show->to_branch);
         $to_branchname=$to_branch->branch_name;
+        $job_positions=JobPosition::orderBy('name')->pluck('name','id');
        //dd($to_branch);
          return view('hr\Transferpromotionrequest\detail'
          ,['transferpromotion'=>$show,'emp_name'=>$emp_name,'from_job'=>$from_jobname,'to_job'=>$to_jobname
-         ,'from_branch'=>$from_branchname,'to_branch'=>$to_branchname,'emp_id'=>$emp_id])->with('Transferpromotion',$show);   
+         ,'from_branch'=>$from_branchname,'to_branch'=>$to_branchname,'emp_id'=>$emp_id,'job_positions'=>$job_positions])->with('Transferpromotion',$show);   
     }
 
     /**
@@ -114,21 +111,22 @@ class TransferpromotionrequestController extends Controller
      */
     public function edit($id)
     {
-         $edit=Transferpromotionrequest::find($id);
+       $edit=Transferpromotionrequest::find($id);
        $emp=Employee::find($edit->employee_id);
-       $emp_name=$emp->user->name;
+       $emp_name=$emp->full_name;
        $from_job=JobPosition::find($edit->from_job_position);
-        $from_jobname=$from_job->name;
-        $to_job=JobPosition::find($edit->to_job_position);
-        $to_jobname=$to_job->name;
-        $from_branch=Branch::find($edit->from_branch);
-        $from_branchname=$from_branch->branch_name;
-        $to_branch=Branch::find($edit->to_branch);
-        $to_branchname=$to_branch->branch_name;
+       $from_jobname=$from_job->name;
+       $to_job=JobPosition::find($edit->to_job_position);
+       $to_jobname=$to_job->name;
+       $from_branch=Branch::find($edit->from_branch);
+       $from_branchname=$from_branch->branch_name;
+       $to_branch=Branch::find($edit->to_branch);
+       $to_branchname=$to_branch->branch_name;
+       $job_positions=JobPosition::orderBy('name')->pluck('name','id');
        //dd($to_branch);
          return view('hr\Transferpromotionrequest\edit'
          ,['transferpromotion'=>$edit,'emp_name'=>$emp_name,'from_job'=>$from_jobname,'to_job'=>$to_jobname
-         ,'from_branch'=>$from_branchname,'to_branch'=>$to_branchname]);  
+         ,'from_branch'=>$from_branchname,'to_branch'=>$to_branchname,'job_positions'=>$job_positions]);  
     }
 
     /**
@@ -139,14 +137,16 @@ class TransferpromotionrequestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //dd($request->all());
+    {        
           $update=Transferpromotionrequest::find($id);
-          $update->employee_id=$request->emp_id;
+          $employee=Employee::find($request->employee);
+          $update->employee_id=$request->employee;
+          $update->from_job_position=$employee->job_position_id;
+          $update->from_branch=$employee->branch_id;
           $update->to_job_position=$request->job_id;
           $update->to_branch=$request->branch_name;
           $update->reason=$request->reason;
-          $update->date=$request->start_date;
+          $update->date=$request->date;
           $update->reason=$request->reason;
           $update->remark=$request->remark;
           $update->maker=Auth::user()->username;
@@ -165,7 +165,6 @@ class TransferpromotionrequestController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-       // dd($id);
        $delete=Transferpromotionrequest::find($id);
        $delete->delete();
          \Session::flash('delete_status',' Record  closed.');
@@ -173,24 +172,14 @@ class TransferpromotionrequestController extends Controller
          
     }
       public function search(Request $request){
-         $name=$request->queryemp;
-          
-          $users =DB::table('users')->where('name','LIKE','%'.$name.'%')->get();
-          // dd($user);
-        $data = [];
+        $name=$request->queryemp;          
+        $employees =DB::table('employees')->where('full_name','LIKE','%'.$name.'%')->get();    
+        $emp_id = [];
         $count=0;
-        foreach($users as $user){
-        $data[$count]=$user->id;
+        foreach($employees as $employee){
+        $emp_id[$count]=$employee->id;
         $count++;
     }
-$emp_id=[];
-$count1=0;
-$Employee=DB::table('employees')->whereIn('user_id',$data)->get();
-foreach($Employee as $emp){
-    $emp_id[$count1]=$emp->id;
-    $count1++;
-}
-
 $results=Transferpromotionrequest::whereIn('employee_id', $emp_id)->paginate(2);
  $count2=0;
        $fjob_name=array();
@@ -203,9 +192,7 @@ $results=Transferpromotionrequest::whereIn('employee_id', $emp_id)->paginate(2);
     $fbranch_name[$count2]= DB::table('branches')->where('id', $result->from_branch)->value('branch_name');
     $tbranch_name[$count2]= DB::table('branches')->where('id', $result->to_branch)->value('branch_name');
    $count2++;
-      }
-      //dd($fjob_name);
-       
+      }       
        return view('hr\TransferPromotionrequest\request',['Result'=> $results,
        'FromJob'=>$fjob_name,'ToJob'=>$tjob_name,'FromBranch'=>$fbranch_name,'ToBranch'=>$tbranch_name]);
         }

@@ -1,16 +1,11 @@
-@extends('layouts.app')
-
-@section('sidebar')
+<?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            {{--  <li class="list-group-item"><a href="#" >Branch List</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >Home</a></li>  --}}
+                            
                         </ul>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">
 
@@ -39,10 +34,10 @@
                     <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
                     Pdf</a>
 
-                    @can('delete-role')
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete-role')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                         Delete</a>
-                    @endcan
+                    <?php endif; ?>
 
                     
                     <a href="/branch/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
@@ -52,11 +47,12 @@
                 </div>
 
                 <div class="panel-body">
-                    @if (session('status'))
+                    <?php if(session('status')): ?>
                         <div class="alert alert-success">
-                            {{ session('status') }}
+                            <?php echo e(session('status')); ?>
+
                         </div>
-                    @endif
+                    <?php endif; ?>
                     <table class="table table-striped">
                         <tr>
                             <th>#</th>
@@ -64,20 +60,20 @@
                             <th>Branch Name</th>                          
                             <th>Edit</th>
                         </tr>
-                        @foreach($branches as $branch)
+                        <?php $__currentLoopData = $branches; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $branch): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$branch->branch_code}}</td>
-                            <td>{{$branch->branch_name}}</td>
+                            <td><?php echo e($loop->iteration); ?></td>
+                            <td><?php echo e($branch->branch_code); ?></td>
+                            <td><?php echo e($branch->branch_name); ?></td>
                          
-                              @can('update',App\Employee::class)
+                              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',App\Employee::class)): ?>
                                 <td>
-                               <a href="{{ route('branch.edit', $branch->id) }}" class="btn-warning btn-sm" >
+                               <a href="<?php echo e(route('branch.edit', $branch->id)); ?>" class="btn-warning btn-sm" >
                                 <i class="fa fa-edit"></i></a></td>
-                                @endcan
+                                <?php endif; ?>
                            
                         </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </table>
                     
                 </div>
@@ -135,7 +131,8 @@
       </div>
       <div class="modal-body">
         <form action="/branch" >
-            {{ method_field('PUT') }}
+            <?php echo e(method_field('PUT')); ?>
+
             <div class="form-group">
                 <label for="branch_code">Branch Code</label>
                 <input type="text" id="branch_code" class="form-control" >
@@ -155,4 +152,6 @@
   </div>
 </div>
 <!-- Update View Modal end -->
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

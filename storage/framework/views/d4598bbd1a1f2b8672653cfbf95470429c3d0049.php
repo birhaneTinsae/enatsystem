@@ -1,16 +1,11 @@
-@extends('layouts.app')
-
-@section('sidebar')
+<?php $__env->startSection('sidebar'); ?>
                         <ul class="list-group">
                             <li class="list-group-item disabled">Menu</li>
-                            {{--  <li class="list-group-item"><a href="#" >Branch List</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >ISD</a></li>
-                            <li class="list-group-item"><a href="#" >Home</a></li>  --}}
+                            
                         </ul>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">
 
@@ -21,67 +16,68 @@
                 <li><a href="/branch">Branch</a></li>               
                 <li class="active">New Branch</li>
             </ol>
-            @if(session('success')!=null)
+            <?php if(session('success')!=null): ?>
             <div class="alert alert-success" role="alert">
-                {{session('success')}}
+                <?php echo e(session('success')); ?>
+
             </div>
-            @endif
+            <?php endif; ?>
             <div class="panel panel-default">
                 <div class="panel-heading">Branch
-                @can('close-role')                   
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('close-role')): ?>                   
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
                     Close</a>
-                    @endcan
+                    <?php endif; ?>
 
-                    @can('update-role')
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update-role')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     Update</a>
-                    @endcan
+                    <?php endif; ?>
 
-                    @can('delete-role')
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete-role')): ?>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
                         Delete</a>
-                    @endcan
+                    <?php endif; ?>
 
                    
-                    {{--  <a href="/branch/create" class="text-right pull-right panel-menu-item"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                        New</a>
-                     --}}
+                    
                 
                 </div>
 
                 <div class="panel-body">
-                    @if (session('status'))
+                    <?php if(session('status')): ?>
                         <div class="alert alert-success">
-                            {{ session('status') }}
+                            <?php echo e(session('status')); ?>
+
                         </div>
-                    @endif
-                    <form method="POST" action="/branch/{{$branches->id}}" >
-                            {{ csrf_field() }}
-                          @method('PUT')
+                    <?php endif; ?>
+                    <form method="POST" action="/branch/<?php echo e($branches->id); ?>" >
+                            <?php echo e(csrf_field()); ?>
+
+                          <?php echo method_field('PUT'); ?>
                     <div class="row">
                         <div class="col-md-6">
                            
                             <div class="form-group">
                                 <label for="branch_code">Branch Code</label>
                                 <input type="text" class="form-control" id="branch_code" name="branch_code" 
-                                value="{{$branches->branch_code}}" placeholder="Branch code">
-                                  @if ($errors->has('branch_code'))
+                                value="<?php echo e($branches->branch_code); ?>" placeholder="Branch code">
+                                  <?php if($errors->has('branch_code')): ?>
                                     <span class="help-block">
-                                        <strong  class="text-danger">{{ $errors->first('branch_code') }}</strong>
+                                        <strong  class="text-danger"><?php echo e($errors->first('branch_code')); ?></strong>
                                     </span>
-                                    @endif
+                                    <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="branch_name">Branch Name</label>
-                                <input type="text" value="{{$branches->branch_name}}" class="form-control" id="branch_name" name="branch_name"  placeholder="Branch name">
-                                  @if ($errors->has('branch_name'))
+                                <input type="text" value="<?php echo e($branches->branch_name); ?>" class="form-control" id="branch_name" name="branch_name"  placeholder="Branch name">
+                                  <?php if($errors->has('branch_name')): ?>
                                     <span class="help-block">
-                                        <strong  class="text-danger">{{ $errors->first('branch_name') }}</strong>
+                                        <strong  class="text-danger"><?php echo e($errors->first('branch_name')); ?></strong>
                                     </span>
-                                    @endif
+                                    <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -91,14 +87,12 @@
                     </form>
                 </div>
                 <div class="panel-footer">
-                    {{--  <div class="row">
-                        <div class="col-md-4">Maker <span class="label label-default">Default Label</span></div>
-                        <div class="col-md-4">Date Time <span class="label label-default">Default Label</span></div>
-                        <div class="col-md-4">Record Status <span class="label label-default">Default Label</span></div>
-                    </div>  --}}
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

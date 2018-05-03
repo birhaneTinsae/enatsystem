@@ -47,13 +47,47 @@ function yesnoCheck() {
 
                             <div class="row">
                                 <div class="col-md-6">
-                                     <div class="form-group">
+                                     <!-- <div class="form-group">
                                         <label for="employee">Employee</label>
                                         <input type="text" class="form-control"  list="actemployees-list"
                                          id="new-employee" name="new_employee" id="<?php echo e($ActingEmployee->employee_id); ?>" placeholder="Employee" value=<?php echo e($ActingEmployee->employee_id); ?>>                            
                                     <datalist id="actemployees-list"> </datalist>
                                     <input type="hidden" name="emp_id" value="<?php echo e($ActingEmployee->employee_id); ?>">
-                                </div>                                
+                                </div>    
+                                    <div class="col-md-6"> -->
+                                    <div class="form-group">
+                                    <label for="employee"> Employee name</label>
+                                   
+                                    <select class="form-control" name="employee" id="employee">
+                                     <?php echo e($employee=App\Employee::all()); ?>
+
+                                    <option value="<?php echo e($ActingEmployee->employee_id); ?>"><?php echo e($emp_name); ?>
+
+                                   </option>
+                                        <?php $__currentLoopData = $employee; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $emp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($emp->id); ?>"><?php echo e($emp->full_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <select>
+                             </div>    
+                                                             <div class="form-group">
+                                    <label for="employee"> Replaced by</label>
+                                   
+                                    <select class="form-control" name="replaced_by" id="replaced_by">
+                                     <?php echo e($employee=App\Employee::all()); ?>
+
+                                    <option value="<?php echo e($ActingEmployee->replaced_by); ?>"><?php echo e($replaced_by); ?>
+
+                                   </option>
+                                        <?php $__currentLoopData = $employee; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $emp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($emp->id); ?>"><?php echo e($emp->full_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <select>
+                                           <?php if($errors->has('replaced_by')): ?>
+                                    <span class="help-block">
+                                        <strong  class="text-danger"><?php echo e($errors->first('replaced_by')); ?></strong>
+                                    </span>
+                                    <?php endif; ?>
+                             </div>                         
                         <div class="form-group">
                             <label for="start_date">Start Date</label>
                             <input type="date" value="<?php echo e($ActingEmployee->start_date); ?>" class="form-control col-xs-3" id="start_date" name="start_date"  >                            
@@ -84,20 +118,43 @@ function yesnoCheck() {
         </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                    <label for="job_position">Acting Position</label>                                    
-                                    <select class="form-control" name="acting_job_id" id="job_id" >
-                                    <?php echo e($job_positions=App\Jobposition::all()); ?>
+                                <div class="form-group">
+                                    <label for="in_place_of_employee"> In Place of Employee</label>
+                                   
+                                    <select class="form-control" name="in_place_of_employee" id="in_place_of_employee">
+                                     <?php echo e($employee=App\Employee::all()); ?>
 
-                                    <option value="<?php echo e($ActingEmployee->acting_job_position_id); ?>"><?php echo e($to_job); ?>
+                                    <option value="<?php echo e($ActingEmployee->in_place_of); ?>"><?php echo e($inplace_of); ?>
 
-                                        <?php $__currentLoopData = $job_positions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $job_position): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($job_position->id); ?>"><?php echo e($job_position->name); ?></option>
+                                   </option>
+                                        <?php $__currentLoopData = $employee; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $emp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($emp->id); ?>"><?php echo e($emp->full_name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <select>
-                             </div
-                              
-                                
+                                           <?php if($errors->has('in_place_of_employee')): ?>
+                                    <span class="help-block">
+                                        <strong  class="text-danger"><?php echo e($errors->first('in_place_of_employee')); ?></strong>
+                                    </span>
+                                    <?php endif; ?>
+                             </div>    
+                                     <div class="form-group">
+                                    <label for="job_position">Acting Position</label>
+                                    
+                                    <select class="form-control" name="acting_job_id" id="acting_job_id" >
+                                     <option value="<?php echo e($ActingEmployee->acting_job_position_id); ?>"><?php echo e($to_job); ?></option>
+                                        <?php $__currentLoopData = $job_positions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id=>$job_position): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($id); ?>"><?php echo e($job_position); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <select>
+                                     <?php if($errors->has('acting_job_id')): ?>
+                                    <span class="help-block">
+                                        <strong  class="text-danger"><?php echo e($errors->first('acting_job_id')); ?></strong>
+                                    </span>
+                                    <?php endif; ?>
+                             </div>                 
+                             </div>
+
+                                                                               
                                        <div class="col-md-6">
                                         <div class="form-group">
                                     <label for="job_position">Acting For Branch/Department</label>                                   
@@ -114,6 +171,7 @@ function yesnoCheck() {
                              </div>
                                 </div>
                                 <div class="col-md-6">
+                                
                                  <div class="form-group">
                                     <label for="status">Status</label>
                                     <select  class="form-control" name="status" id="status" >

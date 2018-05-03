@@ -29,7 +29,7 @@ class AssetItemController extends Controller
     public function create()
     {
         //
-         $ppes=new PPECategory;
+        $ppes=new PPECategory;
         $ppes->setConnection('sqlsrv2');
         $ppes=\App\PPECategory::all();
         //dd($ppes);
@@ -77,9 +77,11 @@ class AssetItemController extends Controller
      * @param  \App\AssetItem  $assetItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(AssetItem $assetItem)
+    public function edit(AssetItem $assetItem,$id)
     {
-        //
+    $edit=AssetItem::find($id);
+    $ppe_type=PPECategory::find($edit->p_p_e_category_id);
+     return view('fixed_asset.asset_category.edit',['asset_item'=>$edit,'ppe_type'=>$ppe_type]);
     }
 
     /**
@@ -91,7 +93,7 @@ class AssetItemController extends Controller
      */
     public function update(Request $request, AssetItem $assetItem)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -102,6 +104,6 @@ class AssetItemController extends Controller
      */
     public function destroy(AssetItem $assetItem)
     {
-        //
+       
     }
 }

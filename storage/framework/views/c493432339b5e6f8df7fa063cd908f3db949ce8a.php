@@ -46,10 +46,10 @@
                 <table class="table table-striped">
                  <tr>
                 <th>Employee Name</th>
-                <td><?php echo e($employee->user->name); ?></td> 
+                <td><?php echo e($employee->full_name); ?></td> 
                 </tr>
                 <th>Employee Id</th>
-                <td><?php echo e($employee->enat_id); ?></td> 
+                <td><?php echo e($employee->id); ?></td> 
                 </tr>
                 <tr>
                 <th>Job Position</th>
@@ -58,17 +58,17 @@
 
                 <tr>
                 <th>Email</th>
-                <td><?php echo e($employee->user->email); ?></td>
+                <td><?php echo e($employee->email); ?></td>
                 </tr>
 
                 <tr>
                 <th>Phone number</th>
-               <td><?php echo e($employee->user->phone_no); ?></td>
+               <td><?php echo e($employee->phone_no); ?></td>
                 </tr>
 
                 <tr>
                 <th>Branch</th>
-                <td><?php echo e($employee->user->branch->branch_name); ?></td>
+                <td><?php echo e($employee->branch->branch_name); ?></td>
                 </tr>
                 <tr>
                 <th> Date of Employment</th>
@@ -80,6 +80,51 @@
                  <td><?php echo e($employee->salary); ?></td>
                 </tr>
                 
+                  <tr>
+                <th>Birth Date</th>
+                 <td><?php echo e($employee->salary); ?></td>
+                </tr>
+
+                    <tr>
+                <th>Employee Name</th>
+                <td><?php echo e($employee->full_name); ?></td> 
+                </tr>
+                <th>Employee Id</th>
+                <td><?php echo e($employee->id); ?></td> 
+                </tr>
+                <tr>
+                <th>Job Position</th>
+                <td><?php echo e($employee->job_position->name); ?></td> 
+                </tr>
+
+                <tr>
+                <th>Email</th>
+                <td><?php echo e($employee->email); ?></td>
+                </tr>
+
+                <tr>
+                <th>Phone number</th>
+               <td><?php echo e($employee->phone_no); ?></td>
+                </tr>
+
+                <tr>
+                <th>Branch</th>
+                <td><?php echo e($employee->branch->branch_name); ?></td>
+                </tr>
+                <tr>
+                <th> Date of Employment</th>
+                 <td><?php echo e($employee->employed_date); ?></td>
+                </tr>
+
+                 <tr>
+                <th>Salary</th>
+                 <td><?php echo e($employee->salary); ?></td>
+                </tr>
+                
+                  <tr>
+                <th>Salary</th>
+                 <td><?php echo e($employee->salary); ?></td>
+                </tr>
 
                         </table>
                 </div>

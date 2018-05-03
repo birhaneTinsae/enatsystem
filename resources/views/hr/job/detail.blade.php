@@ -24,7 +24,7 @@
         <div class="col-md-6 ">
             <ol class="breadcrumb">
                 <!-- <li><a href="home">Home</a></li>                -->
-                <li class="active">TransferPromotion detail</li>
+                <li class="active">{{$jobs->name}} job position detail</li>
             </ol>
             <div class="panel panel-primary">
              <div id="printableTable">
@@ -33,7 +33,7 @@
                     <img class="profile_Image" src="http://localhost:8000/download.jpg">                        
                           </div> 
               <h4 class="text-center  text-success font-weight-bold">
-               {{$Transferpromotion->remark}} request History of Employee {{$emp_name}} on date {{$Transferpromotion->date}}
+              
                </h4>
                 </div>
 
@@ -44,69 +44,70 @@
                         </div>
                     @endif
 
-                    <table class="table table-striped">
+                <table class="table table-striped">
                  <tr>
-                <th>Employee Name</th>
-                <td>{{$emp_name}}</td> 
+                <th>Position Name</th>
+                <td>{{$jobs->name}}</td> 
                 </tr>
-                <th>Employee Id</th>
-                <td>{{$emp_id}}</td> 
+                <th>Grade </th>
+                <td>{{$jobs->grade}}</td> 
                 </tr>
                 <tr>
-                <th>From Job Position</th>
-                <td>{{$from_job}}<td>
+                <th>Step1</th>
+                <td>{{$jobs->step1}}</td> 
                 </tr>
 
-                <tr>
-                <th>To Job position</th>
-                <td>{{$to_job}}<td>
-                </tr>
+                 <th>Step2</th>
+                <td>{{$jobs->step2}}</td> 
+                </tr>                
 
-                <tr>
-                <th>From Branch</th>
-                <td>{{$from_branch}}<td>
-                </tr>
-
-                <tr>
-                <th>To Branch</th>
-                <td>{{$to_branch}}<td>
+                 <th>Step3</th>
+                <td>{{$jobs->step3}}</td> 
                 </tr>
 
 
-                <tr>
-                <th> Date of {{$Transferpromotion->reason}} request</th>
-                <td>{{$Transferpromotion->date}}<td>
+                 <th>Step4</th>
+                <td>{{$jobs->step4}}</td> 
                 </tr>
 
-                 <tr>
-                <th> Salary</th>
-                <td>{{$Transferpromotion->salary}} <td>
+                  <th>Step5</th>
+                <td>{{$jobs->step5}}</td> 
                 </tr>
-                <tr>
+
+                 <th>Step6</th>
+                <td>{{$jobs->step6}}</td> 
+                </tr>
+
+                 <th>Step7</th>
+                <td>{{$jobs->step7}}</td> 
+                </tr>
+
+                 <th>Step8</th>
+                <td>{{$jobs->step8}}</td> 
+                </tr>
+
+                 <th>Step9</th>
+                <td>{{$jobs->step9}}</td> 
+                </tr>
+
+                 <th>Step10</th>
+                <td>{{$jobs->step10}}</td> 
+                </tr>
                 
 
-                <tr>
-                <th> Reason</th>
-                <td>{{$Transferpromotion->reason}}<td>
-                </tr>
-
-                <tr>
-                <th> Remark</th>
-                <td>{{$Transferpromotion->remark}}<td>
-                </tr>
                         </table>
                 </div>
                 <div class="panel-footer">
                     <div class="row">
-                        <div class="col-md-4">Maker <span class="label label-default">{{$Transferpromotion->maker}}</span></div>
-                        <div class="col-md-4">Date Time <span class="label label-default">{{$Transferpromotion->created_at}}</span></div>
+                        <div class="col-md-4">Maker <span class="label label-default"></span></div>
+                        <div class="col-md-4">Date Time <span class="label label-default"></span></div>
                         <div class="col-md-4">Record Status <span class="label label-default">Default Label</span></div>
                     </div>
                     </div>                    
                 </div>
             </div>
             <button onclick="printpage('printableTable')" class="btn btn-primary">print</button></span>                  
-<span><a href="/transferpromotionrequest" class="btn btn-primary">Back</a></span>
+<span><a href="/job" class="btn btn-primary">Back</a></span>
         </div>
     </div>
 </div>

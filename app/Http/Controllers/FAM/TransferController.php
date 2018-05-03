@@ -43,7 +43,7 @@ class TransferController extends Controller
         }
         $curr_custudian=Employee::find($asset->custudian);        
         $curr_custudian_id=User::find($curr_custudian->user_id);       
-        $curr_custudian_name=$curr_custudian_id->name;
+        $curr_custudian_name=$curr_custudian->full_name;
 
         $curr_cost_center=Branch::find($asset->branch_id);        
               
@@ -101,9 +101,18 @@ class TransferController extends Controller
      * @param  \App\Transfer  $transfer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transfer $transfer)
+    public function edit(Request $request,$id)
     {
-        //
+       $edit=Transfer::find($id);
+        $asset=Asset::find($edit->asset_id);
+        $curr_custudian=Employee::find($edit->from_employee);
+        $new_custudian=Employee::find($edit->to_employee);
+        $curr_cost_center=Branch::find($edit->from_cost_center);
+         $new_cost_center=Branch::find($edit->to_cost_center);
+              //dd($curr_custudian);
+          return view('fixed_asset.asset.transfer.edit',['transfer'=>$edit,'asset'=>$asset,'curr_custudian'
+          =>$curr_custudian,'new_custudian'=>$new_custudian,'curr_cost_center'=>$curr_cost_center,
+          'new_cost_center'=>$new_cost_center]);
     }
 
     /**

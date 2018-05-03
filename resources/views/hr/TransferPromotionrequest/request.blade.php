@@ -33,7 +33,7 @@
             <ol class="breadcrumb">
                 <li><a href="home">Home</a></li>         
                 <li><a href="/hr">HR</a></li>                     
-                <li class="active">TransferPromotion Request</li>
+                <li class="active">Transfer Position change Request</li>
             </ol>
         <form action="searchtransferpromotionrequest" method="get">
                 <div class="form-group">
@@ -46,7 +46,7 @@
                 </div>
             </form>
             <div class="panel panel-default">
-                <div class="panel-heading">Employees Transfer/Promotion Request Records
+                <div class="panel-heading">Employees Transfer/ Request Records
                     @can('close-role')                   
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
                     Close</a>
@@ -104,7 +104,7 @@
                          @endphp  
                             @foreach($Result as  $employee)                                    
                             <tr>                                
-                                <td>{{$employee->Employee->User->name}}</td>                                                                                    
+                                <td>{{$employee->Employee->full_name}}</td>                                                                                    
                                  @for ($i = $j; $i <=$j; $i++)                                                                        
                                 <td>{{$FromJob[$j]}}</td>                                                                                                                     
                                 @endfor                                                                                                                                                 
