@@ -122,9 +122,23 @@ Route::resource('fixed-asset', 'FAM\PPECategoryController')->middleware('can:vie
 Route::resource('asset','FAM\AssetController');
 Route::resource('asset-category','FAM\AssetItemController');
 Route::get('additional-cost/{id}','FAM\AdditionalCostController@create');
+Route::resource('additional-costs','FAM\AdditionalCostController');
 Route::post('additional-cost','FAM\AdditionalCostController@store');
 Route::get('impairment/{id}','FAM\ImpairmentController@create');
+Route::resource('impairments','FAM\ImpairmentController');
+Route::resource('usefullifes','FAM\UsefulLifeReEstimation');
 Route::post('impairment','FAM\ImpairmentController@store');
+Route::get('usefullife/{id}','FAM\UsefulLifeReEstimation@create');
+Route::post('usefullife','FAM\UsefulLifeReEstimation@store');
+Route::resource('residuallifes','FAM\ResidualLifeReEstimation');
+Route::get('residuallife/{id}','FAM\ResidualLifeReEstimation@create');
+Route::post('residuallife','FAM\ResidualLifeReEstimation@store');
+Route::get('draft','FAM\PPECalculationController@draft');
+Route::get('final','FAM\PPECalculationController@final');
+Route::get('ppecalc','FAM\PPECalculationController@index');
+Route::post('ppecalc','FAM\PPECalculationController@store');
+
+
 
 Route::resource('transfers','FAM\TransferController');
 Route::get('transfer/{id}','FAM\TransferController@create');
