@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FAM;
 use Illuminate\Support\Facades\DB;
 use App\Asset;
 use App\Disposal;
+use App\PPEDepreciation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class DisposalController extends Controller
@@ -40,9 +41,32 @@ class DisposalController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+       // dd($request->all());
       $new_rec=new Disposal;
+      $asset=Asset::find($request->asset_id);
        $new_rec->asset_id=$request->asset_id;
+         if($asset->disposed=="1"){
+ $request->session()->flash('delete_status',$request->asset_name." is already Disposed.");
+            return redirect('/asset/'.$request->asset_id);
+     }
+      $effective_year=date('Y',strtotime($request->effective_date));
+        $calc_depreciation=PPEDepreciation::where('asset_id',$request->asset_id)        
+        ->where('calculation_type',"Final")
+        ->whereYear('selected_depreciation_date',$effective_year)
+        ->value('selected_depreciation_date'); 
+          
+        if(!empty($calc_depreciation)){
+             $year=date('Y',strtotime($calc_depreciation));
+             $effective_year=date('Y',strtotime($request->effective_date));
+            if($year==$effective_year){
+                 $request->session()->flash('delete_status'," Final PPE is calculated within specifaied Effective date  asset can not be disposed.");
+            return redirect('/asset/'.$request->asset_id);
+            }           
+        }                 
+        if($asset->date_of_acquisition>$request->effective_date){
+             $request->session()->flash('delete_status'," Effective date can not be greater than current date of acquisition .");
+            return redirect('/asset/'.$request->asset_id);
+         }  
        $new_rec->effective_date=$request->effective_date;
         $new_rec->remarks=$request->remarks;
         if($new_rec->save()){
@@ -50,7 +74,7 @@ class DisposalController extends Controller
             ->where('id',$request->asset_id)
             ->update(['disposed'=>"1"]);
             $request->session()->flash('status',"Asset ".$request->asset_name." Disposed.");
-            return redirect('/asset');
+            return redirect('/asset/'.$request->asset_id);
         }
     }
 
@@ -87,8 +111,33 @@ class DisposalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request,$id)
-    {
-        //
+    {      
+        $update=Disposal::find($id);     
+        $asset=Asset::find($update->asset_id);
+         $effective_year=date('Y',strtotime($update->effective_date));  
+           $calc_depreciation=PPEDepreciation::where('asset_id',$update->asset_id)
+        ->where('calculation_type',"Final")
+        ->whereYear('selected_depreciation_date',$effective_year)
+        ->value('selected_depreciation_date');           
+         if(!empty($calc_depreciation)){
+              $year=date('Y',strtotime($calc_depreciation));
+             $effective_year=date('Y',strtotime($update->effective_date));            
+            if($year==$effective_year){                
+                 $request->session()->flash('delete_status'," Final PPE is calculated within specifaied Effective date  Record can not be updated.");
+            return redirect('/asset/'.$update->asset_id);
+            }           
+        }         
+              if($asset->date_of_acquisition>$request->effective_date){
+             $request->session()->flash('delete_status'," Effective date can not be less than  date of acquisition .");
+            return redirect('/asset/'.$asset_id);
+         }
+        $update->asset_id=$update->asset_id;
+        $update->effective_date=$request->effective_date;
+        $update->remarks=$request->remark;
+       if($update->save()){
+            $request->session()->flash('status'," record successfully update.");
+            return redirect('/asset/'.$update->asset_id);
+        }
     }
 
     /**
@@ -97,9 +146,30 @@ class DisposalController extends Controller
      * @param  \App\Disposal  $disposal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Disposal $disposal)
+    public function destroy(Request $request,$id)
     {
-        //
+      $delete = Disposal::find( $id );   
+      $asset=Asset::find($delete->asset_id );    
+      $effective_year=date('Y',strtotime($delete->effective_date)); 
+           $calc_depreciation=PPEDepreciation::where('asset_id',$asset->id)
+        ->where('calculation_type',"Final")
+        ->whereYear('selected_depreciation_date',$effective_year)
+        ->value('selected_depreciation_date');           
+         if(!empty($calc_depreciation)){
+              $year=date('Y',strtotime($calc_depreciation));
+             $effective_year=date('Y',strtotime($delete->effective_date));            
+            if($year==$effective_year){                
+                 $request->session()->flash('delete_status'," Final PPE is calculated within specifaied Effective date  Record can not be Closed.");
+            return redirect('/asset/'.$delete->asset_id);
+            }           
+        }               
+       if( $delete ->delete()){
+            DB::connection('sqlsrv2')->table('assets')
+            ->where('id',$asset->id)
+            ->update(['disposed'=>"0"]);
+            $request->session()->flash('delete_status'," record successfully Closed.");
+            return redirect('/asset/'.$asset->id);
+        }
     }
 
     public function search(Request $request)
