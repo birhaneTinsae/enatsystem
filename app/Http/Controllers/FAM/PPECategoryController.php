@@ -4,6 +4,8 @@ namespace App\Http\Controllers\FAM;
 
 use App\PPECategory;
 use Illuminate\Http\Request;
+use App\Usefullife;
+use App\Residuallife;
 use App\Http\Controllers\Controller;
 class PPECategoryController extends Controller
 {
@@ -59,9 +61,17 @@ class PPECategoryController extends Controller
      * @param  \App\PPECategory  $pPECategory
      * @return \Illuminate\Http\Response
      */
-    public function show(PPECategory $pPECategory)
+    public function show($id)
     {
-        //
+        $show=PPECategory::findOrFail($id);
+        $useful_life=new Usefullife;
+        $useful_life->setconnection('sqlsrv2');
+      //  $useful_life=Usefullife::where('p_p_e_categorie_id',$id)->get();
+
+        $residual_life=new Residuallife;
+        $residual_life->setconnection('sqlsrv2');
+       // $residual_life=Residuallife::where('p_p_e_categorie_id',$id)->get();       
+          return view('fixed_asset.show',['ppe'=>$show]);
     }
 
     /**
