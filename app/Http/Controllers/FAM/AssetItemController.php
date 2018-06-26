@@ -91,9 +91,17 @@ class AssetItemController extends Controller
      * @param  \App\AssetItem  $assetItem
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AssetItem $assetItem)
-    {
-        dd($request->all());
+    public function update(Request $request,  $id)
+    {            
+        $update= AssetItem::find($id);
+        $update->setConnection('sqlsrv2');
+        $update->p_p_e_categorie_id=$request->ppe_type;
+        $update->overrided_useful_life=$request->useful_life;
+        $update->overrided_residual_value=$request->residual_value;
+        if($update->save()){
+            $request->session()->flash('status',"Asset Item".$request->name." successfully Updated.");
+            return redirect('/asset-category');
+        }
     }
 
     /**
