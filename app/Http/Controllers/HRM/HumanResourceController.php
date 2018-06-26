@@ -135,7 +135,15 @@ class HumanResourceController extends Controller
          $employee=Employee::findOrFail($id);        
          $job_id=$employee->job_position_id;
          $job=JobPosition::find($job_id);
-         $job_name=$job->name;
+
+         if($job==NULL){
+        $job_name="";
+         }
+         else{
+             $job_name=$job->name;            
+         }
+         
+         
          $branch_id=$employee->branch_id;
          $branch=Branch::find($branch_id);
          $branch_name=$branch->branch_name;       
@@ -152,7 +160,7 @@ class HumanResourceController extends Controller
      */
     public function update(Request $request, $id)
      {
- $update_employee=Employee::find($id);  
+        $update_employee=Employee::find($id);  
         $valid_data=$request->validate([                     
             'enat_id'=>'required|unique:employees,enat_id,'.$id,
             'Phone_no'=>'required|unique:employees,phone_no,'.$id,            
@@ -219,7 +227,8 @@ class HumanResourceController extends Controller
        public function search(Request $request)
     {
          $name=$request->queryemp;          
-        $employees =DB::table('employees')->where('full_name','LIKE','%'.$name.'%')->paginate(2);          
+        $employees =DB::table('employees')->where('full_name','LIKE',"$name%")->paginate(10);          
+       //dd($employees);
         return view('hr.hr',['employees'=> $employees]);
        
     }
