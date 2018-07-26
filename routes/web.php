@@ -85,6 +85,11 @@ Route::get('/sms-password-notification', 'Notification\SMSPasswordNotificationCo
 Route::get('/sms-password-notification/create', 'Notification\SMSPasswordNotificationController@create')->middleware('can:create-sms');;
 /**
  * 
+ * 
+ */
+Route::resource('/group-notification','Notification\NotificationGroupController');
+/**
+ * 
  */
 Route::resource('msg-templete','Notification\MessageTempleteController');
 /**
