@@ -140,6 +140,7 @@ class AssetController extends Controller
         //
         $residual_percent;
 
+        
         if(!empty($request->residual_value)){
             $residual_percent=$request->residual_value;
         }else {
@@ -193,7 +194,7 @@ class AssetController extends Controller
      */
     public function daily_depreciation($book_value , $useful_life){
 
-        return ($book_value / $useful_life) * 365;
+        return $book_value / $useful_life * 365;
     }
     /**
      * 

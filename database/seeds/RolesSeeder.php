@@ -16,33 +16,34 @@ class RolesSeeder extends Seeder
     {
         //
         $admin=Role::create([
-            'name'=>'Admin',
-            'slug'=>'admin',
-            'permissions'=>json_encode([
-                "create-user"=>true,
-                "create-employee"=>true,
-                "update-employee"=>true,
-                "delete-employee"=>true,
-                "view-employee"=>true,
-                "create-role"=>true,
-                "view-hr"=>true,
-                "view-sms"=>true,
-                "view-vms"=>true,
-                "view-fam"=>true,
-                "view-fcy"=>true,
-                "create-sms"=>true,
+            'name'=>'Admin'
+            // 'slug'=>'admin',
+            // 'permissions'=>json_encode([
+            //     "create-user"=>true,
+            //     "create-employee"=>true,
+            //     "update-employee"=>true,
+            //     "delete-employee"=>true,
+            //     "view-employee"=>true,
+            //     "create-role"=>true,
+            //     "view-hr"=>true,
+            //     "view-sms"=>true,
+            //     "view-vms"=>true,
+            //     "view-fam"=>true,
+            //     "view-fcy"=>true,
+            //     "create-sms"=>true,
                 
-            ]),
+           // ]),
            
         ]);
         $isd=Role::create([ 
         'name'=>'ISD',
-        'slug'=>'isd',
-        'permissions'=>json_encode([
+        // 'slug'=>'isd',
+        // 'permissions'=>json_encode([
            
-            "create-sms"=>true,
+        //     "create-sms"=>true,
             
-        ]),]);
+        // ]),
+        ]);
 
         
         

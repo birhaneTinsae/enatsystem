@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::resource('sms-notifications','SMSNotificationController');
+Route::resource('branches','BranchResourceController');
+Route::resource('message-templetes','MessageTemplateResourceController');
+Route::resource('employees','EmployeeResourceController');

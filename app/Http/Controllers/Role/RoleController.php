@@ -42,12 +42,12 @@ class RoleController extends Controller
        
         $role_permission=array();
         $counter=1;
-/**
- * First loops via all the selected models and views. e.g Employee,SMSNotification.
- * and then foreach the selected models and view loops for the permission like Create,update,view
- * 
- */
-//Loops for models
+        /**
+         * First loops via all the selected models and views. e.g Employee,SMSNotification.
+         * and then foreach the selected models and view loops for the permission like Create,update,view
+         * 
+         */
+        //Loops for models
         foreach($request->models as $model){
             //loops for the permission for the selected model
              //since the permission is an array containing all the permission for all the model this loop only iterate once per a model
@@ -66,7 +66,7 @@ class RoleController extends Controller
         $role->slug=$request->role_slug;
         $role->permissions=json_encode($role_permission);
         if($role->save()){
-            $request->session()->flash('status','Role ${$request->role_name} successfully added.');
+            $request->session()->flash('status',`Role ${$request->role_name} successfully added.`);
             return redirect('/role');
         }
         return json_encode($role_permission);

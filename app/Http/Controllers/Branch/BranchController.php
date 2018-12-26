@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Branch;
 
 use App\Branch;
 use Illuminate\Http\Request;
+use  App\Http\Resources\BranchCollection;
 use App\Http\Controllers\Controller;
 
 class BranchController extends Controller
@@ -16,6 +17,7 @@ class BranchController extends Controller
      */
     public function index()
     {
+        //return new BranchCollection(Branch::all());
         $branches=Branch::all();
        return view('branch.branch',['branches'=>$branches]);
     }
@@ -101,13 +103,7 @@ class BranchController extends Controller
     }
     public function employees($id){
        $employees= Branch::find($id)->employees;
-    //    $employees_detail=[];
-    //    $counter=0;
 
-    //    foreach($employees as $employee){
-    //       $employees_detail[$counter]=$employee;         
-    //       $counter++;
-    //    }
        return json_encode( $employees);
     }
 }

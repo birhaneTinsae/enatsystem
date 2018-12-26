@@ -10,4 +10,8 @@ class FixedAssetController extends Controller
     public function index(){
         return view('fixed_asset\fixed_asset');
     }
+    
+    public function calculate_depreciation(){
+
+    }
 }

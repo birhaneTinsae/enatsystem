@@ -4,13 +4,14 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 // use OwenIt\Auditing\Contracts\Auditable;
 // use OwenIt\Auditing\Contracts\UserResolver;
 
 class User extends Authenticatable //implements Auditable,UserResolver
 {
-    use Notifiable;
-    
+    use HasApiTokens,Notifiable;
+   
    // use \OwenIt\Auditing\Auditable;
     /**
      * The attributes that are mass assignable.

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+use Laravel\Passport\Passport;
 use App\Employee;
 use App\Role;
 use App\Policies\EmployeePolicy;
@@ -31,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
+        Passport::routes();
         //
         Gate::define('view-hr', function ($user) {
             

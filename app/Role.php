@@ -18,11 +18,21 @@ class Role extends Model implements Auditable
     //     'name',
     //     'slug',
     // ];
+ /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    //protected $table = 'auth_group';
 
-    protected $fillable=['name','slug','permissions'];
+    //protected $fillable=['name','slug','permissions'];
 
     public function users(){
         return $this->belongsToMany(User::class,'role_users');
+    }
+
+    public function permissions(){
+        return $this->belongsToMany(AuthPermission::class,'role_permissions');
     }
 
     public function hasAccess(array $permissions){
@@ -38,7 +48,9 @@ class Role extends Model implements Auditable
     protected function hasPermission(string $permission){
         $permissions=json_decode($this->permissions,true);
         //ternary operator new syntax on php 7
-        //dd($permission);
+       
         return $permissions[$permission]??false;
     }
+
+
 }

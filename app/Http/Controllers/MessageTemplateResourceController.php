@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Notification;
-
-use App\NotificationGroup;
+namespace App\Http\Controllers;
+use App\Http\Resources\MessageTemplate as MessageTemplateResource;
+use App\Http\Resources\MessageTemplateCollection ;
+use App\MessageTemplete;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class NotificationGroupController extends Controller
+class MessageTemplateResourceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +16,7 @@ class NotificationGroupController extends Controller
     public function index()
     {
         //
+        return new MessageTemplateCollection(MessageTemplete::all());
     }
 
     /**
@@ -26,8 +27,6 @@ class NotificationGroupController extends Controller
     public function create()
     {
         //
-        $group=NotificationGroup::all();
-        return view('notification.group-notification.new',['group'=>$group]);
     }
 
     /**
@@ -39,35 +38,27 @@ class NotificationGroupController extends Controller
     public function store(Request $request)
     {
         //
-        $group=new NotificationGroup;
-        $group->name=$request->name;
-        if($group->save()){
-            $request->session->flash('status',`Notification group ${$request->name} successfully added.`);
-        }
-        // foreach($request->employees as $employee){
-        //     $emp=Employee::findOrFail($employee->id);
-        //     $emp->notification_group=
-        // }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\NotificationGroup  $notificationGroup
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(NotificationGroup $notificationGroup)
+    public function show($id)
     {
         //
+        return new MessageTemplateResource(MessageTemplete::find($id));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\NotificationGroup  $notificationGroup
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(NotificationGroup $notificationGroup)
+    public function edit($id)
     {
         //
     }
@@ -76,10 +67,10 @@ class NotificationGroupController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\NotificationGroup  $notificationGroup
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NotificationGroup $notificationGroup)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -87,10 +78,10 @@ class NotificationGroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\NotificationGroup  $notificationGroup
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NotificationGroup $notificationGroup)
+    public function destroy($id)
     {
         //
     }

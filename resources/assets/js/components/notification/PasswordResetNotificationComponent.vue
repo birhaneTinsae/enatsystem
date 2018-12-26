@@ -1,39 +1,16 @@
-@extends('layouts.app') 
-@section('sidebar')
-<ul class="list-group">
-    <li class="list-group-item disabled">Menu</li>
-    <li class="list-group-item"><a href="/sms-password-notification">List</a></li>
-    <li class="list-group-item"><a href="/sms-password-notification/create">SMS</a></li>
-    <li class="list-group-item"><a href="/sms-password-notification/send-one-time">One Time SMS</a></li>
-    <li class="list-group-item"><a href="#">Email</a></li>
-    <li class="list-group-item"><a href="home">Home</a></li>
-</ul>
-@endsection
- 
-@section('content')
-<div class="container">
-    <div class="row">
-        <!--col-md-offset-1-->
-        <div class="col-md-10 ">
-            <ol class="breadcrumb">
-                <li><a href="/home">Home</a></li>
-                <li class="active">Notification</li>
-            </ol>
-            @if(session('status'))
-            <div class="alert alert-success" role="alert">
-                {{session('status')}}
-            </div>
-            @endif
-            {{-- <div class="panel panel-default">
-                <div class="panel-heading">SMS Password Notification @can('close-role')
+<style scoped>
+</style>
+<template>
+     <div class="panel panel-default">
+                <div class="panel-heading">SMS Password Notification 
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
-                    Close</a> @endcan @can('update-role')
+                    Close</a>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Update</a> @endcan @can('delete-role')
+                    Update</a>
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
-                        Delete</a> @endcan @can('create-sms')
+                        Delete</a> 
                     <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
-                        New</a> @endcan
+                        New</a>
 
                 </div>
 
@@ -41,24 +18,19 @@
 
 
                     <form action="/sms-password-notification/send" method="POST">
-                        {{ csrf_field() }}
+                      
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="branch">Branch</label>
-                                    <select id="branch" class="form-control" name="branch">
-                                @foreach($branches as $id=>$branch)
-                                <option value="{{$id}}">{{$branch}}</option>
-                                @endforeach
-                                </select>
+                                        <v-select v-model="selected_branch" label="name" :options="branches" @select="getBranchEmployees"></v-select>                    
+                                <p>{{selected_branch}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="employee">Employee</label>
-                                    <select id="employee" class="form-control" name="employee">
-                                    <option value=""></option>
-                                </select>
+                                      <v-select v-model="E label="name" :options="employees"></v-select>                        
                                 </div>
                             </div>
                         </div>
@@ -87,32 +59,79 @@
 
                         <div class="form-group">
                             <label for="msg-templete">Message Templete</label>
-                            <select name="msg-templete" class="form-control" id="msg-templete">
-                            <option value="">--Select Templete--</option>
-                            @foreach($msg_templetes as $id=>$msg_templete)
-                            <option value="{{$id}}">{{$msg_templete}}</option>
-                            @endforeach
-                        </select>
+                            <select name="msg-templete" class="form-control" id="msg-templete" v-model="selected_templete">
+                              <option v-for="message_templete in message_templetes"  v-bind:value="message_templete.templete">{{message_templete.name}}</option>                           
+                            </select>
+                            <p>{{selected_templete}}</p>
                         </div>
 
                         <div class="form-group">
                             <label for="msg">Message</label>
-                            <textarea class="form-control" id="msg" name="msg" rows="3"></textarea>
+                            <textarea class="form-control" id="msg" name="msg" rows="3"  v-model="selected_templete">
+                                
+                            </textarea>
                         </div>
 
                         <button type="submit" class="btn btn-success btn-md">Send</button>
                     </form>
                 </div>
                 <div class="panel-footer">
-                    <!-- <div class="row">
-                        <div class="col-md-4">Maker <span class="label label-default">Default Label</span></div>
-                        <div class="col-md-4">Date Time <span class="label label-default">Default Label</span></div>
-                        <div class="col-md-4">Record Status <span class="label label-default">Default Label</span></div>
-                    </div> -->
+                    
                 </div>
-            </div> --}}
-            <password-reset></password-reset>
-        </div>
-    </div>
-</div>
-@endsection
+            </div>
+</template>
+<script>
+export default {
+    data () {
+        return {
+            branches:[],
+            employees:[],
+            message_templetes:[],
+            selectedEmployee:'',
+            selected_branch:null, 
+            selected_templete:null
+           
+            
+        }
+    },
+    mounted() {
+        this.getBranches();
+        this.getMessageTempletes();
+        this.getBranchEmployees();
+    },
+    watch(){
+se
+    },
+    methods:{
+        getBranches(){
+            axios.get('/api/branches')
+                .then(response=>{
+                    console.log(response.data);
+                    this.branches=response.data.data;
+                });
+        },
+        getBranchEmployees(){
+            console.log(this.selected_branch);
+            if(this.selected_branch!==null){
+                
+                axios.get('/api/employees/'+this.selected_branch.id)
+                .then(response=>{
+                    console.log(response.data);
+                    this.employees=response.data.data;
+                })
+            }
+         
+        },
+        getEmployee(employee){
+
+        },
+        getMessageTempletes(){
+            axios.get('/api/message-templetes')
+            .then(response=>{
+                 console.log(response.data);
+                this.message_templetes=response.data.data;
+            })
+        }
+    }
+}
+</script>
