@@ -61,13 +61,29 @@ export default {
             this.getNotifications();
         },
         getNotifications(){
-             axios.get('/sms-password-notifications')
+             axios.get('/api/sms-notifications')
                         .then(response => {
                             console.log(response);
                             this.notifications = response.data.data;
 
                         });
-       
+            // return  this.notifications=[
+            //     {
+            //      message:"Dear Abel Mekuria Your passwor...",
+            //      sender: "btinsae",
+            //      created_at: "Sat, Mar 10, 2018 12:19 PM"
+            //     },
+            //     {
+            //      message:"Dear Abel Mekuria Your passwor...",
+            //      sender: "btinsae",
+            //      created_at: "Sat, Mar 10, 2018 12:19 PM"
+            //     },
+            //     {
+            //      message:"Dear Abel Mekuria Your passwor...",
+            //      sender: "btinsae",
+            //      created_at: "Sat, Mar 10, 2018 12:19 PM"
+            //     }
+            // ];
         }
     }
 }

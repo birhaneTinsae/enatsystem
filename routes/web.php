@@ -23,7 +23,7 @@ Auth::routes();
 Route::get('phone-book','PhoneBookController@index')->name('phone-book');
 Route::get('phone-book/{query}','PhoneBookController@search');
 
-Route::middleware(['auth'])->group(function(){
+// Route::middleware(['auth'])->group(function(){
 
     // Notification::route('mail', 'taylor@laravel.com')           
     // ->notify(new HRNotification(App\ActingEmployee::all()));
@@ -81,8 +81,10 @@ Route::post('/sms-password-notification/send-one-time','Notification\SMSPassword
 Route::post('/sms-password-notification/filter','Notification\SMSPasswordNotificationController@filter');
 Route::get('/sms-password-notification/send-one-time','Notification\SMSPasswordNotificationController@one_time_sms');
 Route::get('/password-generator','Notification\SMSPasswordNotificationController@generate_password');
-Route::get('/sms-password-notification', 'Notification\SMSPasswordNotificationController@index')->name('sms-notification')->middleware('can:view-sms');;
-Route::get('/sms-password-notification/create', 'Notification\SMSPasswordNotificationController@create')->middleware('can:create-sms');;
+Route::get('/sms-password-notification', 'Notification\SMSPasswordNotificationController@index')->name('sms-notification');//->middleware('can:view-sms');;
+Route::get('/sms-password-notifications', 'Notification\SMSPasswordNotificationController@notifications');
+
+Route::get('/sms-password-notification/create', 'Notification\SMSPasswordNotificationController@create');//->middleware('can:create-sms');;
 /**
  * 
  * 
@@ -107,7 +109,7 @@ Route::post('impairment','FAM\ImpairmentController@store');
 Route::get('impairment/{id}/edit','FAM\ImpairmentController@edit');
 Route::put('impairment/{id}','FAM\ImpairmentController@update');
 
-});
+// });
 /**
  * Please add new application URLs below.
  */

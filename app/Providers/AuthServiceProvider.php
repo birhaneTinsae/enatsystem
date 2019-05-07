@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Providers;
-use Laravel\Passport\Passport;
 use App\Employee;
 use App\Role;
 use App\Policies\EmployeePolicy;
@@ -18,8 +17,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
-        Employee::class=>EmployeePolicy::class,
-        Role::class=>RolePolicy::class,
+        // Employee::class=>EmployeePolicy::class,
+        // Role::class=>RolePolicy::class,
 
     ];
 
@@ -31,36 +30,35 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Passport::routes();
-        //
-        Gate::define('view-hr', function ($user) {
+    
+    //     Gate::define('view-hr', function ($user) {
             
-            return $user->hasAccess(['view-hr']);
-        });
-        Gate::define('view-fam', function ($user) {
+    //         return $user->hasAccess(['view-hr']);
+    //     });
+    //     Gate::define('view-fam', function ($user) {
             
-            return $user->hasAccess(['view-fam']);
-        });
-        Gate::define('view-fcy', function ($user) {
+    //         return $user->hasAccess(['view-fam']);
+    //     });
+    //     Gate::define('view-fcy', function ($user) {
             
-            return $user->hasAccess(['view-fam']);
-        });
-        Gate::define('view-sms', function ($user) {
+    //         return $user->hasAccess(['view-fam']);
+    //     });
+    //     Gate::define('view-sms', function ($user) {
             
-            return $user->hasAccess(['view-sms']);
-        });
-        Gate::define('create-sms', function ($user) {
+    //         return $user->hasAccess(['view-sms']);
+    //     });
+    //     Gate::define('create-sms', function ($user) {
             
-            return $user->hasAccess(['create-sms']);
-        });
-        Gate::define('view-vms', function ($user) {
+    //         return $user->hasAccess(['create-sms']);
+    //     });
+    //     Gate::define('view-vms', function ($user) {
             
-            return $user->hasAccess(['view-vms']);
-        });
-        Gate::define('create-user', function ($user) {
+    //         return $user->hasAccess(['view-vms']);
+    //     });
+    //     Gate::define('create-user', function ($user) {
             
-            return $user->hasAccess(['create-user']);
-        });
+    //         return $user->hasAccess(['create-user']);
+    //     });
     }
 
 
