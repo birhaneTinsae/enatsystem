@@ -20,8 +20,14 @@ class SMSPasswordNotificationController extends Controller
      * -correct the dfajdflka
      */
     public function index(){
+        // $notifications=SMSPasswordNotification::paginate(10);
+       return view('notification.notification');
+   
+    }
+    public function notifications(){
         $notifications=SMSPasswordNotification::paginate(10);
-       return view('notification.notification',['notifications'=>$notifications]);
+        // return view('notification.notification',['notifications'=>$notifications]);
+        return response()->json($notifications);
     }
     
     /***

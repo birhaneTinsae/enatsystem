@@ -39,6 +39,15 @@ class NotificationGroupController extends Controller
     public function store(Request $request)
     {
         //
+        $group=new NotificationGroup;
+        $group->name=$request->name;
+        if($group->save()){
+            $request->session->flash('status',`Notification group ${$request->name} successfully added.`);
+        }
+        // foreach($request->employees as $employee){
+        //     $emp=Employee::findOrFail($employee->id);
+        //     $emp->notification_group=
+        // }
     }
 
     /**

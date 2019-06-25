@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+         $this->middleware('auth');
     }
 
     /**
@@ -26,8 +26,7 @@ class HomeController extends Controller
     {
        $first_login=Auth::user()->first_login;
        if($first_login){
-        //  $user=User::findOrFail(Auth::id);
-        //  $
+ 
          return redirect('/password-reset');
        }
         

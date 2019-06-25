@@ -50,66 +50,7 @@
                 </form>
                 <br>
             {{-- </div> --}}
-            <div class="panel panel-default">
-                <div class="panel-heading">SMS Password Notification
-
-                    <!-- <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-excel"></i>
-                    Excel</a>
-                   
-
-                    
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="far fa-file-pdf"></i>
-                    Pdf</a> -->
-
-
-                    @can('delete-role')
-                    <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
-                        Delete</a> @endcan @can('create-sms')
-                    <a href="/sms-password-notification/create" class="text-right pull-right panel-menu-item"><i class="far fa-plus-square"></i>
-                        New</a> @endcan
-
-                </div>
-
-                <div class="panel-body">
-                    @if($notifications->isNotEmpty())
-                    <table class="table table-striped">
-                        <thead>
-
-                            <tr>
-                                <th>#</th>
-                                <th>Message</th>
-                                <th>Sender</th>
-                                <th>Created</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($notifications as $notification)
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{str_limit($notification->message,30)}}</td>
-                                <td>{{$notification->sender}}</td>
-                                <td>{{$notification->created_at->toDayDateTimeString()}}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    {{$notifications->links()}} @else
-                    <div class="jumbotron ">
-                        <div class="container">
-                            <h1 class="display-4">Notification Empty</h1>
-                            <p class="lead">No Notification yet.</p>
-                        </div>
-                    </div>
-                    @endif
-                </div>
-                <div class="panel-footer">
-                    <!-- <div class="row">
-                        <div class="col-md-4">Maker <span class="label label-default">Default Label</span></div>
-                        <div class="col-md-4">Date Time <span class="label label-default">Default Label</span></div>
-                        <div class="col-md-4">Record Status <span class="label label-default">Default Label</span></div>
-                    </div> -->
-                </div>
-            </div>
+            <sms-notification-list></sms-notification-list>
         </div>
     </div>
 </div>

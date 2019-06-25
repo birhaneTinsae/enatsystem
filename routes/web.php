@@ -23,7 +23,7 @@ Auth::routes();
 Route::get('phone-book','PhoneBookController@index')->name('phone-book');
 Route::get('phone-book/{query}','PhoneBookController@search');
 
-Route::middleware(['auth'])->group(function(){
+// Route::middleware(['auth'])->group(function(){
 
     // Notification::route('mail', 'taylor@laravel.com')           
     // ->notify(new HRNotification(App\ActingEmployee::all()));
@@ -57,7 +57,7 @@ Route::resource('issue','IssueController');
 Route::get('hr/acting','HRM\HumanResourceController@acting');
 Route::get('hr/employees','HRM\HumanResourceController@employees');
 Route::resource('hr', 'HRM\HumanResourceController')->middleware('can:view-hr');
-Route::resource('leave', 'HRM\LeaveManagmentController')->middleware('can:view-hr');
+// Route::resource('leave', 'HRM\LeaveManagmentController')->middleware('can:view-hr');
 
 /**
  * 
@@ -81,13 +81,48 @@ Route::post('/sms-password-notification/send-one-time','Notification\SMSPassword
 Route::post('/sms-password-notification/filter','Notification\SMSPasswordNotificationController@filter');
 Route::get('/sms-password-notification/send-one-time','Notification\SMSPasswordNotificationController@one_time_sms');
 Route::get('/password-generator','Notification\SMSPasswordNotificationController@generate_password');
-Route::get('/sms-password-notification', 'Notification\SMSPasswordNotificationController@index')->name('sms-notification')->middleware('can:view-sms');;
-Route::get('/sms-password-notification/create', 'Notification\SMSPasswordNotificationController@create')->middleware('can:create-sms');;
+Route::get('/sms-password-notification', 'Notification\SMSPasswordNotificationController@index')->name('sms-notification');//->middleware('can:view-sms');;
+Route::get('/sms-password-notifications', 'Notification\SMSPasswordNotificationController@notifications');
+
+Route::get('/sms-password-notification/create', 'Notification\SMSPasswordNotificationController@create');//->middleware('can:create-sms');;
 /**
  * 
  * 
  */
 Route::resource('/group-notification','Notification\NotificationGroupController');
+Route::group(['middleware'=>['auth']],function(){
+
+
+/**
+ * 
+ */
+Route::get('/network-info/search','NetworkInfoController@search');
+Route::get('/network-info/report','NetworkInfoController@report');
+Route::resource('/network-info','NetworkInfoController');
+/**
+ * 
+ */
+Route::resource('/domain-name','DomainNameController');
+/**
+ * 
+ */
+Route::get('/fourG-threeG-maintainance/search','FourGThreeGMaintainanceController@search');
+Route::resource('/fourG-threeG-maintainance','FourGThreeGMaintainanceController');
+/**
+ * 
+ */
+Route::get('/maintainance-info/report','MaintainanceInfoController@report');
+Route::get('/maintainance-info/search','MaintainanceInfoController@search');
+Route::post('/maintainance-info/report','MaintainanceInfoController@generate_report');
+Route::resource('/maintainance-info','MaintainanceInfoController');
+/**
+ * 
+ */
+Route::get('/tt-maintainance/report','TTRegisterController@report');
+Route::get('/tt-maintainance/search','TTRegisterController@search');
+Route::get('/tt-maintainance/generate/report','TTRegisterController@generate_report');
+Route::resource('/tt-maintainance','TTRegisterController');
+});
 /**
  * 
  */
@@ -107,7 +142,7 @@ Route::post('impairment','FAM\ImpairmentController@store');
 Route::get('impairment/{id}/edit','FAM\ImpairmentController@edit');
 Route::put('impairment/{id}','FAM\ImpairmentController@update');
 
-});
+// });
 /**
  * Please add new application URLs below.
  */

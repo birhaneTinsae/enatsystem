@@ -24,7 +24,7 @@
                 {{session('status')}}
             </div>
             @endif
-            <div class="panel panel-default">
+            {{-- <div class="panel panel-default">
                 <div class="panel-heading">SMS Password Notification @can('close-role')
                     <a href="" class="text-right pull-right panel-menu-item"><i class="fa fa-times" aria-hidden="true"></i>
                     Close</a> @endcan @can('update-role')
@@ -110,7 +110,8 @@
                         <div class="col-md-4">Record Status <span class="label label-default">Default Label</span></div>
                     </div> -->
                 </div>
-            </div>
+            </div> --}}
+            <password-reset></password-reset>
         </div>
     </div>
 </div>
