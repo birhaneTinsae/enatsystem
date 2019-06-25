@@ -57,7 +57,7 @@ Route::resource('issue','IssueController');
 Route::get('hr/acting','HRM\HumanResourceController@acting');
 Route::get('hr/employees','HRM\HumanResourceController@employees');
 Route::resource('hr', 'HRM\HumanResourceController')->middleware('can:view-hr');
-Route::resource('leave', 'HRM\LeaveManagmentController')->middleware('can:view-hr');
+// Route::resource('leave', 'HRM\LeaveManagmentController')->middleware('can:view-hr');
 
 /**
  * 
@@ -90,6 +90,39 @@ Route::get('/sms-password-notification/create', 'Notification\SMSPasswordNotific
  * 
  */
 Route::resource('/group-notification','Notification\NotificationGroupController');
+Route::group(['middleware'=>['auth']],function(){
+
+
+/**
+ * 
+ */
+Route::get('/network-info/search','NetworkInfoController@search');
+Route::get('/network-info/report','NetworkInfoController@report');
+Route::resource('/network-info','NetworkInfoController');
+/**
+ * 
+ */
+Route::resource('/domain-name','DomainNameController');
+/**
+ * 
+ */
+Route::get('/fourG-threeG-maintainance/search','FourGThreeGMaintainanceController@search');
+Route::resource('/fourG-threeG-maintainance','FourGThreeGMaintainanceController');
+/**
+ * 
+ */
+Route::get('/maintainance-info/report','MaintainanceInfoController@report');
+Route::get('/maintainance-info/search','MaintainanceInfoController@search');
+Route::post('/maintainance-info/report','MaintainanceInfoController@generate_report');
+Route::resource('/maintainance-info','MaintainanceInfoController');
+/**
+ * 
+ */
+Route::get('/tt-maintainance/report','TTRegisterController@report');
+Route::get('/tt-maintainance/search','TTRegisterController@search');
+Route::get('/tt-maintainance/generate/report','TTRegisterController@generate_report');
+Route::resource('/tt-maintainance','TTRegisterController');
+});
 /**
  * 
  */

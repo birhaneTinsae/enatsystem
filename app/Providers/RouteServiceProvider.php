@@ -26,6 +26,11 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+        Route::model('tt_maintainance',\App\Model\TTRegister::class);
+        Route::model('network_info',\App\Model\NetworkInfo::class);
+        Route::model('maintainance_info',\App\Model\MaintainanceInfo::class);
+        Route::model('domain_name',\App\Model\DomainName::class);
+        Route::model('fourG_threeG_maintainance',\App\Model\FourGThreeGMaintainance::class);
     }
 
     /**

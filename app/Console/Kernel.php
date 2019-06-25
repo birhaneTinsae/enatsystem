@@ -30,6 +30,8 @@ class Kernel extends ConsoleKernel
         Log::info('Scheduled JOB started ');
 
         $schedule->job(new CheckActingStatus)->everyMinute();
+
+        $schedule->command('uncompleted_maintainances:send')->everyMinute();
     }
 
     /**

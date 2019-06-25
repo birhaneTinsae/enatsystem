@@ -53,9 +53,9 @@
                             <label for="role" class="col-md-4 control-label">Roles</label>
 
                             <div class="col-md-6">
-                                <select id="role" type="text" class="form-control" name="role" value="{{ old('role') }}" multiple required>
-                                @foreach($roles as $id=>$role)
-                                <option value="{{$id}}">{{$role}}</option>
+                                <select id="role" type="text" class="form-control" name="role" value="{{ old('role') }}"  required>
+                                @foreach($roles as $role)
+                                <option value="{{$role->id}}">{{$role->name}}</option>
                                 @endforeach
                                 </select> @if ($errors->has('role'))
                                 <span class="help-block">

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\Role;
+use Spatie\Permission\Models\Role;
 use App\Branch;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -78,7 +78,7 @@ class RegisterController extends Controller
         return $user;
     }
     public function showRegistrationForm(){
-        $roles=Role::orderBy('name')->pluck('name','id');
+        $roles=Role::all();
        // $branches=Branch::orderBy('code')->pluck('name','id');
         return view('auth.register',['roles'=>$roles/*,'branches'=>$branches*/]);
     }

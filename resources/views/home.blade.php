@@ -7,7 +7,20 @@
         <div class="alert alert-success" role="alert">
             {{session('status')}}
         </div>
-        @endif @can('view-sms')
+        @endif
+        @hasanyrole('support|admin')
+        <div class="col-md-2">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">ISD</div>
+                <div class="panel-body">
+                    <p class="panel-text">Infrastructure devision house keeping app</p>
+                    <a href="/maintainance-info" class="btn btn-primary btn-block"><i class="far fa-bell"></i> GO THERE</a>
+                </div>
+            </div>
+        </div>
+        @endrole
+         @can('view-sms')
         <div class="col-md-2">
             <div class="panel panel-default">
 
